@@ -1,15 +1,116 @@
 # Project status
 
-## Split fix in progress (2026-10-30 20:25)
+## Licence decision, run progress, recorder and Module A UI (2026-10-30 22:00)
 
-Approved fix for the 613 missing listed videos. New `backend/training/include_supplement.py` (4 tests) matches videos ignoring the
-extension, falls back to category plus unique file name when the folder name differs (flagged `filename_fallback`, label and split
-taken from the authors' lists), records anything still unmatched, and writes to a NEW folder `data/processed/include_v2` with its own
-manifest that references the old feature files by relative path. The old manifest, feature files and part records are untouched.
-Run started as PID 31976 (log `data/raw/include/supplement.log`): 28 affected zips to re-download and process (about 36 GB). At the
-first check it was alive and starting. Nothing was trained. After it finishes: rerun the audit against `include_v2`, then report at
-Gate 1. The process is a child of the session and may stop with it; re-running the same command is safe because finished zips are skipped.
+Licence decision (from the project owner): training on INCLUDE is allowed for non-commercial academic use with attribution to the INCLUDE authors (Sridhar, Ganesan, Kumar, Khapra, ACM Multimedia 2020). The conflict stays documented: Zenodo lists CC BY 4.0, a third party page lists CC BY NC SA 4.0. Until it is resolved there is no redistribution of the data, the extracted features or any clip derived from them, and no commercial use. This is not a blocker for Phase 3 (training).
 
+Supplement run progress: 6 of 28 affected zips are complete. Counted only from the completion records (`data/processed/include_v2/_parts_supplement/<zip>.csv`) whose names match the 28 affected zips (derived with `affected_zips` from the first run logs) and whose write time is after the run start (PID 31976, started 20:02:48): Animals_1of2, Animals_2of2, Clothes_1of2, Clothes_2of2, Colours_1of2, Colours_2of2. In progress: the Days_and_Time zips. The older `_parts` folder was not counted. PID 31976 and PID 30504 were not touched.
+
+Sign recorder: new "Record sign" tab (webcam, landmark overlay, gloss name, 3-2-1 countdown, 2 to 5 s take). Only landmarks are sent (`POST /api/record/sign`), normalised to the same 225 features per frame as INCLUDE, and stored under `data/recorded/<GLOSS>/` (`<stamp>.npy`, `.json` metadata with `contains_video: false`, `.clip.json`); `data/recorded/` is git-ignored. Quality check (`backend/app/recording.py`): rejected and not stored if fewer than 20 frames, the measured frame rate is outside 5 to 60 fps, the body is missing in more than 10 percent of frames, or no hand is detected in more than 30 percent of frames; the UI lists the reasons. An accepted take is retargeted with the measured fps into a clip with `review_status: not_signer_reviewed` and `source.origin: self-recorded`, previewed on the avatar. It is not added to `frontend/public/animations` or the sign registry automatically; that is a manual step after review.
+
+Module A UI without a model: the Sign to English tab now has a live prediction panel with the landmark buffer (frames out of 60) and the state of the `/ws/predict` WebSocket stub. With no model it shows "Model not trained" and never a sign, gloss or confidence. The client sends no frames yet because the stub does not read them.
+
+Checks run: `tsc` clean, `eslint` clean, `vitest` 57 passed (new: recorder helpers, prediction channel), `next build` ok, backend `pytest` 247 passed (7 new for the recorder). Browser smoke test: the Record sign tab and the live prediction panel render; the `/ws/predict` stub returned `model_not_trained`. The webcam flow itself (camera, countdown, a real take) was NOT exercised in a browser here, only by unit and API tests with synthetic landmarks. Dev servers stopped.
+
+## Starter vocabulary, text to sign, head markers (2026-10-30 21:40)
+
+Retention check: Colours_1of2 was missed by the first keeper (it polled every 4 s while a zip is processed in about 3 s); a second keeper now hard links the `.part` files, and the two lost zips (Animals_1of2, Colours_1of2) are to be re-fetched only after the supplement run (PID 31976, untouched) ends.
+
+Starter vocabulary: of HELLO, THANK-YOU, HOSPITAL, WHERE, MARKET, GO, YESTERDAY, I, YOU, HELP, the INCLUDE classes that exist are HELLO, THANK-YOU, HOSPITAL, MARKET, YESTERDAY, I, YOU. WHERE, GO and HELP are not INCLUDE classes and were replaced by DOCTOR, BANK and TOMORROW. Each clip is a retarget of the training sample with the fewest no-hand frames (`python -m retarget.make_vocabulary`), stored in `frontend/public/animations/` with `index.json` (gloss to clip). The sample used is recorded in each clip under `source.source_sample`. All are `not_signer_reviewed`; none is a verified sign. WHERE has no clip, so "Where is the hospital?" shows "no clip for WHERE".
+
+Text to sign: the panel calls `POST /api/nlp/text-to-gloss`, shows the gloss, the non-manual tags and a clear "no clip for X" per gloss, and plays the clips in order with 0.2 s blended transitions, speed 0.5x/1x/1.5x, pause, replay and restart. Fingerspelling is used only if every letter has an `FS-<letter>` clip; none exist, so such words show "no clip". No clip is faked.
+
+Head markers: rule-based approximation on the head bone only (negation: shake about 0.22 rad at 2.5 Hz; yes/no question: 0.12 rad forward tilt; WH question: 0.12 rad sideways tilt; 0.3 s ease in and out). Amplitudes are my assumptions, not signer validated; no face is animated. See `docs/NLP.md`.
+
+Checks run: `tsc` clean, `eslint` clean, `vitest` 49 passed (new tests for markers and token availability), `next build` ok, backend `pytest` 240 passed. Visual check in the browser: "Where is the hospital?" played HOSPITAL and listed WHERE as no clip; "I do not like the hospital" played I then HOSPITAL and listed LIKE and NOT as no clip. The head movement amplitude was not judged by eye (small); it is covered by unit tests only. Dev servers stopped.
+
+## Mixamo avatar integrated (2026-10-30 21:00)
+
+Blender 5.2.3 LTS installed with winget (`C:\Program Files\Blender Foundation\Blender 5.2lender.exe`). Your `T-Pose.fbx` was copied to `tools/avatar/source/` (original untouched) and converted
+by `tools/avatar/convert_fbx.py` to `frontend/public/avatar/signer.glb` (1.79 MB). Parsed with `tools/avatar/verify_glb.py`: 65 joints, wrist and Thumb, Index, Middle, Ring, Pinky joints 1 to 3 (plus a tip bone)
+on both hands, no animations. `SOURCE.md` written (terms: to be confirmed by you before any public release). `frontend/public/avatar/`, `tools/avatar/source/` are in `.gitignore`; the avatar folder is also in `.dockerignore`.
+
+Built: `lib/avatar/mixamo.ts` (bone map, arms-down rest derived from the skeleton, pose application), `components/avatar/GlbHumanoid.tsx` (loads the GLB, falls back to the procedural humanoid), clip JSON
+field `review_status: not_signer_reviewed` (backend schema, retarget builder, TypeScript type) and the UI text "clip not signer-reviewed" while playing. Results run: frontend `tsc` clean, ESLint clean,
+`vitest` 40 passed (6 new, parsing the real GLB), `next build` ok; backend `pytest` 237 passed. Visual check: retargeted INCLUDE Hello sample on the Mixamo avatar raised the right hand to head height;
+temporary clip removed (`frontend/public/animations` empty), dev servers stopped. Not done: the 10 sign starter vocabulary, face and head tilt, any signer review. The convert step used the default exporter settings and the
+armature keeps its 0.01 scale and 90 degree rotation node.
+
+
+## Avatar route chosen: Mixamo rig with INCLUDE landmark retargeting (2026-10-30 20:35)
+
+Decision recorded. Plan, your download steps and limits: `docs/AVATAR_RETARGET_PLAN.md`. I cannot log in to Mixamo or create accounts, so
+the rig must be downloaded by you (FBX, convert to GLB, place at `frontend/public/avatar/signer.glb`, add a SOURCE note with the terms you relied on).
+
+Built without the asset: `backend/retarget/` (landmarks to bone rotations, clip builder, command line tool). 16 tests pass (forward kinematics, mirror
+symmetry, rest start and end, hand dropout, duration limit); full backend suite run after adding them: 237 passed.
+Visual check: the first INCLUDE Hello training sample retargeted and played on the procedural avatar raised the right forearm and hand to head height over
+2.9 s. This verifies the geometry, not the sign. The temporary clip was removed; the animations folder is empty again. The dev servers started for the check were stopped.
+
+Run status, corrected at 20:33: my earlier suspicion that the supplement run had stalled was WRONG. Windows file listings (PowerShell) showed the
+files being downloaded at 0 MB because their size is not refreshed while they are open; reading them directly showed Clothes_1of2 at about 925 MB and Clothes_2of2
+at about 706 MB, so the run was downloading normally. Starvation by my extra download was never shown. At your request I stopped my Animals_1of2 re-download
+anyway (partial file of about 750 MB left in `zips_keep` as Animals_1of2.zip.dl; the server cannot resume, so it must be fetched again from the start later).
+Supplement run alive (PID 31976), 2 of 28 zips processed so far; keeper (PID 3408) alive; Animals_2of2 is kept in `zips_keep`, Animals_1of2 is not.
+
+
+## Parallel work while the supplement run continues (2026-10-30 20:25)
+
+Supplement run (PID 31976, not touched): 2 of 28 zips done (Animals 1 and 2: 10 and 6 videos recovered, 0 unmatched, 0 filename fallbacks so far).
+Downloads are the slow part; each zip needs only a few videos processed. No model has been trained. `data/raw` and `data/processed` were not modified
+(the first manifest was read once, read only, for the smoke run).
+
+Zip retention: the supplement process deletes each zip after processing (its loop was loaded before your request). I could not change it
+without touching the process, so I added a hard link keeper (`zips_keep/keep_zips.ps1`, PID 3408) that links each finished zip into `zips_keep/`.
+Hard links cost no extra space. **One zip was lost before the keeper worked: Animals_1of2 was processed and deleted.** It is being fetched again
+into `zips_keep` (about 1.8 GB). The first keeper launch failed on a path quoting error that I only found later. Please do not delete `zips_keep`.
+
+Phase 3 code (no training): normalization with optional hand gap interpolation, landmark augmentation, manifest loader, 1D CNN, BiGRU and
+Transformer, training, evaluation and comparison scripts, metrics (top-1, top-5, macro F1, confusion matrix, per class accuracy, accuracy versus
+coverage) and an UNRECOGNIZED output. 23 new tests on synthetic tensors. A one epoch smoke run on a tiny slice of the first manifest ran all three
+models end to end; its checkpoints were deleted and its numbers are not reported. See `docs/MODEL_TRAINING.md`.
+
+Phase 4: spaCy rule based English to gloss and gloss to English with fingerspelling fallback and non manual markers; dictionary of 263 INCLUDE signs plus 50
+unvalidated grammar placeholders; gloss forms YOU-PLURAL, RACE-ETHNICITY and SECOND-NUMBER. 80 tests (36 English to gloss pairs, 20 gloss to English
+pairs, 8 round trips). Both required examples pass. See `docs/NLP.md`. Rules are assumed and unvalidated by ISL signers.
+
+Phase 5 skeleton: `POST /api/nlp/text-to-gloss`, `POST /api/nlp/gloss-to-text`, and `WS /ws/predict` as a stub that returns a clear model_not_trained error and
+closes. Config through the environment with `.env.example` (new: spaCy model name, gloss dictionary path). 9 new API tests.
+
+Test results actually run: backend `pytest` 221 passed (full suite, 2026-10-30). Frontend was not changed and not re run. The Dockerfile was updated to include
+`nlp` and the spaCy requirements but the image was not rebuilt, so that change is unverified.
+
+Avatar check (nothing built): the project has no rigged avatar asset. No glb, gltf, fbx, vrm, blend, bvh or obj files exist. `frontend/public/animations/` is empty.
+What exists is the procedural 20 bone humanoid in `frontend/src/lib/avatar/rig.ts` (boxes, spheres and capsules, one joint per finger, no face), the clip format
+and validator, the player and the sign registry (13 placeholder entries, all `no_clip`). Gate 3 options are in the final report of this step.
+
+
+## Gate 1 interim, decisions and split fix in progress (2026-10-30 20:10, label merge approved 20:08)
+
+Supplement run (PID 31976, `data/raw/include/supplement.log`) is alive: 0 of 28 zips finished, downloads in progress (about 2 hours
+expected). It reads the old outputs and writes only to `data/processed/include_v2`. The audit result for the fixed set is therefore
+**not available yet**; Phase 3 has not started and no model is trained.
+
+Code changes since: `include_supplement.py` (extension insensitive match, filename fallback, v2 manifest, label policy flag,
+manifest only mode), `include_stream.label_of` fixed so nested folders do not become labels, `audit_include.py` extended for v2 (stem
+matching, multiple part folders, full lists of videos still missing, every filename_fallback row, classes with no sample in a split).
+Unit tests for these pass (11 in the three new test files).
+
+Label review (details and counts in `docs/evaluation/LABEL_REVIEW.md`, awaiting your approval, nothing applied): the four "Extra"
+labels were my bug, not classes; they are 27 videos in nested folders under 16 parent classes and are proposed to be merged into
+their parents with the authors' split kept; three bracketed labels (you (plural) 21 videos, Race (ethnicity) 14, Second (Number) 8)
+are genuine classes that stay separate. **You approved the merge**: the v2 manifest builder now merges the nested Extra videos into their parent classes by default (authors' split kept per video, nothing dropped); gloss strings YOU-PLURAL, RACE-ETHNICITY and SECOND-NUMBER are applied in Phase 3 label to gloss conversion.
+
+Decisions recorded from you (2026-10-30):
+1. Frontend: keep the existing Next.js 16 app. Add React Three Fiber, Drei and Tailwind inside it. No migration to Vite.
+2. Face landmarks: features stay at 225 per frame (pose and both hands). No re-extraction. Module A trains on pose and hands; the
+   missing non manual markers (facial expression for negation and questions) are a documented known limitation. Face expressions
+   remain in scope for the avatar only.
+3. The 1D CNN baseline, spaCy gloss rules and WebSocket streaming stay in the plan for Phases 3 to 5.
+4. The authors' split stays as is; the test split will not be re split.
+
+Still true: licence conflict unresolved (Zenodo record says CC BY 4.0, a third party page says CC BY NC SA 4.0), signer independence
+unverified.
 
 ## Synopsis and Phase 1 and 2 (2026-10-30)
 

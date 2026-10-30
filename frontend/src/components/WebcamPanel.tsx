@@ -2,6 +2,7 @@
 import { Camera, CameraOff, ScanSearch, ShieldCheck } from "lucide-react";
 import { useRef, useState } from "react";
 import { apiPost, type LandmarkSequenceResult, type SignTranslation } from "@/lib/api";
+import { PredictionPanel } from "./PredictionPanel";
 import type { LandmarkCapture } from "./useLandmarkCapture";
 
 type Check =
@@ -136,6 +137,8 @@ export function WebcamPanel({
         )}
         {check.kind === "error" && <p className="text-rose-300">{check.message}</p>}
       </div>
+
+      <PredictionPanel running={running} runId={runId} bufferFrames={stats.frames} />
 
       <div className="mt-4 rounded-lg border border-white/10 p-3">
         <button

@@ -88,7 +88,8 @@ Production inference never imports `training/`; the API loads `isl_model.pt` and
 Order of operations once `data/processed/include/manifest.csv` exists (from `backend\`):
 
 ```powershell
-.\.venv\Scripts\python -m training.verify_include_split --raw ..\dataaw\include --out ..\data\processed\include --report ..\docs\evaluation\include_split_check.json
+.\.venv\Scripts\python -m training.verify_include_split --raw ..\data
+aw\include --out ..\data\processed\include --report ..\docs\evaluation\include_split_check.json
 .\.venv\Scripts\python -m training.validate_dataset --dir ..\data\processed\include --report ..\docs\evaluation\include_quality.json
 .\.venv\Scripts\python -m training.train --manifest ..\data\processed\include\manifest.csv --out models --seed 0 --class-weights
 .\.venv\Scripts\python -m training.evaluate --manifest ..\data\processed\include\manifest.csv --model-dir models --out ..\docs\evaluation\include_test.json
@@ -99,3 +100,18 @@ Order of operations once `data/processed/include/manifest.csv` exists (from `bac
 accuracy, macro-F1, per-class metrics and the confusion matrix. **No results exist yet.** Limitations to quote with any result: the
 split is the authors' (signer independence unverified, no signer IDs), landmarks were extracted with Python MediaPipe at
 frame stride 2, and use is limited to non-commercial academic research until the license conflict is settled.
+
+## Phase 3 code (written 2026-10-30, not yet run on real data)
+
+New or changed, all unit tested on synthetic tensors (`tests/test_slr_pipeline.py`, 23 tests): `app/recognition/preprocess.py` (optional
+interpolation of short hand gaps, one preprocessing path for training and inference), `app/recognition/models.py` (1D CNN, BiGRU and
+Transformer encoder behind one factory), `training/augment.py` (rotation, scale, speed resampling and temporal jitter on landmark sequences),
+`training/dataset.py` (loads a manifest path and serves train, val and test), `training/slr_metrics.py` (top-1, top-5, per class accuracy,
+accuracy versus coverage at confidence thresholds), `training/train.py` (architecture and augmentation options), `training/evaluate.py`
+(held-out test report), `training/compare_models.py` (trains all three on the same split and seed, picks the best by VALIDATION macro-F1 and
+writes the comparison file). Checkpoints store the architecture and the preprocessing settings, so inference rebuilds the same model. An
+explicit UNRECOGNIZED output exists for low confidence predictions.
+
+A one epoch smoke run of all three models on a tiny slice of the first manifest completed end to end (train, checkpoint, evaluate); its
+checkpoints were deleted and its numbers are not reported. **No real training has been done and no metric exists.** Model comparison waits for
+the corrected split (Gate 1) and for your approval of the licence position.

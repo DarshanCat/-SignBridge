@@ -1,0 +1,291 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 400" width="100%" height="100%">
+  <defs>
+    <!-- Dark Tech Canvas Gradient -->
+    <linearGradient id="dlCanvasBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060914"/>
+      <stop offset="50%" stop-color="#0C1226"/>
+      <stop offset="100%" stop-color="#050711"/>
+    </linearGradient>
+
+    <!-- Card Gradients -->
+    <linearGradient id="cnnCardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <linearGradient id="gruCardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2E1065"/>
+      <stop offset="100%" stop-color="#170638"/>
+    </linearGradient>
+
+    <linearGradient id="transCardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064E3B"/>
+      <stop offset="100%" stop-color="#022C22"/>
+    </linearGradient>
+
+    <!-- Neon Accents -->
+    <linearGradient id="neonCyanG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F5FF"/>
+      <stop offset="100%" stop-color="#0072FF"/>
+    </linearGradient>
+
+    <linearGradient id="neonPinkG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF007A"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+
+    <linearGradient id="neonTealG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="dlGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    /* Traveling Signal Beams */
+    .signal-beam {
+      stroke-dasharray: 8, 16;
+      animation: beamFlow 1.6s linear infinite;
+    }
+    @keyframes beamFlow {
+      to { stroke-dashoffset: -48; }
+    }
+
+    /* Model Pillar Pulse */
+    .pillar-pulse-cnn {
+      animation: pGlowCnn 3s ease-in-out infinite alternate;
+    }
+    @keyframes pGlowCnn {
+      0% { filter: drop-shadow(0 0 3px rgba(0, 245, 255, 0.4)); }
+      100% { filter: drop-shadow(0 0 14px rgba(0, 245, 255, 0.8)); }
+    }
+
+    .pillar-pulse-gru {
+      animation: pGlowGru 3s ease-in-out infinite alternate 0.5s;
+    }
+    @keyframes pGlowGru {
+      0% { filter: drop-shadow(0 0 3px rgba(168, 85, 247, 0.4)); }
+      100% { filter: drop-shadow(0 0 16px rgba(236, 72, 153, 0.8)); }
+    }
+
+    .pillar-pulse-trans {
+      animation: pGlowTrans 3s ease-in-out infinite alternate 1s;
+    }
+    @keyframes pGlowTrans {
+      0% { filter: drop-shadow(0 0 3px rgba(16, 185, 129, 0.4)); }
+      100% { filter: drop-shadow(0 0 14px rgba(16, 185, 129, 0.8)); }
+    }
+
+    /* Radar scanline */
+    .matrix-scan {
+      animation: mScan 4s linear infinite;
+    }
+    @keyframes mScan {
+      0% { transform: translateY(0); opacity: 0; }
+      15% { opacity: 0.8; }
+      85% { opacity: 0.8; }
+      100% { transform: translateY(350px); opacity: 0; }
+    }
+
+    .dl-title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .dl-code {
+      font-family: 'Fira Code', 'Courier New', monospace, Consolas;
+      font-size: 11px;
+      font-weight: 600;
+    }
+  </style>
+
+  <!-- Base Container -->
+  <rect x="2" y="2" width="936" height="396" rx="16" fill="url(#dlCanvasBg)" stroke="#1E293B" stroke-width="2"/>
+
+  <!-- Background Grid -->
+  <g stroke="rgba(255, 255, 255, 0.03)" stroke-width="1">
+    <line x1="20" y1="100" x2="920" y2="100"/>
+    <line x1="20" y1="200" x2="920" y2="200"/>
+    <line x1="20" y1="300" x2="920" y2="300"/>
+    <line x1="315" y1="20" x2="315" y2="380"/>
+    <line x1="625" y1="20" x2="625" y2="380"/>
+  </g>
+
+  <!-- Scanner line -->
+  <g class="matrix-scan">
+    <line x1="20" y1="20" x2="920" y2="20" stroke="url(#neonCyanG)" stroke-width="1.5" opacity="0.5"/>
+  </g>
+
+  <!-- Header Section -->
+  <g transform="translate(30, 22)">
+    <rect width="390" height="28" rx="14" fill="rgba(0, 245, 255, 0.08)" stroke="#00F5FF" stroke-width="1.2"/>
+    <circle cx="14" cy="14" r="4" fill="#00F5FF" filter="url(#dlGlow)"/>
+    <text x="26" y="18" fill="#38BDF8" class="dl-code" font-size="11">🔬 DEEP LEARNING MODEL SUITE // PYTORCH RECOGNITION</text>
+  </g>
+
+  <!-- Data Augmentation Tag at Top Right -->
+  <g transform="translate(560, 22)">
+    <rect width="350" height="28" rx="6" fill="rgba(168, 85, 247, 0.1)" stroke="#8B5CF6" stroke-width="1"/>
+    <text x="12" y="18" fill="#C084FC" class="dl-code" font-size="10.5">AUGMENT: ROTATION ±10° • SPEED 0.8-1.2x • JITTER</text>
+  </g>
+
+  <!-- ================= PILLAR 1: 1D TEMPORAL CNN ================= -->
+  <g transform="translate(30, 70)" class="pillar-pulse-cnn">
+    <rect width="275" height="300" rx="12" fill="url(#cnnCardGrad)" stroke="#38BDF8" stroke-width="1.5"/>
+    <rect x="0" y="0" width="275" height="5" rx="2" fill="url(#neonCyanG)"/>
+
+    <!-- Title Bar -->
+    <g transform="translate(18, 28)">
+      <text x="0" y="0" fill="#38BDF8" class="dl-title">1D TEMPORAL CNN</text>
+      <text x="0" y="18" fill="#94A3B8" class="dl-code" font-size="10">CNN1DClassifier</text>
+    </g>
+
+    <!-- Architecture Visual Diagram -->
+    <g transform="translate(18, 68)">
+      <!-- Conv Block 1 -->
+      <rect width="239" height="26" rx="4" fill="rgba(56, 189, 248, 0.15)" stroke="#0284C7" stroke-width="1"/>
+      <text x="10" y="17" fill="#E2E8F0" class="dl-code" font-size="10.5">Conv1D(k=5, c=128) + BN + ReLU</text>
+
+      <!-- Conv Block 2 -->
+      <g transform="translate(0, 32)">
+        <rect width="239" height="26" rx="4" fill="rgba(56, 189, 248, 0.15)" stroke="#0284C7" stroke-width="1"/>
+        <text x="10" y="17" fill="#E2E8F0" class="dl-code" font-size="10.5">Conv1D(k=5, c=128) + BN + ReLU</text>
+      </g>
+
+      <!-- Conv Block 3 -->
+      <g transform="translate(0, 64)">
+        <rect width="239" height="26" rx="4" fill="rgba(56, 189, 248, 0.15)" stroke="#0284C7" stroke-width="1"/>
+        <text x="10" y="17" fill="#E2E8F0" class="dl-code" font-size="10.5">Conv1D(k=3, c=128) + BN + ReLU</text>
+      </g>
+
+      <!-- Dual Pooling -->
+      <g transform="translate(0, 96)">
+        <rect width="239" height="26" rx="4" fill="rgba(16, 185, 129, 0.15)" stroke="#10B981" stroke-width="1"/>
+        <text x="10" y="17" fill="#34D399" class="dl-code" font-size="10.5">Concat(AvgPool1D, MaxPool1D)</text>
+      </g>
+
+      <!-- Metric Badges -->
+      <g transform="translate(0, 140)">
+        <line x1="0" y1="0" x2="239" y2="0" stroke="#334155" stroke-dasharray="3,3"/>
+        <text x="0" y="20" fill="#94A3B8" class="dl-code">LATENCY  :</text>
+        <text x="95" y="20" fill="#38BDF8" class="dl-code">~11.2 ms (Ultra-Fast)</text>
+
+        <text x="0" y="40" fill="#94A3B8" class="dl-code">PROFILE  :</text>
+        <text x="95" y="40" fill="#CBD5E1" class="dl-code">Local temporal shapes</text>
+
+        <text x="0" y="60" fill="#94A3B8" class="dl-code">PARAM CT :</text>
+        <text x="95" y="60" fill="#FBBF24" class="dl-code">~248K Params</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= PILLAR 2: BIDIRECTIONAL GRU ================= -->
+  <g transform="translate(332, 70)" class="pillar-pulse-gru">
+    <rect width="275" height="300" rx="12" fill="url(#gruCardGrad)" stroke="#A855F7" stroke-width="1.5"/>
+    <rect x="0" y="0" width="275" height="5" rx="2" fill="url(#neonPinkG)"/>
+
+    <!-- Title Bar -->
+    <g transform="translate(18, 28)">
+      <text x="0" y="0" fill="#C084FC" class="dl-title">BIDIRECTIONAL GRU</text>
+      <text x="0" y="18" fill="#F472B6" class="dl-code" font-size="10">BiGRUClassifier (Primary)</text>
+    </g>
+
+    <!-- Architecture Visual Diagram -->
+    <g transform="translate(18, 68)">
+      <!-- GRU Forward Block -->
+      <rect width="239" height="26" rx="4" fill="rgba(168, 85, 247, 0.2)" stroke="#A855F7" stroke-width="1"/>
+      <text x="10" y="17" fill="#E2E8F0" class="dl-code" font-size="10.5">Forward GRU Cells (h→)</text>
+
+      <!-- GRU Backward Block -->
+      <g transform="translate(0, 32)">
+        <rect width="239" height="26" rx="4" fill="rgba(236, 72, 153, 0.2)" stroke="#EC4899" stroke-width="1"/>
+        <text x="10" y="17" fill="#F472B6" class="dl-code" font-size="10.5">Backward GRU Cells (←h)</text>
+      </g>
+
+      <!-- Multi-Layer Depth -->
+      <g transform="translate(0, 64)">
+        <rect width="239" height="26" rx="4" fill="rgba(168, 85, 247, 0.2)" stroke="#A855F7" stroke-width="1"/>
+        <text x="10" y="17" fill="#E2E8F0" class="dl-code" font-size="10.5">Stacked Layers: 2 | Drop: 0.3</text>
+      </g>
+
+      <!-- Dense Linear Head -->
+      <g transform="translate(0, 96)">
+        <rect width="239" height="26" rx="4" fill="rgba(16, 185, 129, 0.15)" stroke="#10B981" stroke-width="1"/>
+        <text x="10" y="17" fill="#34D399" class="dl-code" font-size="10.5">Linear Projection + Softmax</text>
+      </g>
+
+      <!-- Metric Badges -->
+      <g transform="translate(0, 140)">
+        <line x1="0" y1="0" x2="239" y2="0" stroke="#4C1D95" stroke-dasharray="3,3"/>
+        <text x="0" y="20" fill="#C4B5FD" class="dl-code">LATENCY  :</text>
+        <text x="95" y="20" fill="#A855F7" class="dl-code">~17.8 ms (Balanced)</text>
+
+        <text x="0" y="40" fill="#C4B5FD" class="dl-code">PROFILE  :</text>
+        <text x="95" y="40" fill="#E2E8F0" class="dl-code">Past &amp; future context</text>
+
+        <text x="0" y="60" fill="#C4B5FD" class="dl-code">ACCURACY :</text>
+        <text x="95" y="60" fill="#10B981" class="dl-code">Top-1 Standard</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= PILLAR 3: SPATIAL-TEMPORAL TRANSFORMER ================= -->
+  <g transform="translate(635, 70)" class="pillar-pulse-trans">
+    <rect width="275" height="300" rx="12" fill="url(#transCardGrad)" stroke="#10B981" stroke-width="1.5"/>
+    <rect x="0" y="0" width="275" height="5" rx="2" fill="url(#neonTealG)"/>
+
+    <!-- Title Bar -->
+    <g transform="translate(18, 28)">
+      <text x="0" y="0" fill="#34D399" class="dl-title">TRANSFORMER ENCODER</text>
+      <text x="0" y="18" fill="#6EE7B7" class="dl-code" font-size="10">TransformerClassifier</text>
+    </g>
+
+    <!-- Architecture Visual Diagram -->
+    <g transform="translate(18, 68)">
+      <!-- Positional Embedding -->
+      <rect width="239" height="26" rx="4" fill="rgba(16, 185, 129, 0.15)" stroke="#059669" stroke-width="1"/>
+      <text x="10" y="17" fill="#E2E8F0" class="dl-code" font-size="10.5">Learned Positional Embeddings</text>
+
+      <!-- Multi-Head Self-Attention -->
+      <g transform="translate(0, 32)">
+        <rect width="239" height="26" rx="4" fill="rgba(16, 185, 129, 0.25)" stroke="#10B981" stroke-width="1"/>
+        <text x="10" y="17" fill="#34D399" class="dl-code" font-size="10.5">Multi-Head Attention (4 Heads)</text>
+      </g>
+
+      <!-- Feed Forward & Norm -->
+      <g transform="translate(0, 64)">
+        <rect width="239" height="26" rx="4" fill="rgba(16, 185, 129, 0.15)" stroke="#059669" stroke-width="1"/>
+        <text x="10" y="17" fill="#E2E8F0" class="dl-code" font-size="10.5">FeedForward (d_ff=256) + LN</text>
+      </g>
+
+      <!-- Temporal Mean Pooling -->
+      <g transform="translate(0, 96)">
+        <rect width="239" height="26" rx="4" fill="rgba(56, 189, 248, 0.15)" stroke="#38BDF8" stroke-width="1"/>
+        <text x="10" y="17" fill="#38BDF8" class="dl-code" font-size="10.5">Mean Pool + Classification Head</text>
+      </g>
+
+      <!-- Metric Badges -->
+      <g transform="translate(0, 140)">
+        <line x1="0" y1="0" x2="239" y2="0" stroke="#065F46" stroke-dasharray="3,3"/>
+        <text x="0" y="20" fill="#6EE7B7" class="dl-code">LATENCY  :</text>
+        <text x="95" y="20" fill="#34D399" class="dl-code">~24.1 ms (Real-time)</text>
+
+        <text x="0" y="40" fill="#6EE7B7" class="dl-code">PROFILE  :</text>
+        <text x="95" y="40" fill="#E2E8F0" class="dl-code">Long-range attention</text>
+
+        <text x="0" y="60" fill="#6EE7B7" class="dl-code">SCALING  :</text>
+        <text x="95" y="60" fill="#FBBF24" class="dl-code">Complex vocabulary</text>
+      </g>
+    </g>
+  </g>
+</svg>

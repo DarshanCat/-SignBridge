@@ -2,10 +2,12 @@
 import { Pause, Play, RotateCcw, SkipBack, Square } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { apiGet, apiPost, type AvatarPlan, type EnglishToGloss, type SignRegistry } from "@/lib/api";
+import { apiGet, apiPost, type AvatarPlan, type SignRegistry, type TextToGloss } from "@/lib/api";
 import { SequencePlayer } from "@/lib/avatar/player";
 import { loadPlaylist } from "@/lib/avatar/loader";
+import { describeTokens, glossesToPlan, playOrder, type TokenView } from "@/lib/avatar/sentence";
 import { RIG_TEST_CLIP } from "@/lib/avatar/rigTest";
+import type { AvatarKind } from "./avatar/GlbHumanoid";
 
 const AvatarViewer = dynamic(() => import("./avatar/AvatarViewer"), {
   ssr: false,
@@ -14,7 +16,8 @@ const AvatarViewer = dynamic(() => import("./avatar/AvatarViewer"), {
 
 interface Result {
   text: string;
-  gloss: EnglishToGloss;
+  gloss: TextToGloss;
+  views: TokenView[];
   plan: AvatarPlan | null;
   failed: string[];
 }
@@ -30,6 +33,7 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
   const [registry, setRegistry] = useState<SignRegistry | null>(null);
   const [rate, setRate] = useState(1);
   const [ms, setMs] = useState<number | null>(null);
+  const [kind, setKind] = useState<AvatarKind | null>(null);
 
   useEffect(() => () => player.dispose(), [player]);
 
@@ -54,15 +58,18 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
     player.load([]);
     const t0 = performance.now();
     try {
-      const gloss = await apiPost<EnglishToGloss>("/api/translation/english-to-gloss", { text });
-      if (gloss.gloss.length === 0) {
-        setResult({ text, gloss, plan: null, failed: [] });
+      const gloss = await apiPost<TextToGloss>("/api/nlp/text-to-gloss", { text });
+      if (gloss.tokens.length === 0) {
+        setResult({ text, gloss, views: [], plan: null, failed: [] });
         return;
       }
-      const plan = await apiPost<AvatarPlan>("/api/avatar/plan", { gloss: gloss.gloss });
+      const plan = await apiPost<AvatarPlan>("/api/avatar/plan", { gloss: glossesToPlan(gloss.tokens) });
       const { clips, failed } = await loadPlaylist(plan.steps);
-      player.load(clips);
-      setResult({ text, gloss, plan, failed });
+      const byGloss = new Map(clips.map((c) => [c.gloss.toUpperCase(), c]));
+      const views = describeTokens(gloss.tokens, new Set(byGloss.keys()));
+      player.load(playOrder(views).flatMap((g) => byGloss.get(g) ?? []));
+      player.setNmm(gloss.nmm);
+      setResult({ text, gloss, views, plan, failed });
       setMs(Math.round(performance.now() - t0));
     } catch (e) {
       setResult(null);
@@ -128,30 +135,30 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
             </p>
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-slate-300">Gloss:</span>
-              {result.gloss.gloss.length === 0 && <span className="text-amber-300">No supported words found.</span>}
-              {result.gloss.gloss.map((g, i) => {
-                const step = result.plan?.steps[i];
-                const playable = step?.available && !result.failed.includes(g);
-                const verified = statusOf(g) === "verified";
-                const current = snap.status === "playing" && snap.gloss === g;
-                const tone = !playable
-                  ? "bg-amber-400/20 text-amber-200"
-                  : verified
-                    ? "bg-emerald-400/20 text-emerald-200"
-                    : "bg-sky-400/20 text-sky-200";
+              {result.views.length === 0 && <span className="text-amber-300">No supported words found.</span>}
+              {result.views.map((v, i) => {
+                const verified = v.status === "clip" && statusOf(v.gloss) === "verified";
+                const current = snap.status === "playing" && v.play.includes(snap.gloss ?? "");
+                const tone =
+                  v.status === "no_clip" ? "bg-amber-400/20 text-amber-200" : verified ? "bg-emerald-400/20 text-emerald-200" : "bg-sky-400/20 text-sky-200";
                 return (
-                  <span key={`${g}-${i}`} aria-current={current ? "true" : undefined} className={`rounded px-2 py-0.5 text-xs ${tone} ${current ? "ring-2 ring-accent" : ""}`}>
-                    {g}
-                    {!playable ? " (unsupported: no animation)" : verified ? "" : " (clip not signer-reviewed)"}
+                  <span key={`${v.gloss}-${i}`} aria-current={current ? "true" : undefined} className={`rounded px-2 py-0.5 text-xs ${tone} ${current ? "ring-2 ring-accent" : ""}`}>
+                    {v.label}
+                    {v.status !== "no_clip" && !verified ? " (clip not signer-reviewed)" : ""}
                   </span>
                 );
               })}
             </div>
-            {result.gloss.unsupported.length > 0 && (
-              <p className="text-amber-300">Unsupported words (not in vocabulary): {result.gloss.unsupported.join(", ")}</p>
+            {result.gloss.nmm.length > 0 && (
+              <p className="text-slate-300">
+                Non-manual markers: {result.gloss.nmm.join(", ")}. Shown only as a small rule-based head movement (an approximation; no face is animated).
+              </p>
             )}
-            <p className="text-slate-400">Vocabulary coverage: {Math.round(result.gloss.coverage * 100)}% of content words.</p>
-            {result.plan && <p className={result.plan.playable && result.failed.length === 0 ? "text-emerald-300" : "text-amber-300"}>{result.plan.message}</p>}
+            {result.views.some((v) => v.status === "no_clip") && (
+              <p className="text-amber-300">
+                No clip for: {result.views.filter((v) => v.status === "no_clip").map((v) => v.gloss).join(", ")}. These are skipped; no clip is faked.
+              </p>
+            )}
             {ms !== null && <p className="text-xs text-slate-500">Measured translate, plan and clip load: {ms} ms.</p>}
             {result.failed.length > 0 && <p className="text-rose-300">Clip failed to load or validate: {result.failed.join(", ")}.</p>}
           </div>
@@ -160,12 +167,12 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
 
       <div className="rounded-xl border border-white/10 bg-panel p-4">
         <div className="aspect-[4/3] overflow-hidden rounded-lg bg-black/60">
-          <AvatarViewer player={player} />
+          <AvatarViewer player={player} onKind={setKind} />
         </div>
         <p aria-live="polite" className="mt-2 min-h-5 text-sm text-slate-300">
           {rigTest && "Rig self-test motion: not an ISL sign. "}
-          {snap.status === "playing" && `Signing ${snap.gloss} (${snap.index + 1} of ${snap.total})`}
-          {snap.status === "paused" && `Paused at ${snap.gloss} (${snap.index + 1} of ${snap.total})`}
+          {snap.status === "playing" && `Signing ${snap.gloss} (${snap.index + 1} of ${snap.total})${statusOf(snap.gloss ?? "") === "verified" ? "" : " - clip not signer-reviewed"}`}
+          {snap.status === "paused" && `Paused at ${snap.gloss} (${snap.index + 1} of ${snap.total})${statusOf(snap.gloss ?? "") === "verified" ? "" : " - clip not signer-reviewed"}`}
           {snap.status === "finished" && "Finished."}
           {snap.status === "idle" && !hasPlaylist && "Nothing to play. The avatar only signs glosses that have an animation clip."}
           {snap.status === "idle" && hasPlaylist && "Ready."}
@@ -192,6 +199,7 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
             </select>
           </label>
         </div>
+        <p className="mt-2 text-xs text-slate-500">Avatar model: {kind === "glb" ? "Mixamo model from /avatar/signer.glb (terms not yet confirmed)" : kind === "procedural" ? "built in procedural humanoid (no signer.glb found or usable)" : "loading"}.</p>
         <button onClick={runRigTest} className="mt-3 text-xs text-slate-400 underline">
           Run rig self-test (a generic arm motion to check the avatar works; not a sign)
         </button>

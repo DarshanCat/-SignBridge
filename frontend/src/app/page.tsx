@@ -1,22 +1,25 @@
 "use client";
 import { useState } from "react";
 import { EnglishToSignPanel } from "@/components/EnglishToSignPanel";
+import { RecordSignPanel } from "@/components/RecordSignPanel";
 import { StatusPanel } from "@/components/StatusPanel";
 import { useBackendStatus } from "@/components/useBackendStatus";
 import { useLandmarkCapture } from "@/components/useLandmarkCapture";
 import { WebcamPanel } from "@/components/WebcamPanel";
 import { buildStatusItems } from "@/lib/status";
 
-type Mode = "sign-to-english" | "english-to-sign";
+type Mode = "sign-to-english" | "english-to-sign" | "record-sign";
 const TABS: { id: Mode; label: string }[] = [
   { id: "sign-to-english", label: "Sign → English" },
   { id: "english-to-sign", label: "English → Sign" },
+  { id: "record-sign", label: "Record sign" },
 ];
 
 export default function Home() {
   const [mode, setMode] = useState<Mode>("sign-to-english");
   const status = useBackendStatus();
   const capture = useLandmarkCapture();
+  const backendUp = status.backend === "connected";
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
@@ -38,7 +41,10 @@ export default function Home() {
             id={`tab-${t.id}`}
             aria-selected={mode === t.id}
             aria-controls={`panel-${t.id}`}
-            onClick={() => setMode(t.id)}
+            onClick={() => {
+              capture.stop(); // the camera preview belongs to one tab at a time
+              setMode(t.id);
+            }}
             className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
               mode === t.id ? "bg-accent text-ink" : "bg-panel text-slate-300 hover:bg-white/10"
             }`}
@@ -50,7 +56,9 @@ export default function Home() {
 
       <div className="grid gap-4 lg:grid-cols-[2fr_1fr]">
         <div role="tabpanel" id={`panel-${mode}`} aria-labelledby={`tab-${mode}`}>
-          {mode === "sign-to-english" ? <WebcamPanel capture={capture} backendUp={status.backend === "connected"} modelLoaded={status.model?.loaded === true} /> : <EnglishToSignPanel backendUp={status.backend === "connected"} />}
+          {mode === "sign-to-english" && <WebcamPanel capture={capture} backendUp={backendUp} modelLoaded={status.model?.loaded === true} />}
+          {mode === "english-to-sign" && <EnglishToSignPanel backendUp={backendUp} />}
+          {mode === "record-sign" && <RecordSignPanel capture={capture} backendUp={backendUp} />}
         </div>
         <StatusPanel items={buildStatusItems({ ...status, extractor: capture.extractor })} />
       </div>

@@ -21,6 +21,9 @@ class Settings(BaseSettings):
     min_confidence: float = 0.5
     max_body_bytes: int = 2_000_000  # reject larger request bodies (300 frames of landmarks is about 0.75 MB)
     translation_config: Path = BACKEND_DIR / "config" / "translation.json"
+    gloss_dictionary: Path = BACKEND_DIR / "config" / "gloss_dictionary.json"
+    spacy_model: str = "en_core_web_sm"
+    record_dir: Path = BACKEND_DIR.parent / "data" / "recorded"  # self-recorded landmark takes (no video), git-ignored
     animation_dir: Path = BACKEND_DIR.parent / "frontend" / "public" / "animations"
 
 

@@ -7,6 +7,8 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.nlp_routes import router as nlp_router
+from app.api.record_routes import router as record_router
 from app.api.routes import router
 from app.core.config import get_settings
 from app.recognition.model_status import get_model_status
@@ -33,6 +35,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(router)
+app.include_router(nlp_router)
+app.include_router(record_router)
 
 
 @app.middleware("http")

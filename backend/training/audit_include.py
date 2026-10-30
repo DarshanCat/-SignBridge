@@ -18,6 +18,7 @@ import numpy as np
 
 from app.recognition.landmarks import FEATURE_DIM, HAND_POINTS, POSE_POINTS
 from training.include_stream import SPLIT_FILES, VIDEO_RE
+from training.include_supplement import stem_key
 
 EXPECTED_SPLIT_COUNTS = {"train": 3127, "val": 348, "test": 817}
 POSE_END = POSE_POINTS * 3
@@ -31,19 +32,23 @@ def read_lists(raw: Path) -> dict[str, dict[str, str]]:
         for line in (raw / "splits" / name).read_text(encoding="utf-8").splitlines():
             line = line.strip()
             if VIDEO_RE.search(line):
-                d[line.lower()] = line
+                d[stem_key(line)] = line
         lists[split] = d
     return lists
 
 
-def audit(raw: Path, out: Path) -> tuple[dict, dict, list[dict]]:
-    # parts records: member -> row (usable or excluded)
+def audit(raw: Path, out: Path, parts_dirs: list[Path] | None = None) -> tuple[dict, dict, list[dict]]:
+    # processing records keyed by path without extension (the lists say .MOV, some zips hold .MP4)
     seen: dict[str, dict] = {}
-    parts = sorted((out / "_parts").glob("*.csv"))
+    skipped_in_zips: list[str] = []
+    parts = sorted(p for d in (parts_dirs or [out / "_parts"]) for p in d.glob("*.csv"))
     for p in parts:
         with p.open(newline="", encoding="utf-8") as f:
             for r in csv.DictReader(f):
-                seen[r["member"].lower()] = r
+                if r.get("match") == "skip":
+                    skipped_in_zips.append(r["member"])
+                    continue
+                seen[stem_key(r["member"])] = r
     npy_to_member = {r["npy"]: m for m, r in seen.items() if r["npy"]}
 
     manifest = list(csv.DictReader((out / "manifest.csv").open(newline="", encoding="utf-8")))
@@ -54,7 +59,7 @@ def audit(raw: Path, out: Path) -> tuple[dict, dict, list[dict]]:
     per_class = defaultdict(lambda: {"n": 0, "frames": 0, "no_left": 0, "no_right": 0, "no_hands": 0, "lengths": [], "splits": Counter()})
     nonfinite = 0
     for r in manifest:
-        fp = out / r["path"]
+        fp = out / r["path"]  # may point to ../include/ for rows reused from the first run
         if not fp.is_file():
             problems["missing_file"].append(r["path"])
             continue
@@ -90,8 +95,8 @@ def audit(raw: Path, out: Path) -> tuple[dict, dict, list[dict]]:
 
     duplicate_paths = [p for p, n in path_counts.items() if n > 1]
     duplicate_content = [v for v in hashes.values() if len(v) > 1]
-    orphans = sorted(set(f.name for f in out.glob("*.npy")) - set(r["path"] for r in manifest))
-    unknown_manifest = [r["path"] for r in manifest if r["path"] not in npy_to_member]
+    orphans = sorted(set(f.name for f in out.glob("*.npy")) - set(Path(r["path"]).name for r in manifest))
+    unknown_manifest = [r["path"] for r in manifest if Path(r["path"]).name not in npy_to_member]
 
     # split integrity against the authors' lists
     lists = read_lists(raw)
@@ -119,13 +124,19 @@ def audit(raw: Path, out: Path) -> tuple[dict, dict, list[dict]]:
             "manifest_rows": manifest_split.get(split, 0),
         }
     processed_not_listed = sorted(k for k in seen if k not in listed_all)
-    wrong_split = sorted(k for k, r in seen.items() if k in listed_all and listed_all[k][0] != r["split"])
-    manifest_not_listed = [r["path"] for r in manifest if npy_to_member.get(r["path"], "").lower() not in listed_all]
+    wrong_split = sorted(k for k, r in seen.items() if k in listed_all and r["npy"] and listed_all[k][0] != r["split"])
+    manifest_not_listed = [r["path"] for r in manifest if npy_to_member.get(Path(r["path"]).name, "") not in listed_all]
     split_labels = {s: {r["label"] for r in manifest if r["split"] == s} for s in lists}
     all_labels = {r["label"] for r in manifest}
 
     # duplicate content across splits (possible leakage)
     path_split = {r["path"]: r["split"] for r in manifest}
+    fallback_rows = [{"zip_member": r["member"], "list_path": listed_all[k][1], "split": r["split"], "label": r["label"]} for k, r in seen.items() if r.get("match") == "filename_fallback" and r["npy"] and k in listed_all]
+    all_missing = sorted(o for lst in missing_listed.values() for o in lst)
+    per_class_split = {}
+    for r in manifest:
+        per_class_split.setdefault(r["label"], Counter())[r["split"]] += 1
+    no_split = {s: sorted(l for l, c in per_class_split.items() if c.get(s, 0) == 0) for s in lists}
     leak = [v for v in duplicate_content if len({path_split[p] for p in v}) > 1]
 
     missing_by_category = Counter(o.split("/")[0] for lst in missing_listed.values() for o in lst)
@@ -187,6 +198,10 @@ def audit(raw: Path, out: Path) -> tuple[dict, dict, list[dict]]:
         "listed_but_never_seen_by_class_top10": dict(missing_by_label.most_common(10)),
         "listed_but_never_seen_examples": {s: missing_listed[s][:5] for s in lists},
         "signer_ids_available": False,
+        "listed_videos_not_in_manifest": all_missing,
+        "filename_fallback_rows": fallback_rows,
+        "zip_videos_unmatched_in_supplement": sorted(skipped_in_zips),
+        "classes_without_a_sample_in_split": no_split,
     }
     class_rows = []
     for label, c in sorted(per_class.items()):
@@ -205,8 +220,9 @@ def main() -> int:
     p.add_argument("--raw", type=Path, required=True)
     p.add_argument("--out", type=Path, required=True)
     p.add_argument("--reports", type=Path, required=True)
+    p.add_argument("--parts", type=Path, nargs="+", help="part record folders (default: <out>/_parts)")
     a = p.parse_args()
-    quality, split_report, class_rows = audit(a.raw, a.out)
+    quality, split_report, class_rows = audit(a.raw, a.out, a.parts)
     a.reports.mkdir(parents=True, exist_ok=True)
     (a.reports / "dataset_quality.json").write_text(json.dumps(quality, indent=2), encoding="utf-8")
     (a.reports / "split_integrity.json").write_text(json.dumps(split_report, indent=2), encoding="utf-8")

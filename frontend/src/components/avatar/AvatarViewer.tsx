@@ -3,7 +3,7 @@ import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Component, type ReactNode } from "react";
 import type { SequencePlayer } from "@/lib/avatar/player";
-import { Humanoid } from "./Humanoid";
+import { SignerAvatar, type AvatarKind } from "./GlbHumanoid";
 
 function webglAvailable(): boolean {
   try {
@@ -32,7 +32,7 @@ class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean
   }
 }
 
-export default function AvatarViewer({ player }: { player: SequencePlayer }) {
+export default function AvatarViewer({ player, onKind }: { player: SequencePlayer; onKind?: (k: AvatarKind) => void }) {
   if (typeof document !== "undefined" && !webglAvailable()) {
     return <Fallback message="WebGL is not available in this browser, so the 3D avatar cannot be shown. Sign glosses are still shown as text." />;
   }
@@ -42,7 +42,7 @@ export default function AvatarViewer({ player }: { player: SequencePlayer }) {
         <color attach="background" args={["#0b1020"]} />
         <hemisphereLight args={["#cbd5e1", "#1e293b", 0.9]} />
         <directionalLight position={[2, 4, 3]} intensity={1.6} castShadow shadow-mapSize={[1024, 1024]} />
-        <Humanoid player={player} />
+        <SignerAvatar player={player} onKind={onKind} />
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.0, 0]} receiveShadow>
           <circleGeometry args={[1.6, 48]} />
           <meshStandardMaterial color="#121a33" roughness={1} />

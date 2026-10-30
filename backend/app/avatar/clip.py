@@ -9,6 +9,8 @@ import json
 import math
 from pathlib import Path
 
+from typing import Literal
+
 from pydantic import BaseModel, Field, ValidationError, field_validator, model_validator
 
 BONES: list[str] = [
@@ -54,6 +56,12 @@ class ClipSource(BaseModel):
     author: str = Field(min_length=1)
     license: str = Field(min_length=1)
     description: str = Field(min_length=1)
+    # Every clip is not signer reviewed until an ISL signer has checked it; the sign registry decides what counts as verified.
+    review_status: Literal["not_signer_reviewed", "signer_reviewed"] = "not_signer_reviewed"
+    # For clips retargeted from a dataset sample: which sample was used and why (video file name, feature file, missing-hand counts).
+    source_sample: dict | None = None
+    # Where the landmarks came from: a retarget of a dataset sample, or a take the user recorded with the recorder tool.
+    origin: Literal["include-retarget", "self-recorded"] | None = None
 
 
 class ClipFile(BaseModel):

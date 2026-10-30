@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 220" width="100%" height="100%">
+  <defs>
+    <linearGradient id="wsBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080C1B"/>
+      <stop offset="100%" stop-color="#04060E"/>
+    </linearGradient>
+
+    <linearGradient id="packetLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F5FF"/>
+      <stop offset="50%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+
+    <filter id="wsGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    .ws-stream-dots {
+      stroke-dasharray: 6, 14;
+      animation: wsFlow 1.2s linear infinite;
+    }
+    @keyframes wsFlow {
+      to { stroke-dashoffset: -40; }
+    }
+
+    .pulse-packet {
+      animation: packetBlink 1.5s ease-in-out infinite alternate;
+    }
+    @keyframes packetBlink {
+      0% { opacity: 0.6; filter: drop-shadow(0 0 2px #00F5FF); }
+      100% { opacity: 1; filter: drop-shadow(0 0 8px #10B981); }
+    }
+
+    .ws-text-title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      fill: #FFFFFF;
+    }
+
+    .ws-text-sub {
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      fill: #94A3B8;
+    }
+  </style>
+
+  <!-- Container -->
+  <rect x="2" y="2" width="916" height="216" rx="14" fill="url(#wsBg)" stroke="#1E293B" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <g transform="translate(25, 20)">
+    <text x="0" y="0" fill="#00F5FF" font-family="'Courier New', monospace" font-size="11" font-weight="700">
+      ⚡ REAL-TIME WEBSOCKET STREAMING PIPELINE // 30 FPS CONTINUOUS SLR
+    </text>
+  </g>
+
+  <!-- Flow Track Line -->
+  <path d="M 90 120 L 260 120 L 440 120 L 630 120 L 820 120" fill="none" stroke="#1E293B" stroke-width="3"/>
+  <path d="M 90 120 L 260 120 L 440 120 L 630 120 L 820 120" fill="none" stroke="url(#packetLine)" stroke-width="3" class="ws-stream-dots" filter="url(#wsGlow)"/>
+
+  <!-- Step 1: Camera Client -->
+  <g transform="translate(20, 75)">
+    <rect width="130" height="90" rx="10" fill="#0F172A" stroke="#38BDF8" stroke-width="1.2"/>
+    <text x="65" y="32" text-anchor="middle" class="ws-text-title">📹 Camera Feed</text>
+    <text x="65" y="52" text-anchor="middle" class="ws-text-sub">WebRTC @ 30 FPS</text>
+    <text x="65" y="70" text-anchor="middle" class="ws-text-sub" fill="#38BDF8">Client Browser</text>
+  </g>
+
+  <!-- Step 2: MediaPipe SIMD -->
+  <g transform="translate(195, 75)">
+    <rect width="145" height="90" rx="10" fill="#0F172A" stroke="#00F5FF" stroke-width="1.2"/>
+    <text x="72" y="32" text-anchor="middle" class="ws-text-title">🖐️ MediaPipe WASM</text>
+    <text x="72" y="52" text-anchor="middle" class="ws-text-sub">75 Holistic Pts</text>
+    <text x="72" y="70" text-anchor="middle" class="ws-text-sub" fill="#00F5FF">Zero-Latency JS</text>
+  </g>
+
+  <!-- Step 3: WebSocket Transport -->
+  <g transform="translate(380, 75)" class="pulse-packet">
+    <rect width="140" height="90" rx="10" fill="#2E1065" stroke="#A855F7" stroke-width="1.5"/>
+    <text x="70" y="32" text-anchor="middle" class="ws-text-title">🌐 /ws/predict</text>
+    <text x="70" y="52" text-anchor="middle" class="ws-text-sub">FastAPI WS Socket</text>
+    <text x="70" y="70" text-anchor="middle" class="ws-text-sub" fill="#C084FC">JSON Frame Stream</text>
+  </g>
+
+  <!-- Step 4: PyTorch Model Engine -->
+  <g transform="translate(560, 75)">
+    <rect width="150" height="90" rx="10" fill="#0F172A" stroke="#EC4899" stroke-width="1.2"/>
+    <text x="75" y="32" text-anchor="middle" class="ws-text-title">🧠 PyTorch Engine</text>
+    <text x="75" y="52" text-anchor="middle" class="ws-text-sub">CNN / BiGRU / Trans</text>
+    <text x="75" y="70" text-anchor="middle" class="ws-text-sub" fill="#F472B6">Window T = 30</text>
+  </g>
+
+  <!-- Step 5: Prediction & Avatar -->
+  <g transform="translate(750, 75)">
+    <rect width="150" height="90" rx="10" fill="#064E3B" stroke="#10B981" stroke-width="1.2"/>
+    <text x="75" y="32" text-anchor="middle" class="ws-text-title">💬 Live Output</text>
+    <text x="75" y="52" text-anchor="middle" class="ws-text-sub">Gloss Confidence</text>
+    <text x="75" y="70" text-anchor="middle" class="ws-text-sub" fill="#34D399">Avatar Retargeting</text>
+  </g>
+</svg>

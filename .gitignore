@@ -27,4 +27,17 @@ frontend/public/mediapipe/
 .agents/
 .mcp.json
 
+# Mixamo avatar (terms to be confirmed before any public release)
+frontend/public/avatar/
+tools/avatar/source/
+
+# Self-recorded landmark takes (no video)
+data/recorded/
+
+# Temporary archives, partial downloads, and runtime logs
+zips_keep/
+*.zip
+*.zip.part
+*.part
+*.log
 

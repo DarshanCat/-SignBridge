@@ -33,10 +33,10 @@ def read_consented_signers(path: Path) -> set[str]:
         return {r["signer_id"].strip() for r in reader if r["consent_date"].strip() and r["scope"].strip()}
 
 
-def validate(directory: Path) -> dict:
+def validate(directory: Path, exclude_paths: frozenset[Path] = frozenset()) -> dict:
     """Return a report dict; raise DatasetError for blocking problems. Soft issues go in `warnings`."""
     info = read_dataset_info(directory)
-    samples = read_manifest(directory / "manifest.csv")
+    samples = [s for s in read_manifest(directory / "manifest.csv") if s.path not in exclude_paths]  # excluded files (e.g. the test split in pilot runs) are not opened
 
     if info.consent_required:
         missing = {s.signer for s in samples} - read_consented_signers(directory / "consent.csv")

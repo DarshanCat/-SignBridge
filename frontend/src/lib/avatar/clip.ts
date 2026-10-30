@@ -15,7 +15,7 @@ export interface SignClip {
   gloss: string;
   duration: number;
   tracks: Track[];
-  source: { author: string; license: string; description: string };
+  source: { author: string; license: string; description: string; review_status?: "not_signer_reviewed" | "signer_reviewed" };
 }
 
 export const BONES: readonly string[] = bones;

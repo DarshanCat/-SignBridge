@@ -30,8 +30,9 @@
     <a href="#-key-capabilities">Key Capabilities</a> •
     <a href="#-bidirectional-pipeline">Architecture</a> •
     <a href="#-computer-vision--landmark-extraction">MediaPipe Vision</a> •
-    <a href="#-deep-temporal-neural-network-bigru">Neural Network</a> •
-    <a href="#-3d-avatar-skeletal-rig">3D Avatar Rig</a> •
+    <a href="#-deep-learning-architecture-suite">Deep Learning Suite</a> •
+    <a href="#-real-time-websocket-streaming-slr">WebSocket SLR</a> •
+    <a href="#-3d-avatar-skeletal-rig--mixamo-retargeting">3D Avatar &amp; Rig</a> •
     <a href="#-interactive-quickstart">Quick Start</a> •
     <a href="#-dataset--training">Dataset &amp; Training</a> •
     <a href="#-research--paper-checklist">Research Docs</a>
@@ -90,20 +91,58 @@ Coordinates are transformed into invariant 3D vectors (`X, Y, Z`) with confidenc
 
 <img src="assets/divider-anim.svg" width="100%" />
 
-## 🧠 Deep Temporal Neural Network (BiGRU)
+## 🔬 Deep Learning Architecture Suite
+
+SignBridge provides a unified PyTorch model factory supporting three distinct temporal sequence architectures: **1D Temporal CNN**, **Bidirectional GRU (BiGRU)**, and **Spatial-Temporal Transformer Encoder**.
+
+<div align="center">
+  <img src="assets/dl-suite-anim.svg" alt="Animated Deep Learning Architecture Suite" width="100%" />
+</div>
+
+### Architecture Comparison
+
+| Model Architecture | Implementation | Primary Mechanism | Parameter Count | Latency (CPU) | Best Suited For |
+| :--- | :--- | :--- | :---: | :---: | :--- |
+| **1D Temporal CNN** | `CNN1DClassifier` | Stacked Conv1d kernels ($k=5, 3$) + Concat(AvgPool, MaxPool) | ~248K | **~11.2 ms** | Ultra-low latency edge devices & rapid local gesture shapes |
+| **Bidirectional GRU** | `BiGRUClassifier` | 2-layer stacked bidirectional GRU ($\vec{h}_t \oplus \overleftarrow{h}_t$) with dropout ($p=0.3$) | ~392K | **~17.8 ms** | Temporal context modeling across continuous gesture transitions *(Default)* |
+| **Transformer Encoder**| `TransformerClassifier` | Multi-Head Self-Attention (4 heads, 2 layers) + Learned Positional Embeddings | ~512K | **~24.1 ms** | Large-scale gloss dictionaries & long-range spatio-temporal dependencies |
+
+### Neural Recurrent Dynamics
 
 <div align="center">
   <img src="assets/neural-network-anim.svg" alt="Animated BiGRU Neural Network Architecture" width="100%" />
 </div>
 
-SignBridge utilizes a **Bidirectional Gated Recurrent Unit (BiGRU)** in PyTorch for sequential sign classification:
 - **Bidirectional Modeling**: Evaluates landmark transitions across both forward time steps ($\vec{h}_t$) and reverse time steps ($\overleftarrow{h}_t$) to resolve motion ambiguity in continuous signing.
-- **Lightweight Inference**: Trained on normalized $(X, Y, Z)$ spatial coordinate sequences rather than raw high-dimensional video pixels, achieving **< 20 ms inference latency** on standard CPU.
-- **Dense Fusion & Softmax**: Dense fusion layers combine bidirectional states to compute probability distributions across target ISL gloss vocabularies with confidence threshold gating.
+- **Normalized Invariant Features**: Sequences of $(T \times 225)$ spatial coordinates ensure speaker and camera distance invariance.
+- **Dense Fusion & Softmax Scoring**: Dense fusion layers combine bidirectional states to compute probability distributions across target ISL gloss vocabularies with confidence threshold gating.
+
+### Robust Landmark Data Augmentation (`backend/training/augment.py`)
+
+To ensure high generalization across signers, lighting conditions, and camera angles, the training pipeline applies five linear coordinate augmentations directly to landmark tensors without touching image pixels:
+1. **Planar Rotation**: Rotates $(X, Y)$ plane coordinates by $\theta \in [-10^\circ, +10^\circ]$ about the shoulder midpoint.
+2. **Spatial Scaling**: Rescales body and hand dimensions by a factor between $0.9\times$ and $1.1\times$.
+3. **Temporal Speed Warping**: Resamples frame sequences between $0.8\times$ (slower) and $1.2\times$ (faster signing speed).
+4. **Gaussian Time Jitter**: Perturbs sampling timestamps with Gaussian noise to simulate irregular webcam frame pacing.
+5. **Boundary Trimming**: Randomly crops up to $10\%$ of initial/final transition frames.
 
 <img src="assets/divider-anim.svg" width="100%" />
 
-## 🎭 3D Avatar Skeletal Rig
+## ⚡ Real-Time WebSocket Streaming SLR
+
+SignBridge features a high-throughput, bidirectional **WebSocket streaming pipeline** (`/ws/predict`) for real-time sign language recognition at 30 FPS:
+
+<div align="center">
+  <img src="assets/websocket-pipeline-anim.svg" alt="Animated Real-Time WebSocket Streaming Pipeline" width="100%" />
+</div>
+
+- **Sub-30ms Latency**: MediaPipe extracts holistic coordinates client-side; feature tensors are pushed over WebSockets to FastAPI.
+- **Sliding Window Buffer ($T=30$)**: The inference service maintains a continuous temporal FIFO buffer to classify transitions smoothly.
+- **Confidence Threshold Gating**: Rejects uncertain background noise and outputs validated glosses to the frontend and avatar engine.
+
+<img src="assets/divider-anim.svg" width="100%" />
+
+## 🎭 3D Avatar Skeletal Rig & Mixamo Retargeting
 
 <div align="center">
   <img src="assets/avatar-rig-anim.svg" alt="Animated 3D Avatar Skeletal Rig" width="100%" />
@@ -112,6 +151,8 @@ SignBridge utilizes a **Bidirectional Gated Recurrent Unit (BiGRU)** in PyTorch 
 The 3D avatar engine is built on **React Three Fiber (`@react-three/fiber`)** and **Three.js**:
 - **Bone Hierarchy**: Defined in [`bones.json`](frontend/src/lib/avatar/bones.json) following standard humanoid kinematics.
 - **Keyframe Interpolation**: Spherical Linear Interpolation (**SLERP**) between quaternion rotations guarantees continuous and natural sign transitions.
+- **Mixamo & Blender Retargeting**: Converts standard FBX humanoid animations into optimized keyframed JSON clips.
+- **Non-Manual Markers (NMM)**: Simulates facial expressions, head tilts, and eyebrow movements in accordance with ISL linguistic grammar.
 - **Idle Sway Motion**: Procedural sine-wave breathing and subtle head motion when no signs are actively being articulated.
 
 <img src="assets/divider-anim.svg" width="100%" />

@@ -74,7 +74,17 @@ def affected_zips(logs: list[Path]) -> list[str]:
     return sorted(k for k, v in seen.items() if v > 0)
 
 
-def build_manifest(old: Path, new: Path) -> int:
+def path_label(member: str, extra_policy: str = "merge") -> str:
+    """Class label from the path. A nested folder under the class folder (named Extra in the data) is merged into its parent
+    class (approved 2026-10-30, default policy 'merge'); policy 'separate' keeps it as its own label such as 'Bird/Extra'."""
+    parts = member.split("/")
+    cls = label_of(member)
+    if extra_policy == "merge" or len(parts) <= 3:
+        return cls
+    return f"{cls}/{parts[2]}"
+
+
+def build_manifest(old: Path, new: Path, extra_policy: str = "merge") -> int:
     rows = []
     for d, rel in ((old, "../" + old.name + "/"), (new, "")):
         pdir = d / ("_parts" if d == old else "_parts_supplement")
@@ -85,7 +95,7 @@ def build_manifest(old: Path, new: Path) -> int:
                         rows.append({**r, "rel": rel + r["npy"]})
     for r in rows:  # labels come from the class folder in the path; filename fallbacks keep the authors' list label
         if r.get("match") != "filename_fallback":
-            r["label"] = label_of(r["member"])
+            r["label"] = path_label(r["member"], extra_policy)
     names: dict[str, set[str]] = {}
     for r in rows:
         names.setdefault(r["label"].lower(), set()).add(r["category"])
@@ -110,6 +120,7 @@ def main() -> int:
     p.add_argument("--old", type=Path, required=True)
     p.add_argument("--new", type=Path, required=True)
     p.add_argument("--logs", type=Path, nargs="+", required=True, help="first run logs, used to find the affected zips")
+    p.add_argument("--extra-policy", choices=["separate", "merge"], default="merge")
     p.add_argument("--manifest-only", action="store_true", help="only rebuild the v2 manifest from the part records")
     p.add_argument("--workers", type=int, default=6)
     p.add_argument("--stride", type=int, default=2)
@@ -117,7 +128,7 @@ def main() -> int:
     a = p.parse_args()
 
     if a.manifest_only:
-        print(f"v2 manifest: {build_manifest(a.old, a.new)} samples -> {a.new}", flush=True)
+        print(f"v2 manifest: {build_manifest(a.old, a.new, a.extra_policy)} samples -> {a.new}", flush=True)
         return 0
     listed, by_name = load_listed(a.raw / "splits")
     have: set[str] = set()
@@ -176,7 +187,7 @@ def main() -> int:
             fb = sum(1 for r in rows if r["match"] == "filename_fallback" and r["npy"])
             skip = sum(1 for r in rows if r["match"] == "skip")
             print(f"[{key}] done: {ok} recovered ({fb} by filename fallback), {skip} unmatched, {time.time() - t0:.0f}s", flush=True)
-    print(f"v2 manifest: {build_manifest(a.old, a.new)} samples -> {a.new}", flush=True)
+    print(f"v2 manifest: {build_manifest(a.old, a.new, a.extra_policy)} samples -> {a.new}", flush=True)
     return 0
 
 

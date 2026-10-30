@@ -28,6 +28,9 @@ export interface LandmarkCapture {
   start: () => Promise<void>;
   stop: () => void;
   getBuffer: () => LandmarkFrame[];
+  /** Start collecting every extracted frame (landmarks only) for a recording; ends with endRecording(). */
+  beginRecording: () => void;
+  endRecording: () => LandmarkFrame[];
 }
 
 const EMPTY: CaptureStats = { frames: 0, withPose: 0, withHands: 0 };
@@ -57,6 +60,7 @@ export function useLandmarkCapture(): LandmarkCapture {
   const holisticRef = useRef<HolisticInstance | null>(null);
   const bufferRef = useRef<BufferState>(EMPTY_BUFFER);
   const runningRef = useRef(false);
+  const recordRef = useRef<LandmarkFrame[] | null>(null);
   const [state, setState] = useState<CaptureState>("idle");
   const [extractor, setExtractor] = useState<ExtractorState>("not_loaded");
   const [error, setError] = useState<string | null>(null);
@@ -70,6 +74,7 @@ export function useLandmarkCapture(): LandmarkCapture {
     if (videoRef.current) videoRef.current.srcObject = null;
     canvasRef.current?.getContext("2d")?.clearRect(0, 0, 9999, 9999);
     bufferRef.current = EMPTY_BUFFER;
+    recordRef.current = null;
     setStats(EMPTY);
     setState((s) => (s === "error" ? s : "idle"));
   }, []);
@@ -84,7 +89,9 @@ export function useLandmarkCapture(): LandmarkCapture {
         try {
           holisticRef.current = await createHolistic((r) => {
             draw(canvasRef.current, r);
-            bufferRef.current = appendFrame(bufferRef.current, toFrame(r));
+            const frame = toFrame(r);
+            bufferRef.current = appendFrame(bufferRef.current, frame);
+            recordRef.current?.push(frame);
           });
           setExtractor("ready");
         } catch (e) {
@@ -141,5 +148,13 @@ export function useLandmarkCapture(): LandmarkCapture {
   );
 
   const getBuffer = useCallback(() => bufferRef.current.frames, []);
-  return { state, extractor, error, stats, runId, videoRef, canvasRef, start, stop, getBuffer };
+  const beginRecording = useCallback(() => {
+    recordRef.current = [];
+  }, []);
+  const endRecording = useCallback(() => {
+    const frames = recordRef.current ?? [];
+    recordRef.current = null;
+    return frames;
+  }, []);
+  return { state, extractor, error, stats, runId, videoRef, canvasRef, start, stop, getBuffer, beginRecording, endRecording };
 }

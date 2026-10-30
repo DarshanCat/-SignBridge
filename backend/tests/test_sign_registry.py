@@ -37,18 +37,25 @@ def setup(tmp_path: Path, signs: list[dict], clips: dict[str, dict] | None = Non
 FULL = {"reference_source": "ref", "license": "CC BY 4.0", "attribution": "someone"}
 
 
-def test_shipped_registry_covers_exactly_the_vocabulary() -> None:
+def test_shipped_registry_covers_the_vocabulary_and_only_known_glosses() -> None:
+    import json
+
     vocab = load_vocabulary(BACKEND_DIR / "config" / "translation.json")
-    assert {s.gloss for s in load_registry(SHIPPED_REGISTRY).signs} == set(vocab.glosses)
+    dictionary = json.loads((BACKEND_DIR / "config" / "gloss_dictionary.json").read_text(encoding="utf-8"))["signs"]
+    glosses = {s.gloss for s in load_registry(SHIPPED_REGISTRY).signs}
+    assert set(vocab.glosses) <= glosses  # every placeholder vocabulary gloss has a registry record
+    assert glosses <= set(vocab.glosses) | set(dictionary)  # and nothing unknown is registered
 
 
-def test_shipped_clips_are_all_registered_and_nothing_claims_unearned_verification() -> None:
+def test_shipped_clips_are_all_registered_valid_and_none_is_claimed_verified() -> None:
     report = build_report(SHIPPED_REGISTRY, SHIPPED_ANIMATIONS)
     assert report.unregistered_clips == []
     assert all(not s.problems for s in report.signs)
-    assert report.totals["verified"] == sum(s.status == "verified" for s in report.signs)
-    if report.totals["verified"] == 0:  # today: no clip exists, so no sign may be reported as available or verified
-        assert report.totals["no_clip"] == report.totals["signs"]
+    assert report.totals["verified"] == 0 and report.totals["missing_asset"] == 0
+    clips = [p for p in SHIPPED_ANIMATIONS.glob("*.json") if p.name != "index.json"]
+    assert report.totals["clip_unreviewed"] == len(clips)
+    for p in clips:  # every shipped clip says it is not signer reviewed
+        assert json.loads(p.read_text(encoding="utf-8"))["source"]["review_status"] == "not_signer_reviewed"
 
 
 def test_status_progression(tmp_path) -> None:

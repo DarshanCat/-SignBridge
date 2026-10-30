@@ -7,6 +7,9 @@ Interactive docs: `/docs` (Swagger) on the backend.
 | `GET /api/health` | Implemented. Returns `{status, service, version}`. |
 | `GET /api/model/status` | Implemented. `state` is `not_trained`, `loaded` or `error`. |
 | `GET /api/avatar/animations` | Implemented. Lists valid `*.json` clips in `frontend/public/animations` (format in `AVATAR.md`) and reports invalid files in `invalid`. |
+| `POST /api/nlp/text-to-gloss` | Implemented (spaCy rules, `docs/NLP.md`). Body `{text}` (1 to 500 chars). Returns gloss, tokens (with fingerspelling letters), non manual markers, tense, dropped words with reasons, note. 422 for wordless text, 503 if the spaCy model or dictionary is missing. |
+| `POST /api/nlp/gloss-to-text` | Implemented. Body `{gloss: [..]}`. Returns English reconstructed by heuristic rules. |
+| `WS /ws/predict` | STUB. Sends `{type: error, error: model_not_trained}` (or `not_implemented` if a model exists) and closes with code 1013. Never returns a prediction. |
 | `GET /api/avatar/registry` | Implemented. Per-sign provenance and computed status (`no_clip`, `clip_unreviewed`, `verified`, `missing_asset`), unregistered clips, totals. 503 if the registry file is invalid. |
 | `GET /api/translation/vocabulary` | Implemented. Glosses, English, and whether each has an animation clip. |
 | `POST /api/landmarks/extract` | Implemented. Body `{frames: [{pose, left_hand, right_hand}]}` (1 to 300 frames; 33/21/21 points of x,y,z, parts nullable). Returns normalized `features` (225 per frame), per-frame reports, `usable` and `warnings`. 422 on malformed input. |

@@ -4,9 +4,12 @@ from app.avatar.clip import ClipError, load_clip
 from app.schemas.status import AnimationInfo, AnimationRegistryResponse
 
 
+INDEX_FILE = "index.json"  # gloss to clip index written next to the clips; not a clip itself
+
+
 def list_animations(animation_dir: Path) -> AnimationRegistryResponse:
     """List valid sign clips (*.json) found on disk, one per gloss token. Invalid files are reported, not served."""
-    files = sorted(animation_dir.glob("*.json")) if animation_dir.is_dir() else []
+    files = sorted(p for p in animation_dir.glob("*.json") if p.name != INDEX_FILE) if animation_dir.is_dir() else []
     animations: list[AnimationInfo] = []
     invalid: list[str] = []
     for p in files:

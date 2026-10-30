@@ -69,6 +69,21 @@ export interface EnglishToGloss {
   coverage: number;
   note: string;
 }
+export interface NlpGlossToken {
+  gloss: string;
+  kind: string;
+  source: string;
+  letters?: string[] | null;
+}
+export interface TextToGloss {
+  gloss: string[];
+  tokens: NlpGlossToken[];
+  nmm: string[];
+  tense: string;
+  dropped: Record<string, unknown>[];
+  fingerspelled: string[];
+  note: string;
+}
 export interface PlanStep {
   gloss: string;
   available: boolean;
@@ -111,4 +126,16 @@ export interface SignRegistry {
   signs: SignStatus[];
   unregistered_clips: string[];
   totals: Record<string, number>;
+}
+
+export interface RecordResult {
+  accepted: boolean;
+  gloss: string;
+  reasons: string[];
+  stats: { frames: number; no_pose_frames: number; no_hand_frames: number; fps: number; seconds: number };
+  saved: boolean;
+  feature_file: string | null;
+  clip_file: string | null;
+  clip: unknown;
+  note: string;
 }

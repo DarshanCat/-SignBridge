@@ -66,7 +66,8 @@ def build_report(registry_path: Path, animation_dir: Path) -> RegistryReport:
     clips: dict[str, Path] = {}
     if animation_dir.is_dir():
         for p in sorted(animation_dir.glob("*.json")):
-            clips[p.stem.lower()] = p
+            if p.name != "index.json":
+                clips[p.stem.lower()] = p
 
     statuses: list[SignStatus] = []
     used: set[str] = set()

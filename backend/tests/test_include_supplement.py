@@ -57,7 +57,7 @@ def test_build_manifest_keeps_old_folder_untouched_and_references_it(tmp_path) -
     assert "unverified" in json.loads((new / "dataset_info.json").read_text())["notes"]
 
 
-def test_build_manifest_uses_path_label_not_nested_extra_folder(tmp_path) -> None:
+def test_build_manifest_merges_nested_extra_into_parent_class(tmp_path) -> None:
     old, new = tmp_path / "include", tmp_path / "include_v2"
     (old / "_parts").mkdir(parents=True)
     (new / "_parts_supplement").mkdir(parents=True)
@@ -68,4 +68,6 @@ def test_build_manifest_uses_path_label_not_nested_extra_folder(tmp_path) -> Non
         w.writerow(dict(member="Animals/4. Bird/Extra/x.MOV", npy="o1.npy", message="", split="train", label="Extra", category="Animals"))
     (old / "dataset_info.json").write_text(json.dumps({"name": "n", "language": "ISL", "license": "l", "source_url": "u"}))
     build_manifest(old, new)
-    assert [r["label"] for r in csv.DictReader((new / "manifest.csv").open())] == ["Bird"]
+    assert [r["label"] for r in csv.DictReader((new / "manifest.csv").open())] == ["Bird"]  # default: merged into the parent class
+    build_manifest(old, new, extra_policy="separate")
+    assert [r["label"] for r in csv.DictReader((new / "manifest.csv").open())] == ["Bird/Extra"]

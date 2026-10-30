@@ -5,7 +5,7 @@ import numpy as np
 import torch
 
 from app.recognition.artifacts import ModelConfig, load_artifacts
-from app.recognition.preprocess import resample_sequence
+from app.recognition.preprocess import prepare_sequence
 
 
 @dataclass(frozen=True)
@@ -22,11 +22,21 @@ class SignRecognizer:
     @torch.no_grad()
     def predict(self, features: np.ndarray, top_k: int = 3) -> list[Prediction]:
         """Softmax probabilities from the trained model for one (T, FEATURE_DIM) sequence."""
-        x = torch.from_numpy(resample_sequence(features, self.config.seq_len)).unsqueeze(0)
+        x = torch.from_numpy(prepare_sequence(features, self.config.seq_len, self.config.max_gap)).unsqueeze(0)
         probs = torch.softmax(self.model(x), dim=-1)[0]
         k = min(top_k, len(self.config.classes))
         vals, idx = torch.topk(probs, k)
         return [Prediction(self.config.classes[i], float(v)) for v, i in zip(vals.tolist(), idx.tolist())]
+
+
+UNRECOGNIZED = "UNRECOGNIZED"
+
+
+def label_or_unrecognized(predictions: list[Prediction], threshold: float) -> str:
+    """Top label if its model confidence reaches `threshold`, else the explicit UNRECOGNIZED output (never forced into a class)."""
+    if not predictions or predictions[0].confidence < threshold:
+        return UNRECOGNIZED
+    return predictions[0].label
 
 
 _cache: dict[tuple[str, int], SignRecognizer] = {}

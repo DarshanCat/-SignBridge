@@ -3,13 +3,14 @@ FROM python:3.11-slim
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 WORKDIR /srv/backend
 
-COPY backend/requirements.txt ./requirements.txt
+COPY backend/requirements.txt backend/requirements-nlp.txt ./
 # CPU-only PyTorch (the API loads the recognition model); version pinned to requirements-ml.txt
 ARG TORCH_VERSION=2.13.0
-RUN pip install --no-cache-dir -r requirements.txt \
+RUN pip install --no-cache-dir -r requirements.txt -r requirements-nlp.txt \
  && pip install --no-cache-dir "torch==${TORCH_VERSION}" --index-url https://download.pytorch.org/whl/cpu --extra-index-url https://pypi.org/simple
 
 COPY backend/app ./app
+COPY backend/nlp ./nlp
 COPY backend/config ./config
 RUN useradd --create-home --uid 10001 signbridge && mkdir -p /srv/backend/models /srv/animations && chown -R signbridge /srv
 USER signbridge
