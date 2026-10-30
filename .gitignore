@@ -1,0 +1,30 @@
+node_modules/
+.next/
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.env
+.env.local
+# private recordings, datasets, trained weights
+data/*
+!data/.gitkeep
+!data/README.md
+backend/models/*
+!backend/models/.gitkeep
+*.mp4
+*.webm
+
+# MediaPipe runtime copied from node_modules
+frontend/public/mediapipe/
+*.tsbuildinfo
+.venv*/
+
+# Local editor and tooling caches
+.jetro/
+.snapshots/
+.cursor/
+.agents/
+.mcp.json
+
+

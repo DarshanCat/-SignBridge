@@ -1,0 +1,54 @@
+{
+  "hardware": {
+    "cpu": "13th Gen Intel(R) Core(TM) i5-13450HX",
+    "platform": "Windows-10-10.0.26300-SP0",
+    "python": "3.11.9"
+  },
+  "samples_per_measurement": 100,
+  "warmup_runs": 10,
+  "preprocessing_60_frames": {
+    "method": "process_sequence() in-process, synthetic landmarks",
+    "n": 100,
+    "mean_ms": 10.269,
+    "median_ms": 9.626,
+    "p95_ms": 15.292,
+    "min_ms": 7.919,
+    "max_ms": 19.872
+  },
+  "api_health_roundtrip": {
+    "method": "GET /api/health over HTTP to a running uvicorn",
+    "n": 100,
+    "mean_ms": 6.512,
+    "median_ms": 6.611,
+    "p95_ms": 8.269,
+    "min_ms": 4.389,
+    "max_ms": 9.591
+  },
+  "api_landmarks_extract_roundtrip": {
+    "method": "POST /api/landmarks/extract, 60 synthetic frames, includes JSON encode/decode",
+    "payload_bytes": 146592,
+    "n": 100,
+    "mean_ms": 69.676,
+    "median_ms": 56.692,
+    "p95_ms": 148.569,
+    "min_ms": 45.3,
+    "max_ms": 154.135
+  },
+  "mediapipe_python_blank_frame": {
+    "method": "Python Holistic (complexity 0) on a blank 640x480 frame; no person, lower bound only",
+    "n": 100,
+    "mean_ms": 54.148,
+    "median_ms": 53.227,
+    "p95_ms": 63.187,
+    "min_ms": 47.728,
+    "max_ms": 65.414
+  },
+  "model_inference": {
+    "measured": false,
+    "reason": "no real model: not_trained"
+  },
+  "end_to_end": {
+    "measured": false,
+    "reason": "needs a real camera, a real model and in-browser extraction"
+  }
+}

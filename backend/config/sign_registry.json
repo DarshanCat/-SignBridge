@@ -1,0 +1,161 @@
+{
+  "_notice": "Per-sign record. A sign counts as verified only when its clip exists, is visually reviewed in the avatar, and signer_reviewed is true. English words do not map one-to-one to ISL signs; every entry is an unvalidated placeholder until reviewed.",
+  "signs": [
+    {
+      "gloss": "HELLO",
+      "meaning": "hello",
+      "context": "UNSPECIFIED: placeholder gloss; sign, handshape and context not yet defined by an ISL reference",
+      "reference_source": null,
+      "asset_id": null,
+      "license": null,
+      "attribution": null,
+      "verification_status": "no_clip",
+      "visually_reviewed": false,
+      "signer_reviewed": false
+    },
+    {
+      "gloss": "THANK-YOU",
+      "meaning": "thank you",
+      "context": "UNSPECIFIED: placeholder gloss; sign, handshape and context not yet defined by an ISL reference",
+      "reference_source": null,
+      "asset_id": null,
+      "license": null,
+      "attribution": null,
+      "verification_status": "no_clip",
+      "visually_reviewed": false,
+      "signer_reviewed": false
+    },
+    {
+      "gloss": "YES",
+      "meaning": "yes",
+      "context": "UNSPECIFIED: placeholder gloss; sign, handshape and context not yet defined by an ISL reference",
+      "reference_source": null,
+      "asset_id": null,
+      "license": null,
+      "attribution": null,
+      "verification_status": "no_clip",
+      "visually_reviewed": false,
+      "signer_reviewed": false
+    },
+    {
+      "gloss": "NO",
+      "meaning": "no",
+      "context": "UNSPECIFIED: placeholder gloss; sign, handshape and context not yet defined by an ISL reference",
+      "reference_source": null,
+      "asset_id": null,
+      "license": null,
+      "attribution": null,
+      "verification_status": "no_clip",
+      "visually_reviewed": false,
+      "signer_reviewed": false
+    },
+    {
+      "gloss": "WATER",
+      "meaning": "water",
+      "context": "UNSPECIFIED: placeholder gloss; sign, handshape and context not yet defined by an ISL reference",
+      "reference_source": null,
+      "asset_id": null,
+      "license": null,
+      "attribution": null,
+      "verification_status": "no_clip",
+      "visually_reviewed": false,
+      "signer_reviewed": false
+    },
+    {
+      "gloss": "FOOD",
+      "meaning": "food",
+      "context": "UNSPECIFIED: placeholder gloss; sign, handshape and context not yet defined by an ISL reference",
+      "reference_source": null,
+      "asset_id": null,
+      "license": null,
+      "attribution": null,
+      "verification_status": "no_clip",
+      "visually_reviewed": false,
+      "signer_reviewed": false
+    },
+    {
+      "gloss": "HELP",
+      "meaning": "help",
+      "context": "UNSPECIFIED: placeholder gloss; sign, handshape and context not yet defined by an ISL reference",
+      "reference_source": null,
+      "asset_id": null,
+      "license": null,
+      "attribution": null,
+      "verification_status": "no_clip",
+      "visually_reviewed": false,
+      "signer_reviewed": false
+    },
+    {
+      "gloss": "GOOD",
+      "meaning": "good",
+      "context": "UNSPECIFIED: placeholder gloss; sign, handshape and context not yet defined by an ISL reference",
+      "reference_source": null,
+      "asset_id": null,
+      "license": null,
+      "attribution": null,
+      "verification_status": "no_clip",
+      "visually_reviewed": false,
+      "signer_reviewed": false
+    },
+    {
+      "gloss": "NAME",
+      "meaning": "name",
+      "context": "UNSPECIFIED: placeholder gloss; sign, handshape and context not yet defined by an ISL reference",
+      "reference_source": null,
+      "asset_id": null,
+      "license": null,
+      "attribution": null,
+      "verification_status": "no_clip",
+      "visually_reviewed": false,
+      "signer_reviewed": false
+    },
+    {
+      "gloss": "I",
+      "meaning": "I",
+      "context": "UNSPECIFIED: placeholder gloss; sign, handshape and context not yet defined by an ISL reference",
+      "reference_source": null,
+      "asset_id": null,
+      "license": null,
+      "attribution": null,
+      "verification_status": "no_clip",
+      "visually_reviewed": false,
+      "signer_reviewed": false
+    },
+    {
+      "gloss": "YOU",
+      "meaning": "you",
+      "context": "UNSPECIFIED: placeholder gloss; sign, handshape and context not yet defined by an ISL reference",
+      "reference_source": null,
+      "asset_id": null,
+      "license": null,
+      "attribution": null,
+      "verification_status": "no_clip",
+      "visually_reviewed": false,
+      "signer_reviewed": false
+    },
+    {
+      "gloss": "WHAT",
+      "meaning": "what",
+      "context": "UNSPECIFIED: placeholder gloss; sign, handshape and context not yet defined by an ISL reference",
+      "reference_source": null,
+      "asset_id": null,
+      "license": null,
+      "attribution": null,
+      "verification_status": "no_clip",
+      "visually_reviewed": false,
+      "signer_reviewed": false
+    },
+    {
+      "gloss": "WHERE",
+      "meaning": "where",
+      "context": "UNSPECIFIED: placeholder gloss; sign, handshape and context not yet defined by an ISL reference",
+      "reference_source": null,
+      "asset_id": null,
+      "license": null,
+      "attribution": null,
+      "verification_status": "no_clip",
+      "visually_reviewed": false,
+      "signer_reviewed": false
+    }
+  ]
+}

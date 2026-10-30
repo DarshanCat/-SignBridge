@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+
+    <linearGradient id="neonPurple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+
+    <linearGradient id="neonGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#14B8A6"/>
+    </linearGradient>
+
+    <linearGradient id="neonAmber" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#EF4444"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    .feature-card {
+      transition: transform 0.3s ease;
+    }
+    .card-title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      fill: #FFFFFF;
+    }
+    .card-val {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+    }
+    .card-desc {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 11px;
+      fill: #94A3B8;
+      font-weight: 500;
+    }
+    .accent-bar {
+      animation: barGlow 3s infinite alternate;
+    }
+    @keyframes barGlow {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.8)); }
+    }
+  </style>
+
+  <!-- Card 1 -->
+  <g transform="translate(10, 10)">
+    <rect width="210" height="150" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.2"/>
+    <rect x="0" y="0" width="210" height="4" rx="2" fill="url(#neonCyan)" class="accent-bar"/>
+    <text x="20" y="38" class="card-title">Landmark Tracking</text>
+    <text x="20" y="74" class="card-val" fill="#38BDF8">75 Points</text>
+    <text x="20" y="102" class="card-desc">MediaPipe Holistic</text>
+    <text x="20" y="122" class="card-desc">Pose + Left/Right Hands</text>
+  </g>
+
+  <!-- Card 2 -->
+  <g transform="translate(240, 10)">
+    <rect width="210" height="150" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.2"/>
+    <rect x="0" y="0" width="210" height="4" rx="2" fill="url(#neonPurple)" class="accent-bar"/>
+    <text x="20" y="38" class="card-title">Neural Engine</text>
+    <text x="20" y="74" class="card-val" fill="#C084FC">BiGRU</text>
+    <text x="20" y="102" class="card-desc">PyTorch Temporal Network</text>
+    <text x="20" y="122" class="card-desc">Sequence-to-Gloss Model</text>
+  </g>
+
+  <!-- Card 3 -->
+  <g transform="translate(470, 10)">
+    <rect width="210" height="150" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.2"/>
+    <rect x="0" y="0" width="210" height="4" rx="2" fill="url(#neonGreen)" class="accent-bar"/>
+    <text x="20" y="38" class="card-title">Avatar Engine</text>
+    <text x="20" y="74" class="card-val" fill="#34D399">Three.js / R3F</text>
+    <text x="20" y="102" class="card-desc">Skeletal Rig Controller</text>
+    <text x="20" y="122" class="card-desc">Keyframe Clip Interpolation</text>
+  </g>
+
+  <!-- Card 4 -->
+  <g transform="translate(700, 10)">
+    <rect width="210" height="150" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.2"/>
+    <rect x="0" y="0" width="210" height="4" rx="2" fill="url(#neonAmber)" class="accent-bar"/>
+    <text x="20" y="38" class="card-title">Grammar Rules</text>
+    <text x="20" y="74" class="card-val" fill="#FBBF24">ISL ⇄ English</text>
+    <text x="20" y="102" class="card-desc">SOV Sentence Reordering</text>
+    <text x="20" y="122" class="card-desc">Rule-based Gloss Tokenizer</text>
+  </g>
+</svg>

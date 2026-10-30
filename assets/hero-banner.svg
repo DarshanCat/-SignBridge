@@ -1,0 +1,284 @@
+<svg fill="none" viewBox="0 0 900 320" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <style>
+        .banner-container {
+          position: relative;
+          width: 900px;
+          height: 320px;
+          background: radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.25) 0%, transparent 45%),
+                      radial-gradient(circle at 85% 80%, rgba(236, 72, 153, 0.25) 0%, transparent 45%),
+                      radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.15) 0%, transparent 60%),
+                      #0B0F19;
+          border-radius: 16px;
+          overflow: hidden;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+          box-sizing: border-box;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Ambient grid pattern */
+        .grid-bg {
+          position: absolute;
+          inset: 0;
+          background-image: 
+            linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+          background-size: 30px 30px;
+          mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+          -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+        }
+
+        /* Animated glowing beam */
+        .glow-beam {
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 60%;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #6366F1, #EC4899, #10B981, transparent);
+          animation: sweep 6s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes sweep {
+          0% { left: -60%; opacity: 0; }
+          20% { opacity: 1; }
+          80% { opacity: 1; }
+          100% { left: 100%; opacity: 0; }
+        }
+
+        /* Ambient glowing circles */
+        .orb {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(40px);
+          animation: float 8s ease-in-out infinite alternate;
+        }
+
+        .orb-1 {
+          width: 180px;
+          height: 180px;
+          background: rgba(99, 102, 241, 0.35);
+          top: -20px;
+          left: 40px;
+        }
+
+        .orb-2 {
+          width: 220px;
+          height: 220px;
+          background: rgba(236, 72, 153, 0.25);
+          bottom: -40px;
+          right: 60px;
+          animation-delay: -4s;
+        }
+
+        @keyframes float {
+          0% { transform: translateY(0px) scale(1); }
+          100% { transform: translateY(25px) scale(1.1); }
+        }
+
+        .content {
+          position: relative;
+          z-index: 10;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 0 48px;
+          box-sizing: border-box;
+        }
+
+        .badge-row {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 16px;
+        }
+
+        .status-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          background: rgba(99, 102, 241, 0.15);
+          border: 1px solid rgba(99, 102, 241, 0.4);
+          padding: 5px 12px;
+          border-radius: 20px;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: #A5B4FC;
+        }
+
+        .pulse-dot {
+          width: 7px;
+          height: 7px;
+          background-color: #10B981;
+          border-radius: 50%;
+          box-shadow: 0 0 10px #10B981;
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+          0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+          70% { transform: scale(1.1); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+          100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .title {
+          font-size: 46px;
+          font-weight: 800;
+          letter-spacing: -0.03em;
+          margin: 0;
+          line-height: 1.1;
+          background: linear-gradient(135deg, #FFFFFF 30%, #E2E8F0 60%, #94A3B8 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .title-highlight {
+          background: linear-gradient(135deg, #6366F1 0%, #A855F7 50%, #EC4899 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+          font-size: 17px;
+          color: #94A3B8;
+          margin-top: 10px;
+          margin-bottom: 24px;
+          max-width: 680px;
+          line-height: 1.5;
+        }
+
+        .tech-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
+        .tech-tag {
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: #CBD5E1;
+          padding: 4px 10px;
+          border-radius: 6px;
+          font-size: 12px;
+          font-weight: 500;
+          backdrop-filter: blur(8px);
+        }
+
+        .animated-bridge {
+          position: absolute;
+          right: 48px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 140px;
+          height: 140px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .bridge-ring {
+          position: absolute;
+          border-radius: 50%;
+          border: 2px dashed rgba(99, 102, 241, 0.4);
+          animation: spin 20s linear infinite;
+        }
+
+        .ring-1 { width: 140px; height: 140px; }
+        .ring-2 { 
+          width: 100px; 
+          height: 100px; 
+          border: 2px solid rgba(236, 72, 153, 0.35); 
+          border-left-color: transparent;
+          border-right-color: transparent;
+          animation: spin-reverse 12s linear infinite;
+        }
+
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        @keyframes spin-reverse {
+          from { transform: rotate(360deg); }
+          to { transform: rotate(0deg); }
+        }
+
+        .avatar-icon {
+          width: 56px;
+          height: 56px;
+          background: linear-gradient(135deg, #6366F1, #8B5CF6);
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5);
+          animation: pulse-icon 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-icon {
+          0% { transform: scale(1); }
+          100% { transform: scale(1.08); }
+        }
+      </style>
+
+      <div class="banner-container">
+        <div class="grid-bg"></div>
+        <div class="glow-beam"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+
+        <div class="content">
+          <div class="badge-row">
+            <span class="status-pill">
+              <span class="pulse-dot"></span>
+              Real-Time AI &amp; 3D Graphics
+            </span>
+            <span class="status-pill" style="border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.1); color: #F472B6;">
+              Bidirectional Translation
+            </span>
+          </div>
+
+          <h1 class="title">
+            Sign<span class="title-highlight">Bridge</span>
+          </h1>
+
+          <p class="subtitle">
+            Bidirectional <strong>Indian Sign Language (ISL) ⇄ English</strong> translation powered by MediaPipe Holistic landmarks, BiGRU neural recognition, and a real-time Three.js 3D avatar.
+          </p>
+
+          <div class="tech-tags">
+            <span class="tech-tag">⚡ Next.js 16</span>
+            <span class="tech-tag">⚛️ React 19</span>
+            <span class="tech-tag">🎭 Three.js / R3F</span>
+            <span class="tech-tag">🐍 FastAPI</span>
+            <span class="tech-tag">🔥 PyTorch BiGRU</span>
+            <span class="tech-tag">🖐️ MediaPipe Holistic</span>
+            <span class="tech-tag">🐳 Docker</span>
+          </div>
+        </div>
+
+        <div class="animated-bridge">
+          <div class="bridge-ring ring-1"></div>
+          <div class="bridge-ring ring-2"></div>
+          <div class="avatar-icon">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 11v 6a3 3 0 0 0 6 0v-6"></path>
+              <path d="M10 20a4 4 0 0 0 4-4V7a2 2 0 0 0-4 0v9"></path>
+              <path d="M14 11v 5a2 2 0 0 0 4 0v-4a2 2 0 0 0-4 0"></path>
+              <path d="M18 13v 2a2 2 0 0 0 2-2v-3a2 2 0 0 0-4 0"></path>
+              <path d="M4 14a2 2 0 0 1 2-2h1v6H6a2 2 0 0 1-2-2z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </foreignObject>
+</svg>

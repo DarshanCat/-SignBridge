@@ -1,0 +1,5 @@
+# PyTorch (needed by the API for inference) and dataset-preprocessing tools. Install with:
+#   pip install -r requirements-ml.txt --index-url https://download.pytorch.org/whl/cpu --extra-index-url https://pypi.org/simple
+torch==2.13.0
+mediapipe==0.10.14
+opencv-contrib-python==4.10.0.84

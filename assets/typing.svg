@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 48" width="100%" height="48">
+  <style>
+    .typing-text {
+      font-family: 'Fira Code', 'Courier New', monospace, Consolas;
+      font-size: 19px;
+      font-weight: 600;
+      fill: #818CF8;
+    }
+    .cursor {
+      animation: blink 0.8s infinite;
+      fill: #EC4899;
+    }
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+    @keyframes typingCycle {
+      0%, 20% { content: "⚡ Bidirectional Indian Sign Language ⇄ English Translation"; }
+      25%, 45% { content: "🖐️ Real-time MediaPipe Holistic 75-Point Extraction"; }
+      50%, 70% { content: "🧠 Deep Temporal PyTorch BiGRU Neural Network"; }
+      75%, 95% { content: "🎭 Interactive 3D Avatar Skeletal Rig Player (R3F)"; }
+      100% { content: "⚡ Bidirectional Indian Sign Language ⇄ English Translation"; }
+    }
+    .phrase {
+      animation: textSwitch 16s infinite;
+    }
+    @keyframes textSwitch {
+      0%, 22% { opacity: 1; }
+      24%, 25% { opacity: 0; }
+      26%, 47% { opacity: 1; }
+      49%, 50% { opacity: 0; }
+      51%, 72% { opacity: 1; }
+      74%, 75% { opacity: 0; }
+      76%, 97% { opacity: 1; }
+      99%, 100% { opacity: 0; }
+    }
+  </style>
+  <g transform="translate(10, 30)">
+    <text class="typing-text phrase">
+      <tspan fill="#A5B4FC">❯ </tspan>
+      <tspan fill="#F472B6">SignBridge </tspan>
+      <tspan fill="#38BDF8">:: </tspan>
+      <tspan fill="#E2E8F0">Bidirectional ISL ⇄ English Translation with 3D Avatar</tspan>
+    </text>
+    <rect x="670" y="-18" width="9" height="22" class="cursor" rx="1.5"/>
+  </g>
+</svg>

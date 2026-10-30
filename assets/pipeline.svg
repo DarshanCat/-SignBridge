@@ -1,0 +1,212 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 400" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B0F19"/>
+      <stop offset="50%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <!-- Node Gradient: Recognition (Purple/Indigo) -->
+    <linearGradient id="recGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#312E81"/>
+      <stop offset="100%" stop-color="#1E1B4B"/>
+    </linearGradient>
+
+    <!-- Node Gradient: Translation (Pink/Rose) -->
+    <linearGradient id="transGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#831843"/>
+      <stop offset="100%" stop-color="#500724"/>
+    </linearGradient>
+
+    <!-- Node Gradient: Avatar (Emerald/Teal) -->
+    <linearGradient id="avatarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064E3B"/>
+      <stop offset="100%" stop-color="#022C22"/>
+    </linearGradient>
+
+    <!-- Glowing Lines -->
+    <linearGradient id="lineGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="50%" stop-color="#A855F7"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+
+    <linearGradient id="lineGrad2" x1="100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="50%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+
+    <!-- Filter for Glow Effect -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    /* Pulse animations for data flow */
+    .flow-line-forward {
+      stroke-dasharray: 8, 12;
+      animation: flowForward 1.6s linear infinite;
+    }
+
+    .flow-line-backward {
+      stroke-dasharray: 8, 12;
+      animation: flowBackward 1.6s linear infinite;
+    }
+
+    @keyframes flowForward {
+      to {
+        stroke-dashoffset: -40;
+      }
+    }
+
+    @keyframes flowBackward {
+      to {
+        stroke-dashoffset: 40;
+      }
+    }
+
+    .pulse-node {
+      animation: nodePulse 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes nodePulse {
+      0% { filter: drop-shadow(0 0 4px rgba(99, 102, 241, 0.4)); }
+      100% { filter: drop-shadow(0 0 14px rgba(99, 102, 241, 0.8)); }
+    }
+
+    .pulse-avatar {
+      animation: avatarPulse 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes avatarPulse {
+      0% { filter: drop-shadow(0 0 4px rgba(16, 185, 129, 0.4)); }
+      100% { filter: drop-shadow(0 0 14px rgba(16, 185, 129, 0.8)); }
+    }
+
+    .node-text-title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      fill: #F8FAFC;
+    }
+
+    .node-text-sub {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      fill: #94A3B8;
+    }
+
+    .direction-header {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+  </style>
+
+  <!-- Card Frame -->
+  <rect x="2" y="2" width="916" height="396" rx="16" fill="url(#bgGrad)" stroke="#1E293B" stroke-width="2"/>
+
+  <!-- ==================== TRACK 1: SIGN TO ENGLISH ==================== -->
+  <g transform="translate(30, 25)">
+    <circle cx="10" cy="15" r="4" fill="#6366F1" />
+    <text x="24" y="19" class="direction-header" fill="#818CF8">Sign ➔ English Recognition &amp; Translation Flow</text>
+
+    <!-- Connector Path -->
+    <path d="M 125 80 L 235 80 L 395 80 L 555 80 L 715 80" 
+          fill="none" stroke="#312E81" stroke-width="3" stroke-linecap="round" />
+    <path d="M 125 80 L 235 80 L 395 80 L 555 80 L 715 80" 
+          fill="none" stroke="url(#lineGrad1)" stroke-width="3" stroke-linecap="round" class="flow-line-forward" />
+
+    <!-- Step 1: Camera / Video -->
+    <g transform="translate(10, 45)">
+      <rect width="130" height="70" rx="10" fill="url(#recGrad)" stroke="#4F46E5" stroke-width="1.5" />
+      <text x="65" y="32" text-anchor="middle" class="node-text-title">📹 Webcam Input</text>
+      <text x="65" y="50" text-anchor="middle" class="node-text-sub">Video Stream / 30fps</text>
+    </g>
+
+    <!-- Step 2: MediaPipe Holistic -->
+    <g transform="translate(180, 45)" class="pulse-node">
+      <rect width="145" height="70" rx="10" fill="url(#recGrad)" stroke="#6366F1" stroke-width="1.5" />
+      <text x="72" y="32" text-anchor="middle" class="node-text-title">🖐️ MediaPipe</text>
+      <text x="72" y="50" text-anchor="middle" class="node-text-sub">75 Holistic Landmarks</text>
+    </g>
+
+    <!-- Step 3: BiGRU Neural Net -->
+    <g transform="translate(365, 45)" class="pulse-node">
+      <rect width="145" height="70" rx="10" fill="url(#recGrad)" stroke="#818CF8" stroke-width="1.5" />
+      <text x="72" y="32" text-anchor="middle" class="node-text-title">🧠 BiGRU PyTorch</text>
+      <text x="72" y="50" text-anchor="middle" class="node-text-sub">Temporal Feature Recog</text>
+    </g>
+
+    <!-- Step 4: ISL Gloss -->
+    <g transform="translate(550, 45)">
+      <rect width="130" height="70" rx="10" fill="url(#recGrad)" stroke="#A855F7" stroke-width="1.5" />
+      <text x="65" y="32" text-anchor="middle" class="node-text-title">🏷️ ISL Gloss</text>
+      <text x="65" y="50" text-anchor="middle" class="node-text-sub">Sign Token Sequence</text>
+    </g>
+
+    <!-- Step 5: English Sentence -->
+    <g transform="translate(720, 45)">
+      <rect width="130" height="70" rx="10" fill="url(#recGrad)" stroke="#EC4899" stroke-width="1.5" />
+      <text x="65" y="32" text-anchor="middle" class="node-text-title">💬 English Text</text>
+      <text x="65" y="50" text-anchor="middle" class="node-text-sub">Natural Language Output</text>
+    </g>
+  </g>
+
+  <!-- Divider -->
+  <line x1="40" y1="200" x2="880" y2="200" stroke="#1E293B" stroke-dasharray="6,6" stroke-width="1.5"/>
+
+  <!-- ==================== TRACK 2: ENGLISH TO SIGN ==================== -->
+  <g transform="translate(30, 220)">
+    <circle cx="10" cy="15" r="4" fill="#10B981" />
+    <text x="24" y="19" class="direction-header" fill="#34D399">English ➔ Sign 3D Avatar Synthesis Flow</text>
+
+    <!-- Connector Path -->
+    <path d="M 785 80 L 625 80 L 465 80 L 305 80 L 145 80" 
+          fill="none" stroke="#064E3B" stroke-width="3" stroke-linecap="round" />
+    <path d="M 785 80 L 625 80 L 465 80 L 305 80 L 145 80" 
+          fill="none" stroke="url(#lineGrad2)" stroke-width="3" stroke-linecap="round" class="flow-line-backward" />
+
+    <!-- Step 1: English Prompt -->
+    <g transform="translate(720, 45)">
+      <rect width="130" height="70" rx="10" fill="url(#avatarGrad)" stroke="#10B981" stroke-width="1.5" />
+      <text x="65" y="32" text-anchor="middle" class="node-text-title">✍️ English Input</text>
+      <text x="65" y="50" text-anchor="middle" class="node-text-sub">User Text / Command</text>
+    </g>
+
+    <!-- Step 2: Grammar & SOV Reordering -->
+    <g transform="translate(545, 45)">
+      <rect width="140" height="70" rx="10" fill="url(#avatarGrad)" stroke="#14B8A6" stroke-width="1.5" />
+      <text x="70" y="32" text-anchor="middle" class="node-text-title">📐 SOV Reordering</text>
+      <text x="70" y="50" text-anchor="middle" class="node-text-sub">ISL Grammar Rules</text>
+    </g>
+
+    <!-- Step 3: Gloss & Sign Registry -->
+    <g transform="translate(370, 45)">
+      <rect width="140" height="70" rx="10" fill="url(#avatarGrad)" stroke="#06B6D4" stroke-width="1.5" />
+      <text x="70" y="32" text-anchor="middle" class="node-text-title">📖 Sign Registry</text>
+      <text x="70" y="50" text-anchor="middle" class="node-text-sub">Gloss Animation Lookup</text>
+    </g>
+
+    <!-- Step 4: Three.js Rig Controller -->
+    <g transform="translate(195, 45)" class="pulse-avatar">
+      <rect width="140" height="70" rx="10" fill="url(#avatarGrad)" stroke="#0EA5E9" stroke-width="1.5" />
+      <text x="70" y="32" text-anchor="middle" class="node-text-title">🦴 Skeletal Rig</text>
+      <text x="70" y="50" text-anchor="middle" class="node-text-sub">Bone &amp; Joint Rotations</text>
+    </g>
+
+    <!-- Step 5: 3D Avatar Visualization -->
+    <g transform="translate(10, 45)" class="pulse-avatar">
+      <rect width="150" height="70" rx="10" fill="url(#avatarGrad)" stroke="#38BDF8" stroke-width="1.5" />
+      <text x="75" y="32" text-anchor="middle" class="node-text-title">🎭 3D Avatar</text>
+      <text x="75" y="50" text-anchor="middle" class="node-text-sub">React Three Fiber WebGL</text>
+    </g>
+  </g>
+</svg>

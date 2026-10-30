@@ -1,0 +1,18 @@
+# Local/demo composition. Weights and clips are mounted read-only, never baked into images.
+# Start:  docker compose up --build      (web http://localhost:3000, api http://localhost:8000/docs)
+services:
+  api:
+    build: { context: ., dockerfile: backend/Dockerfile }
+    environment:
+      SIGNBRIDGE_CORS_ORIGINS: '["http://localhost:3000"]'
+    volumes:
+      - ./backend/models:/srv/backend/models:ro
+      - ./frontend/public/animations:/srv/animations:ro
+    ports: ["8000:8000"]
+  web:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args: { NEXT_PUBLIC_API_URL: "http://localhost:8000" }
+    depends_on: [api]
+    ports: ["3000:3000"]
