@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 280" width="100%" height="100%">
+  <defs>
+    <linearGradient id="termBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0E1322"/>
+      <stop offset="100%" stop-color="#080B14"/>
+    </linearGradient>
+
+    <filter id="termGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    .cursor-blink {
+      animation: cBlink 0.8s infinite;
+    }
+    @keyframes cBlink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    .line-f1 { animation: lineAppear 8s infinite; }
+    .line-f2 { animation: lineAppear2 8s infinite; }
+    .line-f3 { animation: lineAppear3 8s infinite; }
+    .line-f4 { animation: lineAppear4 8s infinite; }
+    .line-f5 { animation: lineAppear5 8s infinite; }
+
+    @keyframes lineAppear {
+      0%, 10% { opacity: 0; }
+      15%, 95% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    @keyframes lineAppear2 {
+      0%, 25% { opacity: 0; }
+      30%, 95% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    @keyframes lineAppear3 {
+      0%, 45% { opacity: 0; }
+      50%, 95% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    @keyframes lineAppear4 {
+      0%, 65% { opacity: 0; }
+      70%, 95% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    @keyframes lineAppear5 {
+      0%, 80% { opacity: 0; }
+      85%, 95% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .t-code {
+      font-family: 'Fira Code', 'Courier New', monospace, Consolas;
+      font-size: 13px;
+      font-weight: 500;
+    }
+  </style>
+
+  <!-- Window Container -->
+  <rect x="2" y="2" width="916" height="276" rx="12" fill="url(#termBg)" stroke="#1E293B" stroke-width="1.5"/>
+
+  <!-- Window Titlebar -->
+  <path d="M 2 14 Q 2 2 14 2 L 906 2 Q 918 2 918 14 L 918 36 L 2 36 Z" fill="#13192B"/>
+  <circle cx="24" cy="19" r="6" fill="#EF4444"/>
+  <circle cx="44" cy="19" r="6" fill="#F59E0B"/>
+  <circle cx="64" cy="19" r="6" fill="#10B981"/>
+  <text x="460" y="23" text-anchor="middle" fill="#64748B" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">
+    PowerShell // SignBridge Runtime Daemon
+  </text>
+
+  <!-- Terminal Content Lines -->
+  <g transform="translate(25, 68)">
+    <!-- Line 1: Git clone -->
+    <g class="line-f1">
+      <text x="0" y="0" class="t-code" fill="#38BDF8">PS C:\&gt;</text>
+      <text x="75" y="0" class="t-code" fill="#F8FAFC">git clone https://github.com/DarshanCat/-SignBridge.git</text>
+    </g>
+
+    <!-- Line 2: Setup script -->
+    <g transform="translate(0, 32)" class="line-f2">
+      <text x="0" y="0" class="t-code" fill="#38BDF8">PS C:\-SignBridge\&gt;</text>
+      <text x="175" y="0" class="t-code" fill="#FBBF24">.\scripts\setup.ps1</text>
+    </g>
+
+    <!-- Line 3: Setup output -->
+    <g transform="translate(0, 64)" class="line-f3">
+      <text x="0" y="0" class="t-code" fill="#10B981">✔ [Python 3.11]</text>
+      <text x="140" y="0" class="t-code" fill="#94A3B8">PyTorch BiGRU + MediaPipe Holistic + OpenCV installed</text>
+      <text x="0" y="22" class="t-code" fill="#10B981">✔ [Node.js 20+]</text>
+      <text x="140" y="22" class="t-code" fill="#94A3B8">Next.js 16 + React 19 + React Three Fiber packages installed</text>
+    </g>
+
+    <!-- Line 4: Dev launch -->
+    <g transform="translate(0, 118)" class="line-f4">
+      <text x="0" y="0" class="t-code" fill="#38BDF8">PS C:\-SignBridge\&gt;</text>
+      <text x="175" y="0" class="t-code" fill="#EC4899">.\scripts\dev.ps1</text>
+    </g>
+
+    <!-- Line 5: Online status -->
+    <g transform="translate(0, 150)" class="line-f5">
+      <text x="0" y="0" class="t-code" fill="#00F5FF">⚡ [API Server]</text>
+      <text x="140" y="0" class="t-code" fill="#F1F5F9">FastAPI Uvicorn running on </text>
+      <text x="370" y="0" class="t-code" fill="#38BDF8" font-weight="700">http://localhost:8000</text>
+      
+      <text x="0" y="24" class="t-code" fill="#A855F7">🎭 [3D Avatar]</text>
+      <text x="140" y="24" class="t-code" fill="#F1F5F9">Three.js R3F Canvas online on </text>
+      <text x="390" y="24" class="t-code" fill="#34D399" font-weight="700">http://localhost:3000</text>
+      
+      <!-- Blinking Cursor -->
+      <rect x="620" y="10" width="8" height="16" fill="#00F5FF" class="cursor-blink"/>
+    </g>
+  </g>
+</svg>

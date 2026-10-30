@@ -1,24 +1,25 @@
 <div align="center">
 
-  <img src="assets/hero-banner.svg" alt="SignBridge Banner" width="100%" />
+  <!-- ================= HERO ANIMATION BANNER ================= -->
+  <img src="assets/hero-animated.svg" alt="SignBridge Cyber Animated Hero" width="100%" />
 
   <br/><br/>
 
   <!-- Dynamic Typing SVG -->
   <a href="https://github.com/DarshanCat/-SignBridge">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=3000&pause=1200&color=6366F1&center=true&vCenter=true&multiline=false&width=750&height=45&lines=%E2%9A%A1+Bidirectional+Indian+Sign+Language+(ISL)+%E2%87%84+English;%F0%9F%96%90%EF%B8%8F+Real-time+MediaPipe+Holistic+75-Point+Landmark+Extraction;%F0%9F%A7%A0+PyTorch+BiGRU+Deep+Temporal+Neural+Recognition;%F0%9F%8E%AD+Real-time+3D+Avatar+Skeletal+Rig+Playback+(Three.js+%2F+R3F);%F0%9F%8C%90+Empowering+Accessible+Communication+Everywhere" alt="Animated Typing Subtitle" />
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=21&duration=3200&pause=1000&color=00F5FF&center=true&vCenter=true&multiline=false&width=800&height=50&lines=%E2%9A%A1+SignBridge+%3A%3A+Bidirectional+Indian+Sign+Language+%E2%87%84+English;%F0%9F%96%90%EF%B8%8F+Live+MediaPipe+Holistic+75-Point+Landmark+Tracking;%F0%9F%A7%A0+Deep+Temporal+PyTorch+BiGRU+Neural+Classifier;%F0%9F%8E%AD+Real-Time+Three.js+%2F+R3F+3D+Avatar+Skeletal+Playback;%F0%9F%8C%90+Breaking+Barriers+with+Accessible+Sign+AI" alt="Live Typing Animation" />
   </a>
 
   <br/>
 
-  <!-- Badges -->
+  <!-- High-Impact Animated Badges -->
   <p align="center">
     <a href="https://github.com/DarshanCat/-SignBridge/blob/main/LICENSE">
-      <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge&logo=opensourceinitiative&logoColor=white" alt="MIT License" />
+      <img src="https://img.shields.io/badge/License-MIT-00F5FF.svg?style=for-the-badge&logo=opensourceinitiative&logoColor=black" alt="MIT License" />
     </a>
-    <img src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js 16" />
-    <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 19" />
-    <img src="https://img.shields.io/badge/Three.js-R3F-black?style=for-the-badge&logo=threedotjs&logoColor=white" alt="Three.js" />
+    <img src="https://img.shields.io/badge/Next.js_16-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js 16" />
+    <img src="https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React 19" />
+    <img src="https://img.shields.io/badge/Three.js-R3F-000000?style=for-the-badge&logo=threedotjs&logoColor=white" alt="Three.js" />
     <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI" />
     <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch" />
     <img src="https://img.shields.io/badge/MediaPipe-0075FF?style=for-the-badge&logo=google&logoColor=white" alt="MediaPipe" />
@@ -26,214 +27,223 @@
   </p>
 
   <p align="center">
-    <a href="#-key-features">Key Features</a> •
-    <a href="#-system-architecture">Architecture</a> •
-    <a href="#-quick-start">Quick Start</a> •
-    <a href="#-project-layout">Project Layout</a> •
-    <a href="#-dataset--training-pipeline">Dataset & Training</a> •
-    <a href="#-research-documentation">Research Docs</a>
+    <a href="#-key-capabilities">Key Capabilities</a> •
+    <a href="#-bidirectional-pipeline">Architecture</a> •
+    <a href="#-computer-vision--landmark-extraction">MediaPipe Vision</a> •
+    <a href="#-3d-avatar-skeletal-rig">3D Avatar Rig</a> •
+    <a href="#-interactive-quickstart">Quick Start</a> •
+    <a href="#-dataset--training">Dataset &amp; Training</a> •
+    <a href="#-research--paper-checklist">Research Docs</a>
   </p>
 
   <img src="assets/features-banner.svg" alt="SignBridge Key Capabilities" width="100%" />
 
 </div>
 
----
+<img src="assets/divider-anim.svg" width="100%" />
 
 ## 📖 Overview
 
-**SignBridge** is an advanced academic and engineering prototype for **bidirectional Indian Sign Language (ISL) and English** communication. It couples computer vision landmark tracking, recurrent deep learning networks, natural language processing, and modern WebGL 3D avatar rendering into an accessible, end-to-end web system.
+**SignBridge** is an advanced academic and engineering platform for **bidirectional Indian Sign Language (ISL) and English** communication. It couples computer vision landmark tracking, recurrent deep learning networks, natural language grammar transformations, and real-time WebGL 3D avatar rendering into a cohesive, high-performance web system.
 
-> [!NOTE]
-> **ISL is a distinct language with its own grammar, spatial morphology, and Subject-Object-Verb (SOV) sentence order.** It is not American Sign Language (ASL) and cannot be accurately represented by verbatim word-for-word substitution. SignBridge is built from the ground up with dedicated ISL grammar rules and gloss mappings.
+> [!IMPORTANT]
+> **ISL is a distinct visual-spatial natural language with its own grammar morphology and Subject-Object-Verb (SOV) structure.** It is completely distinct from American Sign Language (ASL) and British Sign Language (BSL). SignBridge handles ISL with specialized syntax tokenization, grammar rules, and skeletal rig interpolations.
 
----
+<img src="assets/divider-anim.svg" width="100%" />
 
-## ⚡ System Architecture
+## ⚡ Bidirectional Pipeline
 
 <div align="center">
-  <img src="assets/pipeline.svg" alt="Bidirectional Pipeline Flow" width="100%" />
+  <img src="assets/pipeline.svg" alt="Animated Bidirectional Pipeline Flow" width="100%" />
 </div>
 
-The platform operates across two complementary bidirectional pathways:
+The system features two interconnected real-time pipelines:
 
-### 1. Sign ➔ English Recognition
-1. **Webcam Feed & Landmark Tracking**: Live video frames are processed client-side via **MediaPipe Holistic**, extracting 75 normalized landmark coordinates (pose + left hand + right hand) at up to 30 FPS.
-2. **Temporal BiGRU Inference**: Sequence features are streamed to a FastAPI backend powered by a bidirectional Gated Recurrent Unit (**BiGRU**) in PyTorch.
-3. **Gloss & Translation Mapping**: Recognized ISL gloss sequences are resolved to grammatical English sentences through vocabulary rules.
+### 1. 🖐️ Sign ➔ English Translation Pipeline
+* **Webcam Capture**: Live camera stream ingested directly in the browser via WebRTC.
+* **MediaPipe Holistic**: Runs client-side (WASM + SIMD) to extract **75 key landmarks** (pose, left hand, and right hand) at 30 FPS.
+* **Coordinate Normalization**: Translates raw points relative to shoulder span and nose center, ensuring invariant scale across camera distances.
+* **PyTorch BiGRU Classifier**: Temporal bidirectional recurrent neural network evaluates multi-frame landmark tensors to classify ISL sign glosses.
+* **Grammar Translation**: Maps ISL gloss tokens into natural, grammatically correct English sentences.
 
-### 2. English ➔ Sign 3D Avatar Synthesis
-1. **Rule-Based Gloss Translation**: English text input undergoes lemmatization, stop-word reduction, and SOV grammar transformation.
-2. **Sign Registry Lookup**: Target gloss tokens are retrieved from the sign registry, pointing to keyframed skeletal animation sequences.
-3. **3D Avatar Player**: Rendered inside **Three.js / React Three Fiber**, applying real-time skeletal quaternion and bone transformations to articulate signs smoothly.
+### 2. 🎭 English ➔ 3D Sign Avatar Synthesis Pipeline
+* **Rule-based NLP Engine**: Decomposes English text, strips non-essential stop words, applies lemmatization, and reorders to ISL SOV syntax.
+* **Sign Registry**: Resolves glosses against keyframe dictionary files stored in `frontend/public/animations/`.
+* **Spherical Quaternion Slerp**: Smoothly blends bone rotations across 24 skeletal joints with cubic easing.
+* **React Three Fiber (Three.js)**: Renders the fully responsive 3D humanoid avatar with dynamic lighting, shadows, and idle motions.
 
----
+<img src="assets/divider-anim.svg" width="100%" />
 
-## 📊 Current System State
+## 🖐️ Computer Vision & Landmark Extraction
 
-SignBridge’s software engineering foundation is complete, verified, and audited:
+<div align="center">
+  <img src="assets/hand-landmarks-anim.svg" alt="Animated MediaPipe Holistic Landmark Tracking" width="100%" />
+</div>
 
-| Component | Status | Details |
-| :--- | :---: | :--- |
-| **Frontend UI (Next.js 16 + React 19)** | 🟢 Verified | Full modern responsive dashboard with status telemetry, webcam panel, and 3D viewer. |
-| **Backend API (FastAPI + Pydantic v2)** | 🟢 Verified | Health probes, landmark validation, inference endpoints, and translation routes. |
-| **MediaPipe Holistic Tracking** | 🟢 Complete | Client-side 75-landmark extraction pipeline with unit test suite. |
-| **Deep Learning Pipeline (BiGRU)** | 🟢 Ready | Complete PyTorch architecture, training loop, evaluation metrics, and manifest tools. |
-| **3D Avatar Rigging & Player** | 🟢 Ready | React Three Fiber bone hierarchy, keyframe interpolator, and fallback idle motion. |
-| **Model Weights & Video Datasets** | 🟡 Training Ready | Git-clean repository; datasets and model weights are ready to be trained using bundled scripts. |
+SignBridge extracts **75 critical landmarks** per video frame:
+- **Pose Landmarks (33 points)**: Upper body posture, shoulders, elbows, and wrists.
+- **Left Hand (21 points)**: Wrist, carpals, MCP, PIP, DIP, and fingertips.
+- **Right Hand (21 points)**: Detailed finger articulation and palm planar orientation.
 
-See [docs/PROJECT_STATUS.md](docs/PROJECT_STATUS.md) and [docs/PROJECT_COMPLETION_AUDIT.md](docs/PROJECT_COMPLETION_AUDIT.md) for complete audit checklists.
+Coordinates are transformed into invariant 3D vectors (`X, Y, Z`) with confidence ratings, filtering out occlusion and jitter before streaming to the neural network.
 
----
+<img src="assets/divider-anim.svg" width="100%" />
 
-## 🚀 Quick Start
+## 🎭 3D Avatar Skeletal Rig
+
+<div align="center">
+  <img src="assets/avatar-rig-anim.svg" alt="Animated 3D Avatar Skeletal Rig" width="100%" />
+</div>
+
+The 3D avatar engine is built on **React Three Fiber (`@react-three/fiber`)** and **Three.js**:
+- **Bone Hierarchy**: Defined in [`bones.json`](frontend/src/lib/avatar/bones.json) following standard humanoid kinematics.
+- **Keyframe Interpolation**: Spherical Linear Interpolation (**SLERP**) between quaternion rotations guarantees continuous and natural sign transitions.
+- **Idle Sway Motion**: Procedural sine-wave breathing and subtle head motion when no signs are actively being articulated.
+
+<img src="assets/divider-anim.svg" width="100%" />
+
+## 🚀 Interactive Quickstart
+
+<div align="center">
+  <img src="assets/interactive-terminal.svg" alt="Animated Interactive Terminal" width="100%" />
+</div>
 
 ### Prerequisites
 - **Node.js** 20+ and `npm`
 - **Python** 3.11 (`py -3.11` or `python3.11`)
 - **Git**
 
-### Automated Setup (Windows PowerShell)
+### 1. Automated Setup (Windows PowerShell)
 
 ```powershell
-# 1. Clone repository
+# Clone the repository
 git clone https://github.com/DarshanCat/-SignBridge.git
 cd -SignBridge
 
-# 2. Run automated environment setup
+# Run the automated environment installer
 .\scripts\setup.ps1
 ```
 
-This automated script creates `backend/.venv`, installs dependencies (`requirements.txt`, `requirements-dev.txt`, `requirements-ml.txt` with PyTorch CPU, MediaPipe, OpenCV), and installs frontend npm packages.
+The script automatically initializes `backend\.venv`, installs PyTorch CPU, MediaPipe, OpenCV, FastAPI, and runs `npm install` inside `frontend/`.
 
-### Run Development Servers
+### 2. Launch Development Servers
 
 ```powershell
-# Start both Backend (:8000) and Frontend (:3000) concurrently
+# Start FastAPI (:8000) and Next.js (:3000) concurrently:
 .\scripts\dev.ps1
 
-# Custom ports if 8000 or 3000 are in use:
+# Specify alternate ports if 8000 or 3000 are in use:
 .\scripts\dev.ps1 -ApiPort 8010 -WebPort 3011
 ```
 
-- **Frontend App**: [http://localhost:3000](http://localhost:3000)
-- **Backend API Docs (Swagger UI)**: [http://localhost:8000/docs](http://localhost:8000/docs)
-- **OpenAPI JSON**: [http://localhost:8000/openapi.json](http://localhost:8000/openapi.json)
+- **Frontend Application**: [http://localhost:3000](http://localhost:3000)
+- **FastAPI Interactive Docs (Swagger)**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- **OpenAPI Schema**: [http://localhost:8000/openapi.json](http://localhost:8000/openapi.json)
 
----
-
-## 🧪 Testing & Verification
-
-Run the unified test suite across both frontend and backend:
+### 3. Run Quality & Test Suite
 
 ```powershell
+# Run backend pytest + frontend type checks, ESLint, vitest, and build
 .\scripts\test.ps1
 ```
 
-This runs:
-1. `pytest` unit & integration tests on FastAPI backend.
-2. `npm run type-check` for TypeScript strictness.
-3. `npm run lint` for ESLint quality rules.
-4. `npm test` for avatar rig and landmark transformation tests.
-5. `npm run build` production bundle verification.
+<img src="assets/divider-anim.svg" width="100%" />
 
----
+## 🐳 Multi-Container Docker Deployment
 
-## 🐳 Docker Deployment
-
-Run the complete multi-container stack with a single command:
+Run the complete multi-container stack with Docker Compose:
 
 ```powershell
 docker compose up --build
 ```
 
-Container architecture:
-- `backend`: FastAPI Uvicorn service on port `8000`
-- `frontend`: Next.js production server on port `3000`
+Container topology:
+- **`backend`**: FastAPI Uvicorn async ASGI engine on port `8000`
+- **`frontend`**: Next.js production SSR & client bundle on port `3000`
 
----
+<img src="assets/divider-anim.svg" width="100%" />
 
-## 📁 Project Layout
+## 📁 Repository Structure
 
 ```
 .
-├── 📂 assets/              # Animated SVGs, banners, and diagrams for documentation
+├── 📂 assets/              # Animated SVGs, live HUD diagrams, telemetry visuals & banners
 ├── 📂 frontend/            # Next.js 16, React 19, TypeScript, Tailwind CSS, React Three Fiber
-│   ├── src/app/            # App router pages, layouts, and global styles
+│   ├── src/app/            # App router pages, layouts, and global styling
 │   ├── src/components/     # WebcamPanel, EnglishToSignPanel, StatusPanel, AvatarViewer
-│   ├── src/lib/avatar/     # Skeletal rigging, bones definition, keyframe clip player
-│   └── public/animations/  # Sign animation keyframe JSON files
+│   ├── src/lib/avatar/     # Skeletal rigging, quaternion interpolator, clip player
+│   └── public/animations/  # ISL sign animation keyframe JSON files
 ├── 📂 backend/             # FastAPI asynchronous microservice
-│   ├── app/api/            # REST API endpoints & route handlers
-│   ├── app/recognition/    # Landmark normalization & PyTorch BiGRU model
-│   ├── app/translation/    # English ⇄ ISL grammar & gloss translation engine
+│   ├── app/api/            # REST API endpoints & route controllers
+│   ├── app/recognition/    # Landmark normalization & PyTorch BiGRU sequential model
+│   ├── app/translation/    # English ⇄ ISL grammar & gloss translation engines
 │   ├── app/avatar/         # Sign registry and clip loading services
-│   ├── training/           # Preprocessing, validation, manifest builder, training loop
-│   └── tests/              # Pytest test suite (100% passing)
+│   ├── training/           # Dataset preprocessors, validators, and PyTorch training loops
+│   └── tests/              # Comprehensive Pytest test suite (100% passing)
 ├── 📂 data/                # Dataset directory (raw video and processed landmark numpy arrays)
-├── 📂 docs/                # Comprehensive academic & engineering documentation
-│   ├── ARCHITECTURE.md     # System architecture & component specifications
-│   ├── DATASET_GUIDE.md    # ISL datasets, capture protocol, and ethical guidelines
-│   ├── MODEL_TRAINING.md   # BiGRU hyperparameter tuning and training procedures
-│   ├── AVATAR.md           # 3D avatar bone structure and animation keyframe format
-│   ├── IEEE_PAPER_CHECKLIST.md  # Research paper guidelines & publication checklist
+├── 📂 docs/                # Academic research papers, audits, and engineering specs
+│   ├── ARCHITECTURE.md     # In-depth system design & component diagrams
+│   ├── DATASET_GUIDE.md    # ISL candidate datasets, ethics, and recording protocols
+│   ├── MODEL_TRAINING.md   # BiGRU architecture, hyperparameter tuning & loss curves
+│   ├── AVATAR.md           # Skeletal bone hierarchy and keyframe format specification
+│   ├── IEEE_PAPER_CHECKLIST.md  # Research checklist for academic conference publication
 │   └── PROJECT_REPORT.md   # Complete technical report
 └── 📂 scripts/             # PowerShell automation (setup.ps1, dev.ps1, test.ps1)
 ```
 
----
+<img src="assets/divider-anim.svg" width="100%" />
 
 ## 🧠 Dataset & Training Pipeline
 
-When ready to train the BiGRU neural model with an ISL video dataset:
+When training the PyTorch BiGRU model on an ISL video dataset (e.g. INCLUDE or custom recordings):
 
 ```powershell
 cd backend
 
-# 1. Preprocess raw video dataset into normalized landmark sequences
+# 1. Preprocess raw video into normalized 75-landmark sequences
 .\.venv\Scripts\python -m training.preprocess_videos --index ..\data\raw\<dataset>\index.csv --out ..\data\processed\<dataset>
 
-# 2. Validate extracted landmark dataset integrity
+# 2. Verify dataset integrity and landmark balance
 .\.venv\Scripts\python -m training.validate_dataset --dir ..\data\processed\<dataset>
 
-# 3. Train BiGRU sequence classifier
+# 3. Train the BiGRU sequence classification model
 .\.venv\Scripts\python -m training.train --manifest ..\data\processed\<dataset>\manifest.csv --out models
 ```
 
-For guidelines on acquiring ISL datasets, IRB consent, and annotations, consult [docs/DATASET_GUIDE.md](docs/DATASET_GUIDE.md).
+Detailed dataset acquisition protocols and IRB consent procedures: [docs/DATASET_GUIDE.md](docs/DATASET_GUIDE.md).
 
----
+<img src="assets/divider-anim.svg" width="100%" />
 
-## ⏱️ Latency Benchmarking
+## ⏱️ Latency Measurement
 
-SignBridge includes a latency measurement harness to profile network roundtrips, inference execution, and UI rendering:
+Run the automated profiling harness to measure network roundtrips, inference latencies, and render frames:
 
 ```powershell
 cd backend
 .\.venv\Scripts\python -m benchmarks.measure --api http://localhost:8000 --out ..\docs\benchmarks\latest.json
 ```
 
-Results are saved in JSON format for academic reporting. Details in [docs/EXPERIMENT_PLAN.md](docs/EXPERIMENT_PLAN.md).
+Benchmark specifications: [docs/EXPERIMENT_PLAN.md](docs/EXPERIMENT_PLAN.md).
 
----
+<img src="assets/divider-anim.svg" width="100%" />
 
-## 📚 Detailed Documentation
+## 📚 Academic & Engineering Documentation
 
-| Document | Description |
+| Document | Key Information |
 | :--- | :--- |
-| 📘 [ARCHITECTURE.md](docs/ARCHITECTURE.md) | In-depth system design, data flow diagrams, and tech stack details |
-| 📗 [DATASET_GUIDE.md](docs/DATASET_GUIDE.md) | ISL candidate datasets, ethics, licensing, and consent protocols |
-| 📕 [MODEL_TRAINING.md](docs/MODEL_TRAINING.md) | BiGRU model architecture, hyperparameters, and validation |
-| 📙 [AVATAR.md](docs/AVATAR.md) | Skeletal rig bone hierarchy, quaternion rotation, and clip schema |
-| 📓 [PROJECT_REPORT.md](docs/PROJECT_REPORT.md) | Academic project report draft and experimental design |
-| 📋 [IEEE_PAPER_CHECKLIST.md](docs/IEEE_PAPER_CHECKLIST.md) | Research checklist for academic conference / journal publication |
+| 📘 [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Component architecture, latency budgets, and data interchange schemas |
+| 📗 [DATASET_GUIDE.md](docs/DATASET_GUIDE.md) | Candidate ISL datasets, recording protocol, license checks, and IRB consent |
+| 📕 [MODEL_TRAINING.md](docs/MODEL_TRAINING.md) | BiGRU model specs, learning rate scheduling, regularization, and metrics |
+| 📙 [AVATAR.md](docs/AVATAR.md) | Skeletal joint rotations, coordinate frames, and keyframe schema |
+| 📓 [PROJECT_REPORT.md](docs/PROJECT_REPORT.md) | Academic technical report draft with literature review and experimental design |
+| 📋 [IEEE_PAPER_CHECKLIST.md](docs/IEEE_PAPER_CHECKLIST.md) | Systematic requirements checklist for academic journal / conference submission |
 
----
+<img src="assets/divider-anim.svg" width="100%" />
 
 ## 👥 Authors & Acknowledgments
 
-- **Darshan BG** ([@DarshanCat](https://github.com/DarshanCat)) - *Creator & Lead Developer*
-- Powered by Google **MediaPipe**, **PyTorch**, and the **Three.js** community.
+- **Darshan BG** ([@DarshanCat](https://github.com/DarshanCat)) - *Author & Lead Developer*
+- Built with Google **MediaPipe**, **PyTorch**, and the **Three.js** community.
 
 ---
 
@@ -242,5 +252,6 @@ Results are saved in JSON format for academic reporting. Details in [docs/EXPERI
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 <div align="center">
-  <sub>Built with ❤️ for accessible, barrier-free communication.</sub>
+  <br/>
+  <sub>🌟 Built with passion for accessible, barrier-free communication through AI and 3D graphics.</sub>
 </div>

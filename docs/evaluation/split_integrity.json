@@ -1,0 +1,96 @@
+{
+  "labelling": "authors' predefined split (AI4Bharat/INCLUDE train_test_paths); signer independence UNVERIFIED, no signer IDs exist",
+  "per_split": {
+    "train": {
+      "expected_by_task": 3127,
+      "listed": 3127,
+      "usable_processed": 2671,
+      "excluded_with_reason": 0,
+      "never_seen_in_any_zip": 456,
+      "manifest_rows": 2671
+    },
+    "val": {
+      "expected_by_task": 348,
+      "listed": 348,
+      "usable_processed": 299,
+      "excluded_with_reason": 0,
+      "never_seen_in_any_zip": 49,
+      "manifest_rows": 299
+    },
+    "test": {
+      "expected_by_task": 817,
+      "listed": 817,
+      "usable_processed": 709,
+      "excluded_with_reason": 0,
+      "never_seen_in_any_zip": 108,
+      "manifest_rows": 709
+    }
+  },
+  "listed_total": 4292,
+  "expected_total_by_task": 4292,
+  "listed_matches_task_expectation": {
+    "train": true,
+    "val": true,
+    "test": true
+  },
+  "videos_listed_in_more_than_one_split": [],
+  "processed_videos_not_in_lists": 0,
+  "processed_videos_not_in_lists_examples": [],
+  "manifest_rows_not_in_lists": 0,
+  "processed_with_split_different_from_lists": 0,
+  "identical_features_across_splits": 0,
+  "classes_missing_from_a_split": {
+    "train": 1,
+    "val": 61,
+    "test": 8
+  },
+  "listed_but_never_seen_by_category": {
+    "Home": 190,
+    "Society": 162,
+    "Days_and_Time": 83,
+    "Jobs": 48,
+    "Electronics": 30,
+    "People": 26,
+    "Seasons": 19,
+    "Means_of_Transportation": 18,
+    "Animals": 16,
+    "Colours": 11,
+    "Clothes": 10
+  },
+  "listed_but_never_seen_by_class_top10": {
+    "Days_and_Time/81. Second": 12,
+    "Days_and_Time/Second (Number)": 8,
+    "Home/40. Paint": 8,
+    "Society/19. Ball": 8,
+    "Society/23. God": 7,
+    "Home/38. Page": 7,
+    "Society/22. Science": 7,
+    "Home/49. Ring": 7,
+    "Home/36. Soap": 7,
+    "Home/24. Table": 7
+  },
+  "listed_but_never_seen_examples": {
+    "train": [
+      "Society/23. God/MVI_8996.MOV",
+      "Home/38. Page/MVI_8809.MOV",
+      "Animals/5. Cow/MVI_8570.MOV",
+      "Days_and_Time/Second (Number)/MVI_5506.MOV",
+      "Means_of_Transportation/9. Train/MVI_8579.MOV"
+    ],
+    "val": [
+      "Home/49. Ring/MVI_9087.MOV",
+      "Home/41. Letter/MVI_9055.MOV",
+      "Society/13. Attack/MVI_8707.MOV",
+      "Days_and_Time/85. Night/MVI_9198.MOV",
+      "Days_and_Time/86. Time/MVI_9204.MOV"
+    ],
+    "test": [
+      "Animals/1. Dog/MVI_8560.MOV",
+      "Animals/1. Dog/MVI_8561.MOV",
+      "Animals/2. Cat/MVI_8563.MOV",
+      "Animals/5. Cow/MVI_8569.MOV",
+      "Clothes/39. Suit/MVI_8602.MOV"
+    ]
+  },
+  "signer_ids_available": false
+}

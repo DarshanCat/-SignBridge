@@ -1,5 +1,21 @@
 # Project status
 
+## Synopsis and Phase 1 and 2 (2026-10-30)
+
+Read `SignBridge_Synopsis.docx`. Notes against the current build: the synopsis plans face landmarks (not extracted yet),
+a 1D CNN, BiGRU and Transformer comparison, spaCy gloss rules, WebSocket streaming, Mixamo or Blender avatar clips, and signer
+independent evaluation (INCLUDE has no signer IDs). It names Flask or FastAPI plus HTML or JavaScript; the frontend is Next.js
+16, not Vite, which will need your decision at the frontend phase.
+
+Phase 1 is complete: the resumed run finished, all 44 zips have completion records, and `manifest.csv` exists with 3,679 samples
+(0 failures, 0 exclusions). Phase 2 audit result: **FAIL**. Integrity passes (no unreadable, malformed, non finite or duplicate
+arrays), but 613 of the 4,292 authors' listed videos are missing (train 456, val 49, test 108): the lists say `.MOV` while many
+zips store `.MP4`, so 605 videos were skipped as not in the lists (all 54 logged examples confirmed); 8 more are unexplained.
+Fixing it needs re-downloading 28 zips (about 36 GB). See `docs/evaluation/DATASET_QUALITY_AUDIT.md`, `dataset_quality.json`,
+`class_distribution.csv` and `split_integrity.json`. Licence conflict unresolved (Zenodo record says CC BY 4.0, a third party page
+says CC BY NC SA 4.0); signer independence unverified. No model has been trained. Waiting at GATE 1.
+
+
 ## Dataset quality audit: NOT STARTED, processing incomplete (2026-10-30 19:50)
 
 Verified: the resumed run (PID 29280) is alive and processing; **38 of 44 zips are processed** (38 part records, 3,283 feature
