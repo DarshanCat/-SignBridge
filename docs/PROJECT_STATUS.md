@@ -1,5 +1,16 @@
 # Project status
 
+## Split fix in progress (2026-10-30 20:25)
+
+Approved fix for the 613 missing listed videos. New `backend/training/include_supplement.py` (4 tests) matches videos ignoring the
+extension, falls back to category plus unique file name when the folder name differs (flagged `filename_fallback`, label and split
+taken from the authors' lists), records anything still unmatched, and writes to a NEW folder `data/processed/include_v2` with its own
+manifest that references the old feature files by relative path. The old manifest, feature files and part records are untouched.
+Run started as PID 31976 (log `data/raw/include/supplement.log`): 28 affected zips to re-download and process (about 36 GB). At the
+first check it was alive and starting. Nothing was trained. After it finishes: rerun the audit against `include_v2`, then report at
+Gate 1. The process is a child of the session and may stop with it; re-running the same command is safe because finished zips are skipped.
+
+
 ## Synopsis and Phase 1 and 2 (2026-10-30)
 
 Read `SignBridge_Synopsis.docx`. Notes against the current build: the synopsis plans face landmarks (not extracted yet),

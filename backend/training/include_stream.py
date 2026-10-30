@@ -44,7 +44,9 @@ def load_splits(split_dir: Path) -> dict[str, str]:
 
 
 def label_of(member: str) -> str:
-    folder = member.split("/")[-2]
+    """Class name from the class folder (second path component). Nested folders such as 'Extra' belong to their parent class."""
+    parts = member.split("/")
+    folder = parts[1] if len(parts) > 2 else parts[0]
     m = re.match(r"\s*\d+\.\s*(.*)", folder)
     return (m.group(1) if m else folder).strip()
 

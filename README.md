@@ -30,6 +30,7 @@
     <a href="#-key-capabilities">Key Capabilities</a> •
     <a href="#-bidirectional-pipeline">Architecture</a> •
     <a href="#-computer-vision--landmark-extraction">MediaPipe Vision</a> •
+    <a href="#-deep-temporal-neural-network-bigru">Neural Network</a> •
     <a href="#-3d-avatar-skeletal-rig">3D Avatar Rig</a> •
     <a href="#-interactive-quickstart">Quick Start</a> •
     <a href="#-dataset--training">Dataset &amp; Training</a> •
@@ -86,6 +87,19 @@ SignBridge extracts **75 critical landmarks** per video frame:
 - **Right Hand (21 points)**: Detailed finger articulation and palm planar orientation.
 
 Coordinates are transformed into invariant 3D vectors (`X, Y, Z`) with confidence ratings, filtering out occlusion and jitter before streaming to the neural network.
+
+<img src="assets/divider-anim.svg" width="100%" />
+
+## 🧠 Deep Temporal Neural Network (BiGRU)
+
+<div align="center">
+  <img src="assets/neural-network-anim.svg" alt="Animated BiGRU Neural Network Architecture" width="100%" />
+</div>
+
+SignBridge utilizes a **Bidirectional Gated Recurrent Unit (BiGRU)** in PyTorch for sequential sign classification:
+- **Bidirectional Modeling**: Evaluates landmark transitions across both forward time steps ($\vec{h}_t$) and reverse time steps ($\overleftarrow{h}_t$) to resolve motion ambiguity in continuous signing.
+- **Lightweight Inference**: Trained on normalized $(X, Y, Z)$ spatial coordinate sequences rather than raw high-dimensional video pixels, achieving **< 20 ms inference latency** on standard CPU.
+- **Dense Fusion & Softmax**: Dense fusion layers combine bidirectional states to compute probability distributions across target ISL gloss vocabularies with confidence threshold gating.
 
 <img src="assets/divider-anim.svg" width="100%" />
 

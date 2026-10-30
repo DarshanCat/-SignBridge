@@ -12,6 +12,7 @@ def test_label_of_strips_the_numeric_prefix() -> None:
     assert label_of("Greetings/48. Hello/MVI_0089.MOV") == "Hello"
     assert label_of("Animals/4. Bird/x.MP4") == "Bird"
     assert label_of("Cat/Unnumbered/x.MOV") == "Unnumbered"
+    assert label_of("Animals/4. Bird/Extra/MVI_3042.MOV") == "Bird"  # nested Extra folder belongs to the parent class
 
 
 def test_load_splits_keeps_only_video_lines_case_insensitively(tmp_path) -> None:
