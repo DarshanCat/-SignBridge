@@ -68,7 +68,7 @@ Source: https://zenodo.org/api/records/4010759 (machine-readable metadata of the
 | Provided split | `train.csv` (3,475 videos) and `test.csv` (817). INCLUDE-50: 766 train / 192 test. **No validation split; signer independence of the authors' split is not documented** |
 | Format | Video files (zip parts per category, e.g. `Adjectives_8of8.zip`) |
 | Compatibility | Isolated word-level signs match this project's classifier. Words are English labels of Indian signs; label review by an ISL signer is advisable |
-| Redistribution | CC BY 4.0 requires attribution; the NC variant, if it applied, would forbid commercial use. Do not redistribute the videos or derived landmark tensors until the license is settled |
+| Redistribution | CC BY 4.0 requires attribution; the NC variant, if it applied, would forbid commercial use. The project follows the stricter terms: anything INCLUDE-derived is non-commercial only, with attribution, share alike (`DATA_NOTICE.md`); the videos and derived landmark tensors are kept out of git |
 
 **Decision paused:** no download was started. It needs your approval because of (a) the license conflict, (b) the 56.75 GB
 size, (c) disk space. INCLUDE-50 alone cannot be downloaded separately from the zip parts without knowing which categories

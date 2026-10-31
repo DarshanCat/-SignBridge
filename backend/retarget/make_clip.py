@@ -29,7 +29,7 @@ def main() -> int:
         seq = np.load(a.features)
         clip = build_clip(
             seq, a.gloss, fps=a.fps, stride=a.stride, author="SignBridge automatic retarget",
-            license_text="Derived from INCLUDE landmarks; INCLUDE licence conflict unresolved (CC BY 4.0 per Zenodo, CC BY NC SA 4.0 per a third party page). Not for redistribution.",
+            license_text="Derived from INCLUDE (Sridhar et al., ACM MM 2020). Treated as CC BY-NC-SA 4.0: non-commercial only, with attribution, share alike (see DATA_NOTICE.md). The dataset's own licence is unresolved (CC BY 4.0 per Zenodo, CC BY-NC-SA 4.0 per a third party page).",
             description=f"UNREVIEWED automatic retarget of {a.source_note}; fps {a.fps} assumed, stride {a.stride}; not a verified sign",
         )
     except (OSError, ValueError) as exc:

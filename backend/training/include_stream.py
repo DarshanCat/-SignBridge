@@ -67,24 +67,41 @@ def _process(args: tuple[str, str, str, int]) -> tuple[str, str | None, str]:
         return member, None, str(exc)
 
 
-def download(url: str, dest: Path, size: int) -> None:
+DOWNLOAD_ATTEMPTS = 6
+
+
+def download(url: str, dest: Path, size: int, client: httpx.Client | None = None) -> None:
+    """Download to dest. A dropped connection resumes from the bytes already in the .part file (HTTP Range) instead of starting over;
+    if the server ignores the Range request the download restarts from byte 0. The size is always checked at the end."""
     if dest.exists() and dest.stat().st_size == size:
         return
     part = dest.with_suffix(".part")
-    for attempt in range(1, 4):
-        try:
-            with httpx.stream("GET", url, follow_redirects=True, timeout=60) as r, part.open("wb") as f:
-                r.raise_for_status()
-                for chunk in r.iter_bytes(1 << 20):
-                    f.write(chunk)
-            if part.stat().st_size != size:
-                raise OSError(f"size mismatch: got {part.stat().st_size}, expected {size}")
-            part.replace(dest)
-            return
-        except (httpx.HTTPError, OSError) as exc:
-            print(f"  download attempt {attempt} failed for {dest.name}: {exc}", flush=True)
-            time.sleep(5 * attempt)
-    raise RuntimeError(f"could not download {dest.name}")
+    own = client is None
+    client = client or httpx.Client(follow_redirects=True, timeout=60)
+    try:
+        for attempt in range(1, DOWNLOAD_ATTEMPTS + 1):
+            try:
+                have = part.stat().st_size if part.exists() else 0
+                if have > size:
+                    have = 0  # a longer file than expected cannot be a prefix; start again
+                headers = {"Range": f"bytes={have}-"} if 0 < have < size else {}
+                with client.stream("GET", url, headers=headers) as r:
+                    r.raise_for_status()
+                    resumed = r.status_code == 206 and bool(headers)
+                    with part.open("ab" if resumed else "wb") as f:
+                        for chunk in r.iter_bytes(1 << 16):
+                            f.write(chunk)
+                if part.stat().st_size != size:
+                    raise OSError(f"size mismatch: got {part.stat().st_size}, expected {size}")
+                part.replace(dest)
+                return
+            except (httpx.HTTPError, OSError) as exc:
+                print(f"  download attempt {attempt} failed for {dest.name}: {exc}", flush=True)
+                time.sleep(min(5 * attempt, 30))
+        raise RuntimeError(f"could not download {dest.name}")
+    finally:
+        if own:
+            client.close()
 
 
 def finalize(out: Path) -> None:
@@ -111,7 +128,7 @@ def finalize(out: Path) -> None:
             {
                 "name": "INCLUDE (Sridhar et al., ACM MM 2020), landmark features extracted with MediaPipe Holistic",
                 "language": "ISL",
-                "license": "CC BY 4.0 per the Zenodo record metadata; a third-party page states CC BY-NC-SA 4.0 (unresolved). Treat as non-commercial academic use, attribution required, no redistribution",
+                "license": "CC BY 4.0 per the Zenodo record metadata; a third-party page states CC BY-NC-SA 4.0 (unresolved). Treated as CC BY-NC-SA 4.0: non-commercial only, attribution required, share alike (DATA_NOTICE.md)",
                 "source_url": "https://zenodo.org/records/4010759",
                 "consent_required": False,
                 "notes": "Predefined authors' split (AI4Bharat/INCLUDE train_test_paths); no signer IDs published, signer independence unverified.",

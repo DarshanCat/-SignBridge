@@ -22,8 +22,7 @@ from nlp.lexicon import load_lexicon
 from retarget.clip_builder import build_clip
 
 LICENSE_NOTE = (
-    "Derived from INCLUDE landmarks; INCLUDE licence conflict unresolved (CC BY 4.0 per Zenodo, CC BY NC SA 4.0 per a third party page). "
-    "Not for redistribution."
+    "Derived from INCLUDE (Sridhar et al., ACM MM 2020). Treated as CC BY-NC-SA 4.0: non-commercial only, with attribution, share alike (see DATA_NOTICE.md). The dataset's own licence is unresolved (CC BY 4.0 per Zenodo, CC BY-NC-SA 4.0 per a third party page)."
 )
 
 
@@ -59,19 +58,49 @@ def video_names(parts_dir: Path) -> dict[str, str]:
     return out
 
 
+REGISTRY_ATTRIBUTION = "Sridhar, Ganesan, Kumar, Khapra: INCLUDE, ACM Multimedia 2020 (DOI 10.1145/3394171.3413528)"
+REGISTRY_LICENSE = LICENSE_NOTE
+
+
+def register(registry_path: Path, index: dict[str, dict], lex) -> None:
+    """Add or update one registry record per built clip. Status is clip_unreviewed; nothing here can mark a sign verified."""
+    reg = json.loads(registry_path.read_text(encoding="utf-8"))
+    by = {s["gloss"]: s for s in reg["signs"]}
+    for gloss, e in index.items():
+        rec = by.get(gloss)
+        if rec is None:
+            rec = {"gloss": gloss, "meaning": lex.signs[gloss].label.lower(), "context": "INCLUDE class name; sign, context and handshape not reviewed by an ISL signer"}
+            reg["signs"].append(rec)
+            by[gloss] = rec
+        rec.update({
+            "reference_source": "INCLUDE sample " + e["source_sample"]["video"], "asset_id": gloss.lower(), "license": REGISTRY_LICENSE,
+            "attribution": REGISTRY_ATTRIBUTION, "verification_status": "clip_unreviewed", "visually_reviewed": False, "signer_reviewed": False,
+        })
+    registry_path.write_text(json.dumps(reg, indent=2, ensure_ascii=False), encoding="utf-8")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--manifest", type=Path, required=True)
-    ap.add_argument("--parts", type=Path, required=True)
+    ap.add_argument("--parts", type=Path, nargs="+", required=True, help="part record folder(s) mapping feature files to video paths")
     ap.add_argument("--out", type=Path, required=True)
-    ap.add_argument("--glosses", nargs="+", required=True)
+    ap.add_argument("--glosses", nargs="+", help="glosses to build (default: every INCLUDE sign in the gloss dictionary with --all-include)")
+    ap.add_argument("--all-include", action="store_true", help="build every INCLUDE sign that appears in config/gloss_dictionary.json")
+    ap.add_argument("--registry", type=Path, help="sign registry to update (clip_unreviewed records); omit to leave it untouched")
     ap.add_argument("--fps", type=float, default=30.0)
     ap.add_argument("--stride", type=int, default=2)
     a = ap.parse_args()
 
     lex = load_lexicon()
+    if a.all_include:
+        a.glosses = sorted(g for g, sg in lex.signs.items() if sg.source == "include")
+    if not a.glosses:
+        print("Error: give --glosses or --all-include", file=sys.stderr)
+        return 2
     rows = list(csv.DictReader(a.manifest.open(newline="", encoding="utf-8")))
-    members = video_names(a.parts)
+    members: dict[str, str] = {}
+    for pdir in a.parts:
+        members |= video_names(pdir)
     index: dict[str, dict] = {}
     problems: list[str] = []
     for gloss in a.glosses:
@@ -105,9 +134,12 @@ def main() -> int:
             json.dumps({"version": 1, "note": "Automatic retargets from INCLUDE; none is signer reviewed or a verified sign.", "clips": index}, indent=1),
             encoding="utf-8",
         )
+    if index and a.registry:
+        register(a.registry, index, lex)
     for p in problems:
         print("PROBLEM:", p, file=sys.stderr)
-    return 2 if problems else 0
+    print(f"built {len(index)} clip(s); {len(problems)} gloss(es) without a clip")
+    return 2 if problems and not a.all_include else 0
 
 
 if __name__ == "__main__":

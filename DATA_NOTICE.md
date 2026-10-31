@@ -37,7 +37,8 @@ All of it is licensed **CC BY-NC-SA 4.0, non-commercial only**, with the attribu
    thank-you, tomorrow, yesterday, you, plus `index.json`) was committed in `5450bb8` and removed from tracking in a later commit; the
    files remain in the earlier history. Each is an automatic retarget of one INCLUDE training sample, not signer reviewed.
 2. **Statistics and listings computed from INCLUDE**, in `docs/evaluation/`: class counts, split integrity (including the authors' video
-   paths that are missing from the archives), the label review, the pilot and final model metrics, and `results.md`.
+   paths that are missing from the archives), the label review, the pilot and final model metrics, `results.md` and its confusion matrices.
+3. **The sign registry** (`backend/config/sign_registry.json`), which names the INCLUDE sample (video path and class) behind each clip.
 
 Not in the repository, by design: the videos, the extracted landmark features, the trained model weights, any clip created after the
 untracking commit, recorded takes, and the avatar. They are rebuilt locally (see the README) and are git-ignored (`data/`,

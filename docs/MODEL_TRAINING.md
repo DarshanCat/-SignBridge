@@ -1,117 +1,74 @@
 # Model training
 
-**Status: pipeline implemented and unit-tested; no real model has been trained and no accuracy figures exist.**
-No ISL dataset has been obtained yet (see `DATASET_GUIDE.md`).
+Status: trained and evaluated on the complete INCLUDE data (v2). Numbers are in `docs/evaluation/results.md`; the label that goes with
+every number is "authors' predefined split, signer independence not verified".
 
-## Input features
+## Data
 
-Per frame, 225 values: pose (33), left hand (21), right hand (21) landmarks as x, y, z, centred on the shoulder
-midpoint and divided by shoulder width (`app/recognition/landmarks.py`). Missing hands are zeros. Sequences are
-linearly resampled to `seq_len` frames (default 32; `app/recognition/preprocess.py`). Face landmarks are not used.
+`data/processed/include_v2/manifest.csv`: 4,284 samples, 262 classes, split train 3,121 / val 347 / test 816 exactly as the authors' lists
+define it (`docs/evaluation/DATASET_QUALITY_AUDIT.md`, result PASS with one documented exception). The raw data, features and
+derived clips are kept out of git and shared only non-commercially under CC BY-NC-SA 4.0 with attribution (see `DATA_NOTICE.md`).
 
-## Model
+## Features
 
-`BiGRUClassifier` (`app/recognition/model.py`): bidirectional GRU (default hidden 128, 2 layers, dropout 0.3),
-mean-pool over time, linear head. PyTorch 2.5.1 (CPU wheel) on Python 3.11.
+Per frame 225 values: pose (33), left hand (21), right hand (21) landmarks as x, y, z, origin at the shoulder midpoint, divided by shoulder
+width (`app/recognition/landmarks.py`). A missing hand is an all zero block. Frames without a body pose are dropped. Sequences are resampled
+linearly to `seq_len` 32 (`app/recognition/preprocess.py`); optional hand gap interpolation (`max_gap`) fills short hand dropouts. Face
+landmarks are not used.
 
-## Training data format
+## Models (`app/recognition/models.py`)
 
-A manifest CSV with columns `path,label,signer_id`. Each `path` (relative to the manifest) is a `.npy` file of shape
-`(T, 225)` produced by the same normalization used at inference. Labels must be ISL glosses, never ASL labels.
+1D CNN, BiGRU and Transformer encoder, built by `build_model` from the `ModelConfig` stored in `labels.json`, so the same code path loads a
+checkpoint for training, evaluation and the API.
 
-## Running
+## Commands (from `backend/`, PowerShell)
 
 ```powershell
-cd backend
-pip install -r requirements-ml.txt --index-url https://download.pytorch.org/whl/cpu
-.\.venv\Scripts\python -m training.train --manifest ..\data\processed\manifest.csv --out models --seed 0
+# Train all three on the same split and seed, evaluate the test split once per model, write docs/evaluation/results.md
+.\.venv\Scripts\python -m training.compare_models --manifest ..\data\processed\include_v2\manifest.csv --out ..\data\models_v2 `
+    --results ..\docs\evaluation\results.md --epochs 60 --patience 10 --max-gap 3 --threads 8
+
+# Choose the live confidence threshold on the validation split of the best model (writes threshold.json next to it)
+.\.venv\Scripts\python -m training.calibrate --manifest ..\data\processed\include_v2\manifest.csv --model-dir ..\data\models_v2\cnn --precision 0.95
+
+# Rebuild results.md from the saved metrics (no retraining, no new evaluation)
+.\.venv\Scripts\python -m training.compare_models --manifest ..\data\processed\include_v2\manifest.csv --out ..\data\models_v2 `
+    --results ..\docs\evaluation\results.md --reuse --threshold-file ..\data\models_v2\cnn\threshold.json
+
+# Use the best model in the API: copy isl_model.pt, labels.json, metrics.json and threshold.json into backend\models (git-ignored)
 ```
 
-Training refuses to run with fewer than 3 signers, because the split is signer-independent (disjoint signers for
-train/validation/test, chosen by seed). Early stopping uses validation macro-F1; the best checkpoint is kept.
-Outputs in `backend/models/` (git-ignored): `isl_model.pt`, `labels.json` (class map, feature dim, seq_len and
-architecture, needed to load the weights), and `metrics.json` (accuracy, macro-F1, per-class precision/recall/F1,
-confusion matrix, signer lists, hyperparameters, environment) for validation and test.
+A single model: `python -m training.train --manifest <csv> --arch cnn|bigru|transformer`. Pilot runs that must not read the test split:
+`python -m training.pilot` (the test files are never opened; see `docs/evaluation/pilot/README.md`).
+
+## Settings used and why
+
+1D CNN, BiGRU and Transformer all with 60 epochs maximum, patience 10, `max_gap` 3, learning rate 0.001, hidden size 128, 2 layers,
+dropout 0.3, batch 16, seed 0, no augmentation. They were chosen from the pilot runs on the partial v1 data (validation only): the CNN was
+clearly best; gap interpolation and augmentation were within noise of each other (differences of about 4 of 299 validation samples), and
+the recurrent and attention models were still improving at 40 epochs, so all three got the same larger budget. Early stopping and model
+selection use validation macro-F1 only. The test split is evaluated exactly once per model, inside `train()`; nothing was tuned on it.
+
+## Results in one table (test split, authors' predefined split, signer independence not verified)
+
+| Model | Top-1 | Top-5 | Macro F1 |
+|---|---|---|---|
+| 1D CNN (best by validation) | 0.9130 | 0.9902 | 0.9107 |
+| BiGRU | 0.7929 | 0.9730 | 0.7869 |
+| Transformer | 0.7328 | 0.9596 | 0.7100 |
+
+Per class accuracy, the most frequent confusions, accuracy versus coverage and full confusion matrices are in `docs/evaluation/`.
+
+## Reading the numbers carefully
+
+- INCLUDE publishes no signer IDs, so the predefined split may share signers between train and test. The numbers measure recognition of
+  isolated signs recorded under INCLUDE conditions; they say nothing about new signers, webcams, lighting or continuous signing.
+- MediaPipe in the browser (WebAssembly, CPU inference) differs from the Python MediaPipe used to extract the training features. This
+  mismatch is untested with real webcam input and may lower accuracy.
+- Validation macro metrics average over 246 classes (16 classes have no validation video in the authors' lists).
 
 ## Tests
 
-`backend/tests/test_training_pipeline.py` trains on synthetic arrays in temporary directories to test the code. Those
-models are not real, are never saved to `backend/models`, and their scores must never be cited.
-
-## Not yet done
-
-Real data, hyperparameter search, augmentation beyond Gaussian noise, latency measurements, any reported results.
-
-## Real-time infrastructure and consistency (Phase 9)
-
-- **Window and sequence length:** the browser keeps the newest 60 frames; the backend drops invalid frames and resamples
-  to `seq_len` (default 32). The buffer is cleared when the camera stops and after 15 consecutive frames without a body
-  pose. Only one server request can be in flight, and responses that arrive after the camera stopped are discarded.
-- **Startup:** the API loads the model during startup (`lifespan` in `app/main.py`) and logs its state; the loaded
-  recognizer is cached and reloaded only if `isl_model.pt` changes on disk. With no model the API starts and reports
-  `not_trained`.
-- **Guards:** `load_artifacts` rejects a checkpoint whose `feature_dim` differs from the pipeline's 225, or an invalid
-  `seq_len`/class list; wrong-dimension input to the recognizer is a 422, not a 500.
-- **Consistency:** training and inference share `normalize_frame` and `resample_sequence`; `tests/test_pipeline_audit.py`
-  asserts the model input is identical on both paths and that the API prediction equals the direct recognizer output.
-  Remaining differences (browser vs Python MediaPipe, live window vs clip length) are listed in `EXPERIMENT_PLAN.md`.
-- **Latency tool:** `cd backend; .\.venv\Scripts\python -m benchmarks.measure --api http://localhost:8010 --out ..\docs\benchmarks\latest.json`
-  (start the backend first). Model inference is measured only if a real model exists.
-
-## Phase 11 tooling
-
-All commands run from `backend/` with the venv's Python. Everything below is tested on synthetic data only.
-
-```powershell
-# 1. index videos from a folder tree (label = parent folder; optional signer regex, split file, duplicate hashing)
-.\.venv\Scripts\python -m training.make_manifest --root ..\data\raw\<ds> --out ..\data\raw\<ds>\index.csv --hash-duplicates
-# 2. extract landmarks (writes manifest.csv and exclusions.csv; failures are listed, never dropped silently)
-.\.venv\Scripts\python -m training.preprocess_videos --index ..\data\raw\<ds>\index.csv --out ..\data\processed\<ds>
-# 3. validate and write a data-quality report (class/signer counts, lengths, duplicates)
-.\.venv\Scripts\python -m training.validate_dataset --dir ..\data\processed\<ds> --report ..\docs\evaluation\<ds>_quality.json
-# 4. train (refuses if validation fails; add --class-weights for imbalance)
-.\.venv\Scripts\python -m training.train --manifest ..\data\processed\<ds>\manifest.csv --out models --seed 0
-# 5. evaluate on the held-out test split (same split as training) and time single-sequence inference
-.\.venv\Scripts\python -m training.evaluate --manifest ..\data\processed\<ds>\manifest.csv --model-dir models --out ..\docs\evaluation\<ds>_test.json
-```
-
-Splits: if every manifest row has a `split` (train/val/test) it is used as given and reported as `predefined`
-(signer independence not verified); otherwise a seeded signer-disjoint split is made (needs at least 3 signers). A
-`split` column filled for only some rows is an error. `metrics.json` records the split method, seed, signer lists,
-hyperparameters and class-weight choice. The test split is used only for the final numbers; early stopping uses validation.
-Metrics: accuracy, macro precision/recall/F1 (over classes with test support), per-class results, confusion matrix.
-
-Production inference never imports `training/`; the API loads `isl_model.pt` and `labels.json` only.
-
-## INCLUDE run (in progress, 2026-10-29)
-
-Order of operations once `data/processed/include/manifest.csv` exists (from `backend\`):
-
-```powershell
-.\.venv\Scripts\python -m training.verify_include_split --raw ..\data
-aw\include --out ..\data\processed\include --report ..\docs\evaluation\include_split_check.json
-.\.venv\Scripts\python -m training.validate_dataset --dir ..\data\processed\include --report ..\docs\evaluation\include_quality.json
-.\.venv\Scripts\python -m training.train --manifest ..\data\processed\include\manifest.csv --out models --seed 0 --class-weights
-.\.venv\Scripts\python -m training.evaluate --manifest ..\data\processed\include\manifest.csv --model-dir models --out ..\docs\evaluation\include_test.json
-```
-
-`--class-weights` is a boolean flag (`store_true`), confirmed in `training/train.py`. Training uses the manifest's predefined split
-(`split_method: predefined`); the test split is untouched until `evaluate`, which recomputes the same split and reports
-accuracy, macro-F1, per-class metrics and the confusion matrix. **No results exist yet.** Limitations to quote with any result: the
-split is the authors' (signer independence unverified, no signer IDs), landmarks were extracted with Python MediaPipe at
-frame stride 2, and use is limited to non-commercial academic research until the license conflict is settled.
-
-## Phase 3 code (written 2026-10-30, not yet run on real data)
-
-New or changed, all unit tested on synthetic tensors (`tests/test_slr_pipeline.py`, 23 tests): `app/recognition/preprocess.py` (optional
-interpolation of short hand gaps, one preprocessing path for training and inference), `app/recognition/models.py` (1D CNN, BiGRU and
-Transformer encoder behind one factory), `training/augment.py` (rotation, scale, speed resampling and temporal jitter on landmark sequences),
-`training/dataset.py` (loads a manifest path and serves train, val and test), `training/slr_metrics.py` (top-1, top-5, per class accuracy,
-accuracy versus coverage at confidence thresholds), `training/train.py` (architecture and augmentation options), `training/evaluate.py`
-(held-out test report), `training/compare_models.py` (trains all three on the same split and seed, picks the best by VALIDATION macro-F1 and
-writes the comparison file). Checkpoints store the architecture and the preprocessing settings, so inference rebuilds the same model. An
-explicit UNRECOGNIZED output exists for low confidence predictions.
-
-A one epoch smoke run of all three models on a tiny slice of the first manifest completed end to end (train, checkpoint, evaluate); its
-checkpoints were deleted and its numbers are not reported. **No real training has been done and no metric exists.** Model comparison waits for
-the corrected split (Gate 1) and for your approval of the licence position.
+`backend/tests/test_training_pipeline.py`, `test_slr_pipeline.py` and `test_pilot.py` train tiny models on synthetic arrays in temporary
+folders to test the code; those models are not real and their scores must never be cited. `test_live.py` checks that the live
+WebSocket path produces the same probabilities as the training preprocessing.
