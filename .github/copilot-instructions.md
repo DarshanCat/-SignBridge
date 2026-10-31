@@ -18,6 +18,6 @@ SignBridge is an end-to-end bidirectional Indian Sign Language (ISL) and English
 ## Rules for this repository
 - Never invent predictions, metrics or clips. No clip is signer reviewed; do not mark any sign verified.
 - Label every result "authors' predefined split, signer independence not verified". The test split is evaluated once per model; pilot results are not reportable.
-- INCLUDE licence conflict is unresolved (CC BY 4.0 vs CC BY-NC-SA 4.0): non-commercial academic use with attribution, no redistribution of data, features, derived clips or model weights. Do not commit `data/`, `backend/models/` or `frontend/public/animations/*.json`.
+- INCLUDE licence conflict is unresolved (CC BY 4.0 vs CC BY-NC-SA 4.0); we comply with the stricter one: INCLUDE-derived material may only be shared non-commercially under CC BY-NC-SA 4.0 with attribution (`DATA_NOTICE.md`). Keep `data/`, `backend/models/` and `frontend/public/animations/*.json` out of git anyway.
 - Never delete, overwrite or reset `data/raw` or `data/processed`. Mixamo terms are unconfirmed; keep `frontend/public/avatar/` out of git.
 - In documents, no em dashes and no double hyphens.

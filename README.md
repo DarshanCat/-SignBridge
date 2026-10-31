@@ -1,312 +1,185 @@
 <div align="center">
-
-  <!-- ================= HERO ANIMATION BANNER ================= -->
-  <img src="assets/hero-animated.svg" alt="SignBridge Cyber Animated Hero" width="100%" />
-
-  <br/><br/>
-
-  <!-- Dynamic Typing SVG -->
-  <a href="https://github.com/DarshanCat/-SignBridge">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=21&duration=3200&pause=1000&color=00F5FF&center=true&vCenter=true&multiline=false&width=800&height=50&lines=%E2%9A%A1+SignBridge+%3A%3A+Bidirectional+Indian+Sign+Language+%E2%87%84+English;%F0%9F%96%90%EF%B8%8F+Live+MediaPipe+Holistic+75-Point+Landmark+Tracking;%F0%9F%A7%A0+Deep+Temporal+PyTorch+BiGRU+Neural+Classifier;%F0%9F%8E%AD+Real-Time+Three.js+%2F+R3F+3D+Avatar+Skeletal+Playback;%F0%9F%8C%90+Breaking+Barriers+with+Accessible+Sign+AI" alt="Live Typing Animation" />
-  </a>
-
-  <br/>
-
-  <!-- High-Impact Animated Badges -->
-  <p align="center">
-    <a href="https://github.com/DarshanCat/-SignBridge/blob/main/LICENSE">
-      <img src="https://img.shields.io/badge/License-MIT-00F5FF.svg?style=for-the-badge&logo=opensourceinitiative&logoColor=black" alt="MIT License" />
-    </a>
-    <img src="https://img.shields.io/badge/Next.js_16-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js 16" />
-    <img src="https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React 19" />
-    <img src="https://img.shields.io/badge/Three.js-R3F-000000?style=for-the-badge&logo=threedotjs&logoColor=white" alt="Three.js" />
-    <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI" />
-    <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch" />
-    <img src="https://img.shields.io/badge/MediaPipe-0075FF?style=for-the-badge&logo=google&logoColor=white" alt="MediaPipe" />
-    <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
-  </p>
-
-  <p align="center">
-    <a href="#-key-capabilities">Key Capabilities</a> •
-    <a href="#-bidirectional-pipeline">Architecture</a> •
-    <a href="#-computer-vision--landmark-extraction">MediaPipe Vision</a> •
-    <a href="#-deep-learning-architecture-suite">Deep Learning Suite</a> •
-    <a href="#-real-time-websocket-streaming-slr">WebSocket SLR</a> •
-    <a href="#-3d-avatar-skeletal-rig--mixamo-retargeting">3D Avatar &amp; Rig</a> •
-    <a href="#-interactive-quickstart">Quick Start</a> •
-    <a href="#-dataset--training">Dataset &amp; Training</a> •
-    <a href="#-research--paper-checklist">Research Docs</a>
-  </p>
-
-  <img src="assets/features-banner.svg" alt="SignBridge Key Capabilities" width="100%" />
-
+  <img src="assets/hero-animated.svg" alt="SignBridge" width="100%" />
 </div>
 
-<img src="assets/divider-anim.svg" width="100%" />
+# SignBridge
 
-## 📖 Overview
+SignBridge is an academic prototype that goes both ways between Indian Sign Language (ISL) and English.
 
-**SignBridge** is an advanced academic and engineering platform for **bidirectional Indian Sign Language (ISL) and English** communication. It couples computer vision landmark tracking, recurrent deep learning networks, natural language grammar transformations, and real-time WebGL 3D avatar rendering into a cohesive, high-performance web system.
+- **Sign to English:** the webcam is read in the browser (MediaPipe Holistic landmarks), a trained 1D CNN recognizes one isolated sign at a
+  time, and the recognized glosses are turned into an English sentence.
+- **English to sign:** a sentence is converted to ISL gloss with spaCy rules and played as retargeted clips on a 3D avatar.
 
-> [!IMPORTANT]
-> **ISL is a distinct visual-spatial natural language with its own grammar morphology and Subject-Object-Verb (SOV) structure.** It is completely distinct from American Sign Language (ASL) and British Sign Language (BSL). SignBridge handles ISL with specialized syntax tokenization, grammar rules, and skeletal rig interpolations.
+It is not a complete ISL translator. Read [Known limitations](#known-limitations) before relying on any result.
 
-<img src="assets/divider-anim.svg" width="100%" />
+## Contents
 
-## ⚡ Bidirectional Pipeline
+[Status](#status) | [Setup and run](#setup-and-run) | [Features](#implemented-features) | [Results](#results) | [Folder structure](#folder-structure) |
+[Tests](#tests-and-checks) | [Limitations](#known-limitations) | [Documents](#documents) | [Data and licences](#data-and-licences)
 
-<div align="center">
-  <img src="assets/pipeline.svg" alt="Animated Bidirectional Pipeline Flow" width="100%" />
-</div>
+## Status
 
-The system features two interconnected real-time pipelines:
+| Part | State |
+|---|---|
+| Dataset | INCLUDE processed completely: 4,284 samples, 262 classes (audit PASS, 8 listed videos do not exist in the released archives) |
+| Recognition model | 1D CNN, BiGRU and Transformer trained and evaluated; the CNN is used live |
+| Live recognition | WebSocket `/ws/predict`, tested with real test features through the socket; not tested with a real webcam |
+| Text to gloss | spaCy rule layer, 80+ unit tests, rules not validated by ISL signers |
+| Avatar | Mixamo model driven by retargeted clips; 262 signs have an unreviewed clip |
+| Sign recorder | Record tab, quality check, promote command; not tested with a real webcam |
+| Signer review | none done: no clip is verified |
 
-### 1. 🖐️ Sign ➔ English Translation Pipeline
-* **Webcam Capture**: Live camera stream ingested directly in the browser via WebRTC.
-* **MediaPipe Holistic**: Runs client-side (WASM + SIMD) to extract **75 key landmarks** (pose, left hand, and right hand) at 30 FPS.
-* **Coordinate Normalization**: Translates raw points relative to shoulder span and nose center, ensuring invariant scale across camera distances.
-* **PyTorch BiGRU Classifier**: Temporal bidirectional recurrent neural network evaluates multi-frame landmark tensors to classify ISL sign glosses.
-* **Grammar Translation**: Maps ISL gloss tokens into natural, grammatically correct English sentences.
+## Setup and run
 
-### 2. 🎭 English ➔ 3D Sign Avatar Synthesis Pipeline
-* **Rule-based NLP Engine**: Decomposes English text, strips non-essential stop words, applies lemmatization, and reorders to ISL SOV syntax.
-* **Sign Registry**: Resolves glosses against keyframe dictionary files stored in `frontend/public/animations/`.
-* **Spherical Quaternion Slerp**: Smoothly blends bone rotations across 24 skeletal joints with cubic easing.
-* **React Three Fiber (Three.js)**: Renders the fully responsive 3D humanoid avatar with dynamic lighting, shadows, and idle motions.
-
-<img src="assets/divider-anim.svg" width="100%" />
-
-## 🖐️ Computer Vision & Landmark Extraction
-
-<div align="center">
-  <img src="assets/hand-landmarks-anim.svg" alt="Animated MediaPipe Holistic Landmark Tracking" width="100%" />
-</div>
-
-SignBridge extracts **75 critical landmarks** per video frame:
-- **Pose Landmarks (33 points)**: Upper body posture, shoulders, elbows, and wrists.
-- **Left Hand (21 points)**: Wrist, carpals, MCP, PIP, DIP, and fingertips.
-- **Right Hand (21 points)**: Detailed finger articulation and palm planar orientation.
-
-Coordinates are transformed into invariant 3D vectors (`X, Y, Z`) with confidence ratings, filtering out occlusion and jitter before streaming to the neural network.
-
-<img src="assets/divider-anim.svg" width="100%" />
-
-## 🔬 Deep Learning Architecture Suite
-
-SignBridge provides a unified PyTorch model factory supporting three distinct temporal sequence architectures: **1D Temporal CNN**, **Bidirectional GRU (BiGRU)**, and **Spatial-Temporal Transformer Encoder**.
-
-<div align="center">
-  <img src="assets/dl-suite-anim.svg" alt="Animated Deep Learning Architecture Suite" width="100%" />
-</div>
-
-### Architecture Comparison
-
-| Model Architecture | Implementation | Primary Mechanism | Parameter Count | Latency (CPU) | Best Suited For |
-| :--- | :--- | :--- | :---: | :---: | :--- |
-| **1D Temporal CNN** | `CNN1DClassifier` | Stacked Conv1d kernels ($k=5, 3$) + Concat(AvgPool, MaxPool) | ~248K | **~11.2 ms** | Ultra-low latency edge devices & rapid local gesture shapes |
-| **Bidirectional GRU** | `BiGRUClassifier` | 2-layer stacked bidirectional GRU ($\vec{h}_t \oplus \overleftarrow{h}_t$) with dropout ($p=0.3$) | ~392K | **~17.8 ms** | Temporal context modeling across continuous gesture transitions *(Default)* |
-| **Transformer Encoder**| `TransformerClassifier` | Multi-Head Self-Attention (4 heads, 2 layers) + Learned Positional Embeddings | ~512K | **~24.1 ms** | Large-scale gloss dictionaries & long-range spatio-temporal dependencies |
-
-### Neural Recurrent Dynamics
-
-<div align="center">
-  <img src="assets/neural-network-anim.svg" alt="Animated BiGRU Neural Network Architecture" width="100%" />
-</div>
-
-- **Bidirectional Modeling**: Evaluates landmark transitions across both forward time steps ($\vec{h}_t$) and reverse time steps ($\overleftarrow{h}_t$) to resolve motion ambiguity in continuous signing.
-- **Normalized Invariant Features**: Sequences of $(T \times 225)$ spatial coordinates ensure speaker and camera distance invariance.
-- **Dense Fusion & Softmax Scoring**: Dense fusion layers combine bidirectional states to compute probability distributions across target ISL gloss vocabularies with confidence threshold gating.
-
-### Robust Landmark Data Augmentation (`backend/training/augment.py`)
-
-To ensure high generalization across signers, lighting conditions, and camera angles, the training pipeline applies five linear coordinate augmentations directly to landmark tensors without touching image pixels:
-1. **Planar Rotation**: Rotates $(X, Y)$ plane coordinates by $\theta \in [-10^\circ, +10^\circ]$ about the shoulder midpoint.
-2. **Spatial Scaling**: Rescales body and hand dimensions by a factor between $0.9\times$ and $1.1\times$.
-3. **Temporal Speed Warping**: Resamples frame sequences between $0.8\times$ (slower) and $1.2\times$ (faster signing speed).
-4. **Gaussian Time Jitter**: Perturbs sampling timestamps with Gaussian noise to simulate irregular webcam frame pacing.
-5. **Boundary Trimming**: Randomly crops up to $10\%$ of initial/final transition frames.
-
-<img src="assets/divider-anim.svg" width="100%" />
-
-## ⚡ Real-Time WebSocket Streaming SLR
-
-SignBridge features a high-throughput, bidirectional **WebSocket streaming pipeline** (`/ws/predict`) for real-time sign language recognition at 30 FPS:
-
-<div align="center">
-  <img src="assets/websocket-pipeline-anim.svg" alt="Animated Real-Time WebSocket Streaming Pipeline" width="100%" />
-</div>
-
-- **Sub-30ms Latency**: MediaPipe extracts holistic coordinates client-side; feature tensors are pushed over WebSockets to FastAPI.
-- **Sliding Window Buffer ($T=30$)**: The inference service maintains a continuous temporal FIFO buffer to classify transitions smoothly.
-- **Confidence Threshold Gating**: Rejects uncertain background noise and outputs validated glosses to the frontend and avatar engine.
-
-<img src="assets/divider-anim.svg" width="100%" />
-
-## 🎭 3D Avatar Skeletal Rig & Mixamo Retargeting
-
-<div align="center">
-  <img src="assets/avatar-rig-anim.svg" alt="Animated 3D Avatar Skeletal Rig" width="100%" />
-</div>
-
-The 3D avatar engine is built on **React Three Fiber (`@react-three/fiber`)** and **Three.js**:
-- **Bone Hierarchy**: Defined in [`bones.json`](frontend/src/lib/avatar/bones.json) following standard humanoid kinematics.
-- **Keyframe Interpolation**: Spherical Linear Interpolation (**SLERP**) between quaternion rotations guarantees continuous and natural sign transitions.
-- **Mixamo & Blender Retargeting**: Converts standard FBX humanoid animations into optimized keyframed JSON clips.
-- **Non-Manual Markers (NMM)**: Simulates facial expressions, head tilts, and eyebrow movements in accordance with ISL linguistic grammar.
-- **Idle Sway Motion**: Procedural sine-wave breathing and subtle head motion when no signs are actively being articulated.
-
-<img src="assets/divider-anim.svg" width="100%" />
-
-## 🚀 Interactive Quickstart
-
-<div align="center">
-  <img src="assets/interactive-terminal.svg" alt="Animated Interactive Terminal" width="100%" />
-</div>
-
-### Prerequisites
-- **Node.js** 20+ and `npm`
-- **Python** 3.11 (`py -3.11` or `python3.11`)
-- **Git**
-
-### 1. Automated Setup (Windows PowerShell)
+Needs Node.js 20 or newer, Python 3.11 and Git. Windows PowerShell commands (the code is portable, the scripts are Windows only).
 
 ```powershell
-# Clone the repository
-git clone https://github.com/DarshanCat/-SignBridge.git
-cd -SignBridge
-
-# Run the automated environment installer
-.\scripts\setup.ps1
+.\scripts\setup.ps1          # backend\.venv with PyTorch (CPU), MediaPipe, spaCy, FastAPI; npm install in frontend
 ```
 
-The script automatically initializes `backend\.venv`, installs PyTorch CPU, MediaPipe, OpenCV, FastAPI, and runs `npm install` inside `frontend/`.
+### Files that are not in the repository
 
-### 2. Launch Development Servers
+The repository does not contain the data, the trained model, the clips or the avatar, on purpose (licence and terms, see
+[Data and licences](#data-and-licences)). Without them the app still starts and says what is missing.
+
+| Missing file | What happens without it | How to get it |
+|---|---|---|
+| `backend/models/` (`isl_model.pt`, `labels.json`, `threshold.json`) | Sign to English says "Model not trained" | Train it: `docs/MODEL_TRAINING.md` |
+| `frontend/public/animations/*.json` | English to Sign shows "no clip for X" for every word | `python -m retarget.make_vocabulary --all-include --registry config\sign_registry.json ...` (needs the INCLUDE features) |
+| `frontend/public/avatar/signer.glb` | A built-in procedural humanoid is used | `tools/avatar/` converts a Mixamo FBX you download yourself; terms of Mixamo are yours to confirm |
+| `frontend/public/mediapipe/holistic/` | Landmark extraction cannot load | `npm run setup:mediapipe` (copied from `node_modules`, runs automatically before `dev` and `build`) |
+
+### Run (production build, recommended)
 
 ```powershell
-# Start FastAPI (:8000) and Next.js (:3000) concurrently:
-.\scripts\dev.ps1
-
-# Specify alternate ports if 8000 or 3000 are in use:
-.\scripts\dev.ps1 -ApiPort 8010 -WebPort 3011
+.\scripts\serve.ps1          # builds the frontend, starts the API on :8000 and the web app on :3000
 ```
 
-- **Frontend Application**: [http://localhost:3000](http://localhost:3000)
-- **FastAPI Interactive Docs (Swagger)**: [http://localhost:8000/docs](http://localhost:8000/docs)
-- **OpenAPI Schema**: [http://localhost:8000/openapi.json](http://localhost:8000/openapi.json)
+Open http://localhost:3000. The API needs about 15 seconds to start (it loads spaCy and the model); its docs are at
+http://127.0.0.1:8000/docs. Measured on the development machine, the production build loads the page in 0.25 s against 0.9 s in dev mode,
+and the dev server needs about 5 s for its first request. Use `.\scripts\dev.ps1` only while changing the code.
 
-### 3. Run Quality & Test Suite
+By hand: `cd frontend; npm run build; npm start` and `cd backend; .\.venv\Scripts\python -m uvicorn app.main:app --port 8000`.
+Docker: `docker compose up --build` (images were built once earlier; compose was not part of the final verification).
+
+### Using it
+
+- **Sign to English tab:** Start camera (allow the browser permission). The overlay shows the body skeleton and both hands; a line under the
+  video says whether shoulders and elbows are visible. Press Recognize sign after one isolated sign; accepted signs build the sentence,
+  results below the confidence threshold (0.7) are shown as Unrecognized.
+- **English to Sign tab:** type a sentence, Translate, then Play, with speed, pause and replay. Words without a clip are listed, not faked.
+- **Landmark check tab:** records a 4 second local video together with the browser's landmarks and offers both as downloads;
+  `python -m training.compare_landmarks` (from `backend/`) then compares them with Python MediaPipe on the same video. Nothing is uploaded.
+- **Record sign tab:** record a sign INCLUDE lacks (3-2-1 countdown, landmarks only). Promote a good take:
+  `python -m retarget.promote --clip ..\data\recorded\WATER\<stamp>.clip.json [--replace]`.
+
+## Implemented features
+
+- **Landmarks:** MediaPipe Holistic in the browser (self-hosted WebAssembly, CPU inference), pose 33 and hands 2 x 21 points, 225 values per
+  frame, normalized to the shoulders. Face is not used. Video never leaves the browser; only landmarks are sent.
+- **Recognition:** three architectures behind one `build_model`; training, evaluation, calibration and pilot tools in `backend/training/`;
+  the same preprocessing for training, REST and WebSocket (tested to 1e-6).
+- **Live WebSocket:** `/ws/predict` returns sign, gloss, confidence, alternatives, the gloss sequence and an English sentence; below the
+  threshold it returns UNRECOGNIZED and leaves the sentence unchanged.
+- **Text to gloss:** spaCy rules (time first, subject object verb, negation after the verb, question words last, dropped articles and
+  auxiliaries, fingerspelling markers for unknown words) and non-manual marker tags (`docs/NLP.md`). Gloss to English is a heuristic.
+- **Avatar:** Mixamo Y Bot driven by retargeted landmark clips, 0.2 s blended transitions, speed, pause, replay, and a rule-based head
+  movement for negation, yes/no and WH questions (an approximation, no face animation).
+- **Recorder and promotion:** quality check (at least 20 frames, at most 10 percent frames without body, at most 30 percent without any
+  hand), clip retarget, `retarget.promote` with `--replace` protection.
+- **Data tooling:** streaming INCLUDE download with resume, supplement run with watchdog (`tools/supplement_watchdog.py`), audit
+  (`training.audit_include`), label review.
+- **Quality and speed:** loading indicators for each stage, cached API lookups, spaCy preloaded, long cache headers for large static files.
+
+## Results
+
+Test split of INCLUDE, **authors' predefined split, signer independence not verified**; 816 test samples, 262 classes; each model evaluated
+once on the test split. Settings, per class accuracy, confusion matrices and accuracy versus coverage: `docs/evaluation/results.md`.
+
+| Model | Top-1 | Top-5 | Macro F1 |
+|---|---|---|---|
+| 1D CNN (live model) | 0.9130 | 0.9902 | 0.9107 |
+| BiGRU | 0.7929 | 0.9730 | 0.7869 |
+| Transformer | 0.7328 | 0.9596 | 0.7100 |
+
+The live threshold 0.7 was chosen on the validation split (at least 95 percent accuracy on answered samples). On the test split it answers
+86.8 percent of the signs with 95.5 percent accuracy and returns Unrecognized for the rest. Model inference takes about 0.4 ms per sign on
+the development CPU (median of 200 runs); network and landmark extraction dominate the delay.
+
+Through the live socket, 80 real test samples (rebuilt into landmark frames) gave exactly the offline model's labels and confidences
+(80 of 80 identical within 1e-4). The pilot runs that chose the settings (partial data, validation only) are in `docs/evaluation/pilot/`
+and are not reportable results.
+
+These numbers describe isolated INCLUDE signs. They are not an estimate of accuracy for a new signer, a webcam, or continuous signing.
+
+## Folder structure
+
+```
+backend/
+  app/            FastAPI app: api (routes, WebSocket), recognition (features, models, inference), avatar (clips, registry),
+                  services, schemas, recording.py (sign recorder)
+  nlp/            spaCy text to gloss, gloss to English, gloss dictionary loader
+  training/       dataset tools, train, compare_models, calibrate, pilot, audit_include, INCLUDE download and supplement
+  retarget/       landmarks to avatar bones, clip builder, make_vocabulary, make_clip, promote
+  config/         gloss_dictionary.json, sign_registry.json, translation.json
+  models/         trained weights (git-ignored)
+  tests/          pytest suite (synthetic data only)
+frontend/
+  src/app, src/components    Next.js 16 pages and panels (camera, prediction, English to Sign, Record sign)
+  src/lib                    landmarks, MediaPipe loader, overlay, prediction socket, recorder, avatar (player, retarget, nmm)
+  public/mediapipe, avatar, animations   self-hosted MediaPipe files, signer.glb, clips (the last two are git-ignored)
+data/             raw, processed (INCLUDE features v1 and v2), recorded takes (git-ignored)
+docs/             project documents, docs/evaluation (audit, results, pilot)
+scripts/          setup.ps1, dev.ps1, serve.ps1, test.ps1
+tools/            avatar conversion (Blender), supplement watchdog
+```
+
+## Tests and checks
 
 ```powershell
-# Run backend pytest + frontend type checks, ESLint, vitest, and build
-.\scripts\test.ps1
+.\scripts\test.ps1           # backend pytest, tsc, eslint, vitest and the production build (stop dev servers first)
 ```
 
-<img src="assets/divider-anim.svg" width="100%" />
+Last full run (2026-10-31): backend pytest 277 passed, `tsc` clean, `eslint` clean, vitest 67 passed, `next build` ok. Backend tests use tiny
+synthetic models; their scores are not results. See `docs/PROJECT_STATUS.md` for the exact run.
 
-## 🐳 Multi-Container Docker Deployment
+## Known limitations
 
-Run the complete multi-container stack with Docker Compose:
+- **No face features.** Only pose and hands are tracked, and the avatar has no face animation. Non-manual markers are a small rule-based head
+  movement, not taken from signer data. Real ISL also uses eyebrows, eyes and mouth.
+- **Signer independence is unverified.** INCLUDE publishes no signer IDs, so the predefined split may share signers between train and test.
+  Reported accuracy is probably optimistic for new signers.
+- **Licence conflict.** INCLUDE is CC BY 4.0 on Zenodo and CC BY-NC-SA 4.0 on a third party page (unresolved). This project follows the
+  stricter one: INCLUDE-derived material is non-commercial only, with attribution, under CC BY-NC-SA 4.0 (see [Data and licences](#data-and-licences)).
+  Eleven early clips are still in the git history; data, features, models and newer clips are kept out of git.
+- **Mixamo terms are unconfirmed.** The avatar model is a Mixamo asset and is not included. Download it yourself and check the terms before sharing it.
+- **No clip is signer-reviewed.** All 262 clips are automatic retargets of one training sample each, with approximate bone mapping; some
+  will look wrong. Nothing is marked verified, and the registry cannot mark a sign verified without a recorded human review.
+- **Missing signs.** 262 of 313 dictionary glosses have a clip; 1 INCLUDE class has no data and 50 grammar words (NOT, WHAT, WHERE, GO, HELP,
+  YES, NO, ...) have none; fingerspelling clips do not exist (`docs/MISSING_SIGNS.md`).
+- **Isolated signs only.** Continuous signing is not segmented; each Recognize press is one sign, and gloss to English is a heuristic.
+- **Browser versus training features.** Training features came from Python MediaPipe on video; the browser uses the WebAssembly build with
+  CPU inference. The difference is untested with a real webcam and may lower accuracy.
+- **Text to gloss rules are assumptions** (`docs/NLP.md`), not validated by ISL signers.
+- **Vocabulary:** 262 INCLUDE classes only, everyday words outside them are unknown.
 
-```powershell
-docker compose up --build
-```
+## Documents
 
-Container topology:
-- **`backend`**: FastAPI Uvicorn async ASGI engine on port `8000`
-- **`frontend`**: Next.js production SSR & client bundle on port `3000`
+`docs/PROJECT_STATUS.md` (dated log of every step), `docs/MODEL_TRAINING.md`, `docs/NLP.md`, `docs/AVATAR_RETARGET_PLAN.md`,
+`docs/API_REFERENCE.md`, `docs/MISSING_SIGNS.md`, `docs/evaluation/` (audit, results, pilot), `docs/LABEL_REVIEW`
+(`docs/evaluation/LABEL_REVIEW.md`). Older documents in `docs/` (for example `PROJECT_REPORT.md`, `DEPLOYMENT_READINESS.md`) were written
+before the model existed and may be out of date; `PROJECT_STATUS.md` wins where they disagree.
 
-<img src="assets/divider-anim.svg" width="100%" />
+## Data and licences
 
-## 📁 Repository Structure
+Full details: **[DATA_NOTICE.md](DATA_NOTICE.md)**.
 
-```
-.
-├── 📂 assets/              # Animated SVGs, live HUD diagrams, telemetry visuals & banners
-├── 📂 frontend/            # Next.js 16, React 19, TypeScript, Tailwind CSS, React Three Fiber
-│   ├── src/app/            # App router pages, layouts, and global styling
-│   ├── src/components/     # WebcamPanel, EnglishToSignPanel, StatusPanel, AvatarViewer
-│   ├── src/lib/avatar/     # Skeletal rigging, quaternion interpolator, clip player
-│   └── public/animations/  # ISL sign animation keyframe JSON files
-├── 📂 backend/             # FastAPI asynchronous microservice
-│   ├── app/api/            # REST API endpoints & route controllers
-│   ├── app/recognition/    # Landmark normalization & PyTorch BiGRU sequential model
-│   ├── app/translation/    # English ⇄ ISL grammar & gloss translation engines
-│   ├── app/avatar/         # Sign registry and clip loading services
-│   ├── training/           # Dataset preprocessors, validators, and PyTorch training loops
-│   └── tests/              # Comprehensive Pytest test suite (100% passing)
-├── 📂 data/                # Dataset directory (raw video and processed landmark numpy arrays)
-├── 📂 docs/                # Academic research papers, audits, and engineering specs
-│   ├── ARCHITECTURE.md     # In-depth system design & component diagrams
-│   ├── DATASET_GUIDE.md    # ISL candidate datasets, ethics, and recording protocols
-│   ├── MODEL_TRAINING.md   # BiGRU architecture, hyperparameter tuning & loss curves
-│   ├── AVATAR.md           # Skeletal bone hierarchy and keyframe format specification
-│   ├── IEEE_PAPER_CHECKLIST.md  # Research checklist for academic conference publication
-│   └── PROJECT_REPORT.md   # Complete technical report
-└── 📂 scripts/             # PowerShell automation (setup.ps1, dev.ps1, test.ps1)
-```
+- **Code:** the MIT licence (`LICENSE`) covers the original code only. It does **not** cover INCLUDE or anything derived from it.
+- **INCLUDE-derived material** (the clips in git history, statistics in `docs/evaluation/`, and any features, models or clips you build from the
+  data) is treated as **CC BY-NC-SA 4.0: non-commercial only, with attribution, share alike**. The dataset's own licence is unresolved (CC BY 4.0 on
+  Zenodo, CC BY-NC-SA 4.0 on a third party page), so the project follows the stricter one. Cite: Sridhar, Ganesan, Kumar and Khapra, INCLUDE,
+  ACM Multimedia 2020, DOI 10.1145/3394171.3413528, and Zenodo record 4010759.
+- **Mixamo avatar:** not included. Download your own model from Mixamo and convert it with `tools/avatar/`; check Mixamo's terms yourself.
+- **Kept out of git on purpose:** `data/`, `backend/models/`, `frontend/public/animations/*.json`, `frontend/public/avatar/`.
 
-<img src="assets/divider-anim.svg" width="100%" />
-
-## 🧠 Dataset & Training Pipeline
-
-When training the PyTorch BiGRU model on an ISL video dataset (e.g. INCLUDE or custom recordings):
-
-```powershell
-cd backend
-
-# 1. Preprocess raw video into normalized 75-landmark sequences
-.\.venv\Scripts\python -m training.preprocess_videos --index ..\data\raw\<dataset>\index.csv --out ..\data\processed\<dataset>
-
-# 2. Verify dataset integrity and landmark balance
-.\.venv\Scripts\python -m training.validate_dataset --dir ..\data\processed\<dataset>
-
-# 3. Train the BiGRU sequence classification model
-.\.venv\Scripts\python -m training.train --manifest ..\data\processed\<dataset>\manifest.csv --out models
-```
-
-Detailed dataset acquisition protocols and IRB consent procedures: [docs/DATASET_GUIDE.md](docs/DATASET_GUIDE.md).
-
-<img src="assets/divider-anim.svg" width="100%" />
-
-## ⏱️ Latency Measurement
-
-Run the automated profiling harness to measure network roundtrips, inference latencies, and render frames:
-
-```powershell
-cd backend
-.\.venv\Scripts\python -m benchmarks.measure --api http://localhost:8000 --out ..\docs\benchmarks\latest.json
-```
-
-Benchmark specifications: [docs/EXPERIMENT_PLAN.md](docs/EXPERIMENT_PLAN.md).
-
-<img src="assets/divider-anim.svg" width="100%" />
-
-## 📚 Academic & Engineering Documentation
-
-| Document | Key Information |
-| :--- | :--- |
-| 📘 [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Component architecture, latency budgets, and data interchange schemas |
-| 📗 [DATASET_GUIDE.md](docs/DATASET_GUIDE.md) | Candidate ISL datasets, recording protocol, license checks, and IRB consent |
-| 📕 [MODEL_TRAINING.md](docs/MODEL_TRAINING.md) | BiGRU model specs, learning rate scheduling, regularization, and metrics |
-| 📙 [AVATAR.md](docs/AVATAR.md) | Skeletal joint rotations, coordinate frames, and keyframe schema |
-| 📓 [PROJECT_REPORT.md](docs/PROJECT_REPORT.md) | Academic technical report draft with literature review and experimental design |
-| 📋 [IEEE_PAPER_CHECKLIST.md](docs/IEEE_PAPER_CHECKLIST.md) | Systematic requirements checklist for academic journal / conference submission |
-
-<img src="assets/divider-anim.svg" width="100%" />
-
-## 👥 Authors & Acknowledgments
-
-- **Darshan BG** ([@DarshanCat](https://github.com/DarshanCat)) - *Author & Lead Developer*
-- Built with Google **MediaPipe**, **PyTorch**, and the **Three.js** community.
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
-<div align="center">
-  <br/>
-  <sub>🌟 Built with passion for accessible, barrier-free communication through AI and 3D graphics.</sub>
-</div>
+Author: Darshan BG ([@DarshanCat](https://github.com/DarshanCat)). Built with MediaPipe, PyTorch, spaCy, FastAPI, Next.js and three.js.
