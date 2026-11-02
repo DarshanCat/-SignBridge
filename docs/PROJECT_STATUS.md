@@ -1,5 +1,11 @@
 # Project status
 
+## Signer roles fixed; smoke test recordings not found (2026-11-02)
+
+Signer roles for the self-recorded data, decided by the project owner and fixed before any recording was used: training S01, S02, S03; validation S04; test S05. Recorded in `backend/config/signer_roles.json` (read by `training/make_combined_manifest.py`, which now refuses a different test or validation signer on the command line and refuses a recorded signer without a role) and in `docs/TRAINING_PLAN_SELF_RECORDED.md` (section 5). This is the "minimum meaningful" level of the plan: 5 signers, one unseen test person. Signer IDs are stored in upper case, so typing s01 saves S01. The validation and test signers are not to be changed after a result has been seen; more training signers may be added to the file.
+
+Smoke test of signer s01: the message listed no outcome (the template text "[what worked / problems]" was still in it), and no recordings could be found: `data/recorded/` does not exist in this project and a search of the Downloads folder found no folder named S01. The recorder writes to `<project>/data/recorded/<SIGNER>/<SIGN>/`, so the takes were either rejected (the screen then lists the reasons), made with another copy of the app, or never saved. Nothing could be fixed without the symptoms. What to send: what you saw on screen (an error, a rejected take with its reasons, or a saved message), and whether the backend was running from this folder.
+
 ## Guided recording session and the training plan for self-recorded signs (2026-11-02)
 
 Done (nothing trained, no self-recorded data exists yet):

@@ -34,8 +34,34 @@ NOTICE = (
 )
 
 
+ROLES_FILE = Path(__file__).resolve().parents[1] / "config" / "signer_roles.json"
+
+
 class ManifestError(ValueError):
     pass
+
+
+def load_roles(path: Path = ROLES_FILE) -> dict | None:
+    """The fixed signer roles (train, val, test lists of upper case IDs), or None if the file does not exist."""
+    if not path.is_file():
+        return None
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    return {k: [s.upper() for s in raw.get(k, [])] for k in ("train", "val", "test")}
+
+
+def resolve_roles(roles: dict | None, test_arg: list[str] | None, val_arg: list[str] | None) -> tuple[list[str], list[str], list[str] | None]:
+    """Roles come from the fixed file. Command line values are only accepted if they match it: the validation and test signer cannot be changed here."""
+    test_arg = [s.upper() for s in test_arg] if test_arg else None
+    val_arg = [s.upper() for s in val_arg] if val_arg is not None and val_arg != [] else None
+    if roles is None:
+        if not test_arg:
+            raise ManifestError("no signer_roles.json and no --test-signer given")
+        return test_arg, val_arg or [], None
+    if test_arg is not None and set(test_arg) != set(roles["test"]):
+        raise ManifestError(f"test signer {test_arg} differs from the fixed roles {roles['test']} in config/signer_roles.json; the roles are not changed after recording")
+    if val_arg is not None and set(val_arg) != set(roles["val"]):
+        raise ManifestError(f"validation signer {val_arg} differs from the fixed roles {roles['val']} in config/signer_roles.json; the roles are not changed after recording")
+    return roles["test"], roles["val"], roles["train"]
 
 
 def trim_take(features: np.ndarray) -> tuple[np.ndarray | None, str]:
@@ -69,7 +95,7 @@ def read_takes(recorded: Path) -> list[tuple[str, str, Path]]:
 
 
 def build(include_manifest: Path, recorded: Path, out: Path, test_signers: list[str], val_signers: list[str], min_train_takes: int = 5,
-          lex=None) -> dict:
+          lex=None, train_signers: list[str] | None = None) -> dict:
     lex = lex or load_lexicon()
     test_signers, val_signers = [s.upper() for s in test_signers], [s.upper() for s in val_signers]
     if out.exists():
@@ -83,7 +109,13 @@ def build(include_manifest: Path, recorded: Path, out: Path, test_signers: list[
     missing = [s for s in test_signers + val_signers if s not in signers]
     if missing:
         raise ManifestError(f"no recordings found for signer(s) {missing}; recorded signers are {signers}")
-    train_signers = [s for s in signers if s not in test_signers and s not in val_signers]
+    if train_signers is not None:  # fixed roles: a recorded signer without a role is an error, not an accidental training signer
+        unknown = [s for s in signers if s not in train_signers + test_signers + val_signers]
+        if unknown:
+            raise ManifestError(f"recorded signer(s) {unknown} have no role in config/signer_roles.json; add them as training signers there first")
+        train_signers = [s for s in train_signers if s in signers]
+    else:
+        train_signers = [s for s in signers if s not in test_signers and s not in val_signers]
     if not train_signers:
         raise ManifestError("no signer is left for training; record more signers or use fewer held-out ones")
 
@@ -156,12 +188,13 @@ def main() -> int:
     ap.add_argument("--include-manifest", type=Path, required=True)
     ap.add_argument("--recorded", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
-    ap.add_argument("--test-signer", nargs="+", required=True)
-    ap.add_argument("--val-signer", nargs="*", default=[])
+    ap.add_argument("--test-signer", nargs="+", default=None, help="only needed without config/signer_roles.json; must match it if given")
+    ap.add_argument("--val-signer", nargs="*", default=None, help="same")
     ap.add_argument("--min-train-takes", type=int, default=5)
     a = ap.parse_args()
     try:
-        r = build(a.include_manifest, a.recorded, a.out, a.test_signer, a.val_signer, a.min_train_takes)
+        test, val, train = resolve_roles(load_roles(), a.test_signer, a.val_signer)
+        r = build(a.include_manifest, a.recorded, a.out, test, val, a.min_train_takes, train_signers=train)
     except ManifestError as exc:
         print(f"Error: {exc}", file=sys.stderr)
         return 2

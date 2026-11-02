@@ -1,0 +1,15 @@
+{
+  "fixed_on": "2026-11-02",
+  "note": "Signer roles for the self-recorded data are FIXED. They were chosen before any recording was used for training or evaluation. Do not change the validation or test signer after seeing a result; more training signers may be added.",
+  "train": [
+    "S01",
+    "S02",
+    "S03"
+  ],
+  "val": [
+    "S04"
+  ],
+  "test": [
+    "S05"
+  ]
+}

@@ -120,3 +120,36 @@ def test_takes_without_movement_are_reported_and_thin_classes_are_left_out(tmp_p
     rows = list(csv.DictReader((tmp_path / "combined" / "manifest.csv").open()))
     assert "RARE" not in {r["label"] for r in rows}
     assert report["classes_left_out_for_too_few_training_takes"] == ["RARE"]  # WHERE keeps 2 training signers x 3 takes = 6 >= 5
+
+
+# fixed signer roles ----------------------------------------------------------------------------------------------------------------------------
+
+def test_shipped_roles_are_the_decided_ones_and_disjoint() -> None:
+    from training.make_combined_manifest import load_roles
+
+    roles = load_roles()
+    assert roles == {"train": ["S01", "S02", "S03"], "val": ["S04"], "test": ["S05"]}
+    assert not (set(roles["train"]) & set(roles["val"])) and not (set(roles["train"]) & set(roles["test"])) and not (set(roles["val"]) & set(roles["test"]))
+
+
+def test_command_line_cannot_change_the_fixed_roles() -> None:
+    from training.make_combined_manifest import resolve_roles
+
+    roles = {"train": ["S01", "S02", "S03"], "val": ["S04"], "test": ["S05"]}
+    assert resolve_roles(roles, None, None) == (["S05"], ["S04"], ["S01", "S02", "S03"])
+    assert resolve_roles(roles, ["s05"], ["s04"]) == (["S05"], ["S04"], ["S01", "S02", "S03"])  # matching values are fine, case does not matter
+    with pytest.raises(ManifestError, match="test signer"):
+        resolve_roles(roles, ["S03"], None)
+    with pytest.raises(ManifestError, match="validation signer"):
+        resolve_roles(roles, None, ["S01"])
+    with pytest.raises(ManifestError, match="no signer_roles.json"):
+        resolve_roles(None, None, None)
+    assert resolve_roles(None, ["P4"], ["P3"]) == (["P4"], ["P3"], None)  # without a roles file the old behaviour remains
+
+
+def test_a_recorded_signer_without_a_role_is_refused(tmp_path) -> None:
+    man, rec = make_tree(tmp_path)  # signers P01 to P04
+    with pytest.raises(ManifestError, match="no role"):
+        build(man, rec, tmp_path / "c", ["P04"], ["P03"], train_signers=["P01"])  # P02 has no role
+    ok = build(man, rec, tmp_path / "c2", ["P04"], ["P03"], train_signers=["P01", "P02", "P09"])  # a role without recordings yet is fine
+    assert ok["signers"]["train"] == ["P01", "P02"]

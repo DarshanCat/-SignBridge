@@ -59,6 +59,19 @@ INCLUDE keeps the authors' train, validation and test. For the self-recorded dat
 - **Validation signer(s):** used for early stopping, picking hyperparameters and the confidence threshold. Not test.
 - **Training signers:** everyone else.
 
+### Signer roles (fixed on 2026-11-02, before any recording was used)
+
+| Role | Signer IDs | Notes |
+|---|---|---|
+| Training | S01, S02, S03 | S01 also did the smoke test; the smoke test takes are ordinary S01 takes (same signer ID) and the session resumes up to the full count |
+| Validation | S04 | early stopping, hyperparameters, confidence threshold |
+| Test | S05 | never trained on, validated on or tuned on; evaluated once per trained model |
+
+This is the "minimum meaningful" level of section 8 (5 signers, 3 / 1 / 1): one unseen test person, so the result describes how the model does for S05 and
+says little about people in general. The roles are stored in `backend/config/signer_roles.json`. The builder reads that file and refuses a
+different test or validation signer on the command line, and refuses a recorded signer that has no role (more training signers can be added to the
+file; the validation and test signers are not to be changed after a result has been seen). Signer IDs are stored in upper case (typing s01 saves S01).
+
 The builder fails if a signer would land in two splits. Taking validation and test takes at random from every signer would leak the person into
 training and report an optimistic number (that is what INCLUDE's predefined split may also do, which is why its numbers carry the label "signer
 independence not verified").
@@ -124,10 +137,10 @@ about 20 overlap words by 5 takes per signer (100 more takes each).
 ```powershell
 # 1. record with the guided session (Record sign tab), one signer ID per person
 
-# 2. build the combined manifest in a NEW folder (choose the test and validation signers first and keep them fixed)
+# 2. build the combined manifest in a NEW folder (the roles come from config\signer_roles.json: train S01 S02 S03, validation S04, test S05)
 cd backend
 .\.venv\Scripts\python -m training.make_combined_manifest --include-manifest ..\data\processed\include_v2\manifest.csv `
-    --recorded ..\data\recorded --out ..\data\processed\combined_v1 --test-signer P08 --val-signer P07
+    --recorded ..\data\recorded --out ..\data\processed\combined_v1
 
 # 3. train and compare (same settings for every model); the test split is evaluated once per model
 .\.venv\Scripts\python -m training.compare_models --manifest ..\data\processed\combined_v1\manifest.csv --out ..\data\models_combined_v1 `
