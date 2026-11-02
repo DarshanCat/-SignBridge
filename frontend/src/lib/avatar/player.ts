@@ -1,15 +1,17 @@
+import { slerpEuler, smoothstep } from "./idle";
 import { withNmm } from "./nmm";
 import { sampleClip, type Euler3, type Pose, type SignClip } from "./clip";
 
 /** Seconds over which the avatar blends from the end of one sign into the start of the next. */
-export const TRANSITION_S = 0.2;
+export const TRANSITION_S = 0.25;
 
+/** Blend two poses: body bones are slerped as quaternions (no shortcut through a wrong angle), finger curls (names with a dot) lerped. */
 export function blendPoses(a: Pose, b: Pose, f: number): Pose {
   const out: Pose = {};
   for (const bone of new Set([...Object.keys(a), ...Object.keys(b)])) {
     const x = a[bone] ?? [0, 0, 0];
     const y = b[bone] ?? [0, 0, 0];
-    out[bone] = [0, 1, 2].map((i) => x[i] + (y[i] - x[i]) * f) as Euler3;
+    out[bone] = bone.includes(".") ? ([0, 1, 2].map((i) => x[i] + (y[i] - x[i]) * f) as Euler3) : slerpEuler(x, y, f);
   }
   return out;
 }
@@ -136,7 +138,7 @@ export class SequencePlayer {
   pose(): Pose {
     if (this.status === "idle" || this.status === "finished" || !this.playlist.length) return {};
     const current = sampleClip(this.playlist[this.index], this.time);
-    const pose = this.fromPose ? blendPoses(this.fromPose, current, Math.min(1, this.blend / TRANSITION_S)) : current;
+    const pose = this.fromPose ? blendPoses(this.fromPose, current, smoothstep(this.blend / TRANSITION_S)) : current;
     if (!this.nmm.length) return pose;
     const total = this.playlist.reduce((a, c) => a + c.duration, 0);
     return withNmm(pose, this.nmm, this.elapsed, total);

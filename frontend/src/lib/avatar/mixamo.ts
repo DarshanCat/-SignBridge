@@ -121,13 +121,18 @@ export function buildMixamoRig(root: Object3D): MixamoRig {
 const tmpQ = new Quaternion();
 const tmpE = new Euler();
 
-/** Apply a clip pose (our 20 bone names) to the skeleton. Missing bones in the pose are at rest. */
-export function applyMixamoPose(rig: MixamoRig, pose: Pose): void {
+/**
+ * Apply a clip pose (our 20 bone names) to the skeleton. Missing bones in the pose are at rest.
+ * spread (optional, rad, keyed by finger clip bone such as hand_l.index) fans a finger sideways at its first joint; clips never carry it,
+ * only the relaxed rest layer does.
+ */
+export function applyMixamoPose(rig: MixamoRig, pose: Pose, spread: Record<string, number> = {}): void {
   const canon = new Map<string, Quaternion>();
   for (const j of rig.joints) {
     const key = j.clipBone.split("#")[0];
     const e = pose[key] ?? [0, 0, 0];
-    const r = j.rotateX ? tmpE.set(e[0] * j.fraction, 0, 0, "XYZ") : tmpE.set(e[0], e[1], e[2], "XYZ");
+    const fan = j.rotateX && j.clipBone.endsWith("#1") ? (spread[key] ?? 0) : 0;
+    const r = j.rotateX ? tmpE.set(e[0] * j.fraction, 0, fan, "XYZ") : tmpE.set(e[0], e[1], e[2], "XYZ");
     const local = new Quaternion().setFromEuler(r);
     const parent = j.parentClip ? (canon.get(j.parentClip) ?? new Quaternion()) : new Quaternion();
     const w = parent.clone().multiply(local);

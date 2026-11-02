@@ -2,8 +2,9 @@
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Component, useEffect, useMemo, type ReactNode } from "react";
-import type { Mesh } from "three";
+import type { Mesh, MeshStandardMaterial } from "three";
 import { clone } from "three/examples/jsm/utils/SkeletonUtils.js";
+import { PoseSmoother, withRelaxedRest } from "@/lib/avatar/idle";
 import { applyMixamoPose, buildMixamoRig } from "@/lib/avatar/mixamo";
 import type { SequencePlayer } from "@/lib/avatar/player";
 import { Humanoid } from "./Humanoid";
@@ -17,16 +18,32 @@ function GlbModel({ player, onKind }: { player: SequencePlayer; onKind?: (k: Ava
   const model = useMemo(() => clone(scene), [scene]);
   const rig = useMemo(() => buildMixamoRig(model), [model]);
 
+  const smoother = useMemo(() => new PoseSmoother(), []);
+
   useEffect(() => {
     model.traverse((o) => {
-      if ((o as Mesh).isMesh) o.castShadow = true;
+      const mesh = o as Mesh;
+      if (!mesh.isMesh) return;
+      mesh.castShadow = true;
+      mesh.receiveShadow = true; // arms and hands shade the body
+      for (const m of Array.isArray(mesh.material) ? mesh.material : [mesh.material]) {
+        const std = m as MeshStandardMaterial;
+        if (!std.isMeshStandardMaterial) continue;
+        std.roughness = 0.62; // soft satin instead of the flat plastic look
+        std.metalness = 0;
+        std.envMapIntensity = 0.6;
+        std.needsUpdate = true;
+      }
     });
     onKind?.("glb");
   }, [model, onKind]);
 
-  useFrame((_, delta) => {
-    player.tick(Math.min(delta, 0.1));
-    applyMixamoPose(rig, player.pose());
+  useFrame((state, delta) => {
+    const dt = Math.min(delta, 0.1);
+    player.tick(dt);
+    const target = withRelaxedRest(player.pose(), state.clock.elapsedTime);
+    const smooth = smoother.step(target.pose, target.spread, dt);
+    applyMixamoPose(rig, smooth.pose, smooth.spread);
   });
   return <primitive object={model} />;
 }
