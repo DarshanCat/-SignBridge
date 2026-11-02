@@ -7,7 +7,7 @@ import numpy as np
 
 from app.recognition.landmarks import FEATURE_DIM
 from app.recognition.preprocess import prepare_sequence
-from training.augment import AugmentConfig, augment_sequence
+from training.augment import AugmentConfig, DeployAugmentConfig, augment_sequence, deploy_augment
 from training.data import DatasetError, Sample, read_manifest, split_samples
 
 
@@ -23,13 +23,15 @@ class SequenceStore:
 
     def batch(
         self, idx: np.ndarray, seq_len: int, max_gap: int = 0, rng: np.random.Generator | None = None,
-        augment: AugmentConfig | None = None,
+        augment: AugmentConfig | None = None, deploy: DeployAugmentConfig | None = None,
     ) -> np.ndarray:
         rows = []
         for i in idx:
             seq = self.sequences[int(i)]
             if rng is not None and augment is not None:
                 seq = augment_sequence(seq, rng, augment)
+            if rng is not None and deploy is not None:
+                seq = deploy_augment(seq, rng, deploy)
             rows.append(prepare_sequence(seq, seq_len, max_gap))
         return np.stack(rows)
 

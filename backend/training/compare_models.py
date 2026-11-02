@@ -112,6 +112,7 @@ def main() -> int:
     p.add_argument("--seed", type=int, default=0)
     p.add_argument("--epochs", type=int, default=60)
     p.add_argument("--augment", action="store_true")
+    p.add_argument("--deploy-augment", action="store_true", help="y scale, landmark noise and hand dropout (training.augment.DeployAugmentConfig)")
     p.add_argument("--class-weights", action="store_true")
     p.add_argument("--reuse", action="store_true", help="do not train: rebuild results.md from the metrics.json files already in --out (no model is re-evaluated)")
     p.add_argument("--max-gap", type=int, default=0)
@@ -128,7 +129,7 @@ def main() -> int:
             print(f"training {arch} ...", flush=True)
             reports[arch] = train(
                 a.manifest, a.out / arch, arch=arch, seed=a.seed, epochs=a.epochs, augment=a.augment,
-                class_weights=a.class_weights, num_threads=a.threads, max_gap=a.max_gap, patience=a.patience,
+                class_weights=a.class_weights, num_threads=a.threads, max_gap=a.max_gap, patience=a.patience, deploy_augment=a.deploy_augment,
             )
             t = reports[arch]["results"]["test"]
             print(f"  {arch}: test top1={t['top1_accuracy']:.4f} macro_f1={t['macro_f1']:.4f}", flush=True)
