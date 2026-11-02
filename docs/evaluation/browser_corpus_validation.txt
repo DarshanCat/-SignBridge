@@ -1,0 +1,8 @@
+corpus val: 211 videos in samples.json, 211 unique ids
+16x9: files 211, valid 211, missing 0, bad 0, duplicates 0
+4x3: files 211, valid 211, missing 0, bad 0, duplicates 0
+RESULT: all files valid
+corpus test: 312 videos in samples.json, 312 unique ids
+16x9: files 312, valid 312, missing 0, bad 0, duplicates 0
+4x3: files 312, valid 312, missing 0, bad 0, duplicates 0
+RESULT: all files valid

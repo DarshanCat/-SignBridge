@@ -28,5 +28,12 @@ All numbers are from `docs/evaluation/`; nothing was estimated.
 | Vertical scale sweep, noise and dropout (Fig. 2, Table III) | `BROWSER_PATH.md`, `browser_path_validation_sweep.json` |
 | Signer size in the picture (Fig. 3, Section VII) | `BROWSER_PATH.md` (framing section) |
 | Segmentation figures in the case study | `SEGMENTATION.md` |
+| Larger browser corpora (211 validation and 312 test videos, two framings), six seed-0 models, raw per video results | `eval_val.json`, `eval_test.json` (not used in the text yet; they feed the pending tables) |
+| The same, as readable validation tables with intervals and paired tests | `validation_tables_seed0.md` |
+| Which videos make up those corpora | `browser_corpus_val_samples.json`, `browser_corpus_test_samples.json` |
+| Check that every extracted landmark file is readable, complete and unique | `browser_corpus_validation.txt` |
+| Test and validation metrics of the six seed-0 models (top-1, top-5, macro-F1, accuracy against coverage) | `seed0_model_metrics.json` |
+
+Scripts that produced these files are in `tools/browser_path/` (`select_all.py`, `browser_harness_corpus.js`, `serve_frames_corpus.py`, `run_harness.sh`, `validate_corpus.py`, `eval_matrix.py`, `report_matrix.py`, `zoom_save.py`). The three-seed runs are driven by a separate script that is not copied until those runs have finished.
 
 Facts about the training settings and the augmentation (ranges, probabilities, the exact y scale) are from the code in `backend/training/` and the notes in `docs/PROJECT_STATUS.md`.

@@ -5,6 +5,12 @@
 fig_browser_vs_offline.pdf   accuracy and wrong-accepted rate, offline against the browser path (test videos, CNN, n = 100)
 fig_yscale.pdf               accuracy against a y scale error, browser 16:9 and 4:3 (validation videos, CNN)
 fig_framing.pdf              accuracy against shoulder width as a fraction of the picture width (validation videos shrunk toward the centre, CNN)
+
+Inputs, all in docs/evaluation (the only place this script reads from; nothing comes from a scratch folder):
+    browser_path_rows.json               per video rows, 100 test videos, CNN (figure 1)
+    browser_path_validation_sweep.json   y scale sweep, 100 validation videos, CNN (figure 2)
+    BROWSER_PATH.md                      the framing table (figure 3)
+Not used by any figure yet (they feed the pending three-seed tables): eval_val.json, eval_test.json and seed0_model_metrics.json.
 """
 import json
 import math
@@ -18,6 +24,9 @@ import matplotlib.pyplot as plt  # noqa: E402
 
 HERE = Path(__file__).parent
 EVAL = HERE.parents[1] / "docs" / "evaluation"
+for _name in ("browser_path_rows.json", "browser_path_validation_sweep.json", "BROWSER_PATH.md"):
+    if not (EVAL / _name).is_file():
+        raise SystemExit(f"missing input {EVAL / _name}")
 plt.rcParams.update({"font.size": 8, "axes.titlesize": 8, "axes.labelsize": 8, "legend.fontsize": 7, "xtick.labelsize": 7, "ytick.labelsize": 7,
                      "pdf.fonttype": 42, "ps.fonttype": 42, "axes.spines.top": False, "axes.spines.right": False})
 W, H = 3.4, 2.35  # inches, one IEEE column

@@ -1,0 +1,3127 @@
+{
+ "seed": 0,
+ "step": 3,
+ "per_class": 2,
+ "samples": [
+  {
+   "id": "t000",
+   "label": "Actor",
+   "npy": "bf328d83_MVI_4792.npy",
+   "stem": "MVI_4792",
+   "zip": "Jobs_2of2.zip",
+   "member": "Jobs/98. Actor/MVI_4792.MOV",
+   "video_frames": 80,
+   "sampled_frames": 27
+  },
+  {
+   "id": "t001",
+   "label": "Actor",
+   "npy": "s_1139078c_MVI_8922.npy",
+   "stem": "MVI_8922",
+   "zip": "Jobs_2of2.zip",
+   "member": "Jobs/98. Actor/MVI_8922.MP4",
+   "video_frames": 76,
+   "sampled_frames": 26
+  },
+  {
+   "id": "t002",
+   "label": "Adult",
+   "npy": "936d912e_MVI_3824.npy",
+   "stem": "MVI_3824",
+   "zip": "People_5of5.zip",
+   "member": "People/80. Adult/MVI_3824.MOV",
+   "video_frames": 75,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t003",
+   "label": "Adult",
+   "npy": "554782be_MVI_3823.npy",
+   "stem": "MVI_3823",
+   "zip": "People_5of5.zip",
+   "member": "People/80. Adult/MVI_3823.MOV",
+   "video_frames": 72,
+   "sampled_frames": 24
+  },
+  {
+   "id": "t004",
+   "label": "Afternoon",
+   "npy": "67538517_MVI_5514.npy",
+   "stem": "MVI_5514",
+   "zip": "Days_and_Time_3of3.zip",
+   "member": "Days_and_Time/83. Afternoon/MVI_5514.MOV",
+   "video_frames": 51,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t005",
+   "label": "Animal",
+   "npy": "4e0ac10b_MVI_4167.npy",
+   "stem": "MVI_4167",
+   "zip": "Animals_2of2.zip",
+   "member": "Animals/8. Animal/MVI_4167.MOV",
+   "video_frames": 76,
+   "sampled_frames": 26
+  },
+  {
+   "id": "t006",
+   "label": "Animal",
+   "npy": "a2351633_MVI_3083.npy",
+   "stem": "MVI_3083",
+   "zip": "Animals_2of2.zip",
+   "member": "Animals/8. Animal/MVI_3083.MOV",
+   "video_frames": 108,
+   "sampled_frames": 36
+  },
+  {
+   "id": "t007",
+   "label": "Artist",
+   "npy": "f18b5c09_MVI_4500.npy",
+   "stem": "MVI_4500",
+   "zip": "Jobs_2of2.zip",
+   "member": "Jobs/94. Artist/MVI_4500.MOV",
+   "video_frames": 69,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t008",
+   "label": "Artist",
+   "npy": "aa4ee2af_MVI_4503.npy",
+   "stem": "MVI_4503",
+   "zip": "Jobs_2of2.zip",
+   "member": "Jobs/94. Artist/MVI_4503.MOV",
+   "video_frames": 76,
+   "sampled_frames": 26
+  },
+  {
+   "id": "t009",
+   "label": "Attack",
+   "npy": "s_612c4543_MVI_8964.npy",
+   "stem": "MVI_8964",
+   "zip": "Society_2of3.zip",
+   "member": "Society/13. Attack/MVI_8964.MP4",
+   "video_frames": 71,
+   "sampled_frames": 24
+  },
+  {
+   "id": "t010",
+   "label": "Attack",
+   "npy": "s_1a9bedf8_MVI_8706.npy",
+   "stem": "MVI_8706",
+   "zip": "Society_2of3.zip",
+   "member": "Society/13. Attack/MVI_8706.MP4",
+   "video_frames": 95,
+   "sampled_frames": 32
+  },
+  {
+   "id": "t011",
+   "label": "Author",
+   "npy": "s_0e6a6a2e_MVI_8911.npy",
+   "stem": "MVI_8911",
+   "zip": "Jobs_2of2.zip",
+   "member": "Jobs/95. Author/MVI_8911.MP4",
+   "video_frames": 111,
+   "sampled_frames": 37
+  },
+  {
+   "id": "t012",
+   "label": "Author",
+   "npy": "92a526f7_MVI_5359.npy",
+   "stem": "MVI_5359",
+   "zip": "Jobs_2of2.zip",
+   "member": "Jobs/95. Author/MVI_5359.MOV",
+   "video_frames": 104,
+   "sampled_frames": 35
+  },
+  {
+   "id": "t013",
+   "label": "Baby",
+   "npy": "b11aa8b4_MVI_4947.npy",
+   "stem": "MVI_4947",
+   "zip": "People_2of5.zip",
+   "member": "People/63. Baby/MVI_4947.MOV",
+   "video_frames": 54,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t014",
+   "label": "Baby",
+   "npy": "696b7b79_MVI_4068.npy",
+   "stem": "MVI_4068",
+   "zip": "People_2of5.zip",
+   "member": "People/63. Baby/MVI_4068.MOV",
+   "video_frames": 67,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t015",
+   "label": "Bag",
+   "npy": "9ea5611d_MVI_4434.npy",
+   "stem": "MVI_4434",
+   "zip": "Home_3of4.zip",
+   "member": "Home/45. Bag/MVI_4434.MOV",
+   "video_frames": 47,
+   "sampled_frames": 16
+  },
+  {
+   "id": "t016",
+   "label": "Bag",
+   "npy": "77537d50_MVI_4943.npy",
+   "stem": "MVI_4943",
+   "zip": "Home_3of4.zip",
+   "member": "Home/45. Bag/MVI_4943.MOV",
+   "video_frames": 63,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t017",
+   "label": "Ball",
+   "npy": "s_462fb0e5_MVI_8982.npy",
+   "stem": "MVI_8982",
+   "zip": "Society_3of3.zip",
+   "member": "Society/19. Ball/MVI_8982.MP4",
+   "video_frames": 68,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t018",
+   "label": "Ball",
+   "npy": "37976e25_MVI_4856.npy",
+   "stem": "MVI_4856",
+   "zip": "Society_3of3.zip",
+   "member": "Society/19. Ball/MVI_4856.MOV",
+   "video_frames": 41,
+   "sampled_frames": 14
+  },
+  {
+   "id": "t019",
+   "label": "Bathroom",
+   "npy": "c28be536_MVI_4901.npy",
+   "stem": "MVI_4901",
+   "zip": "Home_2of4.zip",
+   "member": "Home/32. Bathroom/MVI_4901.MOV",
+   "video_frames": 60,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t020",
+   "label": "Bathroom",
+   "npy": "02363f0e_MVI_4378.npy",
+   "stem": "MVI_4378",
+   "zip": "Home_2of4.zip",
+   "member": "Home/32. Bathroom/MVI_4378.MOV",
+   "video_frames": 60,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t021",
+   "label": "Bed",
+   "npy": "24e7ab39_MVI_4355.npy",
+   "stem": "MVI_4355",
+   "zip": "Home_1of4.zip",
+   "member": "Home/26. Bed/MVI_4355.MOV",
+   "video_frames": 59,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t022",
+   "label": "Bed",
+   "npy": "54b7d7f7_MVI_4354.npy",
+   "stem": "MVI_4354",
+   "zip": "Home_1of4.zip",
+   "member": "Home/26. Bed/MVI_4354.MOV",
+   "video_frames": 58,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t023",
+   "label": "Bedroom",
+   "npy": "s_97c53cee_MVI_9021.npy",
+   "stem": "MVI_9021",
+   "zip": "Home_1of4.zip",
+   "member": "Home/30. Bedroom/MVI_9021.MP4",
+   "video_frames": 104,
+   "sampled_frames": 35
+  },
+  {
+   "id": "t024",
+   "label": "Bedroom",
+   "npy": "6ea8e26d_MVI_4372.npy",
+   "stem": "MVI_4372",
+   "zip": "Home_1of4.zip",
+   "member": "Home/30. Bedroom/MVI_4372.MOV",
+   "video_frames": 94,
+   "sampled_frames": 32
+  },
+  {
+   "id": "t025",
+   "label": "Bicycle",
+   "npy": "20ad5c1e_MVI_3246.npy",
+   "stem": "MVI_3246",
+   "zip": "Means_of_Transportation_1of2.zip",
+   "member": "Means_of_Transportation/13. Bicycle/MVI_3246.MOV",
+   "video_frames": 74,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t026",
+   "label": "Bicycle",
+   "npy": "e66c7dbc_MVI_3122.npy",
+   "stem": "MVI_3122",
+   "zip": "Means_of_Transportation_1of2.zip",
+   "member": "Means_of_Transportation/13. Bicycle/MVI_3122.MOV",
+   "video_frames": 91,
+   "sampled_frames": 31
+  },
+  {
+   "id": "t027",
+   "label": "Bill",
+   "npy": "cea4eb42_MVI_4811.npy",
+   "stem": "MVI_4811",
+   "zip": "Society_1of3.zip",
+   "member": "Society/5. Bill/MVI_4811.MOV",
+   "video_frames": 63,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t028",
+   "label": "Bill",
+   "npy": "36b432c9_MVI_4809.npy",
+   "stem": "MVI_4809",
+   "zip": "Society_1of3.zip",
+   "member": "Society/5. Bill/MVI_4809.MOV",
+   "video_frames": 53,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t029",
+   "label": "Bird",
+   "npy": "026f0eaf_MVI_3013.npy",
+   "stem": "MVI_3013",
+   "zip": "Animals_1of2.zip",
+   "member": "Animals/4. Bird/MVI_3013.MOV",
+   "video_frames": 81,
+   "sampled_frames": 27
+  },
+  {
+   "id": "t030",
+   "label": "Bird",
+   "npy": "a72163f9_MVI_3094.npy",
+   "stem": "MVI_3094",
+   "zip": "Animals_1of2.zip",
+   "member": "Animals/4. Bird/MVI_3094.MOV",
+   "video_frames": 96,
+   "sampled_frames": 32
+  },
+  {
+   "id": "t031",
+   "label": "Black",
+   "npy": "a43eff6c_MVI_4918.npy",
+   "stem": "MVI_4918",
+   "zip": "Colours_2of2.zip",
+   "member": "Colours/54. Black/MVI_4918.MOV",
+   "video_frames": 43,
+   "sampled_frames": 15
+  },
+  {
+   "id": "t032",
+   "label": "Black",
+   "npy": "s_92493292_MVI_8619.npy",
+   "stem": "MVI_8619",
+   "zip": "Colours_2of2.zip",
+   "member": "Colours/54. Black/MVI_8619.MP4",
+   "video_frames": 65,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t033",
+   "label": "Blue",
+   "npy": "c059c665_MVI_3872.npy",
+   "stem": "MVI_3872",
+   "zip": "Colours_1of2.zip",
+   "member": "Colours/49. Blue/MVI_3872.MOV",
+   "video_frames": 83,
+   "sampled_frames": 28
+  },
+  {
+   "id": "t034",
+   "label": "Blue",
+   "npy": "8c09577e_MVI_3874.npy",
+   "stem": "MVI_3874",
+   "zip": "Colours_1of2.zip",
+   "member": "Colours/49. Blue/MVI_3874.MOV",
+   "video_frames": 74,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t035",
+   "label": "Boat",
+   "npy": "f3bec3c1_MVI_4190.npy",
+   "stem": "MVI_4190",
+   "zip": "Means_of_Transportation_2of2.zip",
+   "member": "Means_of_Transportation/15. Boat/MVI_4190.MOV",
+   "video_frames": 77,
+   "sampled_frames": 26
+  },
+  {
+   "id": "t036",
+   "label": "Boat",
+   "npy": "777ef43c_MVI_3160.npy",
+   "stem": "MVI_3160",
+   "zip": "Means_of_Transportation_2of2.zip",
+   "member": "Means_of_Transportation/15. Boat/MVI_3160.MOV",
+   "video_frames": 102,
+   "sampled_frames": 34
+  },
+  {
+   "id": "t037",
+   "label": "Book",
+   "npy": "s_cad09517_MVI_8805.npy",
+   "stem": "MVI_8805",
+   "zip": "Home_2of4.zip",
+   "member": "Home/37. Book/MVI_8805.MP4",
+   "video_frames": 74,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t038",
+   "label": "Book",
+   "npy": "4c034b8e_MVI_4399.npy",
+   "stem": "MVI_4399",
+   "zip": "Home_2of4.zip",
+   "member": "Home/37. Book/MVI_4399.MOV",
+   "video_frames": 51,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t039",
+   "label": "Box",
+   "npy": "dfeaf35d_MVI_4439.npy",
+   "stem": "MVI_4439",
+   "zip": "Home_4of4.zip",
+   "member": "Home/46. Box/MVI_4439.MOV",
+   "video_frames": 73,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t040",
+   "label": "Box",
+   "npy": "s_4b17ea74_MVI_9077.npy",
+   "stem": "MVI_9077",
+   "zip": "Home_4of4.zip",
+   "member": "Home/46. Box/MVI_9077.MP4",
+   "video_frames": 103,
+   "sampled_frames": 35
+  },
+  {
+   "id": "t041",
+   "label": "Boy",
+   "npy": "3e86590c_MVI_4981.npy",
+   "stem": "MVI_4981",
+   "zip": "People_4of5.zip",
+   "member": "People/77. Boy/MVI_4981.MOV",
+   "video_frames": 54,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t042",
+   "label": "Boy",
+   "npy": "cc0b75dd_MVI_4242.npy",
+   "stem": "MVI_4242",
+   "zip": "People_4of5.zip",
+   "member": "People/77. Boy/MVI_4242.MOV",
+   "video_frames": 63,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t043",
+   "label": "Brother",
+   "npy": "954c467b_MVI_5096.npy",
+   "stem": "MVI_5096",
+   "zip": "People_2of5.zip",
+   "member": "People/66. Brother/MVI_5096.MOV",
+   "video_frames": 63,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t044",
+   "label": "Brother",
+   "npy": "f2164273_MVI_5095.npy",
+   "stem": "MVI_5095",
+   "zip": "People_2of5.zip",
+   "member": "People/66. Brother/MVI_5095.MOV",
+   "video_frames": 59,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t045",
+   "label": "Brown",
+   "npy": "c5942f44_MVI_4030.npy",
+   "stem": "MVI_4030",
+   "zip": "Colours_1of2.zip",
+   "member": "Colours/51. Brown/MVI_4030.MOV",
+   "video_frames": 63,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t046",
+   "label": "Brown",
+   "npy": "27361439_MVI_3733.npy",
+   "stem": "MVI_3733",
+   "zip": "Colours_1of2.zip",
+   "member": "Colours/51. Brown/MVI_3733.MOV",
+   "video_frames": 53,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t047",
+   "label": "Bus",
+   "npy": "49dde1dc_MVI_3185.npy",
+   "stem": "MVI_3185",
+   "zip": "Means_of_Transportation_2of2.zip",
+   "member": "Means_of_Transportation/14. Bus/MVI_3185.MOV",
+   "video_frames": 90,
+   "sampled_frames": 30
+  },
+  {
+   "id": "t048",
+   "label": "Bus",
+   "npy": "3d660ff1_MVI_3186.npy",
+   "stem": "MVI_3186",
+   "zip": "Means_of_Transportation_2of2.zip",
+   "member": "Means_of_Transportation/14. Bus/MVI_3186.MOV",
+   "video_frames": 97,
+   "sampled_frames": 33
+  },
+  {
+   "id": "t049",
+   "label": "Camera",
+   "npy": "1ea17a41_MVI_5409.npy",
+   "stem": "MVI_5409",
+   "zip": "Electronics_2of2.zip",
+   "member": "Electronics/58. Camera/MVI_5409.MOV",
+   "video_frames": 61,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t050",
+   "label": "Camera",
+   "npy": "872a6298_MVI_4979.npy",
+   "stem": "MVI_4979",
+   "zip": "Electronics_2of2.zip",
+   "member": "Electronics/58. Camera/MVI_4979.MOV",
+   "video_frames": 47,
+   "sampled_frames": 16
+  },
+  {
+   "id": "t051",
+   "label": "Car",
+   "npy": "s_9c44c8cd_MVI_8584.npy",
+   "stem": "MVI_8584",
+   "zip": "Means_of_Transportation_1of2.zip",
+   "member": "Means_of_Transportation/11. Car/MVI_8584.MP4",
+   "video_frames": 87,
+   "sampled_frames": 29
+  },
+  {
+   "id": "t052",
+   "label": "Car",
+   "npy": "8ea99c3e_MVI_3176.npy",
+   "stem": "MVI_3176",
+   "zip": "Means_of_Transportation_1of2.zip",
+   "member": "Means_of_Transportation/11. Car/MVI_3176.MOV",
+   "video_frames": 95,
+   "sampled_frames": 32
+  },
+  {
+   "id": "t053",
+   "label": "Card",
+   "npy": "ab3458e4_MVI_4447.npy",
+   "stem": "MVI_4447",
+   "zip": "Home_4of4.zip",
+   "member": "Home/48. Card/MVI_4447.MOV",
+   "video_frames": 62,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t054",
+   "label": "Card",
+   "npy": "0a318c31_MVI_4448.npy",
+   "stem": "MVI_4448",
+   "zip": "Home_4of4.zip",
+   "member": "Home/48. Card/MVI_4448.MOV",
+   "video_frames": 62,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t055",
+   "label": "Cat",
+   "npy": "s_7efb945c_MVI_8563.npy",
+   "stem": "MVI_8563",
+   "zip": "Animals_1of2.zip",
+   "member": "Animals/2. Cat/MVI_8563.MP4",
+   "video_frames": 69,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t056",
+   "label": "Cat",
+   "npy": "0bba534f_MVI_3032.npy",
+   "stem": "MVI_3032",
+   "zip": "Animals_1of2.zip",
+   "member": "Animals/2. Cat/MVI_3032.MOV",
+   "video_frames": 81,
+   "sampled_frames": 27
+  },
+  {
+   "id": "t057",
+   "label": "Cell phone",
+   "npy": "20563ecb_MVI_5391.npy",
+   "stem": "MVI_5391",
+   "zip": "Electronics_1of2.zip",
+   "member": "Electronics/54. Cell phone/MVI_5391.MOV",
+   "video_frames": 46,
+   "sampled_frames": 16
+  },
+  {
+   "id": "t058",
+   "label": "Cell phone",
+   "npy": "9258dee6_MVI_4539.npy",
+   "stem": "MVI_4539",
+   "zip": "Electronics_1of2.zip",
+   "member": "Electronics/54. Cell phone/MVI_4539.MOV",
+   "video_frames": 53,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t059",
+   "label": "Chair",
+   "npy": "s_617f0dd4_MVI_9005.npy",
+   "stem": "MVI_9005",
+   "zip": "Home_1of4.zip",
+   "member": "Home/25. Chair/MVI_9005.MP4",
+   "video_frames": 47,
+   "sampled_frames": 16
+  },
+  {
+   "id": "t060",
+   "label": "Chair",
+   "npy": "815d81ff_MVI_4351.npy",
+   "stem": "MVI_4351",
+   "zip": "Home_1of4.zip",
+   "member": "Home/25. Chair/MVI_4351.MOV",
+   "video_frames": 44,
+   "sampled_frames": 15
+  },
+  {
+   "id": "t061",
+   "label": "Child",
+   "npy": "9768d7a0_MVI_5140.npy",
+   "stem": "MVI_5140",
+   "zip": "People_5of5.zip",
+   "member": "People/79. Child/MVI_5140.MOV",
+   "video_frames": 52,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t062",
+   "label": "Child",
+   "npy": "s_3933d002_MVI_8646.npy",
+   "stem": "MVI_8646",
+   "zip": "People_5of5.zip",
+   "member": "People/79. Child/MVI_8646.MP4",
+   "video_frames": 52,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t063",
+   "label": "Clock",
+   "npy": "fc84478e_MVI_5380.npy",
+   "stem": "MVI_5380",
+   "zip": "Electronics_1of2.zip",
+   "member": "Electronics/51. Clock/MVI_5380.MOV",
+   "video_frames": 63,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t064",
+   "label": "Clock",
+   "npy": "s_0bf5ecaf_MVI_9093.npy",
+   "stem": "MVI_9093",
+   "zip": "Electronics_1of2.zip",
+   "member": "Electronics/51. Clock/MVI_9093.MP4",
+   "video_frames": 84,
+   "sampled_frames": 28
+  },
+  {
+   "id": "t065",
+   "label": "Clothing",
+   "npy": "ec8f5bff_MVI_3864.npy",
+   "stem": "MVI_3864",
+   "zip": "Clothes_2of2.zip",
+   "member": "Clothes/46. Clothing/MVI_3864.MOV",
+   "video_frames": 75,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t066",
+   "label": "Clothing",
+   "npy": "2223ff87_MVI_5183.npy",
+   "stem": "MVI_5183",
+   "zip": "Clothes_2of2.zip",
+   "member": "Clothes/46. Clothing/MVI_5183.MOV",
+   "video_frames": 54,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t067",
+   "label": "Colour",
+   "npy": "6684af37_MVI_4930.npy",
+   "stem": "MVI_4930",
+   "zip": "Colours_2of2.zip",
+   "member": "Colours/57. Colour/MVI_4930.MOV",
+   "video_frames": 52,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t068",
+   "label": "Colour",
+   "npy": "c01f2297_MVI_5216.npy",
+   "stem": "MVI_5216",
+   "zip": "Colours_2of2.zip",
+   "member": "Colours/57. Colour/MVI_5216.MOV",
+   "video_frames": 54,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t069",
+   "label": "Computer",
+   "npy": "74be4d88_MVI_4543.npy",
+   "stem": "MVI_4543",
+   "zip": "Electronics_1of2.zip",
+   "member": "Electronics/55. Computer/MVI_4543.MOV",
+   "video_frames": 69,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t070",
+   "label": "Computer",
+   "npy": "s_4a88ac34_MVI_9104.npy",
+   "stem": "MVI_9104",
+   "zip": "Electronics_1of2.zip",
+   "member": "Electronics/55. Computer/MVI_9104.MP4",
+   "video_frames": 85,
+   "sampled_frames": 29
+  },
+  {
+   "id": "t071",
+   "label": "Cow",
+   "npy": "s_84e8073d_MVI_8569.npy",
+   "stem": "MVI_8569",
+   "zip": "Animals_1of2.zip",
+   "member": "Animals/5. Cow/MVI_8569.MP4",
+   "video_frames": 80,
+   "sampled_frames": 27
+  },
+  {
+   "id": "t072",
+   "label": "Cow",
+   "npy": "71f16ee4_MVI_3048.npy",
+   "stem": "MVI_3048",
+   "zip": "Animals_1of2.zip",
+   "member": "Animals/5. Cow/MVI_3048.MOV",
+   "video_frames": 123,
+   "sampled_frames": 41
+  },
+  {
+   "id": "t073",
+   "label": "Crowd",
+   "npy": "5e5ce338_MVI_3983.npy",
+   "stem": "MVI_3983",
+   "zip": "People_5of5.zip",
+   "member": "People/83. Crowd/MVI_3983.MOV",
+   "video_frames": 62,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t074",
+   "label": "Crowd",
+   "npy": "4ddf30fa_MVI_5153.npy",
+   "stem": "MVI_5153",
+   "zip": "People_5of5.zip",
+   "member": "People/83. Crowd/MVI_5153.MOV",
+   "video_frames": 59,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t075",
+   "label": "Daughter",
+   "npy": "27009cfe_MVI_3756.npy",
+   "stem": "MVI_3756",
+   "zip": "People_1of5.zip",
+   "member": "People/59. Daughter/MVI_3756.MOV",
+   "video_frames": 52,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t076",
+   "label": "Daughter",
+   "npy": "b6777702_MVI_5074.npy",
+   "stem": "MVI_5074",
+   "zip": "People_1of5.zip",
+   "member": "People/59. Daughter/MVI_5074.MOV",
+   "video_frames": 64,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t077",
+   "label": "Death",
+   "npy": "7d0d40cf_MVI_4802.npy",
+   "stem": "MVI_4802",
+   "zip": "Society_1of3.zip",
+   "member": "Society/2. Death/MVI_4802.MOV",
+   "video_frames": 61,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t078",
+   "label": "Death",
+   "npy": "s_3d2379b7_MVI_8664.npy",
+   "stem": "MVI_8664",
+   "zip": "Society_1of3.zip",
+   "member": "Society/2. Death/MVI_8664.MP4",
+   "video_frames": 92,
+   "sampled_frames": 31
+  },
+  {
+   "id": "t079",
+   "label": "Doctor",
+   "npy": "20908ddb_MVI_5323.npy",
+   "stem": "MVI_5323",
+   "zip": "Jobs_1of2.zip",
+   "member": "Jobs/87. Doctor/MVI_5323.MOV",
+   "video_frames": 51,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t080",
+   "label": "Doctor",
+   "npy": "s_f94fc51f_MVI_8875.npy",
+   "stem": "MVI_8875",
+   "zip": "Jobs_1of2.zip",
+   "member": "Jobs/87. Doctor/MVI_8875.MP4",
+   "video_frames": 58,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t081",
+   "label": "Dog",
+   "npy": "s_dd19fbf3_MVI_8561.npy",
+   "stem": "MVI_8561",
+   "zip": "Animals_1of2.zip",
+   "member": "Animals/1. Dog/MVI_8561.MP4",
+   "video_frames": 67,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t082",
+   "label": "Dog",
+   "npy": "c9fd7bc3_MVI_2978.npy",
+   "stem": "MVI_2978",
+   "zip": "Animals_1of2.zip",
+   "member": "Animals/1. Dog/MVI_2978.MOV",
+   "video_frames": 117,
+   "sampled_frames": 39
+  },
+  {
+   "id": "t083",
+   "label": "Door",
+   "npy": "e3e3312f_MVI_4886.npy",
+   "stem": "MVI_4886",
+   "zip": "Home_1of4.zip",
+   "member": "Home/29. Door/MVI_4886.MOV",
+   "video_frames": 50,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t084",
+   "label": "Door",
+   "npy": "acbc4418_MVI_4369.npy",
+   "stem": "MVI_4369",
+   "zip": "Home_1of4.zip",
+   "member": "Home/29. Door/MVI_4369.MOV",
+   "video_frames": 57,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t085",
+   "label": "Dream",
+   "npy": "235984c7_MVI_4879.npy",
+   "stem": "MVI_4879",
+   "zip": "Home_1of4.zip",
+   "member": "Home/27. Dream/MVI_4879.MOV",
+   "video_frames": 76,
+   "sampled_frames": 26
+  },
+  {
+   "id": "t086",
+   "label": "Dream",
+   "npy": "s_612c9305_MVI_9012.npy",
+   "stem": "MVI_9012",
+   "zip": "Home_1of4.zip",
+   "member": "Home/27. Dream/MVI_9012.MP4",
+   "video_frames": 85,
+   "sampled_frames": 29
+  },
+  {
+   "id": "t087",
+   "label": "Dress",
+   "npy": "e3ae2c8d_MVI_5010.npy",
+   "stem": "MVI_5010",
+   "zip": "Clothes_1of2.zip",
+   "member": "Clothes/38. Dress/MVI_5010.MOV",
+   "video_frames": 51,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t088",
+   "label": "Dress",
+   "npy": "aa251efb_MVI_4870.npy",
+   "stem": "MVI_4870",
+   "zip": "Clothes_1of2.zip",
+   "member": "Clothes/38. Dress/MVI_4870.MOV",
+   "video_frames": 53,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t089",
+   "label": "Election",
+   "npy": "66d4b62d_MVI_4305.npy",
+   "stem": "MVI_4305",
+   "zip": "Society_2of3.zip",
+   "member": "Society/14. Election/MVI_4305.MOV",
+   "video_frames": 80,
+   "sampled_frames": 27
+  },
+  {
+   "id": "t090",
+   "label": "Election",
+   "npy": "s_1d7b7888_MVI_8967.npy",
+   "stem": "MVI_8967",
+   "zip": "Society_2of3.zip",
+   "member": "Society/14. Election/MVI_8967.MP4",
+   "video_frames": 63,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t091",
+   "label": "Energy",
+   "npy": "7132853a_MVI_4827.npy",
+   "stem": "MVI_4827",
+   "zip": "Society_2of3.zip",
+   "member": "Society/10. Energy/MVI_4827.MOV",
+   "video_frames": 51,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t092",
+   "label": "Energy",
+   "npy": "s_5c249933_MVI_8955.npy",
+   "stem": "MVI_8955",
+   "zip": "Society_2of3.zip",
+   "member": "Society/10. Energy/MVI_8955.MP4",
+   "video_frames": 67,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t093",
+   "label": "Evening",
+   "npy": "4b2708cf_MVI_5072.npy",
+   "stem": "MVI_5072",
+   "zip": "Days_and_Time_3of3.zip",
+   "member": "Days_and_Time/84. Evening/MVI_5072.MOV",
+   "video_frames": 41,
+   "sampled_frames": 14
+  },
+  {
+   "id": "t094",
+   "label": "Exercise",
+   "npy": "s_931d7607_MVI_8728.npy",
+   "stem": "MVI_8728",
+   "zip": "Society_3of3.zip",
+   "member": "Society/18. Exercise/MVI_8728.MP4",
+   "video_frames": 65,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t095",
+   "label": "Exercise",
+   "npy": "3e89e858_MVI_4321.npy",
+   "stem": "MVI_4321",
+   "zip": "Society_3of3.zip",
+   "member": "Society/18. Exercise/MVI_4321.MOV",
+   "video_frames": 58,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t096",
+   "label": "Fall",
+   "npy": "4def4ba9_MVI_5436.npy",
+   "stem": "MVI_5436",
+   "zip": "Seasons_1of1.zip",
+   "member": "Seasons/64. Fall/MVI_5436.MOV",
+   "video_frames": 52,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t097",
+   "label": "Fall",
+   "npy": "ce3365d7_MVI_4577.npy",
+   "stem": "MVI_4577",
+   "zip": "Seasons_1of1.zip",
+   "member": "Seasons/64. Fall/MVI_4577.MOV",
+   "video_frames": 71,
+   "sampled_frames": 24
+  },
+  {
+   "id": "t098",
+   "label": "Family",
+   "npy": "90443da2_MVI_3789.npy",
+   "stem": "MVI_3789",
+   "zip": "People_3of5.zip",
+   "member": "People/68. Family/MVI_3789.MOV",
+   "video_frames": 54,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t099",
+   "label": "Family",
+   "npy": "s_e5d09754_MVI_8635.npy",
+   "stem": "MVI_8635",
+   "zip": "People_3of5.zip",
+   "member": "People/68. Family/MVI_8635.MP4",
+   "video_frames": 79,
+   "sampled_frames": 27
+  },
+  {
+   "id": "t100",
+   "label": "Fan",
+   "npy": "s_637731c9_MVI_9097.npy",
+   "stem": "MVI_9097",
+   "zip": "Electronics_1of2.zip",
+   "member": "Electronics/53. Fan/MVI_9097.MP4",
+   "video_frames": 78,
+   "sampled_frames": 26
+  },
+  {
+   "id": "t101",
+   "label": "Fan",
+   "npy": "s_e4b20feb_MVI_9099.npy",
+   "stem": "MVI_9099",
+   "zip": "Electronics_1of2.zip",
+   "member": "Electronics/53. Fan/MVI_9099.MP4",
+   "video_frames": 87,
+   "sampled_frames": 29
+  },
+  {
+   "id": "t102",
+   "label": "Father",
+   "npy": "d78ae27c_MVI_3764.npy",
+   "stem": "MVI_3764",
+   "zip": "People_1of5.zip",
+   "member": "People/61. Father/MVI_3764.MOV",
+   "video_frames": 56,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t103",
+   "label": "Father",
+   "npy": "f09145f5_MVI_4061.npy",
+   "stem": "MVI_4061",
+   "zip": "People_1of5.zip",
+   "member": "People/61. Father/MVI_4061.MOV",
+   "video_frames": 57,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t104",
+   "label": "Fish",
+   "npy": "6fca8894_MVI_3092.npy",
+   "stem": "MVI_3092",
+   "zip": "Animals_1of2.zip",
+   "member": "Animals/3. Fish/MVI_3092.MOV",
+   "video_frames": 83,
+   "sampled_frames": 28
+  },
+  {
+   "id": "t105",
+   "label": "Fish",
+   "npy": "b2063d0e_MVI_3068.npy",
+   "stem": "MVI_3068",
+   "zip": "Animals_1of2.zip",
+   "member": "Animals/3. Fish/MVI_3068.MOV",
+   "video_frames": 74,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t106",
+   "label": "Friday",
+   "npy": "0a59ca2e_MVI_4609.npy",
+   "stem": "MVI_4609",
+   "zip": "Days_and_Time_1of3.zip",
+   "member": "Days_and_Time/71. Friday/MVI_4609.MOV",
+   "video_frames": 57,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t107",
+   "label": "Friend",
+   "npy": "a622e9f7_MVI_3975.npy",
+   "stem": "MVI_3975",
+   "zip": "People_5of5.zip",
+   "member": "People/81. Friend/MVI_3975.MOV",
+   "video_frames": 64,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t108",
+   "label": "Friend",
+   "npy": "d8b549a1_MVI_3828.npy",
+   "stem": "MVI_3828",
+   "zip": "People_5of5.zip",
+   "member": "People/81. Friend/MVI_3828.MOV",
+   "video_frames": 61,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t109",
+   "label": "Gift",
+   "npy": "s_e18d1bc0_MVI_9080.npy",
+   "stem": "MVI_9080",
+   "zip": "Home_4of4.zip",
+   "member": "Home/47. Gift/MVI_9080.MP4",
+   "video_frames": 61,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t110",
+   "label": "Gift",
+   "npy": "8fb62d89_MVI_4442.npy",
+   "stem": "MVI_4442",
+   "zip": "Home_4of4.zip",
+   "member": "Home/47. Gift/MVI_4442.MOV",
+   "video_frames": 46,
+   "sampled_frames": 16
+  },
+  {
+   "id": "t111",
+   "label": "Girl",
+   "npy": "562e38c3_MVI_3966.npy",
+   "stem": "MVI_3966",
+   "zip": "People_4of5.zip",
+   "member": "People/78. Girl/MVI_3966.MOV",
+   "video_frames": 68,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t112",
+   "label": "Girl",
+   "npy": "b8025fd1_MVI_3818.npy",
+   "stem": "MVI_3818",
+   "zip": "People_4of5.zip",
+   "member": "People/78. Girl/MVI_3818.MOV",
+   "video_frames": 52,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t113",
+   "label": "God",
+   "npy": "d6d7cfa6_MVI_4343.npy",
+   "stem": "MVI_4343",
+   "zip": "Society_3of3.zip",
+   "member": "Society/23. God/MVI_4343.MOV",
+   "video_frames": 65,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t114",
+   "label": "God",
+   "npy": "s_0121f603_MVI_8995.npy",
+   "stem": "MVI_8995",
+   "zip": "Society_3of3.zip",
+   "member": "Society/23. God/MVI_8995.MP4",
+   "video_frames": 60,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t115",
+   "label": "Grandfather",
+   "npy": "caeecaaa_MVI_3791.npy",
+   "stem": "MVI_3791",
+   "zip": "People_3of5.zip",
+   "member": "People/69. Grandfather/MVI_3791.MOV",
+   "video_frames": 87,
+   "sampled_frames": 29
+  },
+  {
+   "id": "t116",
+   "label": "Grandfather",
+   "npy": "8e11cb9a_MVI_4234.npy",
+   "stem": "MVI_4234",
+   "zip": "People_3of5.zip",
+   "member": "People/69. Grandfather/MVI_4234.MOV",
+   "video_frames": 86,
+   "sampled_frames": 29
+  },
+  {
+   "id": "t117",
+   "label": "Grandmother",
+   "npy": "s_157e2dcf_MVI_8637.npy",
+   "stem": "MVI_8637",
+   "zip": "People_3of5.zip",
+   "member": "People/70. Grandmother/MVI_8637.MP4",
+   "video_frames": 103,
+   "sampled_frames": 35
+  },
+  {
+   "id": "t118",
+   "label": "Grandmother",
+   "npy": "8efc3a8b_MVI_5107.npy",
+   "stem": "MVI_5107",
+   "zip": "People_3of5.zip",
+   "member": "People/70. Grandmother/MVI_5107.MOV",
+   "video_frames": 77,
+   "sampled_frames": 26
+  },
+  {
+   "id": "t119",
+   "label": "Green",
+   "npy": "9eb1a105_MVI_5189.npy",
+   "stem": "MVI_5189",
+   "zip": "Colours_1of2.zip",
+   "member": "Colours/48. Green/MVI_5189.MOV",
+   "video_frames": 68,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t120",
+   "label": "Green",
+   "npy": "ac412e28_MVI_3870.npy",
+   "stem": "MVI_3870",
+   "zip": "Colours_1of2.zip",
+   "member": "Colours/48. Green/MVI_3870.MOV",
+   "video_frames": 82,
+   "sampled_frames": 28
+  },
+  {
+   "id": "t121",
+   "label": "Grey",
+   "npy": "94a70e17_MVI_4045.npy",
+   "stem": "MVI_4045",
+   "zip": "Colours_2of2.zip",
+   "member": "Colours/56. Grey/MVI_4045.MOV",
+   "video_frames": 53,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t122",
+   "label": "Grey",
+   "npy": "5735ea9b_MVI_5214.npy",
+   "stem": "MVI_5214",
+   "zip": "Colours_2of2.zip",
+   "member": "Colours/56. Grey/MVI_5214.MOV",
+   "video_frames": 66,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t123",
+   "label": "Gun",
+   "npy": "s_d05ff749_MVI_8720.npy",
+   "stem": "MVI_8720",
+   "zip": "Society_2of3.zip",
+   "member": "Society/16. Gun/MVI_8720.MP4",
+   "video_frames": 59,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t124",
+   "label": "Gun",
+   "npy": "fe40b400_MVI_4312.npy",
+   "stem": "MVI_4312",
+   "zip": "Society_2of3.zip",
+   "member": "Society/16. Gun/MVI_4312.MOV",
+   "video_frames": 50,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t125",
+   "label": "Hat",
+   "npy": "cace3337_MVI_5154.npy",
+   "stem": "MVI_5154",
+   "zip": "Clothes_1of2.zip",
+   "member": "Clothes/37. Hat/MVI_5154.MOV",
+   "video_frames": 60,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t126",
+   "label": "Hat",
+   "npy": "d2f21499_MVI_5156.npy",
+   "stem": "MVI_5156",
+   "zip": "Clothes_1of2.zip",
+   "member": "Clothes/37. Hat/MVI_5156.MOV",
+   "video_frames": 51,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t127",
+   "label": "Horse",
+   "npy": "cb5238f7_MVI_3021.npy",
+   "stem": "MVI_3021",
+   "zip": "Animals_2of2.zip",
+   "member": "Animals/7. Horse/MVI_3021.MOV",
+   "video_frames": 74,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t128",
+   "label": "Horse",
+   "npy": "00896819_MVI_3104.npy",
+   "stem": "MVI_3104",
+   "zip": "Animals_2of2.zip",
+   "member": "Animals/7. Horse/MVI_3104.MOV",
+   "video_frames": 75,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t129",
+   "label": "Hour",
+   "npy": "213796d1_MVI_4639.npy",
+   "stem": "MVI_4639",
+   "zip": "Days_and_Time_2of3.zip",
+   "member": "Days_and_Time/79. Hour/MVI_4639.MOV",
+   "video_frames": 65,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t130",
+   "label": "Husband",
+   "npy": "s_99bd57d2_MVI_8638.npy",
+   "stem": "MVI_8638",
+   "zip": "People_3of5.zip",
+   "member": "People/71. Husband/MVI_8638.MP4",
+   "video_frames": 75,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t131",
+   "label": "Husband",
+   "npy": "5ba4fda1_MVI_4092.npy",
+   "stem": "MVI_4092",
+   "zip": "People_3of5.zip",
+   "member": "People/71. Husband/MVI_4092.MOV",
+   "video_frames": 69,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t132",
+   "label": "Job",
+   "npy": "a088190a_MVI_4795.npy",
+   "stem": "MVI_4795",
+   "zip": "Jobs_2of2.zip",
+   "member": "Jobs/99. Job/MVI_4795.MOV",
+   "video_frames": 56,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t133",
+   "label": "Job",
+   "npy": "s_dddc167c_MVI_8924.npy",
+   "stem": "MVI_8924",
+   "zip": "Jobs_2of2.zip",
+   "member": "Jobs/99. Job/MVI_8924.MP4",
+   "video_frames": 62,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t134",
+   "label": "Key",
+   "npy": "bdd81a9c_MVI_4925.npy",
+   "stem": "MVI_4925",
+   "zip": "Home_3of4.zip",
+   "member": "Home/39. Key/MVI_4925.MOV",
+   "video_frames": 56,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t135",
+   "label": "Key",
+   "npy": "d47c9698_MVI_4409.npy",
+   "stem": "MVI_4409",
+   "zip": "Home_3of4.zip",
+   "member": "Home/39. Key/MVI_4409.MOV",
+   "video_frames": 52,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t136",
+   "label": "King",
+   "npy": "0245fbfe_MVI_5270.npy",
+   "stem": "MVI_5270",
+   "zip": "People_3of5.zip",
+   "member": "People/73. King/MVI_5270.MOV",
+   "video_frames": 56,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t137",
+   "label": "King",
+   "npy": "4b08967e_MVI_5269.npy",
+   "stem": "MVI_5269",
+   "zip": "People_3of5.zip",
+   "member": "People/73. King/MVI_5269.MOV",
+   "video_frames": 61,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t138",
+   "label": "Kitchen",
+   "npy": "902f2d17_MVI_4374.npy",
+   "stem": "MVI_4374",
+   "zip": "Home_2of4.zip",
+   "member": "Home/31. Kitchen/MVI_4374.MOV",
+   "video_frames": 62,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t139",
+   "label": "Kitchen",
+   "npy": "fbbdea06_MVI_4899.npy",
+   "stem": "MVI_4899",
+   "zip": "Home_2of4.zip",
+   "member": "Home/31. Kitchen/MVI_4899.MOV",
+   "video_frames": 69,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t140",
+   "label": "Lamp",
+   "npy": "s_550aa095_MVI_9096.npy",
+   "stem": "MVI_9096",
+   "zip": "Electronics_1of2.zip",
+   "member": "Electronics/52. Lamp/MVI_9096.MP4",
+   "video_frames": 73,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t141",
+   "label": "Lamp",
+   "npy": "8319fb44_MVI_4529.npy",
+   "stem": "MVI_4529",
+   "zip": "Electronics_1of2.zip",
+   "member": "Electronics/52. Lamp/MVI_4529.MOV",
+   "video_frames": 50,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t142",
+   "label": "Laptop",
+   "npy": "a641e834_MVI_4547.npy",
+   "stem": "MVI_4547",
+   "zip": "Electronics_2of2.zip",
+   "member": "Electronics/56. Laptop/MVI_4547.MOV",
+   "video_frames": 75,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t143",
+   "label": "Laptop",
+   "npy": "733272db_MVI_5400.npy",
+   "stem": "MVI_5400",
+   "zip": "Electronics_2of2.zip",
+   "member": "Electronics/56. Laptop/MVI_5400.MOV",
+   "video_frames": 55,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t144",
+   "label": "Lawyer",
+   "npy": "4cd3bbec_MVI_4466.npy",
+   "stem": "MVI_4466",
+   "zip": "Jobs_1of2.zip",
+   "member": "Jobs/86. Lawyer/MVI_4466.MOV",
+   "video_frames": 68,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t145",
+   "label": "Lawyer",
+   "npy": "s_2ac01333_MVI_8871.npy",
+   "stem": "MVI_8871",
+   "zip": "Jobs_1of2.zip",
+   "member": "Jobs/86. Lawyer/MVI_8871.MP4",
+   "video_frames": 62,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t146",
+   "label": "Letter",
+   "npy": "s_5b988089_MVI_8823.npy",
+   "stem": "MVI_8823",
+   "zip": "Home_3of4.zip",
+   "member": "Home/41. Letter/MVI_8823.MP4",
+   "video_frames": 80,
+   "sampled_frames": 27
+  },
+  {
+   "id": "t147",
+   "label": "Letter",
+   "npy": "7966ec53_MVI_4417.npy",
+   "stem": "MVI_4417",
+   "zip": "Home_3of4.zip",
+   "member": "Home/41. Letter/MVI_4417.MOV",
+   "video_frames": 63,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t148",
+   "label": "Lock",
+   "npy": "5b3d014f_MVI_4935.npy",
+   "stem": "MVI_4935",
+   "zip": "Home_3of4.zip",
+   "member": "Home/43. Lock/MVI_4935.MOV",
+   "video_frames": 51,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t149",
+   "label": "Lock",
+   "npy": "5b8b6282_MVI_4427.npy",
+   "stem": "MVI_4427",
+   "zip": "Home_3of4.zip",
+   "member": "Home/43. Lock/MVI_4427.MOV",
+   "video_frames": 52,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t150",
+   "label": "Man",
+   "npy": "a6d9fa2f_MVI_5238.npy",
+   "stem": "MVI_5238",
+   "zip": "People_2of5.zip",
+   "member": "People/64. Man/MVI_5238.MOV",
+   "video_frames": 58,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t151",
+   "label": "Man",
+   "npy": "42f0b7c8_MVI_3774.npy",
+   "stem": "MVI_3774",
+   "zip": "People_2of5.zip",
+   "member": "People/64. Man/MVI_3774.MOV",
+   "video_frames": 47,
+   "sampled_frames": 16
+  },
+  {
+   "id": "t152",
+   "label": "Manager",
+   "npy": "edc42642_MVI_5362.npy",
+   "stem": "MVI_5362",
+   "zip": "Jobs_2of2.zip",
+   "member": "Jobs/96. Manager/MVI_5362.MOV",
+   "video_frames": 97,
+   "sampled_frames": 33
+  },
+  {
+   "id": "t153",
+   "label": "Manager",
+   "npy": "012d3ee1_MVI_5363.npy",
+   "stem": "MVI_5363",
+   "zip": "Jobs_2of2.zip",
+   "member": "Jobs/96. Manager/MVI_5363.MOV",
+   "video_frames": 93,
+   "sampled_frames": 31
+  },
+  {
+   "id": "t154",
+   "label": "Marriage",
+   "npy": "s_ae5f7040_MVI_8678.npy",
+   "stem": "MVI_8678",
+   "zip": "Society_1of3.zip",
+   "member": "Society/6. Marriage/MVI_8678.MP4",
+   "video_frames": 64,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t155",
+   "label": "Marriage",
+   "npy": "s_1428bbaa_MVI_8942.npy",
+   "stem": "MVI_8942",
+   "zip": "Society_1of3.zip",
+   "member": "Society/6. Marriage/MVI_8942.MP4",
+   "video_frames": 65,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t156",
+   "label": "Medicine",
+   "npy": "3c54ee09_MVI_4805.npy",
+   "stem": "MVI_4805",
+   "zip": "Society_1of3.zip",
+   "member": "Society/3. Medicine/MVI_4805.MOV",
+   "video_frames": 63,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t157",
+   "label": "Medicine",
+   "npy": "d5fef31e_MVI_4261.npy",
+   "stem": "MVI_4261",
+   "zip": "Society_1of3.zip",
+   "member": "Society/3. Medicine/MVI_4261.MOV",
+   "video_frames": 76,
+   "sampled_frames": 26
+  },
+  {
+   "id": "t158",
+   "label": "Minute",
+   "npy": "b545b6d8_MVI_5053.npy",
+   "stem": "MVI_5053",
+   "zip": "Days_and_Time_2of3.zip",
+   "member": "Days_and_Time/80. Minute/MVI_5053.MOV",
+   "video_frames": 49,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t159",
+   "label": "Monday",
+   "npy": "c0e60266_MVI_4594.npy",
+   "stem": "MVI_4594",
+   "zip": "Days_and_Time_1of3.zip",
+   "member": "Days_and_Time/67. Monday/MVI_4594.MOV",
+   "video_frames": 59,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t160",
+   "label": "Money",
+   "npy": "52115056_MVI_4265.npy",
+   "stem": "MVI_4265",
+   "zip": "Society_1of3.zip",
+   "member": "Society/4. Money/MVI_4265.MOV",
+   "video_frames": 49,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t161",
+   "label": "Money",
+   "npy": "e423b9c0_MVI_4806.npy",
+   "stem": "MVI_4806",
+   "zip": "Society_1of3.zip",
+   "member": "Society/4. Money/MVI_4806.MOV",
+   "video_frames": 65,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t162",
+   "label": "Month",
+   "npy": "4def03b0_MVI_5487.npy",
+   "stem": "MVI_5487",
+   "zip": "Days_and_Time_2of3.zip",
+   "member": "Days_and_Time/77. Month/MVI_5487.MOV",
+   "video_frames": 39,
+   "sampled_frames": 13
+  },
+  {
+   "id": "t163",
+   "label": "Morning",
+   "npy": "f8856aa2_MVI_4651.npy",
+   "stem": "MVI_4651",
+   "zip": "Days_and_Time_3of3.zip",
+   "member": "Days_and_Time/82. Morning/MVI_4651.MOV",
+   "video_frames": 53,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t164",
+   "label": "Mother",
+   "npy": "63e17bb2_MVI_3906.npy",
+   "stem": "MVI_3906",
+   "zip": "People_1of5.zip",
+   "member": "People/60. Mother/MVI_3906.MOV",
+   "video_frames": 66,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t165",
+   "label": "Mother",
+   "npy": "d4df45d4_MVI_4939.npy",
+   "stem": "MVI_4939",
+   "zip": "People_1of5.zip",
+   "member": "People/60. Mother/MVI_4939.MOV",
+   "video_frames": 57,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t166",
+   "label": "Mouse",
+   "npy": "db1077ad_MVI_3101.npy",
+   "stem": "MVI_3101",
+   "zip": "Animals_2of2.zip",
+   "member": "Animals/6. Mouse/MVI_3101.MOV",
+   "video_frames": 64,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t167",
+   "label": "Mouse",
+   "npy": "99528133_MVI_3051.npy",
+   "stem": "MVI_3051",
+   "zip": "Animals_2of2.zip",
+   "member": "Animals/6. Mouse/MVI_3051.MOV",
+   "video_frames": 69,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t168",
+   "label": "Neighbour",
+   "npy": "4fc912cd_MVI_3812.npy",
+   "stem": "MVI_3812",
+   "zip": "People_4of5.zip",
+   "member": "People/76. Neighbour/MVI_3812.MOV",
+   "video_frames": 53,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t169",
+   "label": "Neighbour",
+   "npy": "391a580e_MVI_4241.npy",
+   "stem": "MVI_4241",
+   "zip": "People_4of5.zip",
+   "member": "People/76. Neighbour/MVI_4241.MOV",
+   "video_frames": 64,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t170",
+   "label": "Newspaper",
+   "npy": "s_b9cb1193_MVI_8972.npy",
+   "stem": "MVI_8972",
+   "zip": "Society_2of3.zip",
+   "member": "Society/15. Newspaper/MVI_8972.MP4",
+   "video_frames": 67,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t171",
+   "label": "Newspaper",
+   "npy": "06a3ec19_MVI_4311.npy",
+   "stem": "MVI_4311",
+   "zip": "Society_2of3.zip",
+   "member": "Society/15. Newspaper/MVI_4311.MOV",
+   "video_frames": 70,
+   "sampled_frames": 24
+  },
+  {
+   "id": "t172",
+   "label": "Night",
+   "npy": "1ff93e18_MVI_4666.npy",
+   "stem": "MVI_4666",
+   "zip": "Days_and_Time_3of3.zip",
+   "member": "Days_and_Time/85. Night/MVI_4666.MOV",
+   "video_frames": 52,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t173",
+   "label": "Orange",
+   "npy": "15b160eb_MVI_5056.npy",
+   "stem": "MVI_5056",
+   "zip": "Colours_2of2.zip",
+   "member": "Colours/53. Orange/MVI_5056.MOV",
+   "video_frames": 56,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t174",
+   "label": "Orange",
+   "npy": "87002b4b_MVI_3885.npy",
+   "stem": "MVI_3885",
+   "zip": "Colours_2of2.zip",
+   "member": "Colours/53. Orange/MVI_3885.MOV",
+   "video_frames": 98,
+   "sampled_frames": 33
+  },
+  {
+   "id": "t175",
+   "label": "Page",
+   "npy": "0ca72a05_MVI_4922.npy",
+   "stem": "MVI_4922",
+   "zip": "Home_2of4.zip",
+   "member": "Home/38. Page/MVI_4922.MOV",
+   "video_frames": 48,
+   "sampled_frames": 16
+  },
+  {
+   "id": "t176",
+   "label": "Page",
+   "npy": "s_be1f701e_MVI_9047.npy",
+   "stem": "MVI_9047",
+   "zip": "Home_2of4.zip",
+   "member": "Home/38. Page/MVI_9047.MP4",
+   "video_frames": 87,
+   "sampled_frames": 29
+  },
+  {
+   "id": "t177",
+   "label": "Paint",
+   "npy": "62d3a5c0_MVI_4413.npy",
+   "stem": "MVI_4413",
+   "zip": "Home_3of4.zip",
+   "member": "Home/40. Paint/MVI_4413.MOV",
+   "video_frames": 54,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t178",
+   "label": "Paint",
+   "npy": "efea72d5_MVI_4926.npy",
+   "stem": "MVI_4926",
+   "zip": "Home_3of4.zip",
+   "member": "Home/40. Paint/MVI_4926.MOV",
+   "video_frames": 64,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t179",
+   "label": "Pant",
+   "npy": "550dadf6_MVI_4203.npy",
+   "stem": "MVI_4203",
+   "zip": "Clothes_2of2.zip",
+   "member": "Clothes/43. Pant/MVI_4203.MOV",
+   "video_frames": 43,
+   "sampled_frames": 15
+  },
+  {
+   "id": "t180",
+   "label": "Pant",
+   "npy": "3d345bab_MVI_3855.npy",
+   "stem": "MVI_3855",
+   "zip": "Clothes_2of2.zip",
+   "member": "Clothes/43. Pant/MVI_3855.MOV",
+   "video_frames": 67,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t181",
+   "label": "Paper",
+   "npy": "1ae04572_MVI_4422.npy",
+   "stem": "MVI_4422",
+   "zip": "Home_3of4.zip",
+   "member": "Home/42. Paper/MVI_4422.MOV",
+   "video_frames": 57,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t182",
+   "label": "Paper",
+   "npy": "43e8984b_MVI_4423.npy",
+   "stem": "MVI_4423",
+   "zip": "Home_3of4.zip",
+   "member": "Home/42. Paper/MVI_4423.MOV",
+   "video_frames": 50,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t183",
+   "label": "Parent",
+   "npy": "541db693_MVI_4065.npy",
+   "stem": "MVI_4065",
+   "zip": "People_1of5.zip",
+   "member": "People/62. Parent/MVI_4065.MOV",
+   "video_frames": 74,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t184",
+   "label": "Parent",
+   "npy": "7aa228bb_MVI_4063.npy",
+   "stem": "MVI_4063",
+   "zip": "People_1of5.zip",
+   "member": "People/62. Parent/MVI_4063.MOV",
+   "video_frames": 81,
+   "sampled_frames": 27
+  },
+  {
+   "id": "t185",
+   "label": "Patient",
+   "npy": "626ee56c_MVI_4758.npy",
+   "stem": "MVI_4758",
+   "zip": "Jobs_1of2.zip",
+   "member": "Jobs/88. Patient/MVI_4758.MOV",
+   "video_frames": 70,
+   "sampled_frames": 24
+  },
+  {
+   "id": "t186",
+   "label": "Patient",
+   "npy": "1d844399_MVI_5326.npy",
+   "stem": "MVI_5326",
+   "zip": "Jobs_1of2.zip",
+   "member": "Jobs/88. Patient/MVI_5326.MOV",
+   "video_frames": 55,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t187",
+   "label": "Peace",
+   "npy": "91641bf4_MVI_4833.npy",
+   "stem": "MVI_4833",
+   "zip": "Society_2of3.zip",
+   "member": "Society/12. Peace/MVI_4833.MOV",
+   "video_frames": 60,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t188",
+   "label": "Peace",
+   "npy": "s_3e593999_MVI_8703.npy",
+   "stem": "MVI_8703",
+   "zip": "Society_2of3.zip",
+   "member": "Society/12. Peace/MVI_8703.MP4",
+   "video_frames": 80,
+   "sampled_frames": 27
+  },
+  {
+   "id": "t189",
+   "label": "Pen",
+   "npy": "d8bdeffa_MVI_4907.npy",
+   "stem": "MVI_4907",
+   "zip": "Home_2of4.zip",
+   "member": "Home/34. Pen/MVI_4907.MOV",
+   "video_frames": 48,
+   "sampled_frames": 16
+  },
+  {
+   "id": "t190",
+   "label": "Pen",
+   "npy": "s_00973d8b_MVI_9033.npy",
+   "stem": "MVI_9033",
+   "zip": "Home_2of4.zip",
+   "member": "Home/34. Pen/MVI_9033.MP4",
+   "video_frames": 68,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t191",
+   "label": "Pencil",
+   "npy": "42da8ce5_MVI_4386.npy",
+   "stem": "MVI_4386",
+   "zip": "Home_2of4.zip",
+   "member": "Home/33. Pencil/MVI_4386.MOV",
+   "video_frames": 53,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t192",
+   "label": "Pencil",
+   "npy": "s_6c5ac4d7_MVI_9030.npy",
+   "stem": "MVI_9030",
+   "zip": "Home_2of4.zip",
+   "member": "Home/33. Pencil/MVI_9030.MP4",
+   "video_frames": 58,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t193",
+   "label": "Photograph",
+   "npy": "s_de64346d_MVI_8799.npy",
+   "stem": "MVI_8799",
+   "zip": "Home_2of4.zip",
+   "member": "Home/35. Photograph/MVI_8799.MP4",
+   "video_frames": 75,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t194",
+   "label": "Photograph",
+   "npy": "s_b8eeedb3_MVI_8797.npy",
+   "stem": "MVI_8797",
+   "zip": "Home_2of4.zip",
+   "member": "Home/35. Photograph/MVI_8797.MP4",
+   "video_frames": 82,
+   "sampled_frames": 28
+  },
+  {
+   "id": "t195",
+   "label": "Pink",
+   "npy": "020eb150_MVI_5202.npy",
+   "stem": "MVI_5202",
+   "zip": "Colours_2of2.zip",
+   "member": "Colours/52. Pink/MVI_5202.MOV",
+   "video_frames": 57,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t196",
+   "label": "Pink",
+   "npy": "28dfb7cd_MVI_3882.npy",
+   "stem": "MVI_3882",
+   "zip": "Colours_2of2.zip",
+   "member": "Colours/52. Pink/MVI_3882.MOV",
+   "video_frames": 74,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t197",
+   "label": "Plane",
+   "npy": "f6e09baa_MVI_3113.npy",
+   "stem": "MVI_3113",
+   "zip": "Means_of_Transportation_1of2.zip",
+   "member": "Means_of_Transportation/10. Plane/MVI_3113.MOV",
+   "video_frames": 92,
+   "sampled_frames": 31
+  },
+  {
+   "id": "t198",
+   "label": "Plane",
+   "npy": "7e53f249_MVI_3206.npy",
+   "stem": "MVI_3206",
+   "zip": "Means_of_Transportation_1of2.zip",
+   "member": "Means_of_Transportation/10. Plane/MVI_3206.MOV",
+   "video_frames": 70,
+   "sampled_frames": 24
+  },
+  {
+   "id": "t199",
+   "label": "Player",
+   "npy": "b4e12c84_MVI_5304.npy",
+   "stem": "MVI_5304",
+   "zip": "People_5of5.zip",
+   "member": "People/82. Player/MVI_5304.MOV",
+   "video_frames": 64,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t200",
+   "label": "Player",
+   "npy": "b06fa474_MVI_3830.npy",
+   "stem": "MVI_3830",
+   "zip": "People_5of5.zip",
+   "member": "People/82. Player/MVI_3830.MOV",
+   "video_frames": 59,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t201",
+   "label": "Pocket",
+   "npy": "b2440f11_MVI_5032.npy",
+   "stem": "MVI_5032",
+   "zip": "Clothes_2of2.zip",
+   "member": "Clothes/45. Pocket/MVI_5032.MOV",
+   "video_frames": 61,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t202",
+   "label": "Pocket",
+   "npy": "c7bc735e_MVI_5179.npy",
+   "stem": "MVI_5179",
+   "zip": "Clothes_2of2.zip",
+   "member": "Clothes/45. Pocket/MVI_5179.MOV",
+   "video_frames": 50,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t203",
+   "label": "Police",
+   "npy": "6cea5599_MVI_4775.npy",
+   "stem": "MVI_4775",
+   "zip": "Jobs_2of2.zip",
+   "member": "Jobs/92. Police/MVI_4775.MOV",
+   "video_frames": 49,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t204",
+   "label": "Police",
+   "npy": "c9781a5c_MVI_5348.npy",
+   "stem": "MVI_5348",
+   "zip": "Jobs_2of2.zip",
+   "member": "Jobs/92. Police/MVI_5348.MOV",
+   "video_frames": 51,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t205",
+   "label": "President",
+   "npy": "608adb6f_MVI_4976.npy",
+   "stem": "MVI_4976",
+   "zip": "People_4of5.zip",
+   "member": "People/75. President/MVI_4976.MOV",
+   "video_frames": 51,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t206",
+   "label": "President",
+   "npy": "520ee211_MVI_3956.npy",
+   "stem": "MVI_3956",
+   "zip": "People_4of5.zip",
+   "member": "People/75. President/MVI_3956.MOV",
+   "video_frames": 67,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t207",
+   "label": "Price",
+   "npy": "c3c7c9d8_MVI_4859.npy",
+   "stem": "MVI_4859",
+   "zip": "Society_3of3.zip",
+   "member": "Society/20. Price/MVI_4859.MOV",
+   "video_frames": 54,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t208",
+   "label": "Price",
+   "npy": "s_a653d6ee_MVI_8735.npy",
+   "stem": "MVI_8735",
+   "zip": "Society_3of3.zip",
+   "member": "Society/20. Price/MVI_8735.MP4",
+   "video_frames": 78,
+   "sampled_frames": 26
+  },
+  {
+   "id": "t209",
+   "label": "Priest",
+   "npy": "f9068441_MVI_5344.npy",
+   "stem": "MVI_5344",
+   "zip": "Jobs_1of2.zip",
+   "member": "Jobs/91. Priest/MVI_5344.MOV",
+   "video_frames": 47,
+   "sampled_frames": 16
+  },
+  {
+   "id": "t210",
+   "label": "Priest",
+   "npy": "83f3adeb_MVI_4488.npy",
+   "stem": "MVI_4488",
+   "zip": "Jobs_1of2.zip",
+   "member": "Jobs/91. Priest/MVI_4488.MOV",
+   "video_frames": 78,
+   "sampled_frames": 26
+  },
+  {
+   "id": "t211",
+   "label": "Queen",
+   "npy": "5185904e_MVI_3953.npy",
+   "stem": "MVI_3953",
+   "zip": "People_4of5.zip",
+   "member": "People/74. Queen/MVI_3953.MOV",
+   "video_frames": 79,
+   "sampled_frames": 27
+  },
+  {
+   "id": "t212",
+   "label": "Queen",
+   "npy": "7d0248d2_MVI_4972.npy",
+   "stem": "MVI_4972",
+   "zip": "People_4of5.zip",
+   "member": "People/74. Queen/MVI_4972.MOV",
+   "video_frames": 50,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t213",
+   "label": "Race (ethnicity)",
+   "npy": "a96c5d1c_MVI_4823.npy",
+   "stem": "MVI_4823",
+   "zip": "Society_1of3.zip",
+   "member": "Society/8. Race (ethnicity)/MVI_4823.MOV",
+   "video_frames": 58,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t214",
+   "label": "Race (ethnicity)",
+   "npy": "36a3c65b_MVI_4282.npy",
+   "stem": "MVI_4282",
+   "zip": "Society_1of3.zip",
+   "member": "Society/8. Race (ethnicity)/MVI_4282.MOV",
+   "video_frames": 57,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t215",
+   "label": "Radio",
+   "npy": "s_65b0be8d_MVI_9120.npy",
+   "stem": "MVI_9120",
+   "zip": "Electronics_2of2.zip",
+   "member": "Electronics/60. Radio/MVI_9120.MP4",
+   "video_frames": 55,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t216",
+   "label": "Radio",
+   "npy": "7dc13897_MVI_4987.npy",
+   "stem": "MVI_4987",
+   "zip": "Electronics_2of2.zip",
+   "member": "Electronics/60. Radio/MVI_4987.MOV",
+   "video_frames": 47,
+   "sampled_frames": 16
+  },
+  {
+   "id": "t217",
+   "label": "Red",
+   "npy": "dbb69548_MVI_4018.npy",
+   "stem": "MVI_4018",
+   "zip": "Colours_1of2.zip",
+   "member": "Colours/47. Red/MVI_4018.MOV",
+   "video_frames": 66,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t218",
+   "label": "Red",
+   "npy": "1bdc9760_MVI_3720.npy",
+   "stem": "MVI_3720",
+   "zip": "Colours_1of2.zip",
+   "member": "Colours/47. Red/MVI_3720.MOV",
+   "video_frames": 62,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t219",
+   "label": "Religion",
+   "npy": "s_5fe55711_MVI_8659.npy",
+   "stem": "MVI_8659",
+   "zip": "Society_1of3.zip",
+   "member": "Society/1. Religion/MVI_8659.MP4",
+   "video_frames": 125,
+   "sampled_frames": 42
+  },
+  {
+   "id": "t220",
+   "label": "Religion",
+   "npy": "s_f286583c_MVI_8929.npy",
+   "stem": "MVI_8929",
+   "zip": "Society_1of3.zip",
+   "member": "Society/1. Religion/MVI_8929.MP4",
+   "video_frames": 118,
+   "sampled_frames": 40
+  },
+  {
+   "id": "t221",
+   "label": "Reporter",
+   "npy": "21a7215d_MVI_4790.npy",
+   "stem": "MVI_4790",
+   "zip": "Jobs_2of2.zip",
+   "member": "Jobs/97. Reporter/MVI_4790.MOV",
+   "video_frames": 62,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t222",
+   "label": "Reporter",
+   "npy": "0fd440ad_MVI_5369.npy",
+   "stem": "MVI_5369",
+   "zip": "Jobs_2of2.zip",
+   "member": "Jobs/97. Reporter/MVI_5369.MOV",
+   "video_frames": 60,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t223",
+   "label": "Ring",
+   "npy": "s_940fafe1_MVI_8858.npy",
+   "stem": "MVI_8858",
+   "zip": "Home_4of4.zip",
+   "member": "Home/49. Ring/MVI_8858.MP4",
+   "video_frames": 70,
+   "sampled_frames": 24
+  },
+  {
+   "id": "t224",
+   "label": "Ring",
+   "npy": "6ed3e54c_MVI_4452.npy",
+   "stem": "MVI_4452",
+   "zip": "Home_4of4.zip",
+   "member": "Home/49. Ring/MVI_4452.MOV",
+   "video_frames": 51,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t225",
+   "label": "Saturday",
+   "npy": "s_26a48ec3_MVI_9158.npy",
+   "stem": "MVI_9158",
+   "zip": "Days_and_Time_1of3.zip",
+   "member": "Days_and_Time/72. Saturday/MVI_9158.MP4",
+   "video_frames": 67,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t226",
+   "label": "Science",
+   "npy": "679343a0_MVI_4338.npy",
+   "stem": "MVI_4338",
+   "zip": "Society_3of3.zip",
+   "member": "Society/22. Science/MVI_4338.MOV",
+   "video_frames": 53,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t227",
+   "label": "Science",
+   "npy": "cbfd7b14_MVI_4865.npy",
+   "stem": "MVI_4865",
+   "zip": "Society_3of3.zip",
+   "member": "Society/22. Science/MVI_4865.MOV",
+   "video_frames": 63,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t228",
+   "label": "Screen",
+   "npy": "efa7c7c4_MVI_5406.npy",
+   "stem": "MVI_5406",
+   "zip": "Electronics_2of2.zip",
+   "member": "Electronics/57. Screen/MVI_5406.MOV",
+   "video_frames": 63,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t229",
+   "label": "Screen",
+   "npy": "2f823d16_MVI_4976.npy",
+   "stem": "MVI_4976",
+   "zip": "Electronics_2of2.zip",
+   "member": "Electronics/57. Screen/MVI_4976.MOV",
+   "video_frames": 59,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t230",
+   "label": "Season",
+   "npy": "8424fdc1_MVI_5004.npy",
+   "stem": "MVI_5004",
+   "zip": "Seasons_1of1.zip",
+   "member": "Seasons/65. Season/MVI_5004.MOV",
+   "video_frames": 88,
+   "sampled_frames": 30
+  },
+  {
+   "id": "t231",
+   "label": "Season",
+   "npy": "s_4015a7db_MVI_9136.npy",
+   "stem": "MVI_9136",
+   "zip": "Seasons_1of1.zip",
+   "member": "Seasons/65. Season/MVI_9136.MP4",
+   "video_frames": 114,
+   "sampled_frames": 38
+  },
+  {
+   "id": "t232",
+   "label": "Second",
+   "npy": "s_45f9f2c9_MVI_9213.npy",
+   "stem": "MVI_9213",
+   "zip": "Days_and_Time_3of3.zip",
+   "member": "Days_and_Time/81. Second/MVI_9213.MP4",
+   "video_frames": 72,
+   "sampled_frames": 24
+  },
+  {
+   "id": "t233",
+   "label": "Second",
+   "npy": "295ea900_MVI_5058.npy",
+   "stem": "MVI_5058",
+   "zip": "Days_and_Time_3of3.zip",
+   "member": "Days_and_Time/81. Second/MVI_5058.MOV",
+   "video_frames": 50,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t234",
+   "label": "Secretary",
+   "npy": "d491f461_MVI_4482.npy",
+   "stem": "MVI_4482",
+   "zip": "Jobs_1of2.zip",
+   "member": "Jobs/90. Secretary/MVI_4482.MOV",
+   "video_frames": 69,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t235",
+   "label": "Secretary",
+   "npy": "c993da0b_MVI_4768.npy",
+   "stem": "MVI_4768",
+   "zip": "Jobs_1of2.zip",
+   "member": "Jobs/90. Secretary/MVI_4768.MOV",
+   "video_frames": 68,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t236",
+   "label": "Shirt",
+   "npy": "b77eced9_MVI_3702.npy",
+   "stem": "MVI_3702",
+   "zip": "Clothes_1of2.zip",
+   "member": "Clothes/41. Shirt/MVI_3702.MOV",
+   "video_frames": 83,
+   "sampled_frames": 28
+  },
+  {
+   "id": "t237",
+   "label": "Shirt",
+   "npy": "1f4cfce8_MVI_4201.npy",
+   "stem": "MVI_4201",
+   "zip": "Clothes_1of2.zip",
+   "member": "Clothes/41. Shirt/MVI_4201.MOV",
+   "video_frames": 69,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t238",
+   "label": "Shoes",
+   "npy": "92097380_MVI_3857.npy",
+   "stem": "MVI_3857",
+   "zip": "Clothes_2of2.zip",
+   "member": "Clothes/44. Shoes/MVI_3857.MOV",
+   "video_frames": 93,
+   "sampled_frames": 31
+  },
+  {
+   "id": "t239",
+   "label": "Shoes",
+   "npy": "843167be_MVI_4887.npy",
+   "stem": "MVI_4887",
+   "zip": "Clothes_2of2.zip",
+   "member": "Clothes/44. Shoes/MVI_4887.MOV",
+   "video_frames": 83,
+   "sampled_frames": 28
+  },
+  {
+   "id": "t240",
+   "label": "Sign",
+   "npy": "s_9e6eb946_MVI_8991.npy",
+   "stem": "MVI_8991",
+   "zip": "Society_3of3.zip",
+   "member": "Society/21. Sign/MVI_8991.MP4",
+   "video_frames": 65,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t241",
+   "label": "Sign",
+   "npy": "58fdacf4_MVI_4333.npy",
+   "stem": "MVI_4333",
+   "zip": "Society_3of3.zip",
+   "member": "Society/21. Sign/MVI_4333.MOV",
+   "video_frames": 55,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t242",
+   "label": "Sister",
+   "npy": "46efd3cd_MVI_4078.npy",
+   "stem": "MVI_4078",
+   "zip": "People_2of5.zip",
+   "member": "People/67. Sister/MVI_4078.MOV",
+   "video_frames": 56,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t243",
+   "label": "Sister",
+   "npy": "ca2598e1_MVI_5098.npy",
+   "stem": "MVI_5098",
+   "zip": "People_2of5.zip",
+   "member": "People/67. Sister/MVI_5098.MOV",
+   "video_frames": 59,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t244",
+   "label": "Skirt",
+   "npy": "8daae4a5_MVI_3997.npy",
+   "stem": "MVI_3997",
+   "zip": "Clothes_1of2.zip",
+   "member": "Clothes/40. Skirt/MVI_3997.MOV",
+   "video_frames": 66,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t245",
+   "label": "Skirt",
+   "npy": "60401aa4_MVI_4876.npy",
+   "stem": "MVI_4876",
+   "zip": "Clothes_1of2.zip",
+   "member": "Clothes/40. Skirt/MVI_4876.MOV",
+   "video_frames": 61,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t246",
+   "label": "Soap",
+   "npy": "b550cd96_MVI_4396.npy",
+   "stem": "MVI_4396",
+   "zip": "Home_2of4.zip",
+   "member": "Home/36. Soap/MVI_4396.MOV",
+   "video_frames": 50,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t247",
+   "label": "Soap",
+   "npy": "s_1af3b38e_MVI_8800.npy",
+   "stem": "MVI_8800",
+   "zip": "Home_2of4.zip",
+   "member": "Home/36. Soap/MVI_8800.MP4",
+   "video_frames": 75,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t248",
+   "label": "Soldier",
+   "npy": "bfeaf796_MVI_5353.npy",
+   "stem": "MVI_5353",
+   "zip": "Jobs_2of2.zip",
+   "member": "Jobs/93. Soldier/MVI_5353.MOV",
+   "video_frames": 42,
+   "sampled_frames": 14
+  },
+  {
+   "id": "t249",
+   "label": "Soldier",
+   "npy": "dda9df98_MVI_4778.npy",
+   "stem": "MVI_4778",
+   "zip": "Jobs_2of2.zip",
+   "member": "Jobs/93. Soldier/MVI_4778.MOV",
+   "video_frames": 57,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t250",
+   "label": "Son",
+   "npy": "58f74252_MVI_4052.npy",
+   "stem": "MVI_4052",
+   "zip": "People_1of5.zip",
+   "member": "People/58. Son/MVI_4052.MOV",
+   "video_frames": 61,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t251",
+   "label": "Son",
+   "npy": "9424ad70_MVI_3755.npy",
+   "stem": "MVI_3755",
+   "zip": "People_1of5.zip",
+   "member": "People/58. Son/MVI_3755.MOV",
+   "video_frames": 52,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t252",
+   "label": "Sport",
+   "npy": "s_0af2e7ce_MVI_8722.npy",
+   "stem": "MVI_8722",
+   "zip": "Society_3of3.zip",
+   "member": "Society/17. Sport/MVI_8722.MP4",
+   "video_frames": 73,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t253",
+   "label": "Sport",
+   "npy": "4ed8b1d8_MVI_4850.npy",
+   "stem": "MVI_4850",
+   "zip": "Society_3of3.zip",
+   "member": "Society/17. Sport/MVI_4850.MOV",
+   "video_frames": 59,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t254",
+   "label": "Spring",
+   "npy": "02420741_MVI_4995.npy",
+   "stem": "MVI_4995",
+   "zip": "Seasons_1of1.zip",
+   "member": "Seasons/62. Spring/MVI_4995.MOV",
+   "video_frames": 64,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t255",
+   "label": "Spring",
+   "npy": "e8913f5f_MVI_4993.npy",
+   "stem": "MVI_4993",
+   "zip": "Seasons_1of1.zip",
+   "member": "Seasons/62. Spring/MVI_4993.MOV",
+   "video_frames": 71,
+   "sampled_frames": 24
+  },
+  {
+   "id": "t256",
+   "label": "Student",
+   "npy": "0f042ce9_MVI_4463.npy",
+   "stem": "MVI_4463",
+   "zip": "Jobs_1of2.zip",
+   "member": "Jobs/85. Student/MVI_4463.MOV",
+   "video_frames": 78,
+   "sampled_frames": 26
+  },
+  {
+   "id": "t257",
+   "label": "Student",
+   "npy": "aec07544_MVI_5315.npy",
+   "stem": "MVI_5315",
+   "zip": "Jobs_1of2.zip",
+   "member": "Jobs/85. Student/MVI_5315.MOV",
+   "video_frames": 58,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t258",
+   "label": "Suit",
+   "npy": "a7290bb2_MVI_5013.npy",
+   "stem": "MVI_5013",
+   "zip": "Clothes_1of2.zip",
+   "member": "Clothes/39. Suit/MVI_5013.MOV",
+   "video_frames": 55,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t259",
+   "label": "Suit",
+   "npy": "2b37f925_MVI_3843.npy",
+   "stem": "MVI_3843",
+   "zip": "Clothes_1of2.zip",
+   "member": "Clothes/39. Suit/MVI_3843.MOV",
+   "video_frames": 71,
+   "sampled_frames": 24
+  },
+  {
+   "id": "t260",
+   "label": "Summer",
+   "npy": "79288c0d_MVI_4991.npy",
+   "stem": "MVI_4991",
+   "zip": "Seasons_1of1.zip",
+   "member": "Seasons/61. Summer/MVI_4991.MOV",
+   "video_frames": 61,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t261",
+   "label": "Summer",
+   "npy": "71682cd6_MVI_5421.npy",
+   "stem": "MVI_5421",
+   "zip": "Seasons_1of1.zip",
+   "member": "Seasons/61. Summer/MVI_5421.MOV",
+   "video_frames": 70,
+   "sampled_frames": 24
+  },
+  {
+   "id": "t262",
+   "label": "Sunday",
+   "npy": "736cc340_MVI_5008.npy",
+   "stem": "MVI_5008",
+   "zip": "Days_and_Time_1of3.zip",
+   "member": "Days_and_Time/66. Sunday/MVI_5008.MOV",
+   "video_frames": 47,
+   "sampled_frames": 16
+  },
+  {
+   "id": "t263",
+   "label": "T-Shirt",
+   "npy": "6828ee82_MVI_4882.npy",
+   "stem": "MVI_4882",
+   "zip": "Clothes_2of2.zip",
+   "member": "Clothes/42. T-Shirt/MVI_4882.MOV",
+   "video_frames": 78,
+   "sampled_frames": 26
+  },
+  {
+   "id": "t264",
+   "label": "T-Shirt",
+   "npy": "c952d7da_MVI_5169.npy",
+   "stem": "MVI_5169",
+   "zip": "Clothes_2of2.zip",
+   "member": "Clothes/42. T-Shirt/MVI_5169.MOV",
+   "video_frames": 60,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t265",
+   "label": "Table",
+   "npy": "s_ba4b474c_MVI_8753.npy",
+   "stem": "MVI_8753",
+   "zip": "Home_1of4.zip",
+   "member": "Home/24. Table/MVI_8753.MP4",
+   "video_frames": 51,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t266",
+   "label": "Table",
+   "npy": "60f2c662_MVI_4344.npy",
+   "stem": "MVI_4344",
+   "zip": "Home_1of4.zip",
+   "member": "Home/24. Table/MVI_4344.MOV",
+   "video_frames": 55,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t267",
+   "label": "Teacher",
+   "npy": "6aaa0813_MVI_5310.npy",
+   "stem": "MVI_5310",
+   "zip": "Jobs_1of2.zip",
+   "member": "Jobs/84. Teacher/MVI_5310.MOV",
+   "video_frames": 61,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t268",
+   "label": "Teacher",
+   "npy": "s_13a03d53_MVI_8866.npy",
+   "stem": "MVI_8866",
+   "zip": "Jobs_1of2.zip",
+   "member": "Jobs/84. Teacher/MVI_8866.MP4",
+   "video_frames": 61,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t269",
+   "label": "Team",
+   "npy": "s_a54112a1_MVI_8946.npy",
+   "stem": "MVI_8946",
+   "zip": "Society_1of3.zip",
+   "member": "Society/7. Team/MVI_8946.MP4",
+   "video_frames": 72,
+   "sampled_frames": 24
+  },
+  {
+   "id": "t270",
+   "label": "Team",
+   "npy": "7cb3dbea_MVI_4819.npy",
+   "stem": "MVI_4819",
+   "zip": "Society_1of3.zip",
+   "member": "Society/7. Team/MVI_4819.MOV",
+   "video_frames": 58,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t271",
+   "label": "Technology",
+   "npy": "s_ee5da4eb_MVI_8692.npy",
+   "stem": "MVI_8692",
+   "zip": "Society_2of3.zip",
+   "member": "Society/9. Technology/MVI_8692.MP4",
+   "video_frames": 63,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t272",
+   "label": "Technology",
+   "npy": "def7f8e4_MVI_4283.npy",
+   "stem": "MVI_4283",
+   "zip": "Society_2of3.zip",
+   "member": "Society/9. Technology/MVI_4283.MOV",
+   "video_frames": 51,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t273",
+   "label": "Telephone",
+   "npy": "s_a016f3f3_MVI_8834.npy",
+   "stem": "MVI_8834",
+   "zip": "Home_3of4.zip",
+   "member": "Home/44. Telephone/MVI_8834.MP4",
+   "video_frames": 60,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t274",
+   "label": "Telephone",
+   "npy": "f2512139_MVI_4428.npy",
+   "stem": "MVI_4428",
+   "zip": "Home_3of4.zip",
+   "member": "Home/44. Telephone/MVI_4428.MOV",
+   "video_frames": 41,
+   "sampled_frames": 14
+  },
+  {
+   "id": "t275",
+   "label": "Television",
+   "npy": "6256f897_MVI_4986.npy",
+   "stem": "MVI_4986",
+   "zip": "Electronics_2of2.zip",
+   "member": "Electronics/59. Television/MVI_4986.MOV",
+   "video_frames": 49,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t276",
+   "label": "Television",
+   "npy": "fbc3233f_MVI_4985.npy",
+   "stem": "MVI_4985",
+   "zip": "Electronics_2of2.zip",
+   "member": "Electronics/59. Television/MVI_4985.MOV",
+   "video_frames": 57,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t277",
+   "label": "Thursday",
+   "npy": "ad20accf_MVI_5021.npy",
+   "stem": "MVI_5021",
+   "zip": "Days_and_Time_1of3.zip",
+   "member": "Days_and_Time/70. Thursday/MVI_5021.MOV",
+   "video_frames": 56,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t278",
+   "label": "Time",
+   "npy": "s_ddfcea72_MVI_9202.npy",
+   "stem": "MVI_9202",
+   "zip": "Days_and_Time_3of3.zip",
+   "member": "Days_and_Time/86. Time/MVI_9202.MP4",
+   "video_frames": 58,
+   "sampled_frames": 20
+  },
+  {
+   "id": "t279",
+   "label": "Today",
+   "npy": "f14feb76_MVI_4616.npy",
+   "stem": "MVI_4616",
+   "zip": "Days_and_Time_1of3.zip",
+   "member": "Days_and_Time/73. Today/MVI_4616.MOV",
+   "video_frames": 54,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t280",
+   "label": "Tomorrow",
+   "npy": "743a0ff8_MVI_5477.npy",
+   "stem": "MVI_5477",
+   "zip": "Days_and_Time_2of3.zip",
+   "member": "Days_and_Time/74. Tomorrow/MVI_5477.MOV",
+   "video_frames": 41,
+   "sampled_frames": 14
+  },
+  {
+   "id": "t281",
+   "label": "Tool",
+   "npy": "1a19f2ae_MVI_4456.npy",
+   "stem": "MVI_4456",
+   "zip": "Home_4of4.zip",
+   "member": "Home/50. Tool/MVI_4456.MOV",
+   "video_frames": 64,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t282",
+   "label": "Tool",
+   "npy": "s_77ecb0e2_MVI_9089.npy",
+   "stem": "MVI_9089",
+   "zip": "Home_4of4.zip",
+   "member": "Home/50. Tool/MVI_9089.MP4",
+   "video_frames": 70,
+   "sampled_frames": 24
+  },
+  {
+   "id": "t283",
+   "label": "Train",
+   "npy": "89b17f6a_MVI_3139.npy",
+   "stem": "MVI_3139",
+   "zip": "Means_of_Transportation_1of2.zip",
+   "member": "Means_of_Transportation/9. Train/MVI_3139.MOV",
+   "video_frames": 95,
+   "sampled_frames": 32
+  },
+  {
+   "id": "t284",
+   "label": "Train",
+   "npy": "06970606_MVI_3168.npy",
+   "stem": "MVI_3168",
+   "zip": "Means_of_Transportation_1of2.zip",
+   "member": "Means_of_Transportation/9. Train/MVI_3168.MOV",
+   "video_frames": 77,
+   "sampled_frames": 26
+  },
+  {
+   "id": "t285",
+   "label": "Transportation",
+   "npy": "s_1d13c497_MVI_8599.npy",
+   "stem": "MVI_8599",
+   "zip": "Means_of_Transportation_2of2.zip",
+   "member": "Means_of_Transportation/17. Transportation/MVI_8599.MP4",
+   "video_frames": 69,
+   "sampled_frames": 23
+  },
+  {
+   "id": "t286",
+   "label": "Transportation",
+   "npy": "9f0cc726_MVI_3135.npy",
+   "stem": "MVI_3135",
+   "zip": "Means_of_Transportation_2of2.zip",
+   "member": "Means_of_Transportation/17. Transportation/MVI_3135.MOV",
+   "video_frames": 100,
+   "sampled_frames": 34
+  },
+  {
+   "id": "t287",
+   "label": "Truck",
+   "npy": "d4817d83_MVI_3213.npy",
+   "stem": "MVI_3213",
+   "zip": "Means_of_Transportation_1of2.zip",
+   "member": "Means_of_Transportation/12. Truck/MVI_3213.MOV",
+   "video_frames": 87,
+   "sampled_frames": 29
+  },
+  {
+   "id": "t288",
+   "label": "Truck",
+   "npy": "s_a5bbcd3f_MVI_8585.npy",
+   "stem": "MVI_8585",
+   "zip": "Means_of_Transportation_1of2.zip",
+   "member": "Means_of_Transportation/12. Truck/MVI_8585.MP4",
+   "video_frames": 73,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t289",
+   "label": "Tuesday",
+   "npy": "f2896faa_MVI_4596.npy",
+   "stem": "MVI_4596",
+   "zip": "Days_and_Time_1of3.zip",
+   "member": "Days_and_Time/68. Tuesday/MVI_4596.MOV",
+   "video_frames": 55,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t290",
+   "label": "Waiter",
+   "npy": "7c4cd7bb_MVI_4761.npy",
+   "stem": "MVI_4761",
+   "zip": "Jobs_1of2.zip",
+   "member": "Jobs/89. Waiter/MVI_4761.MOV",
+   "video_frames": 72,
+   "sampled_frames": 24
+  },
+  {
+   "id": "t291",
+   "label": "Waiter",
+   "npy": "s_bc615df2_MVI_8883.npy",
+   "stem": "MVI_8883",
+   "zip": "Jobs_1of2.zip",
+   "member": "Jobs/89. Waiter/MVI_8883.MP4",
+   "video_frames": 73,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t292",
+   "label": "War",
+   "npy": "3230b769_MVI_4294.npy",
+   "stem": "MVI_4294",
+   "zip": "Society_2of3.zip",
+   "member": "Society/11. War/MVI_4294.MOV",
+   "video_frames": 55,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t293",
+   "label": "War",
+   "npy": "s_2753f825_MVI_8957.npy",
+   "stem": "MVI_8957",
+   "zip": "Society_2of3.zip",
+   "member": "Society/11. War/MVI_8957.MP4",
+   "video_frames": 71,
+   "sampled_frames": 24
+  },
+  {
+   "id": "t294",
+   "label": "Wednesday",
+   "npy": "2fe37bc3_MVI_4600.npy",
+   "stem": "MVI_4600",
+   "zip": "Days_and_Time_1of3.zip",
+   "member": "Days_and_Time/69. Wednesday/MVI_4600.MOV",
+   "video_frames": 54,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t295",
+   "label": "Week",
+   "npy": "6509e327_MVI_5484.npy",
+   "stem": "MVI_5484",
+   "zip": "Days_and_Time_2of3.zip",
+   "member": "Days_and_Time/76. Week/MVI_5484.MOV",
+   "video_frames": 39,
+   "sampled_frames": 13
+  },
+  {
+   "id": "t296",
+   "label": "White",
+   "npy": "44a618b7_MVI_5211.npy",
+   "stem": "MVI_5211",
+   "zip": "Colours_2of2.zip",
+   "member": "Colours/55. White/MVI_5211.MOV",
+   "video_frames": 56,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t297",
+   "label": "White",
+   "npy": "888e8f32_MVI_3744.npy",
+   "stem": "MVI_3744",
+   "zip": "Colours_2of2.zip",
+   "member": "Colours/55. White/MVI_3744.MOV",
+   "video_frames": 45,
+   "sampled_frames": 15
+  },
+  {
+   "id": "t298",
+   "label": "Wife",
+   "npy": "bd5f1392_MVI_3799.npy",
+   "stem": "MVI_3799",
+   "zip": "People_3of5.zip",
+   "member": "People/72. Wife/MVI_3799.MOV",
+   "video_frames": 53,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t299",
+   "label": "Wife",
+   "npy": "2b2c7fba_MVI_4967.npy",
+   "stem": "MVI_4967",
+   "zip": "People_3of5.zip",
+   "member": "People/72. Wife/MVI_4967.MOV",
+   "video_frames": 53,
+   "sampled_frames": 18
+  },
+  {
+   "id": "t300",
+   "label": "Window",
+   "npy": "101df4fd_MVI_4364.npy",
+   "stem": "MVI_4364",
+   "zip": "Home_1of4.zip",
+   "member": "Home/28. Window/MVI_4364.MOV",
+   "video_frames": 87,
+   "sampled_frames": 29
+  },
+  {
+   "id": "t301",
+   "label": "Window",
+   "npy": "c3a2d03a_MVI_4883.npy",
+   "stem": "MVI_4883",
+   "zip": "Home_1of4.zip",
+   "member": "Home/28. Window/MVI_4883.MOV",
+   "video_frames": 66,
+   "sampled_frames": 22
+  },
+  {
+   "id": "t302",
+   "label": "Winter",
+   "npy": "s_ec3bedc5_MVI_9129.npy",
+   "stem": "MVI_9129",
+   "zip": "Seasons_1of1.zip",
+   "member": "Seasons/63. Winter/MVI_9129.MP4",
+   "video_frames": 74,
+   "sampled_frames": 25
+  },
+  {
+   "id": "t303",
+   "label": "Winter",
+   "npy": "67a4ca0d_MVI_5432.npy",
+   "stem": "MVI_5432",
+   "zip": "Seasons_1of1.zip",
+   "member": "Seasons/63. Winter/MVI_5432.MOV",
+   "video_frames": 61,
+   "sampled_frames": 21
+  },
+  {
+   "id": "t304",
+   "label": "Woman",
+   "npy": "8cd2757f_MVI_3777.npy",
+   "stem": "MVI_3777",
+   "zip": "People_2of5.zip",
+   "member": "People/65. Woman/MVI_3777.MOV",
+   "video_frames": 46,
+   "sampled_frames": 16
+  },
+  {
+   "id": "t305",
+   "label": "Woman",
+   "npy": "8a26311f_MVI_4953.npy",
+   "stem": "MVI_4953",
+   "zip": "People_2of5.zip",
+   "member": "People/65. Woman/MVI_4953.MOV",
+   "video_frames": 51,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t306",
+   "label": "Year",
+   "npy": "s_969a7618_MVI_9177.npy",
+   "stem": "MVI_9177",
+   "zip": "Days_and_Time_2of3.zip",
+   "member": "Days_and_Time/78. Year/MVI_9177.MP4",
+   "video_frames": 57,
+   "sampled_frames": 19
+  },
+  {
+   "id": "t307",
+   "label": "Yellow",
+   "npy": "7e9ca87a_MVI_4908.npy",
+   "stem": "MVI_4908",
+   "zip": "Colours_1of2.zip",
+   "member": "Colours/50. Yellow/MVI_4908.MOV",
+   "video_frames": 50,
+   "sampled_frames": 17
+  },
+  {
+   "id": "t308",
+   "label": "Yellow",
+   "npy": "6116bc95_MVI_3730.npy",
+   "stem": "MVI_3730",
+   "zip": "Colours_1of2.zip",
+   "member": "Colours/50. Yellow/MVI_3730.MOV",
+   "video_frames": 48,
+   "sampled_frames": 16
+  },
+  {
+   "id": "t309",
+   "label": "Yesterday",
+   "npy": "93bffdc2_MVI_4624.npy",
+   "stem": "MVI_4624",
+   "zip": "Days_and_Time_2of3.zip",
+   "member": "Days_and_Time/75. Yesterday/MVI_4624.MOV",
+   "video_frames": 47,
+   "sampled_frames": 16
+  },
+  {
+   "id": "t310",
+   "label": "train ticket",
+   "npy": "7cfbee00_MVI_4192.npy",
+   "stem": "MVI_4192",
+   "zip": "Means_of_Transportation_2of2.zip",
+   "member": "Means_of_Transportation/16. train ticket/MVI_4192.MOV",
+   "video_frames": 79,
+   "sampled_frames": 27
+  },
+  {
+   "id": "t311",
+   "label": "train ticket",
+   "npy": "06fbe7ce_MVI_3253.npy",
+   "stem": "MVI_3253",
+   "zip": "Means_of_Transportation_2of2.zip",
+   "member": "Means_of_Transportation/16. train ticket/MVI_3253.MOV",
+   "video_frames": 76,
+   "sampled_frames": 26
+  }
+ ]
+}
