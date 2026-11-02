@@ -1,5 +1,13 @@
 # Project status
 
+## Deployment augmentation, faster resampling, training checkpoints (2026-11-02)
+
+Code for the augmented retraining (results still to come, nothing reported from it yet): `training/augment.py` has `DeployAugmentConfig` and `deploy_augment` (y scale 0.85 to 1.20 on 80 percent of samples, landmark noise with sigma up to 0.01 of the image size, hand dropout up to 0.2 per frame and hand); the y scale is exact and is tested against re-normalizing scaled raw landmarks. `training.train` and `training.compare_models` take a deploy-augment option. The CNN run with it finished (validation macro-F1 0.906, test top-1 0.906, top-5 0.988, macro-F1 0.910 on the authors' predefined split, one test evaluation); BiGRU and Transformer were still training.
+
+`resample_sequence` is now vectorized (same values as the per column `np.interp` to 1e-6, about 30 times faster, covered by a test); the published baseline CNN still scores 0.9130 on the test split with it. That check re-ran the baseline CNN over the test split once, which is a reproduction and not a new result, and is to be disclosed with the other test uses.
+
+Training checkpoints: the checkpoint option writes `checkpoint_last.pt` (model, optimizer, both random number generator states, best state, early stopping counter) and `checkpoint_best.pt` after every epoch, atomically; the resume option continues from `checkpoint_last.pt` and refuses a run whose settings differ (epochs may be raised). A split run (2 epochs, then resume to 4) ends with the same weights as a straight 4 epoch run (tested). Resuming a run that already finished runs the final evaluation again, including the test split, so do that only when the evaluation is wanted. The BiGRU and Transformer augmented runs started before this and have no checkpoints.
+
 ## Camera, framing guide, deployment preparation (2026-11-02)
 
 Camera: 1280x720 is requested first with a fallback to any camera setting; the real resolution is shown and the picture box and overlay follow it. Framing: a dashed guide for head, shoulders and hands, and a warning when the smoothed shoulder width is below 0.10 of the picture width; the threshold comes from validation videos shrunk toward the centre (accuracy 0.83 to 0.89 at 0.10 and above, 0.71 at 0.08 to 0.10, about 0.55 below, 12 to 14 percent confident wrong answers; INCLUDE signers measure 0.12 to 0.15, larger sizes unmeasured), see `docs/evaluation/BROWSER_PATH.md`. No retraining; the augmentation proposal stays in that document for the retraining with self-recorded data.

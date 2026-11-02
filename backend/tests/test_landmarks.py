@@ -81,3 +81,22 @@ def test_endpoint_rejects_empty_and_oversized() -> None:
     assert client.post("/api/landmarks/extract", json={"frames": []}).status_code == 422
     assert client.post("/api/landmarks/extract", json={"frames": [{}] * 301}).status_code == 422
     assert client.post("/api/landmarks/extract", json={"frames": [{"pose": "x"}]}).status_code == 422
+
+
+def test_vectorized_resample_matches_np_interp():
+    import numpy as np
+
+    from app.recognition.landmarks import FEATURE_DIM
+    from app.recognition.preprocess import resample_sequence
+
+    rng = np.random.default_rng(0)
+    for t, length in [(2, 32), (7, 32), (32, 32), (33, 32), (90, 32), (300, 32), (50, 13), (5, 100)]:
+        x = rng.normal(size=(t, FEATURE_DIM)).astype(np.float32)
+        src, dst = np.linspace(0.0, 1.0, t), np.linspace(0.0, 1.0, length)
+        want = np.stack([np.interp(dst, src, x[:, i]) for i in range(FEATURE_DIM)], axis=1).astype(np.float32)
+        got = resample_sequence(x, length)
+        if t == length:
+            np.testing.assert_array_equal(got, x)
+        np.testing.assert_allclose(got, want, atol=1e-6)
+    one = rng.normal(size=(1, FEATURE_DIM)).astype(np.float32)
+    assert resample_sequence(one, 5).shape == (5, FEATURE_DIM)

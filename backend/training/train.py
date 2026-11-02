@@ -6,6 +6,7 @@ The manifest's predefined split is used when present; early stopping and model s
 
 import argparse
 import json
+import os
 import platform
 import random
 import sys
@@ -35,11 +36,28 @@ def predict_probs(model: nn.Module, x: np.ndarray, batch: int = 256) -> np.ndarr
     return np.concatenate(out)
 
 
+CKPT_LAST = "checkpoint_last.pt"
+CKPT_BEST = "checkpoint_best.pt"
+
+
+def _atomic_save(obj: dict, path: Path) -> None:
+    """Write to a temporary file and rename, so a kill in the middle never leaves a half written checkpoint."""
+    tmp = path.with_name(path.name + ".tmp")
+    torch.save(obj, tmp)
+    os.replace(tmp, path)
+
+
+def _load_checkpoint(path: Path) -> dict:
+    # weights_only=False: the file holds optimizer and RNG state written by this same code on this machine (never a download)
+    return torch.load(path, map_location="cpu", weights_only=False)
+
+
 def train(
     manifest: Path, out_dir: Path, *, arch: str = "bigru", seed: int = 0, epochs: int = 40, batch_size: int = 16,
     lr: float = 1e-3, seq_len: int = 32, hidden: int = 128, layers: int = 2, heads: int = 4, dropout: float = 0.3,
     patience: int = 8, noise_std: float = 0.01, class_weights: bool = False, augment: bool = False, max_gap: int = 0,
     num_threads: int | None = None, evaluate_test: bool = True, deploy_augment: bool = False,
+    progress: bool = False, checkpoint: bool = False, resume: bool = False,
 ) -> dict:
     if arch not in ARCHITECTURES:
         raise DatasetError(f"unknown architecture {arch!r}; expected one of {ARCHITECTURES}")
@@ -72,8 +90,30 @@ def train(
     deploy = DeployAugmentConfig() if deploy_augment else None
     x_val = va.all(seq_len, max_gap)
     best_f1, best_state, stale, epochs_run = -1.0, None, 0, 0
+    # settings that must match for a resume to continue the same run (epochs may be raised, nothing else may change)
+    signature = {
+        "arch": arch, "seed": seed, "batch_size": batch_size, "lr": lr, "seq_len": seq_len, "hidden": hidden, "layers": layers, "heads": heads,
+        "dropout": dropout, "patience": patience, "noise_std": noise_std, "class_weights": class_weights, "augment": augment,
+        "deploy_augment": deploy_augment, "max_gap": max_gap, "classes": classes, "train_samples": len(tr),
+    }
+    out_dir.mkdir(parents=True, exist_ok=True)
+    if resume:
+        last = out_dir / CKPT_LAST
+        if not last.is_file():
+            raise DatasetError(f"nothing to resume: {last} does not exist (start without resume)")
+        ck = _load_checkpoint(last)
+        if ck["signature"] != signature:
+            diff = sorted(k for k in signature if ck["signature"].get(k) != signature[k])
+            raise DatasetError(f"cannot resume: these settings differ from the checkpointed run: {diff}")
+        model.load_state_dict(ck["model"])
+        opt.load_state_dict(ck["optimizer"])
+        best_f1, best_state, stale, epochs_run = ck["best_f1"], ck["best_state"], ck["stale"], ck["epochs_run"]
+        rng.bit_generator.state = ck["numpy_rng"]
+        torch.set_rng_state(ck["torch_rng"])
+        if progress:
+            print(f"resumed from {last} at epoch {epochs_run}, best val macro-F1 {best_f1:.4f}", flush=True)
 
-    for _ in range(epochs):
+    while epochs_run < epochs and stale < patience:
         model.train()
         epochs_run += 1
         order = rng.permutation(len(tr))
@@ -85,13 +125,24 @@ def train(
             loss_fn(model(xb), torch.from_numpy(tr.labels[b])).backward()
             opt.step()
         val_f1 = full_report(predict_probs(model, x_val), va.labels, classes)["macro_f1"]
+        if progress:
+            print(f"epoch {epochs_run} val macro-F1 {val_f1:.4f}", flush=True)
         if val_f1 > best_f1:
             best_f1, stale = val_f1, 0
             best_state = {k: v.clone() for k, v in model.state_dict().items()}
+            if checkpoint:
+                _atomic_save({"model": best_state, "epoch": epochs_run, "val_macro_f1": best_f1}, out_dir / CKPT_BEST)
         else:
             stale += 1
-            if stale >= patience:
-                break
+        if checkpoint:
+            _atomic_save(
+                {
+                    "signature": signature, "model": model.state_dict(), "optimizer": opt.state_dict(), "epochs_run": epochs_run,
+                    "best_f1": best_f1, "best_state": best_state, "stale": stale, "numpy_rng": rng.bit_generator.state,
+                    "torch_rng": torch.get_rng_state(),
+                },
+                out_dir / CKPT_LAST,
+            )
 
     assert best_state is not None
     model.load_state_dict(best_state)
@@ -128,6 +179,9 @@ def main() -> int:
     p.add_argument("--epochs", type=int, default=40)
     p.add_argument("--augment", action="store_true", help="landmark augmentation (rotation, scale, speed, temporal jitter)")
     p.add_argument("--deploy-augment", action="store_true", help="y scale, landmark noise and hand dropout (training.augment.DeployAugmentConfig)")
+    p.add_argument("--patience", type=int, default=8)
+    p.add_argument("--checkpoint", action="store_true", help="write checkpoint_last.pt and checkpoint_best.pt after every epoch (atomic)")
+    p.add_argument("--resume", action="store_true", help="continue from checkpoint_last.pt in --out (implies --checkpoint); settings must match")
     p.add_argument("--max-gap", type=int, default=0, help="interpolate missing hand gaps up to this many frames")
     p.add_argument("--threads", type=int, default=None, help="limit torch CPU threads")
     p.add_argument("--class-weights", action="store_true", help="inverse-frequency loss weights (train split)")
@@ -135,7 +189,8 @@ def main() -> int:
     try:
         report = train(
             a.manifest, a.out, arch=a.arch, seed=a.seed, epochs=a.epochs, class_weights=a.class_weights, augment=a.augment,
-            max_gap=a.max_gap, num_threads=a.threads, deploy_augment=a.deploy_augment,
+            max_gap=a.max_gap, num_threads=a.threads, deploy_augment=a.deploy_augment, patience=a.patience, progress=True,
+            checkpoint=a.checkpoint or a.resume, resume=a.resume,
         )
     except DatasetError as exc:
         print(f"Dataset error: {exc}", file=sys.stderr)

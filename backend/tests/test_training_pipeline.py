@@ -149,3 +149,53 @@ def test_recognize_with_model(trained: Path) -> None:
 def test_recognize_422_for_unusable_sequence(trained: Path) -> None:
     _use(trained)
     assert client.post("/api/signs/recognize", json={"frames": [frame()]}).status_code == 422
+
+
+def _ck(out: Path, name: str = "checkpoint_last.pt") -> dict:
+    import torch
+
+    return torch.load(out / name, map_location="cpu", weights_only=False)
+
+
+def test_checkpoint_resume_continues_the_same_run(tmp_path):
+    ds = make_dataset(tmp_path)
+    kw = dict(hidden=16, layers=1, patience=50, num_threads=1, max_gap=3, deploy_augment=True, checkpoint=True)
+    straight = tmp_path / "straight"
+    train(ds, straight, epochs=4, **kw)
+    split = tmp_path / "split"
+    train(ds, split, epochs=2, **kw)  # "killed" after epoch 2: only the checkpoint of epoch 2 matters
+    assert _ck(split)["epochs_run"] == 2
+    resumed = train(ds, split, epochs=4, resume=True, **kw)
+    assert resumed["hyperparameters"]["epochs_run"] == 4
+    a, b = _ck(straight), _ck(split)
+    assert a["epochs_run"] == b["epochs_run"] == 4
+    for k in a["model"]:
+        np.testing.assert_allclose(a["model"][k].numpy(), b["model"][k].numpy(), atol=1e-6)
+    assert a["best_f1"] == pytest.approx(b["best_f1"])
+    assert (split / "checkpoint_best.pt").is_file()
+    assert not list(split.glob("*.tmp"))  # atomic writes leave no temporary file
+
+
+def test_resume_of_a_finished_run_changes_nothing(tmp_path):
+    ds = make_dataset(tmp_path)
+    kw = dict(hidden=16, layers=1, patience=50, num_threads=1, checkpoint=True)
+    first = train(ds, tmp_path / "m", epochs=3, **kw)
+    again = train(ds, tmp_path / "m", epochs=3, resume=True, **kw)
+    assert again["hyperparameters"]["epochs_run"] == 3
+    assert again["results"]["val"]["macro_f1"] == pytest.approx(first["results"]["val"]["macro_f1"])
+
+
+def test_resume_refuses_missing_or_changed_settings(tmp_path):
+    ds = make_dataset(tmp_path)
+    with pytest.raises(DatasetError, match="nothing to resume"):
+        train(ds, tmp_path / "none", epochs=2, hidden=16, layers=1, resume=True)
+    train(ds, tmp_path / "m", epochs=2, hidden=16, layers=1, checkpoint=True, num_threads=1)
+    with pytest.raises(DatasetError, match="hidden"):
+        train(ds, tmp_path / "m", epochs=4, hidden=32, layers=1, resume=True, num_threads=1)
+    with pytest.raises(DatasetError, match="deploy_augment"):
+        train(ds, tmp_path / "m", epochs=4, hidden=16, layers=1, resume=True, deploy_augment=True, num_threads=1)
+
+
+def test_training_without_checkpoint_writes_none(tmp_path):
+    train(make_dataset(tmp_path), tmp_path / "m", epochs=2, hidden=16, layers=1)
+    assert not (tmp_path / "m" / "checkpoint_last.pt").exists()
