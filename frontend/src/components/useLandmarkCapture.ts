@@ -1,7 +1,8 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cameraErrorMessage } from "@/lib/camera";
-import { createHolistic, type HolisticInstance } from "@/lib/holistic";
+import { createHolistic, type HolisticInstance, type LoadPhase } from "@/lib/holistic";
+import { drawOverlay, poseReadout, type PoseReadout } from "@/lib/overlay";
 import {
   appendFrame,
   EMPTY_BUFFER,
@@ -21,6 +22,12 @@ export interface LandmarkCapture {
   extractor: ExtractorState;
   error: string | null;
   stats: CaptureStats;
+  /** What the body pose tracker sees in the latest frame (for the on-screen hint). */
+  pose: PoseReadout;
+  /** Which loading step the landmark model is in while extractor is "loading". */
+  loadPhase: LoadPhase | null;
+  /** Load the landmark model without the camera, so Start camera is instant. Safe to call more than once. */
+  preload: () => void;
   /** Increments every time the camera is started; results from older runs must be ignored. */
   runId: number;
   videoRef: React.RefObject<HTMLVideoElement | null>;
@@ -31,26 +38,14 @@ export interface LandmarkCapture {
   /** Start collecting every extracted frame (landmarks only) for a recording; ends with endRecording(). */
   beginRecording: () => void;
   endRecording: () => LandmarkFrame[];
+  /** The live camera stream (for a local MediaRecorder in the landmark check tab); null when the camera is off. */
+  getStream: () => MediaStream | null;
+  /** Called with every extracted frame and its performance.now() time; pass null to remove. */
+  setFrameListener: (fn: ((frame: LandmarkFrame, tMs: number) => void) | null) => void;
 }
 
 const EMPTY: CaptureStats = { frames: 0, withPose: 0, withHands: 0 };
-
-function draw(canvas: HTMLCanvasElement | null, r: HolisticResults) {
-  const ctx = canvas?.getContext("2d");
-  if (!canvas || !ctx) return;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const dots = (pts: { x: number; y: number }[] | undefined, color: string, radius: number) => {
-    ctx.fillStyle = color;
-    pts?.forEach((p) => {
-      ctx.beginPath();
-      ctx.arc(p.x * canvas.width, p.y * canvas.height, radius, 0, 2 * Math.PI);
-      ctx.fill();
-    });
-  };
-  dots(r.poseLandmarks, "#5eead4", 3);
-  dots(r.leftHandLandmarks, "#fbbf24", 3);
-  dots(r.rightHandLandmarks, "#f472b6", 3);
-}
+const NO_POSE: PoseReadout = { detected: false, visible: 0, shoulders: false, elbows: false, wrists: false };
 
 /** Webcam + in-browser MediaPipe Holistic. Video never leaves the browser; only a short landmark buffer is kept. */
 export function useLandmarkCapture(): LandmarkCapture {
@@ -61,11 +56,15 @@ export function useLandmarkCapture(): LandmarkCapture {
   const bufferRef = useRef<BufferState>(EMPTY_BUFFER);
   const runningRef = useRef(false);
   const recordRef = useRef<LandmarkFrame[] | null>(null);
+  const listenerRef = useRef<((frame: LandmarkFrame, tMs: number) => void) | null>(null);
   const [state, setState] = useState<CaptureState>("idle");
   const [extractor, setExtractor] = useState<ExtractorState>("not_loaded");
   const [error, setError] = useState<string | null>(null);
   const [stats, setStats] = useState<CaptureStats>(EMPTY);
   const [runId, setRunId] = useState(0);
+  const [pose, setPose] = useState<PoseReadout>(NO_POSE);
+  const [loadPhase, setLoadPhase] = useState<LoadPhase | null>(null);
+  const loadingRef = useRef<Promise<void> | null>(null);
 
   const stop = useCallback(() => {
     runningRef.current = false;
@@ -79,26 +78,40 @@ export function useLandmarkCapture(): LandmarkCapture {
     setState((s) => (s === "error" ? s : "idle"));
   }, []);
 
+  const ensureModel = useCallback((): Promise<void> => {
+    if (holisticRef.current) return Promise.resolve();
+    loadingRef.current ??= (async () => {
+      setExtractor("loading");
+      try {
+        holisticRef.current = await createHolistic((r) => {
+          drawOverlay(canvasRef.current?.getContext("2d") as CanvasRenderingContext2D, canvasRef.current?.width ?? 640, canvasRef.current?.height ?? 480, r);
+          setPose(poseReadout(r.poseLandmarks));
+          const frame = toFrame(r);
+          bufferRef.current = appendFrame(bufferRef.current, frame);
+          recordRef.current?.push(frame);
+          listenerRef.current?.(frame, performance.now());
+        }, setLoadPhase);
+        setExtractor("ready");
+      } catch (e) {
+        setExtractor("error");
+        throw e;
+      } finally {
+        loadingRef.current = null;
+      }
+    })();
+    return loadingRef.current;
+  }, []);
+
+  const preload = useCallback(() => {
+    ensureModel().catch(() => {}); // the error state is shown; Start camera retries
+  }, [ensureModel]);
+
   const start = useCallback(async () => {
     setError(null);
     setRunId((r) => r + 1);
     setState("starting");
     try {
-      if (!holisticRef.current) {
-        setExtractor("loading");
-        try {
-          holisticRef.current = await createHolistic((r) => {
-            draw(canvasRef.current, r);
-            const frame = toFrame(r);
-            bufferRef.current = appendFrame(bufferRef.current, frame);
-            recordRef.current?.push(frame);
-          });
-          setExtractor("ready");
-        } catch (e) {
-          setExtractor("error");
-          throw e;
-        }
-      }
+      await ensureModel();
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { width: 640, height: 480, facingMode: "user" },
         audio: false,
@@ -135,7 +148,7 @@ export function useLandmarkCapture(): LandmarkCapture {
       setError(cameraErrorMessage(e));
       setState("error");
     }
-  }, []);
+  }, [ensureModel]);
 
   useEffect(
     () => () => {
@@ -148,6 +161,10 @@ export function useLandmarkCapture(): LandmarkCapture {
   );
 
   const getBuffer = useCallback(() => bufferRef.current.frames, []);
+  const getStream = useCallback(() => streamRef.current, []);
+  const setFrameListener = useCallback((fn: ((frame: LandmarkFrame, tMs: number) => void) | null) => {
+    listenerRef.current = fn;
+  }, []);
   const beginRecording = useCallback(() => {
     recordRef.current = [];
   }, []);
@@ -156,5 +173,5 @@ export function useLandmarkCapture(): LandmarkCapture {
     recordRef.current = null;
     return frames;
   }, []);
-  return { state, extractor, error, stats, runId, videoRef, canvasRef, start, stop, getBuffer, beginRecording, endRecording };
+  return { state, extractor, error, stats, runId, videoRef, canvasRef, start, stop, getBuffer, beginRecording, endRecording, pose, loadPhase, preload, getStream, setFrameListener };
 }

@@ -64,3 +64,19 @@ def test_vocabulary_endpoint_flags_animation_availability(tmp_path) -> None:
     body = client.get("/api/translation/vocabulary").json()
     by = {i["gloss"]: i["has_animation"] for i in body["items"]}
     assert by["HELLO"] is True and by["WATER"] is False and body["animated"] == 1
+
+
+def test_list_animations_is_cached_until_a_clip_changes(tmp_path) -> None:
+    import json
+
+    from app.avatar import registry
+    from tests.helpers import valid_clip
+
+    (tmp_path / "hello.json").write_text(json.dumps(valid_clip("HELLO")))
+    first = registry.list_animations(tmp_path)
+    assert registry.list_animations(tmp_path) is first  # unchanged folder: same cached object
+    (tmp_path / "water.json").write_text(json.dumps(valid_clip("WATER")))
+    second = registry.list_animations(tmp_path)
+    assert second is not first and {a.gloss for a in second.animations} == {"HELLO", "WATER"}
+    (tmp_path / "water.json").unlink()
+    assert {a.gloss for a in registry.list_animations(tmp_path).animations} == {"HELLO"}

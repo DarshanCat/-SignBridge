@@ -6,6 +6,9 @@ import { apiPost, type RecordResult } from "@/lib/api";
 import { parseClip, type SignClip } from "@/lib/avatar/clip";
 import { SequencePlayer } from "@/lib/avatar/player";
 import { buildRecordRequest, countdownSteps, DURATIONS_S, isValidGloss, normalizeGloss } from "@/lib/recorder";
+import { shortcutHelp } from "@/lib/shortcuts";
+import { CaptureHints } from "./CaptureHints";
+import { useShortcuts } from "./useShortcuts";
 import type { LandmarkCapture } from "./useLandmarkCapture";
 
 const AvatarViewer = dynamic(() => import("./avatar/AvatarViewer"), {
@@ -29,6 +32,7 @@ export function RecordSignPanel({ capture, backendUp }: { capture: LandmarkCaptu
   const cancelled = useRef(false);
   const running = state === "running";
   const busy = phase.kind !== "idle";
+  const canRecord = running && backendUp && !busy && isValidGloss(gloss);
 
   useEffect(
     () => () => {
@@ -76,6 +80,8 @@ export function RecordSignPanel({ capture, backendUp }: { capture: LandmarkCaptu
     }
   }
 
+  useShortcuts({ record: canRecord ? () => void record() : undefined, replay: result?.accepted ? () => player.restart() : undefined });
+
   return (
     <section className="space-y-4" aria-label="Record sign">
       <div className="rounded-xl border border-white/10 bg-panel p-4">
@@ -100,7 +106,7 @@ export function RecordSignPanel({ capture, backendUp }: { capture: LandmarkCaptu
           <canvas ref={canvasRef} width={640} height={480} className="pointer-events-none absolute inset-0 h-full w-full" />
           {!running && (
             <p className="absolute inset-0 flex items-center justify-center p-4 text-center text-sm text-slate-400">
-              {state === "starting" ? (extractor === "loading" ? "Loading MediaPipe landmark extraction…" : "Waiting for camera…") : "Camera is off."}
+              {state === "starting" ? (extractor === "loading" ? "Loading the landmark model…" : "Waiting for camera…") : "Camera is off."}
             </p>
           )}
           {phase.kind === "countdown" && (
@@ -114,6 +120,7 @@ export function RecordSignPanel({ capture, backendUp }: { capture: LandmarkCaptu
             </p>
           )}
         </div>
+        <CaptureHints capture={capture} />
         {error && (
           <p role="alert" className="mt-3 rounded-lg bg-rose-500/15 p-3 text-sm text-rose-200">
             {error}
@@ -152,7 +159,7 @@ export function RecordSignPanel({ capture, backendUp }: { capture: LandmarkCaptu
           </label>
           <button
             type="submit"
-            disabled={!running || !backendUp || busy || !isValidGloss(gloss)}
+            disabled={!canRecord}
             className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-ink disabled:opacity-50"
           >
             {busy ? (phase.kind === "sending" ? "Saving…" : "Recording…") : "Record (3-2-1)"}
@@ -160,7 +167,8 @@ export function RecordSignPanel({ capture, backendUp }: { capture: LandmarkCaptu
         </form>
         {gloss.trim() !== "" && !isValidGloss(gloss) && <p className="mt-2 text-xs text-amber-300">Use letters, digits and hyphens only (up to 32 characters).</p>}
         {gloss.trim() !== "" && isValidGloss(gloss) && <p className="mt-2 text-xs text-slate-400">Will be saved as {normalizeGloss(gloss)}.</p>}
-        {!backendUp && <p className="mt-2 text-xs text-amber-300">Backend unreachable: recordings cannot be saved.</p>}
+        {!backendUp && <p role="alert" className="mt-2 text-xs text-amber-300">Backend unreachable: recordings cannot be saved. Start it with scripts\serve.ps1.</p>}
+        <p className="mt-2 text-xs text-slate-500">Keyboard (when not typing in a field): {shortcutHelp(["record", "replay"])}.</p>
         {problem && (
           <p role="alert" className="mt-2 rounded-lg bg-rose-500/15 p-2 text-sm text-rose-200">
             {problem}

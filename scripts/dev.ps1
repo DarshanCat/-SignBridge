@@ -4,7 +4,7 @@ param([int]$ApiPort = 8000, [int]$WebPort = 3000)
 $root = Split-Path -Parent $PSScriptRoot
 
 $env:SIGNBRIDGE_CORS_ORIGINS = '["http://localhost:' + $WebPort + '"]'
-$env:NEXT_PUBLIC_API_URL = "http://localhost:$ApiPort"
+$env:NEXT_PUBLIC_API_URL = "http://127.0.0.1:$ApiPort"
 
 Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$root\backend'; .\.venv\Scripts\python -m uvicorn app.main:app --port $ApiPort"
 Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$root\frontend'; npm run dev -- -p $WebPort"

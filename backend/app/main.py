@@ -24,6 +24,14 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
     """Load the recognition model once at startup (cached for requests); report honestly if there is none."""
     status = get_model_status(settings.model_dir)
     logger.info("Recognition model state at startup: %s (%s)", status.state, status.message)
+    if settings.preload_nlp:  # the first text to gloss request otherwise pays for loading spaCy (about 4.5 s measured)
+        try:
+            from app.api.nlp_routes import _load_nlp
+
+            _load_nlp(settings.spacy_model)("warm up")
+            logger.info("spaCy model %s preloaded", settings.spacy_model)
+        except Exception as exc:  # the NLP endpoints report 503 themselves; the API must still start
+            logger.warning("spaCy preload skipped: %s", exc)
     yield
 
 

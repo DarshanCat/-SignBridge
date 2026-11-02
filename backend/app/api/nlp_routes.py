@@ -1,9 +1,10 @@
 """Text to gloss and gloss to text (spaCy rules), plus the live prediction WebSocket (stub until a model is trained)."""
 
+import json
 import logging
 from functools import lru_cache
 
-from fastapi import APIRouter, Depends, HTTPException, WebSocket
+from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel, Field
 
 from app.core.config import Settings, get_settings
@@ -96,12 +97,66 @@ def api_gloss_to_text(req: GlossRequest, lex: Lexicon = Depends(get_lexicon)) ->
 
 @router.websocket("/ws/predict")
 async def ws_predict(ws: WebSocket) -> None:
-    """Live landmark streaming endpoint. STUB: reports that no model is available and closes. No prediction is ever produced here."""
+    """Live isolated sign recognition. Client messages (JSON text):
+        {"type": "predict", "frames": [LandmarkFrame, ...], "commit": true}   recognize one sign from the frames
+        {"type": "reset"}                                                      clear the sentence and the segmenter
+        {"type": "frames", "frames": [...]}                                    continuous mode: stream frames in chunks; every finished sign
+                                                                               comes back as a `sign` event, followed by a `stream` status
+        {"type": "undo"} / {"type": "flush"}                                   remove the last sign / close a sign still open
+    Server messages: ready, prediction, reset_ok, error. Without a trained model it sends model_not_trained and closes; it never invents
+    a prediction. Below the confidence threshold the label is UNRECOGNIZED and the sentence is unchanged."""
     await ws.accept()
     settings = get_settings()
     status = get_model_status(settings.model_dir)
     if status.state != "loaded":
         await ws.send_json({"type": "error", "error": "model_not_trained", "message": "No trained sign recognition model is available; streaming prediction is disabled."})
-    else:
-        await ws.send_json({"type": "error", "error": "not_implemented", "message": "A model exists but live streaming prediction is not implemented yet."})
-    await ws.close(code=1013)  # 1013: try again later
+        await ws.close(code=1013)  # 1013: try again later
+        return
+    try:
+        lex = load_lexicon(settings.gloss_dictionary)
+    except (OSError, ValueError, KeyError):
+        await ws.send_json({"type": "error", "error": "dictionary_unavailable", "message": "The gloss dictionary is unavailable or invalid."})
+        await ws.close(code=1011)
+        return
+    from app.recognition.inference import get_recognizer
+    from app.services.live_service import LiveError, LiveSession, live_flush, live_predict, live_stream, load_threshold, sentence_fields
+
+    config = get_recognizer(settings.model_dir).config
+    threshold, source = load_threshold(settings.model_dir, settings.min_confidence)
+    await ws.send_json({"type": "ready", "classes": len(config.classes), "architecture": config.arch, "threshold": threshold, "threshold_source": source})
+    session = LiveSession()
+    try:
+        while True:
+            raw = await ws.receive_text()
+            if len(raw) > settings.max_body_bytes:
+                await ws.send_json({"type": "error", "error": "too_large", "message": "Message too large."})
+                continue
+            try:
+                msg = json.loads(raw)
+                kind = msg.get("type") if isinstance(msg, dict) else None
+            except ValueError:
+                kind, msg = None, {}
+            if kind == "reset":
+                session.reset()
+                await ws.send_json({"type": "reset_ok"})
+            elif kind == "undo":
+                removed = session.undo()
+                await ws.send_json({"type": "sequence", "removed": removed, **sentence_fields(session, lex)})
+            elif kind == "flush":
+                for ev in live_flush(session, settings.model_dir, lex, settings.min_confidence):
+                    await ws.send_json(ev)
+            elif kind == "frames":
+                try:
+                    for ev in live_stream(msg, session, settings.model_dir, lex, settings.min_confidence):
+                        await ws.send_json(ev)
+                except LiveError as exc:
+                    await ws.send_json({"type": "error", "error": exc.code, "message": exc.message})
+            elif kind == "predict":
+                try:
+                    await ws.send_json(live_predict(msg, session, settings.model_dir, lex, settings.min_confidence))
+                except LiveError as exc:
+                    await ws.send_json({"type": "error", "error": exc.code, "message": exc.message})
+            else:
+                await ws.send_json({"type": "error", "error": "bad_message", "message": "Expected a JSON message with type frames, predict, undo, flush or reset."})
+    except WebSocketDisconnect:
+        return

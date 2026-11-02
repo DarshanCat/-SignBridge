@@ -13,7 +13,13 @@ const nextConfig = {
   output: "standalone",
   agentRules: false,
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    // Large static files that never change between runs are cached for a day (default is max-age=0, a revalidation on every load).
+    const longCache = [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }];
+    return [
+      { source: "/:path*", headers: securityHeaders },
+      { source: "/mediapipe/:path*", headers: longCache },
+      { source: "/avatar/:path*", headers: longCache },
+    ];
   },
 };
 

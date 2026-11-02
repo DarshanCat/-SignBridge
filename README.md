@@ -23,7 +23,7 @@ It is not a complete ISL translator. Read [Known limitations](#known-limitations
 |---|---|
 | Dataset | INCLUDE processed completely: 4,284 samples, 262 classes (audit PASS, 8 listed videos do not exist in the released archives) |
 | Recognition model | 1D CNN, BiGRU and Transformer trained and evaluated; the CNN is used live |
-| Live recognition | WebSocket `/ws/predict`, tested with real test features through the socket; not tested with a real webcam |
+| Live recognition | WebSocket `/ws/predict`: isolated signs and continuous signing with sign segmentation; tested with real INCLUDE samples joined into streams; not tested with a real webcam |
 | Text to gloss | spaCy rule layer, 80+ unit tests, rules not validated by ISL signers |
 | Avatar | Mixamo model driven by retargeted clips; 262 signs have an unreviewed clip |
 | Sign recorder | Record tab, quality check, promote command; not tested with a real webcam |
@@ -64,10 +64,16 @@ Docker: `docker compose up --build` (images were built once earlier; compose was
 
 ### Using it
 
+- **Conversation tab (first, default):** one screen for both directions with a chat log. The deaf user signs in front of the camera;
+  recognized signs build a sentence (undo and clear available) that is sent as a message, by button, by `S`, or automatically after 3 s of rest.
+  The hearing user types; the message is converted to gloss, the avatar signs it, and the text and gloss stay in the chat with a line saying
+  which words had no clip. Shortcuts when not typing: P play or pause, A replay, U undo, C clear, S send. Layout works down to a 375 px wide screen.
 - **Sign to English tab:** Start camera (allow the browser permission). The overlay shows the body skeleton and both hands; a line under the
-  video says whether shoulders and elbows are visible. Press Recognize sign after one isolated sign; accepted signs build the sentence,
-  results below the confidence threshold (0.7) are shown as Unrecognized.
+  video says whether shoulders and elbows are visible. Press Recognize sign after one isolated sign (R), or switch on Continuous signing: the server finds
+  each sign from your hand movement (lower your hands between signs) and the glosses and the English sentence build up by themselves.
+  Results below the confidence threshold (0.7) are shown as Unrecognized.
 - **English to Sign tab:** type a sentence, Translate, then Play, with speed, pause and replay. Words without a clip are listed, not faked.
+- Keyboard shortcuts also exist on English to Sign (P, A), Record sign (R, A) and Landmark check (R); the page shows an error banner when the backend is down.
 - **Landmark check tab:** records a 4 second local video together with the browser's landmarks and offers both as downloads;
   `python -m training.compare_landmarks` (from `backend/`) then compares them with Python MediaPipe on the same video. Nothing is uploaded.
 - **Record sign tab:** record a sign INCLUDE lacks (3-2-1 countdown, landmarks only). Promote a good take:
@@ -81,6 +87,12 @@ Docker: `docker compose up --build` (images were built once earlier; compose was
   the same preprocessing for training, REST and WebSocket (tested to 1e-6).
 - **Live WebSocket:** `/ws/predict` returns sign, gloss, confidence, alternatives, the gloss sequence and an English sentence; below the
   threshold it returns UNRECOGNIZED and leaves the sentence unchanged.
+- **Continuous signing:** `backend/app/recognition/segmenter.py` cuts the landmark stream into signs (a wrist raised and moving opens a sign, hands down or
+  still closes it); every segment is classified and added to the sentence. On streams of real INCLUDE samples with a pause between signs 98 percent of the
+  test signs were split correctly (`docs/evaluation/SEGMENTATION.md`).
+- **Conversation mode:** chat log for both directions on one screen (see Using it).
+- **Gloss to English:** rule fixes and 40 tested gloss sequences (was, were, will be, on Monday, in the morning, possessives, greetings with a name, do support in
+  questions); `backend/tests/test_gloss_to_text_quality.py`.
 - **Text to gloss:** spaCy rules (time first, subject object verb, negation after the verb, question words last, dropped articles and
   auxiliaries, fingerspelling markers for unknown words) and non-manual marker tags (`docs/NLP.md`). Gloss to English is a heuristic.
 - **Avatar:** Mixamo Y Bot driven by retargeted landmark clips, 0.2 s blended transitions, speed, pause, replay, and a rule-based head
@@ -140,7 +152,7 @@ tools/            avatar conversion (Blender), supplement watchdog
 .\scripts\test.ps1           # backend pytest, tsc, eslint, vitest and the production build (stop dev servers first)
 ```
 
-Last full run (2026-10-31): backend pytest 277 passed, `tsc` clean, `eslint` clean, vitest 67 passed, `next build` ok. Backend tests use tiny
+Last full run (2026-11-02, `scripts\test.ps1`): backend pytest 329 passed, `tsc` clean, `eslint` clean, vitest 78 passed, `next build` ok. Backend tests use tiny
 synthetic models; their scores are not results. See `docs/PROJECT_STATUS.md` for the exact run.
 
 ## Known limitations
@@ -157,7 +169,9 @@ synthetic models; their scores are not results. See `docs/PROJECT_STATUS.md` for
   will look wrong. Nothing is marked verified, and the registry cannot mark a sign verified without a recorded human review.
 - **Missing signs.** 262 of 313 dictionary glosses have a clip; 1 INCLUDE class has no data and 50 grammar words (NOT, WHAT, WHERE, GO, HELP,
   YES, NO, ...) have none; fingerspelling clips do not exist (`docs/MISSING_SIGNS.md`).
-- **Isolated signs only.** Continuous signing is not segmented; each Recognize press is one sign, and gloss to English is a heuristic.
+- **Signs signed back to back cannot be separated.** The continuous mode needs the hands to drop or pause between signs. Segmented recognition is a few
+  points worse than isolated recognition: on test streams with a pause 76.7 percent of the signs were recognized correctly and 6.8 percent accepted
+  wrongly (isolated: about 82.8 and 3.9 percent). The pauses in that test were synthetic; real streams are untested. Gloss to English is a heuristic.
 - **Browser versus training features.** Training features came from Python MediaPipe on video; the browser uses the WebAssembly build with
   CPU inference. The difference is untested with a real webcam and may lower accuracy.
 - **Text to gloss rules are assumptions** (`docs/NLP.md`), not validated by ISL signers.

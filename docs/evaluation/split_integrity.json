@@ -4,26 +4,26 @@
     "train": {
       "expected_by_task": 3127,
       "listed": 3127,
-      "usable_processed": 2671,
+      "usable_processed": 3121,
       "excluded_with_reason": 0,
-      "never_seen_in_any_zip": 456,
-      "manifest_rows": 2671
+      "never_seen_in_any_zip": 6,
+      "manifest_rows": 3121
     },
     "val": {
       "expected_by_task": 348,
       "listed": 348,
-      "usable_processed": 299,
+      "usable_processed": 347,
       "excluded_with_reason": 0,
-      "never_seen_in_any_zip": 49,
-      "manifest_rows": 299
+      "never_seen_in_any_zip": 1,
+      "manifest_rows": 347
     },
     "test": {
       "expected_by_task": 817,
       "listed": 817,
-      "usable_processed": 709,
+      "usable_processed": 816,
       "excluded_with_reason": 0,
-      "never_seen_in_any_zip": 108,
-      "manifest_rows": 709
+      "never_seen_in_any_zip": 1,
+      "manifest_rows": 816
     }
   },
   "listed_total": 4292,
@@ -40,57 +40,64 @@
   "processed_with_split_different_from_lists": 0,
   "identical_features_across_splits": 0,
   "classes_missing_from_a_split": {
-    "train": 1,
-    "val": 61,
-    "test": 8
+    "train": 0,
+    "val": 16,
+    "test": 0
   },
   "listed_but_never_seen_by_category": {
-    "Home": 190,
-    "Society": 162,
-    "Days_and_Time": 83,
-    "Jobs": 48,
-    "Electronics": 30,
-    "People": 26,
-    "Seasons": 19,
-    "Means_of_Transportation": 18,
-    "Animals": 16,
-    "Colours": 11,
-    "Clothes": 10
+    "Days_and_Time": 8
   },
   "listed_but_never_seen_by_class_top10": {
-    "Days_and_Time/81. Second": 12,
-    "Days_and_Time/Second (Number)": 8,
-    "Home/40. Paint": 8,
-    "Society/19. Ball": 8,
-    "Society/23. God": 7,
-    "Home/38. Page": 7,
-    "Society/22. Science": 7,
-    "Home/49. Ring": 7,
-    "Home/36. Soap": 7,
-    "Home/24. Table": 7
+    "Days_and_Time/Second (Number)": 8
   },
   "listed_but_never_seen_examples": {
     "train": [
-      "Society/23. God/MVI_8996.MOV",
-      "Home/38. Page/MVI_8809.MOV",
-      "Animals/5. Cow/MVI_8570.MOV",
       "Days_and_Time/Second (Number)/MVI_5506.MOV",
-      "Means_of_Transportation/9. Train/MVI_8579.MOV"
+      "Days_and_Time/Second (Number)/MVI_5505.MOV",
+      "Days_and_Time/Second (Number)/MVI_5503.MOV",
+      "Days_and_Time/Second (Number)/MVI_4647.MOV",
+      "Days_and_Time/Second (Number)/MVI_5504.MOV"
     ],
     "val": [
-      "Home/49. Ring/MVI_9087.MOV",
-      "Home/41. Letter/MVI_9055.MOV",
-      "Society/13. Attack/MVI_8707.MOV",
-      "Days_and_Time/85. Night/MVI_9198.MOV",
-      "Days_and_Time/86. Time/MVI_9204.MOV"
+      "Days_and_Time/Second (Number)/MVI_4648.MOV"
     ],
     "test": [
-      "Animals/1. Dog/MVI_8560.MOV",
-      "Animals/1. Dog/MVI_8561.MOV",
-      "Animals/2. Cat/MVI_8563.MOV",
-      "Animals/5. Cow/MVI_8569.MOV",
-      "Clothes/39. Suit/MVI_8602.MOV"
+      "Days_and_Time/Second (Number)/MVI_4650.MOV"
     ]
   },
-  "signer_ids_available": false
+  "signer_ids_available": false,
+  "listed_videos_not_in_manifest": [
+    "Days_and_Time/Second (Number)/MVI_4647.MOV",
+    "Days_and_Time/Second (Number)/MVI_4648.MOV",
+    "Days_and_Time/Second (Number)/MVI_4649.MOV",
+    "Days_and_Time/Second (Number)/MVI_4650.MOV",
+    "Days_and_Time/Second (Number)/MVI_5503.MOV",
+    "Days_and_Time/Second (Number)/MVI_5504.MOV",
+    "Days_and_Time/Second (Number)/MVI_5505.MOV",
+    "Days_and_Time/Second (Number)/MVI_5506.MOV"
+  ],
+  "filename_fallback_rows": [],
+  "zip_videos_unmatched_in_supplement": [],
+  "classes_without_a_sample_in_split": {
+    "train": [],
+    "val": [
+      "Mean",
+      "Nice",
+      "Ugly",
+      "cheap",
+      "deep",
+      "expensive",
+      "female",
+      "hard",
+      "high",
+      "light",
+      "male",
+      "rich",
+      "strong",
+      "thick",
+      "thin",
+      "weak"
+    ],
+    "test": []
+  }
 }

@@ -10,7 +10,7 @@ SignBridge is an end-to-end bidirectional Indian Sign Language (ISL) and English
 ## Current state (2026-10-31)
 - Live Sign to English: `/ws/predict` WebSocket, one isolated sign per request, confidence threshold 0.7, below it the answer is UNRECOGNIZED. Same preprocessing as training (`normalize_frame`, then `prepare_sequence`).
 - English to Sign: text to gloss (`backend/nlp`), clips retargeted from INCLUDE samples (`backend/retarget`), Mixamo avatar. 262 glosses have a clip, 51 do not (`docs/MISSING_SIGNS.md`).
-- Extra tabs: Record sign (own takes, landmarks only), Landmark check (browser vs Python MediaPipe on the same video).
+- Tabs: Conversation (chat for both directions, the default), Sign to English (isolated and continuous signing, sign segmentation in `backend/app/recognition/segmenter.py`), English to Sign, Record sign (own takes, landmarks only), Landmark check (browser vs Python MediaPipe on the same video).
 - Run: `.\scripts\serve.ps1` (production build, recommended). Check: `.\scripts\test.ps1` (pytest, tsc, eslint, vitest, build). Use the dev server only while editing.
 - Latest status and every decision: `docs/PROJECT_STATUS.md` (newest first). Model numbers: `docs/evaluation/results.md`.
 

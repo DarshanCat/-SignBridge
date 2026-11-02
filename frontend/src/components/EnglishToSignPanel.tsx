@@ -7,7 +7,9 @@ import { SequencePlayer } from "@/lib/avatar/player";
 import { loadPlaylist } from "@/lib/avatar/loader";
 import { describeTokens, glossesToPlan, playOrder, type TokenView } from "@/lib/avatar/sentence";
 import { RIG_TEST_CLIP } from "@/lib/avatar/rigTest";
+import { shortcutHelp } from "@/lib/shortcuts";
 import type { AvatarKind } from "./avatar/GlbHumanoid";
+import { useShortcuts } from "./useShortcuts";
 
 const AvatarViewer = dynamic(() => import("./avatar/AvatarViewer"), {
   ssr: false,
@@ -33,6 +35,7 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
   const [registry, setRegistry] = useState<SignRegistry | null>(null);
   const [rate, setRate] = useState(1);
   const [ms, setMs] = useState<number | null>(null);
+  const [stage, setStage] = useState<string | null>(null);
   const [kind, setKind] = useState<AvatarKind | null>(null);
 
   useEffect(() => () => player.dispose(), [player]);
@@ -58,12 +61,15 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
     player.load([]);
     const t0 = performance.now();
     try {
+      setStage("Converting text to gloss");
       const gloss = await apiPost<TextToGloss>("/api/nlp/text-to-gloss", { text });
       if (gloss.tokens.length === 0) {
         setResult({ text, gloss, views: [], plan: null, failed: [] });
         return;
       }
+      setStage("Looking up sign clips");
       const plan = await apiPost<AvatarPlan>("/api/avatar/plan", { gloss: glossesToPlan(gloss.tokens) });
+      setStage(`Loading ${plan.steps.filter((x) => x.available).length} clip(s)`);
       const { clips, failed } = await loadPlaylist(plan.steps);
       const byGloss = new Map(clips.map((c) => [c.gloss.toUpperCase(), c]));
       const views = describeTokens(gloss.tokens, new Set(byGloss.keys()));
@@ -75,6 +81,7 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
       setResult(null);
       setError(e instanceof Error ? e.message : "Translation failed.");
     } finally {
+      setStage(null);
       setBusy(false);
     }
   }
@@ -88,6 +95,10 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
 
   const hasPlaylist = snap.total > 0;
   const playing = snap.status === "playing";
+  useShortcuts({
+    play: hasPlaylist ? () => (playing ? player.pause() : player.play()) : undefined,
+    replay: hasPlaylist ? () => player.replay() : undefined,
+  });
   const btn = "inline-flex items-center gap-2 rounded-lg bg-white/10 px-3 py-2 text-sm disabled:opacity-40";
 
   return (
@@ -120,6 +131,12 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
             {busy ? "Translating…" : "Translate"}
           </button>
         </form>
+        {busy && stage && (
+          <p aria-live="polite" className="mt-2 flex items-center gap-2 text-xs text-sky-300">
+            <span className="inline-block h-3 w-3 animate-spin rounded-full border-2 border-sky-300 border-t-transparent" aria-hidden />
+            {stage}…
+          </p>
+        )}
         {!backendUp && <p className="mt-2 text-xs text-amber-300">Backend unreachable: translation is unavailable.</p>}
         {error && (
           <p role="alert" className="mt-2 rounded-lg bg-rose-500/15 p-2 text-sm text-rose-200">
@@ -199,7 +216,8 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
             </select>
           </label>
         </div>
-        <p className="mt-2 text-xs text-slate-500">Avatar model: {kind === "glb" ? "Mixamo model from /avatar/signer.glb (terms not yet confirmed)" : kind === "procedural" ? "built in procedural humanoid (no signer.glb found or usable)" : "loading"}.</p>
+        <p className="mt-2 text-xs text-slate-500">Keyboard (when not typing): {shortcutHelp(["play", "replay"])}.</p>
+        <p className="mt-2 text-xs text-slate-500">Avatar model: {kind === "glb" ? "Mixamo model from /avatar/signer.glb (terms not yet confirmed)" : kind === "procedural" ? "built in procedural humanoid (no signer.glb found or usable)" : "loading the 3D model…"}.</p>
         <button onClick={runRigTest} className="mt-3 text-xs text-slate-400 underline">
           Run rig self-test (a generic arm motion to check the avatar works; not a sign)
         </button>
@@ -213,7 +231,7 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
           <>
             <p className="mt-2 text-xs text-amber-300">
               {registry.totals.verified} verified, {registry.totals.clip_unreviewed} with an unreviewed clip, {registry.totals.no_clip} without
-              any clip, of {registry.totals.signs} placeholder glosses. A sign is only verified after a visual check and ISL signer review.
+              any clip, of {registry.totals.signs} registered glosses. A sign is only verified after a visual check and ISL signer review.
             </p>
             {registry.unregistered_clips.length > 0 && (
               <p className="mt-1 text-xs text-rose-300">Clips not in the sign registry: {registry.unregistered_clips.join(", ")}</p>

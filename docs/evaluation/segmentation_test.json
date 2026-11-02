@@ -1,0 +1,50 @@
+{
+  "split": "test",
+  "cfg": {
+    "rest_y": 2.0,
+    "start_frames": 2,
+    "end_frames": 6,
+    "still_speed": 0.03,
+    "still_frames": 10,
+    "pad_before": 5,
+    "pad_after": 4,
+    "min_engaged": 6,
+    "max_frames": 120
+  },
+  "results": {
+    "gap0": {
+      "true_signs": 322,
+      "segments": 321,
+      "split_correct": 242,
+      "recognized_correct": 188,
+      "sentence_exact": 28,
+      "streams": 80,
+      "recognized_wrong": 20,
+      "fragmented": 77,
+      "merged_segments": 81,
+      "unrecognized": 34
+    },
+    "gap10": {
+      "true_signs": 322,
+      "segments": 322,
+      "split_correct": 316,
+      "recognized_correct": 247,
+      "sentence_exact": 28,
+      "streams": 80,
+      "recognized_wrong": 22,
+      "unrecognized": 47,
+      "fragmented": 4,
+      "merged_segments": 4
+    },
+    "gap20": {
+      "true_signs": 322,
+      "segments": 322,
+      "split_correct": 320,
+      "recognized_correct": 248,
+      "sentence_exact": 28,
+      "streams": 80,
+      "recognized_wrong": 23,
+      "unrecognized": 49
+    }
+  }
+}

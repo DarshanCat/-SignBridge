@@ -216,3 +216,24 @@ def test_compare_models_picks_best_by_validation_not_test() -> None:
     reports = {"cnn": rep(0.5, 0.9), "bigru": rep(0.7, 0.1), "transformer": rep(0.6, 0.95)}
     assert pick_best(reports) == "bigru"  # highest validation score, although another model has a better test score
     assert "Best by validation macro-F1: **bigru**" in results_markdown(reports, "bigru")
+
+
+def test_results_markdown_has_label_per_class_confusions_and_threshold(tmp_path) -> None:
+    from training.calibrate import choose_threshold
+    from training.compare_models import confusion_csv
+
+    cm = [[3, 1], [2, 4]]
+    t = {"macro_f1": 0.5, "top1_accuracy": 0.7, "top5_accuracy": 0.9, "macro_precision": 0.5, "macro_recall": 0.5, "confusion_matrix": cm,
+         "per_class_accuracy": {"A": {"support": 4, "accuracy": 0.75}, "B": {"support": 6, "accuracy": 0.667}},
+         "accuracy_vs_coverage": [{"threshold": 0.5, "coverage": 0.8, "accuracy_on_answered": 0.9, "answered": 8, "unrecognized": 2}]}
+    rep = {"results": {"val": {**t, "macro_f1": 0.6}, "test": t}, "parameters": 1, "hyperparameters": {"epochs_run": 1, "seed": 0},
+           "split_method": "predefined", "sample_counts": {}, "dataset": {"name": "n", "license": "l"}, "classes_missing_from_train": []}
+    md = results_markdown({"cnn": rep}, "cnn", {"cnn": "confusion_matrix_cnn.csv"},
+                          {"threshold": 0.5, "rule": "r", "val_coverage": 0.7, "val_accuracy_on_answered": 0.95}, ["A", "B"])
+    assert "Authors' predefined split, signer independence not verified." in md
+    assert "| A | 4 | 0.750 |" in md and "| B | A | 2 |" in md and "**0.5**" in md and "coverage 0.8000 and accuracy on answered 0.9000" in md and "confusion_matrix_cnn.csv" in md
+    confusion_csv(t, ["A", "B"], tmp_path / "c.csv")
+    assert (tmp_path / "c.csv").read_text().splitlines()[1] == "A,3,1"
+    probs = np.array([[0.9, 0.1], [0.6, 0.4], [0.55, 0.45], [0.2, 0.8], [0.3, 0.7], [0.95, 0.05]] * 4)
+    y = np.array([0, 1, 1, 1, 0, 0] * 4)
+    assert 0.0 <= choose_threshold(probs, y, 0.9) <= 0.95

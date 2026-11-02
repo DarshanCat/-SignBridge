@@ -41,3 +41,6 @@ zips_keep/
 *.part
 *.log
 
+
+# Clips retargeted from INCLUDE landmarks: no redistribution (licence conflict unresolved); rebuild with retarget.make_vocabulary
+frontend/public/animations/*.json

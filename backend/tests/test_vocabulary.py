@@ -33,10 +33,10 @@ def test_pick_sample_prefers_fewest_no_hand_frames_then_fewest_missing_then_long
 
 def test_shipped_vocabulary_index_matches_the_clip_files_and_records_the_sample() -> None:
     idx = json.loads((ANIM / "index.json").read_text(encoding="utf-8"))["clips"]
-    assert len(idx) == 10 and {"HELLO", "THANK-YOU", "HOSPITAL", "MARKET", "YESTERDAY", "I", "YOU", "DOCTOR", "BANK", "TOMORROW"} == set(idx)
+    assert {"HELLO", "THANK-YOU", "HOSPITAL", "MARKET", "YESTERDAY", "I", "YOU", "DOCTOR", "BANK", "TOMORROW"} <= set(idx)
     for gloss, e in idx.items():
         clip = json.loads((ANIM / e["file"]).read_text(encoding="utf-8"))
         assert clip["gloss"] == gloss and clip["source"]["review_status"] == "not_signer_reviewed"
         sample = clip["source"]["source_sample"]
-        assert sample == e["source_sample"] and sample["split"] == "train" and sample["video"].endswith(".MOV")
+        assert sample == e["source_sample"] and sample["split"] == "train" and sample["video"].upper().endswith((".MOV", ".MP4"))
         assert sample["feature_file"].endswith(".npy") and sample["candidates_considered"] >= 1

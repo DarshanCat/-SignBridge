@@ -9,3 +9,16 @@ body {
   outline: 2px solid #5eead4;
   outline-offset: 2px;
 }
+
+/* Narrow screens: comfortable touch targets (44 px) and 16 px fields so phones do not zoom into them */
+@media (max-width: 640px) {
+  button,
+  select,
+  input:not([type="checkbox"]):not([type="radio"]) {
+    min-height: 44px;
+  }
+  input:not([type="checkbox"]):not([type="radio"]),
+  select {
+    font-size: 16px;
+  }
+}

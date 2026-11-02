@@ -1,0 +1,42 @@
+{
+  "label": "pilot, v1 partial split, not reportable",
+  "run": "s2_transformer_e40",
+  "arch": "transformer",
+  "validation": {
+    "top1_accuracy": 0.7123745819397993,
+    "top5_accuracy": 0.9297658862876255,
+    "macro_f1": 0.6770731707317074,
+    "num_samples": 299
+  },
+  "test_split_evaluated": false,
+  "hyperparameters": {
+    "arch": "transformer",
+    "seed": 0,
+    "epochs_max": 40,
+    "epochs_run": 32,
+    "batch_size": 16,
+    "lr": 0.001,
+    "seq_len": 32,
+    "hidden": 128,
+    "layers": 2,
+    "heads": 4,
+    "dropout": 0.3,
+    "patience": 8,
+    "noise_std": 0.01,
+    "class_weights": false,
+    "augment": false,
+    "max_gap": 0
+  },
+  "parameters": 361226,
+  "epochs_run": 32,
+  "seconds": 227.5,
+  "split_method": "predefined",
+  "sample_counts": {
+    "train": 2671,
+    "val": 299
+  },
+  "classes_missing_from_train": [
+    "Adjectives/Extra"
+  ],
+  "note": "Authors' predefined INCLUDE split on the partial v1 data; signer independence unverified. Not a reportable result."
+}

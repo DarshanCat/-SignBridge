@@ -1,40 +1,40 @@
 {
   "statistics": {
-    "total_usable_samples": 3679,
-    "classes": 266,
+    "total_usable_samples": 4284,
+    "classes": 262,
     "samples_per_split": {
-      "train": 2671,
-      "test": 709,
-      "val": 299
+      "train": 3121,
+      "test": 816,
+      "val": 347
     },
     "feature_dim": 225,
     "feature_layout": "pose 33x3 | left hand 21x3 | right hand 21x3 (x, y, z), shoulder-midpoint origin, shoulder-width scale; face not used",
     "dtype_counts": {
-      "float32": 3679
+      "float32": 4284
     },
     "trailing_shape_counts": {
-      "(225,)": 3679
+      "(225,)": 4284
     },
     "sequence_length_frames": {
       "min": 17,
-      "p5": 22,
-      "median": 30,
-      "mean": 31.75,
-      "p95": 46,
+      "p5": 23,
+      "median": 31,
+      "mean": 32.39,
+      "p95": 47,
       "max": 77
     },
-    "frames_total": 116798,
+    "frames_total": 138738,
     "missing_landmark_rates": {
-      "frame_without_left_hand": 0.1707,
-      "frame_without_right_hand": 0.2735,
-      "frame_without_any_hand": 0.0963,
+      "frame_without_left_hand": 0.1957,
+      "frame_without_right_hand": 0.2962,
+      "frame_without_any_hand": 0.1189,
       "frame_without_pose": 0.0,
       "note": "frames without a body pose are discarded during extraction, so every stored frame has a pose; a missing hand is an all-zero block"
     },
     "samples_per_class": {
-      "min": 1,
-      "max": 22,
-      "median": 11.0
+      "min": 4,
+      "max": 25,
+      "median": 15.0
     },
     "exclusions": {
       "count": 0,
@@ -43,9 +43,9 @@
     "non_finite_arrays": 0
   },
   "integrity": {
-    "zip_part_records": 44,
-    "manifest_rows": 3679,
-    "feature_files_on_disk": 3679,
+    "zip_part_records": 72,
+    "manifest_rows": 4284,
+    "feature_files_on_disk": 605,
     "problems": {},
     "problem_counts": {},
     "duplicate_manifest_paths": 0,
