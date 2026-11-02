@@ -253,8 +253,7 @@ Three measurements became product behavior. First, the prototype requests 1280$\
 \textbf{Test-split disclosure.} The test split was used as follows; we list every use known to us.
 \begin{enumerate}
 \item The three baseline models (seed 0) were each evaluated once on the full test split (816 samples) to produce Table~\ref{tab:base}. The earlier pilot runs used the validation split of a partial manifest only and never read test features.
-\item The segmentation study of Section~
-ef{sec:case} evaluated streams of test samples once per rest-gap setting (three settings) after tuning on validation.
+\item The segmentation study of Section~\ref{sec:case} evaluated streams of test samples once per rest-gap setting (three settings) after tuning on validation.
 \item The browser-path benchmark of the baseline CNN on 100 test videos (Section~\ref{sec:gap}) is a further use. It followed three end-to-end fake-camera runs on three INCLUDE test videos, whose wrong results first exposed the picture-aspect problem; the rescale was therefore designed after seeing test videos, although it was derived from the geometry and its size was not tuned on test data.
 \item After the resampling routine was vectorized for speed, the baseline CNN was run over the test split once to confirm that its accuracy (0.9130) was unchanged.
 \item Each of the three augmented models (seed 0) and each of the twelve additional models (seeds 1 and 2, baseline and augmented) was evaluated once on the full test split at the end of its training run.

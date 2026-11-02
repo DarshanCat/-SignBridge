@@ -37,3 +37,19 @@ All numbers are from `docs/evaluation/`; nothing was estimated.
 Scripts that produced these files are in `tools/browser_path/` (`select_all.py`, `browser_harness_corpus.js`, `serve_frames_corpus.py`, `run_harness.sh`, `validate_corpus.py`, `eval_matrix.py`, `report_matrix.py`, `zoom_save.py`). The three-seed runs are driven by a separate script that is not copied until those runs have finished.
 
 Facts about the training settings and the augmentation (ranges, probabilities, the exact y scale) are from the code in `backend/training/` and the notes in `docs/PROJECT_STATUS.md`.
+
+## Word version
+
+`main.docx` is generated from `main.tex`; edit the LaTeX and rebuild, do not edit the Word file if you want to keep the two in step.
+
+```powershell
+python paper\docx\build_docx.py
+```
+
+It needs pandoc 3.x (install it with winget, package id JohnMacFarlane.Pandoc) and python-docx. `docx\prepare.py` makes a pandoc friendly copy of `main.tex` and PNG copies of the figures, `ieee.csl` is the IEEE citation style, `docx\filter.lua` numbers sections, figures and tables and resolves the references, and `docx\build_docx.py` applies the styles, the highlights and the two column layout.
+
+- `\pending{...}` shows as white bold text on red highlight, `\todo{...}` as bold text on yellow highlight (search for the highlight in Word: Find, Format, Highlight).
+- Each of the 22 references carries a Word comment starting with `[VERIFY]` that repeats the DOI or arXiv note from `refs.bib`.
+- Equations are Word equations; the references are formatted by citeproc in IEEE style.
+
+Known differences from the PDF: caption and heading numbers are typed text (they will not renumber if you insert a figure), cross references are static text, the full width Table IV is one column wide, the vertical rule inside Table III is dropped, pagination differs from the LaTeX version, and the placement of figures and tables follows Word's flow.
