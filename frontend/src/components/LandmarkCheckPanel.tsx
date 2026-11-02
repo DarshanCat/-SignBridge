@@ -1,4 +1,5 @@
 "use client";
+import { cameraBoxStyle, FramingGuide } from "./CameraFrame";
 import { Camera, CameraOff, Circle, Download } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { USE_CPU_INFERENCE } from "@/lib/holistic";
@@ -121,9 +122,10 @@ export function LandmarkCheckPanel({ capture }: { capture: LandmarkCapture }) {
           you are done.
         </p>
 
-        <div className="relative mt-3 aspect-[4/3] overflow-hidden rounded-lg bg-black/60">
+        <div className="relative mt-3 overflow-hidden rounded-lg bg-black/60" style={cameraBoxStyle(capture.resolution)}>
           <video ref={videoRef} playsInline muted className="h-full w-full object-cover" aria-label="Webcam preview" />
-          <canvas ref={canvasRef} width={640} height={480} className="pointer-events-none absolute inset-0 h-full w-full" />
+          <canvas ref={canvasRef} width={capture.resolution?.width ?? 640} height={capture.resolution?.height ?? 480} className="pointer-events-none absolute inset-0 h-full w-full" />
+          <FramingGuide capture={capture} />
           {!running && (
             <p className="absolute inset-0 flex items-center justify-center p-4 text-center text-sm text-slate-400">
               {state === "starting" ? (extractor === "loading" ? "Loading the landmark model…" : "Waiting for camera…") : "Camera is off."}

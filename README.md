@@ -183,7 +183,7 @@ synthetic models; their scores are not results. See `docs/PROJECT_STATUS.md` for
 ## Documents
 
 `docs/PROJECT_STATUS.md` (dated log of every step), `docs/MODEL_TRAINING.md`, `docs/NLP.md`, `docs/AVATAR_RETARGET_PLAN.md`,
-`docs/API_REFERENCE.md`, `docs/MISSING_SIGNS.md`, `docs/evaluation/` (audit, results, pilot), `docs/LABEL_REVIEW`
+`docs/API_REFERENCE.md`, `docs/DEPLOYMENT.md` (Vercel and Hugging Face Spaces, prepared, not deployed), `docs/MISSING_SIGNS.md`, `docs/evaluation/` (audit, results, pilot), `docs/LABEL_REVIEW`
 (`docs/evaluation/LABEL_REVIEW.md`). Older documents in `docs/` (for example `PROJECT_REPORT.md`, `DEPLOYMENT_READINESS.md`) were written
 before the model existed and may be out of date; `PROJECT_STATUS.md` wins where they disagree.
 

@@ -7,7 +7,7 @@ from functools import lru_cache
 from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel, Field
 
-from app.core.config import Settings, get_settings
+from app.core.config import Settings, get_settings, origin_allowed
 from app.recognition.model_status import get_model_status
 from nlp.gloss_to_text import gloss_to_english
 from nlp.lexicon import Lexicon, load_lexicon
@@ -105,8 +105,11 @@ async def ws_predict(ws: WebSocket) -> None:
         {"type": "undo"} / {"type": "flush"}                                   remove the last sign / close a sign still open
     Server messages: ready, prediction, reset_ok, error. Without a trained model it sends model_not_trained and closes; it never invents
     a prediction. Below the confidence threshold the label is UNRECOGNIZED and the sentence is unchanged."""
-    await ws.accept()
     settings = get_settings()
+    if settings.ws_check_origin and not origin_allowed(ws.headers.get("origin"), settings):
+        await ws.close(code=1008)  # policy violation: the page is not on the list of allowed origins
+        return
+    await ws.accept()
     status = get_model_status(settings.model_dir)
     if status.state != "loaded":
         await ws.send_json({"type": "error", "error": "model_not_trained", "message": "No trained sign recognition model is available; streaming prediction is disabled."})

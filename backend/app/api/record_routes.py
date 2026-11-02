@@ -15,7 +15,15 @@ from nlp.lexicon import load_lexicon
 from app.schemas.landmarks import MAX_FRAMES, LandmarkFrame
 
 logger = logging.getLogger("signbridge")
-router = APIRouter()
+
+
+def require_recording(settings: Settings = Depends(get_settings)) -> None:
+    """The recorder writes to disk; a public deployment turns it off with SIGNBRIDGE_RECORDING_ENABLED=false."""
+    if not settings.recording_enabled:
+        raise HTTPException(status_code=403, detail="Recording is disabled on this deployment.")
+
+
+router = APIRouter(dependencies=[Depends(require_recording)])
 
 
 class RecordRequest(BaseModel):

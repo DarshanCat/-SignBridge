@@ -1,11 +1,13 @@
 "use client";
 import { LOAD_PHASE_TEXT } from "@/lib/holistic";
-import { poseAdvice } from "@/lib/overlay";
+import { resolutionLabel } from "@/lib/camera";
+import { framingWarning, poseAdvice } from "@/lib/overlay";
 import type { LandmarkCapture } from "./useLandmarkCapture";
 
 /** What the landmark model is loading (with its step), and what the body pose tracker currently sees. */
 export function CaptureHints({ capture }: { capture: LandmarkCapture }) {
-  const { extractor, loadPhase, state, pose } = capture;
+  const { extractor, loadPhase, state, pose, resolution } = capture;
+  const small = state === "running" ? framingWarning(pose) : null;
   return (
     <div aria-live="polite" className="mt-2 space-y-1 text-xs">
       {extractor === "loading" && (
@@ -15,6 +17,13 @@ export function CaptureHints({ capture }: { capture: LandmarkCapture }) {
         </p>
       )}
       {extractor === "ready" && state !== "running" && <p className="text-emerald-300">Landmark model ready.</p>}
+      {state === "running" && resolution && (
+        <p className="text-slate-400">
+          Camera: {resolutionLabel(resolution)}
+          {resolution.width * 9 !== resolution.height * 16 ? " (not 16:9; recognition is most reliable at 16:9, so the picture is rescaled for the model)" : ""}
+        </p>
+      )}
+      {small && <p role="alert" className="text-amber-300">{small}</p>}
       {state === "running" && <p className={pose.shoulders && pose.elbows ? "text-emerald-300" : "text-amber-300"}>{poseAdvice(pose)}</p>}
     </div>
   );

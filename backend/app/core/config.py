@@ -16,6 +16,9 @@ class Settings(BaseSettings):
     app_name: str = "SignBridge API"
     version: str = "0.1.0"
     cors_origins: list[str] = ["http://localhost:3000", "http://127.0.0.1:3000"]
+    cors_origin_regex: str | None = None  # for example https://signbridge.*\.vercel\.app to also allow Vercel preview deployments
+    ws_check_origin: bool = False  # public deployment: refuse WebSocket connections from a browser origin that CORS would refuse
+    recording_enabled: bool = True  # public deployment: false turns the sign recorder endpoints off (nothing is written to disk)
     model_dir: Path = BACKEND_DIR / "models"
     sign_registry: Path = BACKEND_DIR / "config" / "sign_registry.json"
     min_confidence: float = 0.5
@@ -26,6 +29,15 @@ class Settings(BaseSettings):
     spacy_model: str = "en_core_web_sm"
     record_dir: Path = BACKEND_DIR.parent / "data" / "recorded"  # self-recorded landmark takes (no video), git-ignored
     animation_dir: Path = BACKEND_DIR.parent / "frontend" / "public" / "animations"
+
+
+def origin_allowed(origin: str | None, settings: "Settings") -> bool:
+    """Same rule as the CORS middleware, for WebSockets (which CORS does not cover). A missing Origin header (not a browser) is allowed."""
+    import re
+
+    if origin is None or origin in settings.cors_origins or "*" in settings.cors_origins:
+        return True
+    return bool(settings.cors_origin_regex and re.fullmatch(settings.cors_origin_regex, origin))
 
 
 @lru_cache

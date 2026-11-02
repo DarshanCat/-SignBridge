@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { cameraErrorMessage } from "@/lib/camera";
+import { aspectOf, cameraErrorMessage, openCamera, type Resolution } from "@/lib/camera";
 import { createHolistic, type HolisticInstance, type LoadPhase } from "@/lib/holistic";
 import { drawOverlay, poseReadout, type PoseReadout } from "@/lib/overlay";
 import {
@@ -24,6 +24,8 @@ export interface LandmarkCapture {
   stats: CaptureStats;
   /** What the body pose tracker sees in the latest frame (for the on-screen hint). */
   pose: PoseReadout;
+  /** What the camera actually delivers (null until it runs); the picture, overlay and landmark conversion follow it. */
+  resolution: Resolution | null;
   /** Which loading step the landmark model is in while extractor is "loading". */
   loadPhase: LoadPhase | null;
   /** Load the landmark model without the camera, so Start camera is instant. Safe to call more than once. */
@@ -45,7 +47,7 @@ export interface LandmarkCapture {
 }
 
 const EMPTY: CaptureStats = { frames: 0, withPose: 0, withHands: 0 };
-const NO_POSE: PoseReadout = { detected: false, visible: 0, shoulders: false, elbows: false, wrists: false };
+const NO_POSE: PoseReadout = { detected: false, visible: 0, shoulders: false, elbows: false, wrists: false, shoulderWidth: null };
 
 /** Webcam + in-browser MediaPipe Holistic. Video never leaves the browser; only a short landmark buffer is kept. */
 export function useLandmarkCapture(): LandmarkCapture {
@@ -63,6 +65,8 @@ export function useLandmarkCapture(): LandmarkCapture {
   const [stats, setStats] = useState<CaptureStats>(EMPTY);
   const [runId, setRunId] = useState(0);
   const [pose, setPose] = useState<PoseReadout>(NO_POSE);
+  const [resolution, setResolution] = useState<Resolution | null>(null);
+  const widthRef = useRef<number | null>(null); // smoothed shoulder width, so the warning does not flicker
   const [loadPhase, setLoadPhase] = useState<LoadPhase | null>(null);
   const loadingRef = useRef<Promise<void> | null>(null);
 
@@ -74,6 +78,7 @@ export function useLandmarkCapture(): LandmarkCapture {
     canvasRef.current?.getContext("2d")?.clearRect(0, 0, 9999, 9999);
     bufferRef.current = EMPTY_BUFFER;
     recordRef.current = null;
+    setResolution(null);
     setStats(EMPTY);
     setState((s) => (s === "error" ? s : "idle"));
   }, []);
@@ -85,9 +90,11 @@ export function useLandmarkCapture(): LandmarkCapture {
       try {
         holisticRef.current = await createHolistic((r) => {
           drawOverlay(canvasRef.current?.getContext("2d") as CanvasRenderingContext2D, canvasRef.current?.width ?? 640, canvasRef.current?.height ?? 480, r);
-          setPose(poseReadout(r.poseLandmarks));
+          const readout = poseReadout(r.poseLandmarks);
+          widthRef.current = readout.shoulderWidth === null ? widthRef.current : widthRef.current === null ? readout.shoulderWidth : widthRef.current * 0.85 + readout.shoulderWidth * 0.15;
+          setPose({ ...readout, shoulderWidth: readout.shoulderWidth === null ? null : widthRef.current });
           const v = videoRef.current;
-          const frame = toFrame(r, v && v.videoWidth && v.videoHeight ? v.videoWidth / v.videoHeight : undefined);
+          const frame = toFrame(r, v && v.videoWidth && v.videoHeight ? aspectOf({ width: v.videoWidth, height: v.videoHeight }) : undefined);
           bufferRef.current = appendFrame(bufferRef.current, frame);
           recordRef.current?.push(frame);
           listenerRef.current?.(frame, performance.now());
@@ -113,15 +120,14 @@ export function useLandmarkCapture(): LandmarkCapture {
     setState("starting");
     try {
       await ensureModel();
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { width: 640, height: 480, facingMode: "user" },
-        audio: false,
-      });
+      const stream = await openCamera((c) => navigator.mediaDevices.getUserMedia(c));
       streamRef.current = stream;
       const video = videoRef.current;
       if (!video) throw new Error("Video element is not available.");
       video.srcObject = stream;
       await video.play();
+      widthRef.current = null;
+      setResolution(video.videoWidth && video.videoHeight ? { width: video.videoWidth, height: video.videoHeight } : null);
       runningRef.current = true;
       setState("running");
 
@@ -174,5 +180,5 @@ export function useLandmarkCapture(): LandmarkCapture {
     recordRef.current = null;
     return frames;
   }, []);
-  return { state, extractor, error, stats, runId, videoRef, canvasRef, start, stop, getBuffer, beginRecording, endRecording, pose, loadPhase, preload, getStream, setFrameListener };
+  return { state, extractor, error, stats, runId, videoRef, canvasRef, start, stop, getBuffer, beginRecording, endRecording, pose, resolution, loadPhase, preload, getStream, setFrameListener };
 }

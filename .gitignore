@@ -44,3 +44,6 @@ zips_keep/
 
 # Clips retargeted from INCLUDE landmarks: no redistribution (licence conflict unresolved); rebuild with retarget.make_vocabulary
 frontend/public/animations/*.json
+
+# assembled deployment folders
+build/

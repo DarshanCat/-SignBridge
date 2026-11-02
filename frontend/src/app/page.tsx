@@ -9,16 +9,20 @@ import { StatusPanel } from "@/components/StatusPanel";
 import { useBackendStatus } from "@/components/useBackendStatus";
 import { useLandmarkCapture } from "@/components/useLandmarkCapture";
 import { WebcamPanel } from "@/components/WebcamPanel";
+import { Footer } from "@/components/Footer";
+import { RECORDING_DISABLED } from "@/lib/deployment";
 import { buildStatusItems } from "@/lib/status";
 
 type Mode = "conversation" | "sign-to-english" | "english-to-sign" | "record-sign" | "landmark-check";
-const TABS: { id: Mode; label: string }[] = [
+const ALL_TABS: { id: Mode; label: string }[] = [
   { id: "conversation", label: "Conversation" },
   { id: "sign-to-english", label: "Sign → English" },
   { id: "english-to-sign", label: "English → Sign" },
   { id: "record-sign", label: "Record sign" },
   { id: "landmark-check", label: "Landmark check" },
 ];
+// the public deployment has no recorder (NEXT_PUBLIC_DISABLE_RECORDING=1)
+const TABS = ALL_TABS.filter((t) => !(RECORDING_DISABLED && t.id === "record-sign"));
 
 export default function Home() {
   const [mode, setMode] = useState<Mode>("conversation");
@@ -34,6 +38,7 @@ export default function Home() {
   const backendUp = status.backend === "connected";
 
   return (
+    <>
     <main className="mx-auto max-w-6xl px-4 py-6 sm:py-8">
       <header className="mb-6">
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
@@ -76,11 +81,13 @@ export default function Home() {
           {mode === "conversation" && <ConversationPanel capture={capture} backendUp={backendUp} />}
           {mode === "sign-to-english" && <WebcamPanel capture={capture} backendUp={backendUp} />}
           {mode === "english-to-sign" && <EnglishToSignPanel backendUp={backendUp} />}
-          {mode === "record-sign" && <RecordSignPanel capture={capture} backendUp={backendUp} />}
+          {mode === "record-sign" && !RECORDING_DISABLED && <RecordSignPanel capture={capture} backendUp={backendUp} />}
           {mode === "landmark-check" && <LandmarkCheckPanel capture={capture} />}
         </div>
         <StatusPanel items={buildStatusItems({ ...status, extractor: capture.extractor })} />
       </div>
     </main>
+      <Footer />
+    </>
   );
 }

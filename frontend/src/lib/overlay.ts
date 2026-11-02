@@ -32,13 +32,30 @@ export interface PoseReadout {
   shoulders: boolean;
   elbows: boolean;
   wrists: boolean;
+  /** Distance between the shoulders as a fraction of the picture width (x only), or null when a shoulder is not visible. */
+  shoulderWidth: number | null;
+}
+
+/**
+ * Smallest shoulder width (fraction of the picture width) that is not warned about. Chosen on validation videos shrunk toward the centre
+ * (docs/evaluation/BROWSER_PATH.md, section on framing): accuracy was 0.83 to 0.89 at 0.10 and above, 0.71 at 0.08 to 0.10, about 0.55 below 0.08
+ * with 12 to 14 percent confident wrong answers. INCLUDE signers measure 0.12 to 0.15.
+ */
+export const MIN_SHOULDER_WIDTH = 0.1;
+
+/** A warning when the signer is too small in the picture (too far from the camera); null when the size is fine or unknown. */
+export function framingWarning(r: PoseReadout): string | null {
+  if (r.shoulderWidth === null || r.shoulderWidth >= MIN_SHOULDER_WIDTH) return null;
+  return "You look small in the picture. Move closer or zoom in so your head, shoulders and both hands fill most of the frame; small signers are recognized less reliably.";
 }
 
 const seen = (p: OverlayPoint | undefined): boolean => !!p && (p.visibility ?? 1) > VISIBLE && p.x >= 0 && p.x <= 1 && p.y >= 0 && p.y <= 1;
 
 export function poseReadout(pose: OverlayPoint[] | undefined): PoseReadout {
-  if (!pose || pose.length < 17) return { detected: false, visible: 0, shoulders: false, elbows: false, wrists: false };
+  if (!pose || pose.length < 17) return { detected: false, visible: 0, shoulders: false, elbows: false, wrists: false, shoulderWidth: null };
+  const both = seen(pose[LEFT_SHOULDER]) && seen(pose[RIGHT_SHOULDER]);
   return {
+    shoulderWidth: both ? Math.abs(pose[LEFT_SHOULDER].x - pose[RIGHT_SHOULDER].x) : null,
     detected: true,
     visible: pose.filter(seen).length,
     shoulders: seen(pose[LEFT_SHOULDER]) && seen(pose[RIGHT_SHOULDER]),

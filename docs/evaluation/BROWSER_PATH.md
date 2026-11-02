@@ -110,3 +110,23 @@ Other perturbations on 16:9 landmarks: Gaussian noise on x and y (in image fract
 On exact rescaling the 4:3 letterboxed input is still 17 points below 16:9 on validation (0.58 against 0.75), and a y scale error cannot explain it. The likely cause is MediaPipe itself on a small, letterboxed picture (the Python run on the same frames shows most of the same loss), so the more reliable fixes are capture guidance (fill the frame) and training on real webcam takes. Treat augmentation as a margin, not as the cure.
 
 Files: `tools/browser_path/sweep.py` (run in a copy of the folder whose `samples.json` is `samples_val.json`, produced by `select_samples.py` with the split set to `val`) and `docs/evaluation/browser_path_validation_sweep.json`.
+
+## Framing: how small can the signer be (threshold for the capture warning)
+
+Authors' predefined split, signer independence not verified. 30 of the 100 validation videos (the first 30 of the seeded list) were shrunk toward the centre of the 1280x720 frame (to 100, 60, 45 and 30 percent, black padding, no aspect change, so no rescale is involved) and classified with Python MediaPipe and the live path. The measure is the median shoulder width, as a fraction of the picture width. Python only, because frame stepping in the browser for all sizes was not worth the time; browser accuracy was 3 to 5 points below Python on the same frames (section above). One sample of 30 videos per size, so the bins are rough (n = 12 to 32 video-size pairs per bin).
+
+| Shoulder width (fraction of picture width) | Accuracy | Wrong accepted | n |
+|---|---|---|---|
+| 0.04 to 0.06 | 0.50 | 0.14 | 14 |
+| 0.06 to 0.08 | 0.59 | 0.12 | 32 |
+| 0.08 to 0.10 | 0.71 | 0.00 | 14 |
+| 0.10 to 0.13 | 0.83 | 0.00 | 12 |
+| 0.13 to 0.17 | 0.89 | 0.00 | 18 |
+
+At 30 percent size the body pose was not found at all. The native INCLUDE signers measure 0.116 to 0.149 (median 0.133); no size above 0.15 is covered by this data, so a signer who fills the frame (shoulders 0.25 or more) is unmeasured, not known to be good.
+
+The app therefore warns when the smoothed shoulder width is below **0.10** (`MIN_SHOULDER_WIDTH` in `frontend/src/lib/overlay.ts`): below it accuracy falls under 0.75 and confident wrong answers appear. The framing guide drawn on the camera picture puts the shoulders at about 22 percent of the width, between the measured range and a typical close webcam picture. Both numbers are to be re-checked on real webcam takes from the guided sessions.
+
+## Camera request
+
+The app now asks the camera for 1280x720 (`ideal`, so the nearest size the camera has is used), falls back to any camera setting when that fails, shows the real resolution in the camera panel and sizes the picture and the landmark overlay to it. For a camera that is not 16:9 the landmark y is rescaled as described above. Higher resolution makes MediaPipe slower on weak CPUs; if a machine cannot keep up, set the preferred size in `frontend/src/lib/camera.ts`.

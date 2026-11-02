@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { drawOverlay, poseAdvice, poseReadout, type OverlayPoint } from "./overlay";
+import { drawOverlay, framingWarning, MIN_SHOULDER_WIDTH, poseAdvice, poseReadout, type OverlayPoint } from "./overlay";
 
 const pt = (x: number, y: number, visibility = 0.9): OverlayPoint => ({ x, y, visibility });
 const fullPose = (): OverlayPoint[] => Array.from({ length: 33 }, (_, i) => pt(0.3 + (i % 5) * 0.1, 0.2 + Math.floor(i / 5) * 0.1));
@@ -55,5 +55,19 @@ describe("pose overlay", () => {
     const r = poseReadout(fullPose());
     expect(r).toMatchObject({ detected: true, shoulders: true, elbows: true, wrists: true });
     expect(poseAdvice(r)).toMatch(/Body pose detected/);
+  });
+
+  it("measures the shoulder width and warns only when the signer is small in the picture", () => {
+    const wide = fullPose();
+    wide[11] = pt(0.40, 0.4);
+    wide[12] = pt(0.60, 0.4);
+    expect(poseReadout(wide).shoulderWidth).toBeCloseTo(0.2);
+    expect(framingWarning(poseReadout(wide))).toBeNull();
+    const small = fullPose();
+    small[11] = pt(0.46, 0.4);
+    small[12] = pt(0.54, 0.4);
+    expect(framingWarning(poseReadout(small))).toMatch(/small in the picture/);
+    expect(framingWarning(poseReadout(undefined))).toBeNull(); // nothing is known, so nothing is said
+    expect(MIN_SHOULDER_WIDTH).toBe(0.1);
   });
 });
