@@ -1,0 +1,7 @@
+frames/
+browser/
+videos/
+results.json
+summary.json
+diag.json
+*.log

@@ -1,5 +1,9 @@
 # Project status
 
+## Browser path benchmark on 100 test videos (2026-11-02)
+
+Authors' predefined split, signer independence not verified. 100 INCLUDE test videos (one per class, seed 0) were run through real Chrome with the app's MediaPipe by frame stepping (not a looping fake camera, which drops frames at about 6 fps) in two framings, and compared with the offline path and with Python MediaPipe on the same frames. Full tables, method and limits are in `docs/evaluation/BROWSER_PATH.md`. Accuracy (answered correctly at threshold 0.7), wrong accepted, unrecognized: offline 0.82 / 0.03 / 0.15; browser 16:9 0.78 / 0.02 / 0.20 (not distinguishable from offline); browser 4:3 letterboxed 0.65 / 0.07 / 0.28 (clearly worse, paired p = 0.002). Without the y rescale added earlier today, 4:3 gives 0.07 with 29 percent confident wrong answers, so that change is what makes 4:3 usable at all. Resolution is not the cause (640x360 16:9 gives 0.80); a webcam-like 4:3 centre crop gives 0.76. Proposed, not done: aspect and scale augmentation, webcam takes in training, capture guidance. No retraining and no change to the model or threshold.
+
 ## Aspect ratio correction for webcam landmarks (2026-11-02)
 
 The browser now rescales landmark y to a 16:9 reference before sending or recording (`toFrame(r, aspect)` in `frontend/src/lib/landmarks.ts`: factor (16/9) divided by the video aspect, so 4/3 for a 640x480 webcam; x and z unchanged, backend unchanged). Reason: MediaPipe y is a fraction of the image height, the model was trained on 16:9 INCLUDE videos, and the fake camera test gave wrong or missing signs on 4:3 input. The Landmark check file records `reference_aspect` and `video_aspect`, and `training.compare_landmarks` applies the same rescaling to the Python landmarks for files that carry the field (older files are compared as before). Tests: `landmarks.test.ts`, `landmarkCheck.test.ts`, `test_compare_landmarks.py`.

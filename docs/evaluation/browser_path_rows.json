@@ -1,0 +1,5405 @@
+{
+ "threshold": 0.7,
+ "rows": [
+  {
+   "id": "s000",
+   "label": "Technology",
+   "sampled": 21,
+   "video_frames": 63,
+   "offline": {
+    "top": "Technology",
+    "conf": 1.0,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Technology",
+    "conf": 0.9992,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Technology",
+    "conf": 0.3575,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Technology",
+    "conf": 0.9999,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Technology",
+    "conf": 0.9939,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Technology",
+    "conf": 0.9999,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Technology",
+    "conf": 0.2768,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s001",
+   "label": "Team",
+   "sampled": 20,
+   "video_frames": 58,
+   "offline": {
+    "top": "Team",
+    "conf": 0.9938,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Team",
+    "conf": 0.9876,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "narrow",
+    "conf": 0.4483,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Team",
+    "conf": 0.957,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Team",
+    "conf": 0.9891,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Team",
+    "conf": 0.9409,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "narrow",
+    "conf": 0.3838,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s002",
+   "label": "Yesterday",
+   "sampled": 16,
+   "video_frames": 47,
+   "offline": {
+    "top": "Yesterday",
+    "conf": 0.9649,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 16,
+    "top": "Yesterday",
+    "conf": 0.9933,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 16,
+    "top": "they",
+    "conf": 0.5188,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 16,
+    "top": "Yesterday",
+    "conf": 0.9053,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 16,
+    "top": "Yesterday",
+    "conf": 0.9238,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 16,
+    "top": "Yesterday",
+    "conf": 0.9573,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 16,
+    "top": "they",
+    "conf": 0.3882,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s003",
+   "label": "Kitchen",
+   "sampled": 25,
+   "video_frames": 75,
+   "offline": {
+    "top": "Kitchen",
+    "conf": 0.99,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Kitchen",
+    "conf": 0.9969,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Neighbour",
+    "conf": 0.4042,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Kitchen",
+    "conf": 0.9064,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Kitchen",
+    "conf": 0.9987,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Kitchen",
+    "conf": 0.9842,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Neighbour",
+    "conf": 0.3387,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s004",
+   "label": "Monday",
+   "sampled": 20,
+   "video_frames": 59,
+   "offline": {
+    "top": "Monday",
+    "conf": 0.6487,
+    "accepted": false,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Monday",
+    "conf": 0.6567,
+    "accepted": false
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "School",
+    "conf": 0.8781,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Tuesday",
+    "conf": 0.9173,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Tuesday",
+    "conf": 0.5452,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Monday",
+    "conf": 0.9519,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "small little",
+    "conf": 0.5192,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s005",
+   "label": "Pencil",
+   "sampled": 18,
+   "video_frames": 53,
+   "offline": {
+    "top": "Pencil",
+    "conf": 0.7789,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Pencil",
+    "conf": 0.8495,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "you",
+    "conf": 0.5799,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Pencil",
+    "conf": 0.9513,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Pencil",
+    "conf": 0.6945,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Pencil",
+    "conf": 0.8119,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "you",
+    "conf": 0.7308,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s006",
+   "label": "Clock",
+   "sampled": 25,
+   "video_frames": 74,
+   "offline": {
+    "top": "Clock",
+    "conf": 0.9995,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Clock",
+    "conf": 0.9985,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 25,
+    "top": "long",
+    "conf": 0.5752,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Clock",
+    "conf": 0.9969,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Clock",
+    "conf": 0.9986,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Clock",
+    "conf": 0.9949,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 25,
+    "top": "long",
+    "conf": 0.6336,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s007",
+   "label": "Mouse",
+   "sampled": 28,
+   "video_frames": 84,
+   "offline": {
+    "top": "Mouse",
+    "conf": 0.9342,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Mouse",
+    "conf": 0.8322,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Pant",
+    "conf": 0.7531,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Pant",
+    "conf": 0.5446,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Mouse",
+    "conf": 0.8394,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 28,
+    "top": "bad",
+    "conf": 0.4185,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Pant",
+    "conf": 0.7374,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s008",
+   "label": "Neighbour",
+   "sampled": 22,
+   "video_frames": 64,
+   "offline": {
+    "top": "Neighbour",
+    "conf": 0.9767,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 22,
+    "top": "Neighbour",
+    "conf": 0.7853,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 22,
+    "top": "Neighbour",
+    "conf": 0.7969,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 22,
+    "top": "Neighbour",
+    "conf": 0.8743,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 22,
+    "top": "Neighbour",
+    "conf": 0.9702,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 22,
+    "top": "Neighbour",
+    "conf": 0.9268,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 22,
+    "top": "Neighbour",
+    "conf": 0.8256,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s009",
+   "label": "Religion",
+   "sampled": 40,
+   "video_frames": 118,
+   "offline": {
+    "top": "Religion",
+    "conf": 0.9988,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 40,
+    "top": "Religion",
+    "conf": 0.9991,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 40,
+    "top": "dry",
+    "conf": 0.6458,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 40,
+    "top": "Religion",
+    "conf": 0.992,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 40,
+    "top": "Religion",
+    "conf": 0.9982,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 40,
+    "top": "Religion",
+    "conf": 0.9936,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 40,
+    "top": "dry",
+    "conf": 0.7321,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s010",
+   "label": "Newspaper",
+   "sampled": 23,
+   "video_frames": 67,
+   "offline": {
+    "top": "Newspaper",
+    "conf": 0.9623,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Newspaper",
+    "conf": 0.9796,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Temple",
+    "conf": 0.2448,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Newspaper",
+    "conf": 0.9959,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Newspaper",
+    "conf": 0.926,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Newspaper",
+    "conf": 0.9847,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Hospital",
+    "conf": 0.2504,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s011",
+   "label": "Fan",
+   "sampled": 26,
+   "video_frames": 78,
+   "offline": {
+    "top": "Fan",
+    "conf": 0.7353,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Fan",
+    "conf": 0.8062,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Hat",
+    "conf": 0.423,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Hat",
+    "conf": 0.7677,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Fan",
+    "conf": 0.7167,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 26,
+    "top": "India",
+    "conf": 0.5802,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 26,
+    "top": "India",
+    "conf": 0.3916,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s012",
+   "label": "Dream",
+   "sampled": 26,
+   "video_frames": 77,
+   "offline": {
+    "top": "Dream",
+    "conf": 0.9998,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Dream",
+    "conf": 0.9998,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 26,
+    "top": "wide",
+    "conf": 0.4508,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Dream",
+    "conf": 0.9993,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Dream",
+    "conf": 0.9995,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Dream",
+    "conf": 0.9986,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Hospital",
+    "conf": 0.254,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s013",
+   "label": "Photograph",
+   "sampled": 20,
+   "video_frames": 58,
+   "offline": {
+    "top": "Tuesday",
+    "conf": 0.3895,
+    "accepted": false,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Photograph",
+    "conf": 0.3332,
+    "accepted": false
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "narrow",
+    "conf": 0.4869,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Tuesday",
+    "conf": 0.3774,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Photograph",
+    "conf": 0.6722,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Tuesday",
+    "conf": 0.2905,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "narrow",
+    "conf": 0.5784,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s014",
+   "label": "Sign",
+   "sampled": 20,
+   "video_frames": 59,
+   "offline": {
+    "top": "Sign",
+    "conf": 0.607,
+    "accepted": false,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Sign",
+    "conf": 0.6759,
+    "accepted": false
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "they",
+    "conf": 0.4567,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Sign",
+    "conf": 0.9094,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Sign",
+    "conf": 0.7712,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Sign",
+    "conf": 0.92,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "they",
+    "conf": 0.6055,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s015",
+   "label": "Sister",
+   "sampled": 20,
+   "video_frames": 59,
+   "offline": {
+    "top": "Sister",
+    "conf": 0.9973,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Sister",
+    "conf": 0.7394,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Sister",
+    "conf": 0.8982,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Sister",
+    "conf": 0.9935,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Sister",
+    "conf": 0.9583,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Sister",
+    "conf": 0.973,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Sister",
+    "conf": 0.9936,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s016",
+   "label": "Election",
+   "sampled": 27,
+   "video_frames": 80,
+   "offline": {
+    "top": "Election",
+    "conf": 0.9871,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 27,
+    "top": "Election",
+    "conf": 0.995,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 27,
+    "top": "long",
+    "conf": 0.2869,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 27,
+    "top": "Election",
+    "conf": 0.9857,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 27,
+    "top": "Election",
+    "conf": 0.9927,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 27,
+    "top": "Election",
+    "conf": 0.9878,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 27,
+    "top": "long",
+    "conf": 0.259,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s017",
+   "label": "Friday",
+   "sampled": 19,
+   "video_frames": 57,
+   "offline": {
+    "top": "Friday",
+    "conf": 0.915,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Friday",
+    "conf": 0.892,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 19,
+    "top": "bad",
+    "conf": 0.2978,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Friday",
+    "conf": 0.7166,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Friday",
+    "conf": 0.9751,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Blue",
+    "conf": 0.2641,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 19,
+    "top": "cool",
+    "conf": 0.2556,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s018",
+   "label": "Cell phone",
+   "sampled": 25,
+   "video_frames": 73,
+   "offline": {
+    "top": "Cell phone",
+    "conf": 0.9964,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Cell phone",
+    "conf": 0.9837,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 25,
+    "top": "you",
+    "conf": 0.3481,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Green",
+    "conf": 0.2885,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Cell phone",
+    "conf": 0.9728,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 25,
+    "top": "India",
+    "conf": 0.3885,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 25,
+    "top": "you",
+    "conf": 0.6459,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s019",
+   "label": "Window",
+   "sampled": 28,
+   "video_frames": 84,
+   "offline": {
+    "top": "Window",
+    "conf": 0.9987,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Window",
+    "conf": 0.9982,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 28,
+    "top": "big large",
+    "conf": 0.5288,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Window",
+    "conf": 0.9875,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Window",
+    "conf": 0.9987,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Window",
+    "conf": 0.9919,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 28,
+    "top": "big large",
+    "conf": 0.7301,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s020",
+   "label": "Colour",
+   "sampled": 18,
+   "video_frames": 52,
+   "offline": {
+    "top": "Colour",
+    "conf": 0.9987,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Colour",
+    "conf": 0.999,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Colour",
+    "conf": 0.5512,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Colour",
+    "conf": 0.9963,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Colour",
+    "conf": 0.9996,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Colour",
+    "conf": 0.9962,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Colour",
+    "conf": 0.666,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s021",
+   "label": "Lawyer",
+   "sampled": 23,
+   "video_frames": 68,
+   "offline": {
+    "top": "Lawyer",
+    "conf": 0.9559,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Lawyer",
+    "conf": 0.9741,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 23,
+    "top": "narrow",
+    "conf": 0.3881,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Lawyer",
+    "conf": 0.9602,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Lawyer",
+    "conf": 0.9963,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Lawyer",
+    "conf": 0.8968,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Neighbour",
+    "conf": 0.5327,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s022",
+   "label": "Spring",
+   "sampled": 24,
+   "video_frames": 71,
+   "offline": {
+    "top": "Spring",
+    "conf": 0.7167,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Book",
+    "conf": 0.6102,
+    "accepted": false
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 24,
+    "top": "cold",
+    "conf": 0.7393,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Spring",
+    "conf": 0.7293,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Spring",
+    "conf": 0.7257,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Spring",
+    "conf": 0.816,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 24,
+    "top": "cold",
+    "conf": 0.6181,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s023",
+   "label": "Skirt",
+   "sampled": 25,
+   "video_frames": 75,
+   "offline": {
+    "top": "Skirt",
+    "conf": 0.9999,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Skirt",
+    "conf": 0.9999,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Skirt",
+    "conf": 0.9987,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Skirt",
+    "conf": 0.9998,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Skirt",
+    "conf": 0.9998,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Skirt",
+    "conf": 0.9996,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Skirt",
+    "conf": 0.9986,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s024",
+   "label": "Telephone",
+   "sampled": 20,
+   "video_frames": 60,
+   "offline": {
+    "top": "Telephone",
+    "conf": 0.9769,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Telephone",
+    "conf": 0.9926,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Telephone",
+    "conf": 0.5586,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Telephone",
+    "conf": 0.9875,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Telephone",
+    "conf": 0.9662,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Telephone",
+    "conf": 0.9779,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "they",
+    "conf": 0.6615,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s025",
+   "label": "Exercise",
+   "sampled": 20,
+   "video_frames": 58,
+   "offline": {
+    "top": "Exercise",
+    "conf": 0.9905,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Exercise",
+    "conf": 0.9831,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "wide",
+    "conf": 0.679,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Exercise",
+    "conf": 0.9703,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Exercise",
+    "conf": 0.9743,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Exercise",
+    "conf": 0.969,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "wide",
+    "conf": 0.603,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s026",
+   "label": "Patient",
+   "sampled": 23,
+   "video_frames": 67,
+   "offline": {
+    "top": "Patient",
+    "conf": 0.9798,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Patient",
+    "conf": 0.9736,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Patient",
+    "conf": 0.8463,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Patient",
+    "conf": 0.8445,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Patient",
+    "conf": 0.9838,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Patient",
+    "conf": 0.8147,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Patient",
+    "conf": 0.839,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s027",
+   "label": "God",
+   "sampled": 20,
+   "video_frames": 60,
+   "offline": {
+    "top": "God",
+    "conf": 0.8543,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "God",
+    "conf": 0.4198,
+    "accepted": false
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "wide",
+    "conf": 0.6978,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Green",
+    "conf": 0.2676,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Cell phone",
+    "conf": 0.4211,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Green",
+    "conf": 0.4019,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "wide",
+    "conf": 0.6934,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s028",
+   "label": "Tomorrow",
+   "sampled": 14,
+   "video_frames": 41,
+   "offline": {
+    "top": "Tomorrow",
+    "conf": 0.9601,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 14,
+    "top": "Tomorrow",
+    "conf": 0.9165,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 14,
+    "top": "you",
+    "conf": 0.55,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 14,
+    "top": "Tomorrow",
+    "conf": 0.7295,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 14,
+    "top": "Tomorrow",
+    "conf": 0.6974,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 14,
+    "top": "Tomorrow",
+    "conf": 0.4038,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 14,
+    "top": "you",
+    "conf": 0.4824,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s029",
+   "label": "Queen",
+   "sampled": 25,
+   "video_frames": 74,
+   "offline": {
+    "top": "Queen",
+    "conf": 0.999,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Queen",
+    "conf": 0.9986,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Queen",
+    "conf": 0.7347,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Queen",
+    "conf": 0.9966,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Queen",
+    "conf": 0.9979,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Queen",
+    "conf": 0.9957,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Queen",
+    "conf": 0.7605,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s030",
+   "label": "Page",
+   "sampled": 29,
+   "video_frames": 87,
+   "offline": {
+    "top": "Page",
+    "conf": 0.9686,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 29,
+    "top": "Page",
+    "conf": 0.8371,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 29,
+    "top": "Neighbour",
+    "conf": 0.8064,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 29,
+    "top": "Page",
+    "conf": 0.693,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 29,
+    "top": "Page",
+    "conf": 0.9506,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 29,
+    "top": "Page",
+    "conf": 0.4817,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 29,
+    "top": "Neighbour",
+    "conf": 0.7977,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s031",
+   "label": "Afternoon",
+   "sampled": 17,
+   "video_frames": 51,
+   "offline": {
+    "top": "Lamp",
+    "conf": 0.8126,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Afternoon",
+    "conf": 0.7356,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "warm",
+    "conf": 0.4873,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Afternoon",
+    "conf": 0.5779,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Afternoon",
+    "conf": 0.6082,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Afternoon",
+    "conf": 0.6134,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "warm",
+    "conf": 0.4862,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s032",
+   "label": "Evening",
+   "sampled": 14,
+   "video_frames": 41,
+   "offline": {
+    "top": "Evening",
+    "conf": 0.9192,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 14,
+    "top": "Evening",
+    "conf": 0.9484,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 14,
+    "top": "wide",
+    "conf": 0.4727,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 14,
+    "top": "Bird",
+    "conf": 0.3623,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 14,
+    "top": "Evening",
+    "conf": 0.9756,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 14,
+    "top": "Evening",
+    "conf": 0.4965,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 14,
+    "top": "you",
+    "conf": 0.4687,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s033",
+   "label": "Ball",
+   "sampled": 15,
+   "video_frames": 44,
+   "offline": {
+    "top": "Ball",
+    "conf": 0.8845,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 15,
+    "top": "Ball",
+    "conf": 0.6085,
+    "accepted": false
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 15,
+    "top": "wide",
+    "conf": 0.5058,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 15,
+    "top": "Money",
+    "conf": 0.4841,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 15,
+    "top": "Money",
+    "conf": 0.5434,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 15,
+    "top": "Money",
+    "conf": 0.7259,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 15,
+    "top": "wide",
+    "conf": 0.5331,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s034",
+   "label": "Author",
+   "sampled": 37,
+   "video_frames": 111,
+   "offline": {
+    "top": "Author",
+    "conf": 0.993,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 37,
+    "top": "Author",
+    "conf": 0.997,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 37,
+    "top": "Neighbour",
+    "conf": 0.8455,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 37,
+    "top": "Author",
+    "conf": 0.9969,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 37,
+    "top": "Author",
+    "conf": 0.9972,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 37,
+    "top": "Author",
+    "conf": 0.9963,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 37,
+    "top": "Neighbour",
+    "conf": 0.836,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s035",
+   "label": "Woman",
+   "sampled": 16,
+   "video_frames": 46,
+   "offline": {
+    "top": "Woman",
+    "conf": 0.7671,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 16,
+    "top": "Woman",
+    "conf": 0.6667,
+    "accepted": false
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 16,
+    "top": "you",
+    "conf": 0.6482,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 16,
+    "top": "Woman",
+    "conf": 0.5146,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 16,
+    "top": "White",
+    "conf": 0.4985,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 16,
+    "top": "White",
+    "conf": 0.5192,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 16,
+    "top": "you",
+    "conf": 0.6869,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s036",
+   "label": "Tool",
+   "sampled": 22,
+   "video_frames": 64,
+   "offline": {
+    "top": "Tool",
+    "conf": 0.9985,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 22,
+    "top": "Tool",
+    "conf": 0.9777,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 22,
+    "top": "wide",
+    "conf": 0.7062,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 22,
+    "top": "Tool",
+    "conf": 0.9517,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 22,
+    "top": "Tool",
+    "conf": 0.9829,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 22,
+    "top": "Tool",
+    "conf": 0.9713,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 22,
+    "top": "wide",
+    "conf": 0.6184,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s037",
+   "label": "Energy",
+   "sampled": 23,
+   "video_frames": 67,
+   "offline": {
+    "top": "Energy",
+    "conf": 0.9924,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Energy",
+    "conf": 0.9898,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 23,
+    "top": "wide",
+    "conf": 0.3563,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Energy",
+    "conf": 0.6645,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Energy",
+    "conf": 0.9876,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Energy",
+    "conf": 0.4432,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 23,
+    "top": "wide",
+    "conf": 0.3613,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s038",
+   "label": "Job",
+   "sampled": 19,
+   "video_frames": 56,
+   "offline": {
+    "top": "Job",
+    "conf": 0.8829,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Job",
+    "conf": 0.931,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 19,
+    "top": "wide",
+    "conf": 0.4118,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Summer",
+    "conf": 0.5471,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Job",
+    "conf": 0.9225,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Summer",
+    "conf": 0.4947,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Summer",
+    "conf": 0.3763,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s039",
+   "label": "Week",
+   "sampled": 13,
+   "video_frames": 39,
+   "offline": {
+    "top": "Week",
+    "conf": 0.9992,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 13,
+    "top": "Week",
+    "conf": 0.9984,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 13,
+    "top": "narrow",
+    "conf": 0.5534,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 13,
+    "top": "Week",
+    "conf": 0.9992,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 13,
+    "top": "Week",
+    "conf": 0.9993,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 13,
+    "top": "Week",
+    "conf": 0.9995,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 13,
+    "top": "narrow",
+    "conf": 0.5358,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s040",
+   "label": "Bill",
+   "sampled": 18,
+   "video_frames": 53,
+   "offline": {
+    "top": "Week",
+    "conf": 0.4553,
+    "accepted": false,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Time",
+    "conf": 0.4944,
+    "accepted": false
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "narrow",
+    "conf": 0.705,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Bag",
+    "conf": 0.55,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Bag",
+    "conf": 0.2195,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Bag",
+    "conf": 0.2653,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "narrow",
+    "conf": 0.6446,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s041",
+   "label": "War",
+   "sampled": 19,
+   "video_frames": 56,
+   "offline": {
+    "top": "War",
+    "conf": 0.9049,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 19,
+    "top": "War",
+    "conf": 0.9088,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 19,
+    "top": "wide",
+    "conf": 0.9996,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 19,
+    "top": "War",
+    "conf": 0.7916,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 19,
+    "top": "War",
+    "conf": 0.9063,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 19,
+    "top": "War",
+    "conf": 0.677,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 19,
+    "top": "wide",
+    "conf": 0.9996,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s042",
+   "label": "Green",
+   "sampled": 28,
+   "video_frames": 82,
+   "offline": {
+    "top": "Green",
+    "conf": 0.9881,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Green",
+    "conf": 0.9918,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 28,
+    "top": "warm",
+    "conf": 0.7376,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Green",
+    "conf": 0.9854,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Green",
+    "conf": 0.9787,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Green",
+    "conf": 0.9808,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 28,
+    "top": "warm",
+    "conf": 0.6902,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s043",
+   "label": "Adult",
+   "sampled": 24,
+   "video_frames": 72,
+   "offline": {
+    "top": "Adult",
+    "conf": 0.4678,
+    "accepted": false,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Child",
+    "conf": 0.579,
+    "accepted": false
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Child",
+    "conf": 0.4529,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Adult",
+    "conf": 0.917,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Child",
+    "conf": 0.4334,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Adult",
+    "conf": 0.8792,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Child",
+    "conf": 0.5475,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s044",
+   "label": "Parent",
+   "sampled": 26,
+   "video_frames": 76,
+   "offline": {
+    "top": "Parent",
+    "conf": 0.5232,
+    "accepted": false,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Wife",
+    "conf": 0.6188,
+    "accepted": false
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 26,
+    "top": "wide",
+    "conf": 0.2276,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Wife",
+    "conf": 0.6262,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Parent",
+    "conf": 0.503,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Wife",
+    "conf": 0.5756,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 26,
+    "top": "dry",
+    "conf": 0.2302,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s045",
+   "label": "Bedroom",
+   "sampled": 34,
+   "video_frames": 102,
+   "offline": {
+    "top": "Bedroom",
+    "conf": 0.9962,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 34,
+    "top": "Bedroom",
+    "conf": 0.9178,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 34,
+    "top": "wide",
+    "conf": 0.649,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 34,
+    "top": "Bedroom",
+    "conf": 0.9932,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 34,
+    "top": "Bedroom",
+    "conf": 0.8174,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 34,
+    "top": "Bedroom",
+    "conf": 0.9944,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 34,
+    "top": "wide",
+    "conf": 0.4269,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s046",
+   "label": "Boy",
+   "sampled": 21,
+   "video_frames": 63,
+   "offline": {
+    "top": "Boy",
+    "conf": 0.8443,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Boy",
+    "conf": 0.8096,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Girl",
+    "conf": 0.3936,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Boy",
+    "conf": 0.7421,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Boy",
+    "conf": 0.8165,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Boy",
+    "conf": 0.5715,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Girl",
+    "conf": 0.5958,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s047",
+   "label": "Money",
+   "sampled": 17,
+   "video_frames": 49,
+   "offline": {
+    "top": "Money",
+    "conf": 0.9737,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Money",
+    "conf": 0.9636,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "you",
+    "conf": 0.497,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Money",
+    "conf": 0.9784,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Money",
+    "conf": 0.9655,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Money",
+    "conf": 0.975,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "you",
+    "conf": 0.673,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s048",
+   "label": "Priest",
+   "sampled": 16,
+   "video_frames": 47,
+   "offline": {
+    "top": "Priest",
+    "conf": 0.9993,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 16,
+    "top": "Priest",
+    "conf": 0.9973,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 16,
+    "top": "they",
+    "conf": 0.9268,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 16,
+    "top": "Priest",
+    "conf": 0.9989,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 16,
+    "top": "Priest",
+    "conf": 0.9958,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 16,
+    "top": "Priest",
+    "conf": 0.9971,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 16,
+    "top": "they",
+    "conf": 0.8741,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s049",
+   "label": "Grandfather",
+   "sampled": 28,
+   "video_frames": 82,
+   "offline": {
+    "top": "Grandfather",
+    "conf": 1.0,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Grandfather",
+    "conf": 1.0,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Grandfather",
+    "conf": 0.9863,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Grandfather",
+    "conf": 1.0,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Grandfather",
+    "conf": 1.0,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Grandfather",
+    "conf": 1.0,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Grandfather",
+    "conf": 0.979,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s050",
+   "label": "Baby",
+   "sampled": 18,
+   "video_frames": 54,
+   "offline": {
+    "top": "Monday",
+    "conf": 0.6377,
+    "accepted": false,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Monday",
+    "conf": 0.7746,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "small little",
+    "conf": 0.5929,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Monday",
+    "conf": 0.4546,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Monday",
+    "conf": 0.6136,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Monday",
+    "conf": 0.3542,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "small little",
+    "conf": 0.5111,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s051",
+   "label": "Death",
+   "sampled": 31,
+   "video_frames": 92,
+   "offline": {
+    "top": "Death",
+    "conf": 0.9876,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 31,
+    "top": "Death",
+    "conf": 0.9466,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 31,
+    "top": "wide",
+    "conf": 0.632,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 31,
+    "top": "Death",
+    "conf": 0.9534,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 31,
+    "top": "Death",
+    "conf": 0.9856,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 31,
+    "top": "Death",
+    "conf": 0.9291,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 31,
+    "top": "wide",
+    "conf": 0.6809,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s052",
+   "label": "Box",
+   "sampled": 30,
+   "video_frames": 90,
+   "offline": {
+    "top": "Box",
+    "conf": 0.9971,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 30,
+    "top": "Box",
+    "conf": 0.8792,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 30,
+    "top": "Neighbour",
+    "conf": 0.538,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 30,
+    "top": "Box",
+    "conf": 0.8877,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 30,
+    "top": "Box",
+    "conf": 0.8663,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 30,
+    "top": "Box",
+    "conf": 0.8404,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 30,
+    "top": "Neighbour",
+    "conf": 0.6064,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s053",
+   "label": "Attack",
+   "sampled": 32,
+   "video_frames": 95,
+   "offline": {
+    "top": "Attack",
+    "conf": 0.9921,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 32,
+    "top": "Attack",
+    "conf": 0.9798,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 32,
+    "top": "they",
+    "conf": 0.8634,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 32,
+    "top": "Attack",
+    "conf": 0.9795,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 32,
+    "top": "Attack",
+    "conf": 0.9822,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 32,
+    "top": "Attack",
+    "conf": 0.9557,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 32,
+    "top": "they",
+    "conf": 0.8937,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s054",
+   "label": "Brother",
+   "sampled": 21,
+   "video_frames": 63,
+   "offline": {
+    "top": "Brother",
+    "conf": 0.985,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Brother",
+    "conf": 0.9625,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Sister",
+    "conf": 0.59,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Brother",
+    "conf": 0.9792,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Brother",
+    "conf": 0.9937,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Brother",
+    "conf": 0.9897,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Sister",
+    "conf": 0.9276,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s055",
+   "label": "Husband",
+   "sampled": 17,
+   "video_frames": 51,
+   "offline": {
+    "top": "Wife",
+    "conf": 0.6105,
+    "accepted": false,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Wife",
+    "conf": 0.4894,
+    "accepted": false
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "long",
+    "conf": 0.4489,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Wife",
+    "conf": 0.5091,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Husband",
+    "conf": 0.5883,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Wife",
+    "conf": 0.3727,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "long",
+    "conf": 0.3844,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s056",
+   "label": "Dress",
+   "sampled": 18,
+   "video_frames": 53,
+   "offline": {
+    "top": "Dress",
+    "conf": 0.8837,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Dress",
+    "conf": 0.8645,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Skirt",
+    "conf": 0.7475,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Dress",
+    "conf": 0.6634,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Dress",
+    "conf": 0.8382,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Dress",
+    "conf": 0.568,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Skirt",
+    "conf": 0.708,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s057",
+   "label": "Screen",
+   "sampled": 20,
+   "video_frames": 59,
+   "offline": {
+    "top": "Screen",
+    "conf": 0.9982,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Screen",
+    "conf": 0.997,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "wide",
+    "conf": 0.8917,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Screen",
+    "conf": 0.716,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Screen",
+    "conf": 0.9911,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Screen",
+    "conf": 0.601,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "wide",
+    "conf": 0.8779,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s058",
+   "label": "Pant",
+   "sampled": 15,
+   "video_frames": 43,
+   "offline": {
+    "top": "Pant",
+    "conf": 0.9382,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 15,
+    "top": "Pant",
+    "conf": 0.9489,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 15,
+    "top": "Skirt",
+    "conf": 0.7288,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 15,
+    "top": "Pant",
+    "conf": 0.8821,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 15,
+    "top": "Pant",
+    "conf": 0.9652,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 15,
+    "top": "Pant",
+    "conf": 0.8904,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 15,
+    "top": "Skirt",
+    "conf": 0.7568,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s059",
+   "label": "Second",
+   "sampled": 24,
+   "video_frames": 72,
+   "offline": {
+    "top": "Second",
+    "conf": 0.99,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Second",
+    "conf": 0.9871,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 24,
+    "top": "you",
+    "conf": 0.9956,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Second",
+    "conf": 0.5797,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Second",
+    "conf": 0.9861,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Second",
+    "conf": 0.761,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 24,
+    "top": "you",
+    "conf": 0.9971,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s060",
+   "label": "Suit",
+   "sampled": 19,
+   "video_frames": 55,
+   "offline": {
+    "top": "Suit",
+    "conf": 0.9991,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Suit",
+    "conf": 0.9995,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 19,
+    "top": "wide",
+    "conf": 0.5628,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Suit",
+    "conf": 0.6473,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Suit",
+    "conf": 0.8045,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Suit",
+    "conf": 0.5035,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 19,
+    "top": "wide",
+    "conf": 0.5638,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s061",
+   "label": "Blue",
+   "sampled": 19,
+   "video_frames": 56,
+   "offline": {
+    "top": "Blue",
+    "conf": 0.7384,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Blue",
+    "conf": 0.7944,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Skirt",
+    "conf": 0.6123,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 19,
+    "top": "good",
+    "conf": 0.4981,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Blue",
+    "conf": 0.7741,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 19,
+    "top": "good",
+    "conf": 0.881,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Skirt",
+    "conf": 0.6544,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s062",
+   "label": "T-Shirt",
+   "sampled": 30,
+   "video_frames": 88,
+   "offline": {
+    "top": "T-Shirt",
+    "conf": 0.9994,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 30,
+    "top": "T-Shirt",
+    "conf": 0.999,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 30,
+    "top": "Alright",
+    "conf": 0.903,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 30,
+    "top": "T-Shirt",
+    "conf": 0.9962,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 30,
+    "top": "T-Shirt",
+    "conf": 0.9987,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 30,
+    "top": "T-Shirt",
+    "conf": 0.9985,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 30,
+    "top": "Alright",
+    "conf": 0.914,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s063",
+   "label": "Fish",
+   "sampled": 28,
+   "video_frames": 83,
+   "offline": {
+    "top": "Fish",
+    "conf": 0.9962,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Fish",
+    "conf": 0.9973,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 28,
+    "top": "narrow",
+    "conf": 0.7209,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Fish",
+    "conf": 0.906,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Fish",
+    "conf": 0.9987,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 28,
+    "top": "Fish",
+    "conf": 0.8941,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 28,
+    "top": "narrow",
+    "conf": 0.7375,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s064",
+   "label": "Card",
+   "sampled": 30,
+   "video_frames": 88,
+   "offline": {
+    "top": "Card",
+    "conf": 0.9994,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 30,
+    "top": "Card",
+    "conf": 0.9984,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 30,
+    "top": "wide",
+    "conf": 0.3865,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 30,
+    "top": "Card",
+    "conf": 0.9759,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 30,
+    "top": "Card",
+    "conf": 0.9987,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 30,
+    "top": "Card",
+    "conf": 0.9481,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 30,
+    "top": "narrow",
+    "conf": 0.5169,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s065",
+   "label": "Minute",
+   "sampled": 17,
+   "video_frames": 49,
+   "offline": {
+    "top": "Minute",
+    "conf": 0.645,
+    "accepted": false,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Money",
+    "conf": 0.6269,
+    "accepted": false
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "you",
+    "conf": 0.8188,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Money",
+    "conf": 0.8712,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Money",
+    "conf": 0.5042,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Money",
+    "conf": 0.8383,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "you",
+    "conf": 0.792,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s066",
+   "label": "Transportation",
+   "sampled": 23,
+   "video_frames": 69,
+   "offline": {
+    "top": "Transportation",
+    "conf": 0.9827,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Transportation",
+    "conf": 0.9948,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Neighbour",
+    "conf": 0.4421,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Transportation",
+    "conf": 0.6844,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Transportation",
+    "conf": 0.9836,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Transportation",
+    "conf": 0.8205,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Neighbour",
+    "conf": 0.7047,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s067",
+   "label": "Family",
+   "sampled": 27,
+   "video_frames": 79,
+   "offline": {
+    "top": "Family",
+    "conf": 0.7718,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 27,
+    "top": "Family",
+    "conf": 0.8411,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 27,
+    "top": "narrow",
+    "conf": 0.3079,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 27,
+    "top": "Store or Shop",
+    "conf": 0.4434,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 27,
+    "top": "Box",
+    "conf": 0.5,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 27,
+    "top": "Election",
+    "conf": 0.6264,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 27,
+    "top": "narrow",
+    "conf": 0.3385,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s068",
+   "label": "Winter",
+   "sampled": 18,
+   "video_frames": 52,
+   "offline": {
+    "top": "Winter",
+    "conf": 0.9368,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Winter",
+    "conf": 0.9004,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "wide",
+    "conf": 0.9356,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Winter",
+    "conf": 0.7381,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Winter",
+    "conf": 0.9845,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Winter",
+    "conf": 0.5324,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "wide",
+    "conf": 0.9743,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s069",
+   "label": "Morning",
+   "sampled": 18,
+   "video_frames": 53,
+   "offline": {
+    "top": "Morning",
+    "conf": 0.9992,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Morning",
+    "conf": 0.9975,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "old",
+    "conf": 0.5701,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Morning",
+    "conf": 0.9991,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Morning",
+    "conf": 0.998,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Morning",
+    "conf": 0.9991,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "old",
+    "conf": 0.5091,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s070",
+   "label": "Book",
+   "sampled": 17,
+   "video_frames": 51,
+   "offline": {
+    "top": "Book",
+    "conf": 0.9867,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Book",
+    "conf": 0.9915,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "School",
+    "conf": 0.3783,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Book",
+    "conf": 0.9967,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Book",
+    "conf": 0.9763,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Book",
+    "conf": 0.9936,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Park",
+    "conf": 0.429,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s071",
+   "label": "Black",
+   "sampled": 15,
+   "video_frames": 43,
+   "offline": {
+    "top": "Black",
+    "conf": 0.5514,
+    "accepted": false,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 15,
+    "top": "Black",
+    "conf": 0.7109,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 15,
+    "top": "wide",
+    "conf": 0.6259,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 15,
+    "top": "Black",
+    "conf": 0.672,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 15,
+    "top": "Black",
+    "conf": 0.5336,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 15,
+    "top": "Black",
+    "conf": 0.6434,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 15,
+    "top": "wide",
+    "conf": 0.5908,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s072",
+   "label": "Mother",
+   "sampled": 18,
+   "video_frames": 53,
+   "offline": {
+    "top": "Mother",
+    "conf": 0.9839,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Mother",
+    "conf": 0.9355,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "you",
+    "conf": 0.2817,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Mother",
+    "conf": 0.9446,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Mother",
+    "conf": 0.9702,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Mother",
+    "conf": 0.9629,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "you",
+    "conf": 0.418,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s073",
+   "label": "Ring",
+   "sampled": 17,
+   "video_frames": 51,
+   "offline": {
+    "top": "Ring",
+    "conf": 0.7465,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Ring",
+    "conf": 0.7731,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "narrow",
+    "conf": 0.5047,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Ring",
+    "conf": 0.4216,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Ring",
+    "conf": 0.7396,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Ring",
+    "conf": 0.5783,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Neighbour",
+    "conf": 0.4962,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s074",
+   "label": "Grandmother",
+   "sampled": 26,
+   "video_frames": 77,
+   "offline": {
+    "top": "Grandmother",
+    "conf": 0.9938,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Grandmother",
+    "conf": 0.9944,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 26,
+    "top": "warm",
+    "conf": 0.5278,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Grandmother",
+    "conf": 0.9969,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Grandmother",
+    "conf": 0.9996,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Grandmother",
+    "conf": 0.9915,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 26,
+    "top": "you",
+    "conf": 0.5461,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s075",
+   "label": "Clothing",
+   "sampled": 17,
+   "video_frames": 50,
+   "offline": {
+    "top": "Clothing",
+    "conf": 0.604,
+    "accepted": false,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Clothing",
+    "conf": 0.6985,
+    "accepted": false
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Skirt",
+    "conf": 0.3303,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Clothing",
+    "conf": 0.7102,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Clothing",
+    "conf": 0.7588,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Clothing",
+    "conf": 0.7836,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Skirt",
+    "conf": 0.4144,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s076",
+   "label": "Artist",
+   "sampled": 23,
+   "video_frames": 69,
+   "offline": {
+    "top": "Artist",
+    "conf": 0.5266,
+    "accepted": false,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Artist",
+    "conf": 0.9054,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 23,
+    "top": "they",
+    "conf": 0.9689,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Artist",
+    "conf": 0.6367,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Artist",
+    "conf": 0.6655,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 23,
+    "top": "they",
+    "conf": 0.5079,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 23,
+    "top": "they",
+    "conf": 0.9829,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s077",
+   "label": "Time",
+   "sampled": 20,
+   "video_frames": 58,
+   "offline": {
+    "top": "Time",
+    "conf": 0.9607,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Time",
+    "conf": 0.9725,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "long",
+    "conf": 0.8627,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "slow",
+    "conf": 0.8974,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Time",
+    "conf": 0.9796,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "slow",
+    "conf": 0.9475,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "long",
+    "conf": 0.8334,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s078",
+   "label": "Reporter",
+   "sampled": 21,
+   "video_frames": 62,
+   "offline": {
+    "top": "Reporter",
+    "conf": 0.9232,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Reporter",
+    "conf": 0.9414,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Neighbour",
+    "conf": 0.6068,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Reporter",
+    "conf": 0.8347,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Reporter",
+    "conf": 0.9641,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Reporter",
+    "conf": 0.7583,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Neighbour",
+    "conf": 0.4379,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s079",
+   "label": "Waiter",
+   "sampled": 25,
+   "video_frames": 73,
+   "offline": {
+    "top": "Waiter",
+    "conf": 0.976,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Waiter",
+    "conf": 0.989,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 25,
+    "top": "wide",
+    "conf": 0.4577,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Waiter",
+    "conf": 0.9139,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Waiter",
+    "conf": 0.9899,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Waiter",
+    "conf": 0.847,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 25,
+    "top": "wide",
+    "conf": 0.4502,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s080",
+   "label": "train ticket",
+   "sampled": 34,
+   "video_frames": 101,
+   "offline": {
+    "top": "train ticket",
+    "conf": 0.9998,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 34,
+    "top": "train ticket",
+    "conf": 0.9998,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 34,
+    "top": "cold",
+    "conf": 0.2595,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 34,
+    "top": "train ticket",
+    "conf": 0.9991,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 34,
+    "top": "train ticket",
+    "conf": 0.9993,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 34,
+    "top": "train ticket",
+    "conf": 0.9986,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 34,
+    "top": "cold",
+    "conf": 0.1339,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s081",
+   "label": "Radio",
+   "sampled": 19,
+   "video_frames": 55,
+   "offline": {
+    "top": "Radio",
+    "conf": 0.3791,
+    "accepted": false,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Radio",
+    "conf": 0.5762,
+    "accepted": false
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 19,
+    "top": "wide",
+    "conf": 0.7104,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Radio",
+    "conf": 0.8902,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Market",
+    "conf": 0.5865,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 19,
+    "top": "Market",
+    "conf": 0.752,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 19,
+    "top": "wide",
+    "conf": 0.6108,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s082",
+   "label": "Laptop",
+   "sampled": 25,
+   "video_frames": 75,
+   "offline": {
+    "top": "Laptop",
+    "conf": 1.0,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Laptop",
+    "conf": 1.0,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Hat",
+    "conf": 0.3674,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Laptop",
+    "conf": 0.9997,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Laptop",
+    "conf": 0.9999,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Laptop",
+    "conf": 0.9992,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 25,
+    "top": "long",
+    "conf": 0.6863,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s083",
+   "label": "Player",
+   "sampled": 22,
+   "video_frames": 65,
+   "offline": {
+    "top": "Player",
+    "conf": 0.9981,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 22,
+    "top": "Player",
+    "conf": 0.998,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 22,
+    "top": "wide",
+    "conf": 0.8865,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 22,
+    "top": "Player",
+    "conf": 0.9975,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 22,
+    "top": "Player",
+    "conf": 0.9975,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 22,
+    "top": "Player",
+    "conf": 0.9986,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 22,
+    "top": "wide",
+    "conf": 0.9816,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s084",
+   "label": "Fall",
+   "sampled": 24,
+   "video_frames": 71,
+   "offline": {
+    "top": "you",
+    "conf": 0.673,
+    "accepted": false,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 24,
+    "top": "you",
+    "conf": 0.701,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 24,
+    "top": "wide",
+    "conf": 0.8757,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Fall",
+    "conf": 0.9432,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 24,
+    "top": "you",
+    "conf": 0.6649,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 24,
+    "top": "you",
+    "conf": 0.8162,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 24,
+    "top": "wide",
+    "conf": 0.91,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s085",
+   "label": "Lock",
+   "sampled": 21,
+   "video_frames": 61,
+   "offline": {
+    "top": "Lock",
+    "conf": 0.9536,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Lock",
+    "conf": 0.9554,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 21,
+    "top": "narrow",
+    "conf": 0.8574,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Lock",
+    "conf": 0.8901,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Lock",
+    "conf": 0.9711,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 21,
+    "top": "Lock",
+    "conf": 0.8322,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 21,
+    "top": "narrow",
+    "conf": 0.7312,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s086",
+   "label": "Police",
+   "sampled": 17,
+   "video_frames": 49,
+   "offline": {
+    "top": "Police",
+    "conf": 0.9977,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Police",
+    "conf": 0.9995,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "long",
+    "conf": 0.6424,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Police",
+    "conf": 0.9792,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Police",
+    "conf": 0.9988,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Police",
+    "conf": 0.8993,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "narrow",
+    "conf": 0.4752,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s087",
+   "label": "Gift",
+   "sampled": 16,
+   "video_frames": 46,
+   "offline": {
+    "top": "Gift",
+    "conf": 0.931,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 16,
+    "top": "Gift",
+    "conf": 0.8331,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 16,
+    "top": "Friend",
+    "conf": 0.3512,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 16,
+    "top": "Gift",
+    "conf": 0.8057,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 16,
+    "top": "Gift",
+    "conf": 0.9157,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 16,
+    "top": "Gift",
+    "conf": 0.8041,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 16,
+    "top": "Friend",
+    "conf": 0.3469,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s088",
+   "label": "Cow",
+   "sampled": 27,
+   "video_frames": 80,
+   "offline": {
+    "top": "Cow",
+    "conf": 0.9922,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 27,
+    "top": "Cow",
+    "conf": 0.9775,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 27,
+    "top": "wide",
+    "conf": 0.9934,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 27,
+    "top": "Cow",
+    "conf": 0.9569,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 27,
+    "top": "Cow",
+    "conf": 0.9857,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 27,
+    "top": "Cow",
+    "conf": 0.941,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 27,
+    "top": "wide",
+    "conf": 0.9883,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s089",
+   "label": "Letter",
+   "sampled": 20,
+   "video_frames": 58,
+   "offline": {
+    "top": "Paper",
+    "conf": 0.9624,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Paper",
+    "conf": 0.6805,
+    "accepted": false
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "wide",
+    "conf": 0.9187,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "How are you",
+    "conf": 0.2523,
+    "accepted": false
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Paper",
+    "conf": 0.7774,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "How are you",
+    "conf": 0.4803,
+    "accepted": false
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "wide",
+    "conf": 0.9455,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s090",
+   "label": "Paper",
+   "sampled": 17,
+   "video_frames": 50,
+   "offline": {
+    "top": "Paper",
+    "conf": 0.9887,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Paper",
+    "conf": 0.9798,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Alright",
+    "conf": 0.6579,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Paper",
+    "conf": 0.9896,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Paper",
+    "conf": 0.9666,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Paper",
+    "conf": 0.994,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Alright",
+    "conf": 0.7252,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s091",
+   "label": "Wife",
+   "sampled": 18,
+   "video_frames": 53,
+   "offline": {
+    "top": "Wife",
+    "conf": 0.4884,
+    "accepted": false,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Wife",
+    "conf": 0.4639,
+    "accepted": false
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Wife",
+    "conf": 0.7232,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Wife",
+    "conf": 0.9108,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Wife",
+    "conf": 0.5786,
+    "accepted": false
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Wife",
+    "conf": 0.9729,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Wife",
+    "conf": 0.5903,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s092",
+   "label": "Car",
+   "sampled": 29,
+   "video_frames": 87,
+   "offline": {
+    "top": "Car",
+    "conf": 0.9719,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 29,
+    "top": "Car",
+    "conf": 0.7945,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 29,
+    "top": "Car",
+    "conf": 0.2994,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 29,
+    "top": "Car",
+    "conf": 0.9143,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 29,
+    "top": "Car",
+    "conf": 0.8596,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 29,
+    "top": "Car",
+    "conf": 0.991,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 29,
+    "top": "Park",
+    "conf": 0.4362,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s093",
+   "label": "Price",
+   "sampled": 26,
+   "video_frames": 78,
+   "offline": {
+    "top": "Price",
+    "conf": 0.9883,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Price",
+    "conf": 0.9699,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Friend",
+    "conf": 0.2399,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Price",
+    "conf": 0.9909,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Price",
+    "conf": 0.9689,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 26,
+    "top": "Price",
+    "conf": 0.9857,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 26,
+    "top": "narrow",
+    "conf": 0.1711,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s094",
+   "label": "Summer",
+   "sampled": 24,
+   "video_frames": 70,
+   "offline": {
+    "top": "Summer",
+    "conf": 0.9996,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Summer",
+    "conf": 0.9809,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Summer",
+    "conf": 0.9762,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Summer",
+    "conf": 0.9971,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Summer",
+    "conf": 0.9978,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Summer",
+    "conf": 0.9972,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 24,
+    "top": "Summer",
+    "conf": 0.979,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s095",
+   "label": "Pen",
+   "sampled": 23,
+   "video_frames": 69,
+   "offline": {
+    "top": "Pen",
+    "conf": 0.9816,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Pen",
+    "conf": 0.9229,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 23,
+    "top": "wide",
+    "conf": 0.3362,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Pen",
+    "conf": 0.9237,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Pen",
+    "conf": 0.9836,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 23,
+    "top": "Pen",
+    "conf": 0.9886,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 23,
+    "top": "wide",
+    "conf": 0.4943,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s096",
+   "label": "Sport",
+   "sampled": 25,
+   "video_frames": 73,
+   "offline": {
+    "top": "Sport",
+    "conf": 0.8821,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Sport",
+    "conf": 0.9508,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 25,
+    "top": "wide",
+    "conf": 0.9955,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Sport",
+    "conf": 0.9482,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Sport",
+    "conf": 0.9661,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 25,
+    "top": "Sport",
+    "conf": 0.9433,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 25,
+    "top": "wide",
+    "conf": 0.9929,
+    "accepted": true
+   }
+  },
+  {
+   "id": "s097",
+   "label": "Science",
+   "sampled": 17,
+   "video_frames": 50,
+   "offline": {
+    "top": "Science",
+    "conf": 0.9993,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Science",
+    "conf": 0.9972,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Crowd",
+    "conf": 0.2694,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Science",
+    "conf": 0.9933,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Science",
+    "conf": 0.9959,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Science",
+    "conf": 0.9921,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 17,
+    "top": "Shoes",
+    "conf": 0.3499,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s098",
+   "label": "Today",
+   "sampled": 18,
+   "video_frames": 54,
+   "offline": {
+    "top": "Today",
+    "conf": 0.9959,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Today",
+    "conf": 0.9976,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "they",
+    "conf": 0.3152,
+    "accepted": false
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Today",
+    "conf": 0.8201,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Today",
+    "conf": 0.9625,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 18,
+    "top": "Today",
+    "conf": 0.9147,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 18,
+    "top": "you",
+    "conf": 0.5648,
+    "accepted": false
+   }
+  },
+  {
+   "id": "s099",
+   "label": "King",
+   "sampled": 20,
+   "video_frames": 60,
+   "offline": {
+    "top": "Queen",
+    "conf": 0.9975,
+    "accepted": true,
+    "status": "ok"
+   },
+   "py16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Queen",
+    "conf": 0.9758,
+    "accepted": true
+   },
+   "py4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Queen",
+    "conf": 0.9204,
+    "accepted": true
+   },
+   "py4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Queen",
+    "conf": 0.997,
+    "accepted": true
+   },
+   "br16x9": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Queen",
+    "conf": 0.9807,
+    "accepted": true
+   },
+   "br4x3": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Queen",
+    "conf": 0.9787,
+    "accepted": true
+   },
+   "br4x3_raw": {
+    "status": "ok",
+    "frames": 20,
+    "top": "Queen",
+    "conf": 0.911,
+    "accepted": true
+   }
+  }
+ ]
+}
