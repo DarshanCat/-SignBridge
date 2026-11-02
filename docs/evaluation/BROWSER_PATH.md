@@ -73,3 +73,40 @@ The remaining loss is a train and input mismatch, so the model, not the pipeline
 - **Do not lower the 0.7 threshold or loosen UNRECOGNIZED** to hide the 4:3 loss; the wrong-accepted rate is already higher there.
 
 Before any retraining, re-run this benchmark on validation videos to pick the augmentation ranges, and keep the test videos for one final run.
+
+## Validation run: how much mismatch the model tolerates (to choose augmentation ranges)
+
+Same method on 100 validation videos (one per class, seed 0, split "val" of the authors' predefined split, signer independence not verified; these are not test videos). Nothing was retrained. Accuracy is answered correctly at threshold 0.7; the second number is wrong accepted. The perturbations are applied to the browser landmarks that the app sends (16:9 frames unless stated), so the first row of each sweep is the baseline.
+
+| Source | Accuracy | Wrong accepted |
+|---|---|---|
+| offline (stored features) | 0.77 | 0.04 |
+| browser 16:9 | 0.75 | 0.01 |
+| browser 4:3 letterboxed, y rescaled | 0.58 | 0.04 |
+| browser 4:3 without the rescale | 0.03 | 0.33 |
+
+The test videos gave the same picture (0.82, 0.78, 0.65, 0.07), so the ordering is not an accident of one sample.
+
+Sensitivity to the y scale (factor applied on top of the correct rescale; 1.0 is exact):
+
+| Factor | 0.6 | 0.75 | 0.9 | 1.0 | 1.1 | 1.25 | 1.33 | 1.5 | 1.75 |
+|---|---|---|---|---|---|---|---|---|---|
+| Accuracy on 16:9 | 0.01 | 0.05 | 0.43 | 0.75 | 0.65 | 0.26 | 0.14 | 0.05 | 0.01 |
+| Accuracy on 4:3 | 0.02 | 0.03 | 0.35 | 0.58 | 0.54 | 0.22 | 0.12 | 0.02 | 0.01 |
+
+The model is very sensitive to the vertical scale: a 10 percent error costs 10 to 30 points and 25 percent leaves 0.2 to 0.3 with 36 to 47 percent wrong accepted. A factor of 0.75 on 16:9 is exactly what an unrescaled 4:3 camera produces, which is why that case failed so badly. This is also why the model cannot be trusted with any camera whose aspect is not reported correctly.
+
+Other perturbations on 16:9 landmarks: Gaussian noise on x and y (in image fractions) 0.002 gives 0.74, 0.005 gives 0.72, 0.01 gives 0.70, 0.02 gives 0.44. Hands removed independently in a random share of frames: 10 percent gives 0.77, 20 percent 0.69, 40 percent 0.55, 60 percent 0.30 (the browser finds a hand in about 87 percent of frames already).
+
+### Proposed augmentation ranges (for the later training run, not applied)
+
+- **Vertical scale**: uniform in 0.85 to 1.20 on the landmark y before normalization, applied to most training samples. This is deliberately narrower than the 0.75 to 1.35 first guessed: the model has no tolerance beyond 20 percent and wider ranges would mostly teach it to ignore a cue that is real (body proportions). The purpose is a safety margin of about 10 percent around the exact rescale (field of view, a camera that reports 16:10, small errors), not coverage of an unrescaled 4:3 camera, which the app now corrects.
+- **Landmark noise**: Gaussian, sigma drawn up to 0.01 of the image size (accuracy loss at 0.01 is about 5 points, 0.02 is too much).
+- **Hand dropout**: per frame and hand with probability up to 0.2.
+- Keep the 0.7 threshold; evaluate each augmentation setting by validation macro F1 and by this benchmark on the browser landmarks of the validation videos, then run the test videos once.
+
+### What augmentation will probably not fix
+
+On exact rescaling the 4:3 letterboxed input is still 17 points below 16:9 on validation (0.58 against 0.75), and a y scale error cannot explain it. The likely cause is MediaPipe itself on a small, letterboxed picture (the Python run on the same frames shows most of the same loss), so the more reliable fixes are capture guidance (fill the frame) and training on real webcam takes. Treat augmentation as a margin, not as the cure.
+
+Files: `tools/browser_path/sweep.py` (run in a copy of the folder whose `samples.json` is `samples_val.json`, produced by `select_samples.py` with the split set to `val`) and `docs/evaluation/browser_path_validation_sweep.json`.
