@@ -1,0 +1,274 @@
+% IEEE conference paper, two column. Compile: see paper/README.md
+% Every number comes from docs/evaluation (see the table of sources in paper/README.md).
+% Numbers that need the three seed runs are wrapped in \pending{...} so that they can be found and replaced.
+% Citations are real papers written from memory and each is marked [VERIFY] in refs.bib: check every one before submission.
+\documentclass[conference]{IEEEtran}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{array}
+
+\newcommand{\pending}[1]{{\color{red}\textbf{[#1]}}}
+\newcommand{\todo}[1]{{\color{blue}\textbf{[#1]}}}
+\newcommand{\signbridge}{\textsc{SignBridge}}
+
+\begin{document}
+
+\title{Offline Accuracy Is Not Webcam Accuracy: Measuring the Deployment Gap in Landmark-Based Indian Sign Language Recognition}
+
+\author{\IEEEauthorblockN{Darshan BG}
+\IEEEauthorblockA{Independent researcher\\
+Email: \todo{author email}}}
+
+\maketitle
+
+\begin{abstract}
+Landmark-based sign language recognizers are usually reported with accuracy on the test split of the dataset they were trained on. We ask what that number means once the same model runs behind a web browser and a webcam. We take a one-dimensional CNN, a bidirectional GRU and a Transformer trained on the INCLUDE dataset of Indian Sign Language (262 classes) and run the same test videos through a real browser MediaPipe pipeline in two picture shapes. At the live confidence threshold of 0.7 the CNN answers 0.82 of 100 test videos correctly from stored features and 0.78 from browser landmarks of 16:9 frames, but 0.65 from 4:3 frames and 0.07 when the 4:3 picture aspect is ignored, with 29\,\% confident wrong answers. A 10\,\% error in the vertical landmark scale costs 10 to 30 points, and signers who appear small in the frame are recognized less reliably. We add a targeted augmentation (vertical scale, landmark noise, hand dropout) and measure its effect on all three architectures over three seeds: \pending{summary of 3-seed result}. We turn the findings into a camera request, a framing guide and a size warning in an open prototype. All numbers are on the authors' predefined split; signer independence is not verified.
+\end{abstract}
+
+\begin{IEEEkeywords}
+sign language recognition, Indian Sign Language, deployment, distribution shift, MediaPipe, data augmentation
+\end{IEEEkeywords}
+
+\section{Introduction}
+Sign language recognition from video is a task where reported accuracy is high and deployed accuracy is rarely measured. A common design replaces pixels with body, hand and face landmarks from a pose estimator, which makes models small enough to run in a web page~\cite{lugaresi2019mediapipe,bazarevsky2020blazepose,zhang2020mediapipehands}. The features then look camera independent, and the test split of the training dataset is treated as the answer to how well the system will work. It is not. The landmarks that reach the classifier in a browser come from a different camera, a different picture shape, a different resolution and a different distance from the signer than the ones in the dataset, and a landmark model is only as invariant to these as its normalization and training make it.
+
+This paper measures that gap for Indian Sign Language (ISL). We use the INCLUDE dataset~\cite{sridhar2020include}, three standard sequence classifiers, and a running prototype, \signbridge{}, that recognizes isolated signs in the browser and signs typed English with a 3D avatar. Our contributions are:
+\begin{enumerate}
+\item A browser-path benchmark that feeds dataset test videos frame by frame through the real in-browser MediaPipe Holistic model in two picture shapes, and compares the result with the offline path and with Python MediaPipe on identical frames, with paired tests and intervals (Sections~\ref{sec:pipeline} and~\ref{sec:gap}).
+\item A sensitivity study of the classifier to vertical landmark scale, landmark noise, hand dropout and signer size in the picture, which shows that the dominant failure was a picture aspect mismatch of a kind that normalization by shoulder width does not remove.
+\item A targeted augmentation derived from those measurements on validation data, evaluated on three architectures over three seeds (Section~\ref{sec:aug}).
+\item Their conversion into product behavior: a camera request, a framing guide and a size warning (Section~\ref{sec:guidance}), and a full disclosure of every use of the test split (Section~\ref{sec:limits}).
+\end{enumerate}
+
+\section{Related Work}
+\textbf{Sign language datasets and recognition.} Word-level datasets such as WLASL~\cite{li2020wlasl} and, for Indian Sign Language, INCLUDE~\cite{sridhar2020include} made isolated sign classification a standard benchmark; surveys cover the field~\cite{rastgoo2021survey}. Skeleton and landmark based methods are among the strongest and cheapest systems~\cite{jiang2021sam}. These works evaluate on held-out splits of the same collection. We instead evaluate the path a user would actually run.
+
+\textbf{Landmark extraction.} MediaPipe provides body pose and hand landmarks in real time on commodity hardware and in the browser~\cite{lugaresi2019mediapipe,bazarevsky2020blazepose,zhang2020mediapipehands}. We use it unchanged on both sides of the comparison and ask how much of the gap is the extractor and how much is the input.
+
+\textbf{Dataset shift and robustness.} Train-test mismatch is a long-studied problem~\cite{quinonero2009dataset,torralba2011bias}, with modern benchmarks of distribution shift~\cite{koh2021wilds}, corruption robustness~\cite{hendrycks2019robustness} and the finding that equally accurate models can behave differently under shift~\cite{damour2022underspecification}. Our shifts are specific and physical (picture aspect, subject size, detector dropout), which lets us measure them one at a time and choose an augmentation from the measurements instead of from convention~\cite{shorten2019augmentation}.
+
+\textbf{Abstention.} A reject option trades coverage for accuracy~\cite{geifman2017selective} and depends on confidence being meaningful, which deep networks do not guarantee~\cite{guo2017calibration}. We report the coverage and accuracy trade-off per condition and show that the chosen threshold depends on the model and the input path.
+
+\textbf{Deployment with Deaf communities.} Technology that claims to translate sign language has to be evaluated with signers and their communities~\cite{bragg2019interdisciplinary}. We state in Section~\ref{sec:limits} what we could not do.
+
+\section{Dataset and Models}\label{sec:data}
+\textbf{Data.} INCLUDE contains 4,284 processed videos of 262 classes in the version we use (4 to 25 videos per class, median 15), with the authors' predefined split of 3,121 training, 347 validation and 816 test samples~\cite{sridhar2020include}. Eight listed videos are absent from the released archives. No video appears in two splits, and the stored feature arrays contain no byte-identical duplicates across splits. The dataset carries no signer identifiers, so \emph{every result in this paper is on the authors' predefined split and signer independence is not verified.}
+
+\textbf{Features.} Each frame has 225 values: 33 pose, 21 left-hand and 21 right-hand landmarks with $(x,y,z)$. Coordinates are translated so that the shoulder midpoint is the origin and divided by the two-dimensional shoulder distance computed from the normalized image coordinates. A missing hand is an all-zero block; in the stored features 19.6\,\% of frames lack the left hand and 29.6\,\% the right hand. Face landmarks are not used. Sequences are resampled to 32 frames after interpolating hand gaps of at most three frames; the same function serves training and inference.
+
+\textbf{Models.} We train a 1D CNN (343,558 parameters), a bidirectional GRU~\cite{cho2014gru,schuster1997birnn} (636,422) and a Transformer encoder~\cite{vaswani2017attention} (360,710) with identical settings: at most 60 epochs, patience 10 on validation macro-F1, batch size 16, learning rate $10^{-3}$, hidden size 128, two layers, dropout 0.3, input noise of standard deviation 0.01 in normalized units, seed 0. Model selection used the validation split only; each model was evaluated on the test split once.
+
+\begin{table}[t]
+\caption{Baseline models on the INCLUDE test split (816 samples), authors' predefined split, signer independence not verified. Accuracy at confidence threshold 0.7 is the answered share and the accuracy among answered.}
+\label{tab:base}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccc}
+\hline
+Model & Top-1 & Top-5 & Macro-F1 & Cov. / acc. at 0.7\\
+\hline
+1D CNN & 0.9130 & 0.9902 & 0.9107 & 0.8676 / 0.9548\\
+BiGRU & 0.7929 & 0.9730 & 0.7869 & 0.7279 / 0.9074\\
+Transformer & 0.7328 & 0.9596 & 0.7100 & 0.7549 / 0.8279\\
+\hline
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:base} gives the standard offline numbers. A prediction whose top confidence is below a threshold is reported as UNRECOGNIZED. The live threshold is the lowest value of $\{0, 0.3, 0.5, 0.7, 0.8, 0.9, 0.95\}$ that gives at least 95\,\% accuracy on answered \emph{validation} samples of the best model; for the CNN this is 0.7 (validation coverage 0.8818, accuracy on answered 0.9608). Because the CNN is the model deployed, most single-model experiments below use it, and Section~\ref{sec:aug} extends them to all three.
+
+\section{Browser Deployment Pipeline}\label{sec:pipeline}
+The prototype runs MediaPipe Holistic in the browser (WebAssembly, CPU inference, model complexity 0) on frames from the webcam. Only landmarks leave the page: a short buffer (the newest 60 frames, dropped after 15 frames without a body pose) is sent over a WebSocket to a FastAPI server that applies exactly the normalization and resampling of training and returns a label or UNRECOGNIZED. No video is stored or transmitted.
+
+\textbf{A picture aspect problem.} MediaPipe returns $x$ as a fraction of the picture width and $y$ as a fraction of its height. INCLUDE videos are 16:9; a webcam is commonly 4:3. For the same pose, a 4:3 picture therefore yields a vertical coordinate that is larger by a factor of $(16/9)/(4/3)$, and the shoulder-width normalization (which uses the 2D distance) does not undo it because it divides $x$ and $y$ by the same number. We rescale the vertical coordinate of every landmark to what the same pose would give in a 16:9 picture,
+\begin{equation}
+y' = y\cdot\frac{16/9}{w/h},
+\end{equation}
+with $w/h$ the camera picture's aspect, before it is sent (Section~\ref{sec:guidance} describes the camera request). $x$ and $z$ are unchanged. The rescale is exact in the sense that, in normalized coordinates, it equals the effect of scaling the raw $y$ by $s$ and re-normalizing, which we use to implement the augmentation of Section~\ref{sec:aug} on stored features.
+
+\section{Deployment-Gap Experiments}\label{sec:gap}
+\textbf{Protocol.} We took test videos of the authors' predefined split whose original file is available, one per class, drawn with a fixed seed: 100 videos for the CNN study reported in this section, and a separate validation set of 100 videos for tuning decisions. Each video was resized to 1280$\times$720 (16:9) and, separately, letterboxed into 640$\times$480 (4:3); every third frame (about 8 to 10 frames per second, similar to a live browser) was written as a JPEG of quality 95. A headless Chrome instance then passed each frame to the self-hosted MediaPipe Holistic of the prototype with its options (smoothing on, CPU inference). Feeding frames one at a time, instead of playing a looping fake camera, removes dropped frames: headless extraction runs at about 6 frames per second and a live fake camera would have mixed starved takes into the error rate. We compare: (a) \emph{offline}, the stored features of the same videos; (b) \emph{Python} MediaPipe on the same JPEG frames; (c) \emph{browser} landmarks, with and without the vertical rescale. Accuracy is the share of videos answered above the threshold \emph{and} correct; wrong-accepted is answered above the threshold and wrong; the remainder is UNRECOGNIZED. Intervals are 95\,\% Wilson intervals~\cite{wilson1927}; paired comparisons use an exact sign test on discordant videos~\cite{mcnemar1947}. The body pose was found in every frame in all sources, so detection loss is not what is measured; hands were found in about 87\,\% of frames. Limits: the harness uses the prototype's MediaPipe files and options but not its user-interface code, camera or socket, and one sample per class gives intervals of about $\pm 9$ points.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig_browser_vs_offline.pdf}
+\caption{CNN on 100 INCLUDE test videos at threshold 0.7 (authors' predefined split, signer independence not verified): correct-and-accepted share with 95\,\% Wilson intervals and wrong-and-accepted share. Offline features, browser landmarks of 16:9 and of letterboxed 4:3 frames, and the same 4:3 landmarks without the vertical rescale.}
+\label{fig:bvo}
+\end{figure}
+
+\subsection{Browser against offline}
+Figure~\ref{fig:bvo} and Table~\ref{tab:bvo} show the main result. In native 16:9 the browser path is within noise of the offline path: 0.78 against 0.82 (6 videos lost and 2 gained, $p=0.29$), with a wrong-accepted rate of 0.02. In 4:3 the loss is large: 0.65 (22 videos lost, 5 gained, $p=0.002$), with 0.07 wrong accepted and 0.28 UNRECOGNIZED. Python MediaPipe on the same 4:3 frames reaches 0.70, so most of the loss comes from the input, not the browser build; on identical frames the browser is 3 to 5 points below Python, which is not significant at this sample size. The extractor is therefore a minor contributor, and the picture is the major one.
+
+\begin{table}[t]
+\caption{CNN, 100 test videos, threshold 0.7 (authors' predefined split, signer independence not verified). Acc.\ = correct and accepted with 95\,\% Wilson interval; WA = wrong accepted; UN = unrecognized; Top-1 ignores the threshold.}
+\label{tab:bvo}
+\centering
+\small
+\begin{tabular}{lccccc}
+\hline
+Source & Acc. & (interval) & WA & UN & Top-1\\
+\hline
+Offline features & 0.82 & 0.73 to 0.88 & 0.03 & 0.15 & 0.92\\
+Python, 16:9 & 0.81 & 0.72 to 0.87 & 0.03 & 0.16 & 0.90\\
+Browser, 16:9 & 0.78 & 0.69 to 0.85 & 0.02 & 0.20 & 0.87\\
+Python, 4:3 & 0.70 & 0.60 to 0.78 & 0.05 & 0.25 & 0.81\\
+Browser, 4:3 & 0.65 & 0.55 to 0.74 & 0.07 & 0.28 & 0.78\\
+Python, 4:3 raw & 0.08 & & 0.29 & 0.63 & 0.12\\
+Browser, 4:3 raw & 0.07 & & 0.29 & 0.64 & 0.10\\
+\hline
+\end{tabular}
+\end{table}
+
+Without the vertical rescale, 4:3 input gives 0.07 accuracy and 29\,\% confident wrong answers: the model fails not by hesitating but by answering wrongly. Two diagnostics separate resolution from shape. A 16:9 picture resized to 640$\times$360 gives 0.80, so a smaller picture is not the cause. A centre crop of the 16:9 frame to 4:3 (a webcam-like fill) with the rescale gives 0.76, six points below 16:9, so a real webcam probably lies between the letterboxed and the native result; we did not measure a real webcam with real signers.
+
+\subsection{Vertical scale, noise and hand dropout}
+We applied controlled perturbations to the browser landmarks of 100 \emph{validation} videos (Fig.~\ref{fig:y}). With no perturbation the CNN scores 0.75 in 16:9 and 0.58 in 4:3. A vertical scale error of 10\,\% lowers the 16:9 accuracy to 0.43 (factor 0.9) or 0.65 (1.1); 25\,\% leaves 0.26 with 36\,\% wrong accepted, and a factor 0.75, which is exactly what an unrescaled 4:3 camera produces, leaves 0.05. The model is therefore very sensitive to a cue that shoulder-width normalization cannot remove. Table~\ref{tab:sweep} gives the noise and dropout sweeps: noise and dropout cost accuracy gradually, whereas vertical scale is a cliff. The browser already misses a hand in about 13\,\% of frames, so the dropout rates of 10 to 20\,\% are within what a live camera produces.
+
+\begin{table}[t]
+\caption{CNN on browser 16:9 landmarks of 100 validation videos with added noise or removed hands, threshold 0.7 (authors' predefined split, signer independence not verified). Noise is the standard deviation on $x$ and $y$ as a fraction of the picture size; dropout is the share of frames in which each hand is removed. Acc.\ = correct and accepted; WA = wrong accepted.}
+\label{tab:sweep}
+\centering
+\small
+\begin{tabular}{lcc|lcc}
+\hline
+Noise & Acc. & WA & Dropout & Acc. & WA\\
+\hline
+0.002 & 0.74 & 0.02 & 0.1 & 0.77 & 0.02\\
+0.005 & 0.72 & 0.03 & 0.2 & 0.69 & 0.04\\
+0.01 & 0.70 & 0.06 & 0.4 & 0.55 & 0.09\\
+0.02 & 0.44 & 0.11 & 0.6 & 0.30 & 0.16\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig_yscale.pdf}
+\caption{CNN accuracy and wrong-accepted rate against a vertical scale error applied to browser landmarks of 100 validation videos (authors' predefined split, signer independence not verified). The shaded band is the range used for augmentation in Section~\ref{sec:aug}.}
+\label{fig:y}
+\end{figure}
+
+\subsection{Signer size in the picture}
+To test framing, we shrank 30 validation videos toward the picture centre (to 100, 60, 45 and 30\,\% of their size, black padding, aspect unchanged) and classified Python landmarks of the result, binned by the median shoulder width as a fraction of the picture width (Fig.~\ref{fig:frame}). INCLUDE signers measure 0.116 to 0.149 (median 0.133). Accuracy is 0.89 for widths of 0.13 to 0.17 and 0.83 for 0.10 to 0.13, falls to 0.71 for 0.08 to 0.10 and to 0.59 and 0.50 below 0.08, where 12 to 14\,\% of answers are confidently wrong. At 30\,\% size no body pose was found. No width above 0.15 is covered, so a signer who fills the frame is unmeasured. The bins are rough (12 to 32 video-size pairs each).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig_framing.pdf}
+\caption{CNN accuracy and wrong-accepted rate against median shoulder width (fraction of picture width), validation videos shrunk toward the centre, Python MediaPipe (authors' predefined split, signer independence not verified). The dotted line is the warning threshold of the prototype.}
+\label{fig:frame}
+\end{figure}
+
+\subsection{Other architectures}
+Table~\ref{tab:arch} repeats the browser-path conditions for the BiGRU and the Transformer and for the CNN on a larger video set, with three seeds each. The numbers are mean and spread over seeds of independently trained models; they are not available at the time of writing.
+
+\begin{table*}[t]
+\caption{Baseline models under the browser path over three seeds: mean $\pm$ standard deviation of accuracy at the validation-chosen threshold (authors' predefined split, signer independence not verified). Test videos are evaluated once per trained model.}
+\label{tab:arch}
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{lccc}
+\hline
+Condition & 1D CNN & BiGRU & Transformer\\
+\hline
+Offline features & \pending{mean $\pm$ SD} & \pending{mean $\pm$ SD} & \pending{mean $\pm$ SD}\\
+Browser, 16:9 & \pending{mean $\pm$ SD} & \pending{mean $\pm$ SD} & \pending{mean $\pm$ SD}\\
+Browser, 4:3 with rescale & \pending{mean $\pm$ SD} & \pending{mean $\pm$ SD} & \pending{mean $\pm$ SD}\\
+Browser, 4:3 raw & \pending{mean $\pm$ SD} & \pending{mean $\pm$ SD} & \pending{mean $\pm$ SD}\\
+Wrong-accepted rate, browser 16:9 & \pending{mean $\pm$ SD} & \pending{mean $\pm$ SD} & \pending{mean $\pm$ SD}\\
+Validation-chosen threshold & \pending{mean, range} & \pending{mean, range} & \pending{mean, range}\\
+\hline
+\end{tabular}
+\end{table*}
+
+\section{Targeted Augmentation}\label{sec:aug}
+\textbf{Design.} The measurements of Section~\ref{sec:gap} on validation videos fix three augmentations, all applied to the stored normalized features of each training sample at every epoch. (i) \emph{Vertical scale}: with probability 0.8 the raw $y$ is multiplied by a factor drawn uniformly from 0.85 to 1.20 and the coordinates are re-normalized with the new shoulder distance; this is exact and is tested against re-normalizing scaled raw landmarks. The range is a margin of about 10\,\% around the exact rescale, deliberately narrower than first guessed because the model has no tolerance beyond 20\,\% and a wider range would mostly teach it to ignore body proportions. (ii) \emph{Landmark noise}: independent Gaussian jitter on $x$ and $y$ of every detected landmark, with a per-sample standard deviation drawn from 0 to 0.01 of the picture size (converted to normalized units with the median INCLUDE shoulder width, 0.133); missing hands stay exactly zero. (iii) \emph{Hand dropout}: each hand in each frame is zeroed with a per-sample probability drawn from 0 to 0.2. Nothing else changes: same split, seed handling, settings and checkpoint rule as the baseline.
+
+\textbf{Evaluation.} Each of the three architectures is trained with and without the augmentation, for three seeds. We report offline test accuracy (to detect regressions), the browser-path conditions of Table~\ref{tab:arch}, the perturbation sweeps, and paired differences with bootstrap intervals~\cite{efron1979bootstrap}.
+
+\begin{table}[t]
+\caption{Augmented minus baseline accuracy (three-seed mean; authors' predefined split, signer independence not verified).}
+\label{tab:aug}
+\centering
+\small
+\begin{tabular}{lccc}
+\hline
+Condition & CNN & BiGRU & Transformer\\
+\hline
+Offline test features & \pending{$\Delta$} & \pending{$\Delta$} & \pending{$\Delta$}\\
+Browser, 16:9 & \pending{$\Delta$} & \pending{$\Delta$} & \pending{$\Delta$}\\
+Browser, 4:3 with rescale & \pending{$\Delta$} & \pending{$\Delta$} & \pending{$\Delta$}\\
+Browser, 4:3 raw & \pending{$\Delta$} & \pending{$\Delta$} & \pending{$\Delta$}\\
+Vertical scale 0.9 / 1.25 & \pending{$\Delta$} & \pending{$\Delta$} & \pending{$\Delta$}\\
+Noise 0.01, dropout 0.2 & \pending{$\Delta$} & \pending{$\Delta$} & \pending{$\Delta$}\\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Results.} Table~\ref{tab:aug} summarizes the change per architecture. \pending{one paragraph: which architectures gain, by how much, and whether the 4:3 gap closes}. We expect, and will state only if the seeds confirm, that augmentation reduces sensitivity to vertical scale; we do not expect it to close the gap that remains in 4:3 after an exact rescale, which on validation data (0.58 against 0.75 for the baseline CNN) cannot be explained by a vertical scale error.
+
+\textbf{Threshold trade-off.} Augmentation changes how confident a model is, so the validation-chosen threshold may change. Table~\ref{tab:trade} shows the coverage and accuracy trade-off of the baseline CNN on the offline test split and the corresponding cells for the browser path and the augmented models.
+
+\begin{table}[t]
+\caption{Coverage and accuracy on answered samples against the confidence threshold, baseline CNN, offline test split (authors' predefined split, signer independence not verified), and the augmented and browser-path counterparts.}
+\label{tab:trade}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lccc}
+\hline
+Threshold & Offline CNN & Browser 16:9 & Augmented CNN\\
+ & cov. / acc. & cov. / acc. & cov. / acc.\\
+\hline
+0.50 & 0.9559 / 0.9346 & \pending{c / a} & \pending{c / a}\\
+0.70 & 0.8676 / 0.9548 & \pending{c / a} & \pending{c / a}\\
+0.80 & 0.8162 / 0.9700 & \pending{c / a} & \pending{c / a}\\
+0.90 & 0.7451 / 0.9770 & \pending{c / a} & \pending{c / a}\\
+0.95 & 0.6556 / 0.9757 & \pending{c / a} & \pending{c / a}\\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Framing Guidance}\label{sec:guidance}
+Three measurements became product behavior. First, the prototype requests 1280$\times$720 from the camera (an ideal constraint, so the nearest size is used), falls back to whatever the camera gives, shows the real resolution, and sizes the picture and the landmark overlay to the camera's actual shape; for any non-16:9 camera it applies the rescale of Section~\ref{sec:pipeline}. Second, a dashed outline for head, shoulders and both hands is drawn on the camera picture, with the shoulders at about 22\,\% of the width, between the INCLUDE range (0.12 to 0.15) and a typical close webcam picture. Third, the app warns when the smoothed shoulder width falls below 0.10 of the picture width: in Fig.~\ref{fig:frame} accuracy is 0.83 or more at 0.10 and above, 0.71 between 0.08 and 0.10, and about 0.55 below, with confident wrong answers appearing. The guide and the threshold are choices supported by data on validation videos; they are not validated with real users, and sizes larger than those in the dataset are not covered.
+
+\section{Case Study: SignBridge}\label{sec:case}
+\signbridge{} is an open prototype with five tabs: a conversation view for both directions, sign to English (isolated and continuous signing), English to sign, a recorder for guided collection of the signer's own takes, and a landmark check that compares browser and Python landmarks on the same recording. The frontend is Next.js with a React Three Fiber avatar; the backend is FastAPI with PyTorch. English to sign uses a rule-based gloss converter and avatar clips retargeted from INCLUDE landmark samples; the clips are automatic and \emph{none is reviewed by a signer}. Continuous mode segments a landmark stream from wrist height and motion; on streams joined from real INCLUDE samples with 10 rest frames between signs it splits 98.1\,\% of signs correctly on the test split, and only 75.2\,\% when signs follow each other with the natural margins alone, because signs signed back to back cannot be separated by this method. The prototype follows the findings above: it sends only landmarks, rescales by picture aspect, requests a 16:9 camera, warns about small framing, and returns UNRECOGNIZED below the validated threshold instead of a guess.
+
+\section{Limitations}\label{sec:limits}
+\textbf{Split and signers.} All results use the authors' predefined split, and signer independence is not verified: the dataset has no signer identifiers, so a person may appear in training and test. Absolute accuracies are therefore optimistic for new signers, and the gap we measure is a lower bound on the gap for people unseen in training.
+
+\textbf{No face features.} Face landmarks are not used. Facial expression carries grammatical information in Indian Sign Language (for example questions and negation); the recognizer cannot use it, and the avatar does not animate a face. The avatar's head movements for negation and questions are rule-based approximations that are not taken from signer-validated data.
+
+\textbf{Clips not signer-reviewed.} The avatar clips are automatic retargets from dataset samples. No clip has been reviewed by a signer; they can be wrong or unnatural, and the system is not an interpreting service.
+
+\textbf{Reproducibility.} The code, the benchmark scripts, the per-video result rows and the evaluation reports are in the project repository; the INCLUDE videos, the derived features, the trained weights and the avatar clips are not distributed there, and the benchmark needs the dataset archives from the INCLUDE authors.
+
+\textbf{Real webcams.} All browser results use dataset videos re-encoded as pictures; they do not include a real webcam, real lighting, real users or a left-handed signer. The framing study covers sizes up to the dataset range only. One sample per class gives wide intervals, and the single-seed CNN study of Section~\ref{sec:gap} has no training-variance estimate.
+
+\textbf{Licence.} The INCLUDE licence is stated inconsistently: CC BY 4.0 in the Zenodo record and CC BY-NC-SA 4.0 on a third-party page. We follow the stricter reading: INCLUDE-derived material (features, weights, clips) is shared non-commercially under CC BY-NC-SA 4.0 with attribution, and the data and model files are not in the public repository. The avatar character's licence terms are unconfirmed and it is not distributed.
+
+\textbf{Test-split disclosure.} The test split was used as follows; we list every use known to us.
+\begin{enumerate}
+\item The three baseline models (seed 0) were each evaluated once on the full test split (816 samples) to produce Table~\ref{tab:base}. The earlier pilot runs used the validation split of a partial manifest only and never read test features.
+\item The segmentation study of Section~
+ef{sec:case} evaluated streams of test samples once per rest-gap setting (three settings) after tuning on validation.
+\item The browser-path benchmark of the baseline CNN on 100 test videos (Section~\ref{sec:gap}) is a further use. It followed three end-to-end fake-camera runs on three INCLUDE test videos, whose wrong results first exposed the picture-aspect problem; the rescale was therefore designed after seeing test videos, although it was derived from the geometry and its size was not tuned on test data.
+\item After the resampling routine was vectorized for speed, the baseline CNN was run over the test split once to confirm that its accuracy (0.9130) was unchanged.
+\item Each of the three augmented models (seed 0) and each of the twelve additional models (seeds 1 and 2, baseline and augmented) was evaluated once on the full test split at the end of its training run.
+\item Test videos are used once per trained model in the browser-path evaluation of Table~\ref{tab:arch}: \pending{number of test videos}, six seed-0 models and twelve further models.
+\end{enumerate}
+No augmentation range, threshold or model choice was tuned on the test split; they were chosen on validation data (Section~\ref{sec:gap} and the validation sweeps).
+
+\section{Conclusion}
+A landmark recognizer that scores 0.913 top-1 on its test split can answer 0.07 of test videos correctly, with 29\,\% confident wrong answers, when the same model receives landmarks from a picture of a different shape. A simple geometric rescale removes that failure; what remains is a smaller but real loss in 4:3 pictures (0.65 against 0.82 offline for the CNN), a steep sensitivity to vertical scale and a loss for signers who appear small. We turned the measurements into a targeted augmentation and into camera and framing behavior of an open prototype; \pending{one sentence with the three-seed outcome}. The central lesson is methodological: report the accuracy of the path a user will run, with the picture shape, the framing and the abstention rule stated, on a split whose signer independence is known. We could not do the last of these for INCLUDE, and the next step is recording signers under their own identifiers on real webcams and reviewing the avatar clips with Deaf signers.
+
+\section*{Acknowledgment}
+The INCLUDE authors released the dataset used here. \todo{add acknowledgments}
+
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+
+\end{document}
