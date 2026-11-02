@@ -29,9 +29,8 @@ async function get(url) {
 async function main() {
   const list = await (await get(`${apiBase}/tree/main/animations`)).json();
   const clips = list.filter((e) => e.type === "file" && e.path.endsWith(".json")).map((e) => e.path);
-  const wanted = [...clips, "avatar/signer.glb"];
   let done = 0;
-  const queue = [...wanted];
+  const queue = [...clips];
   async function worker() {
     for (let p = queue.shift(); p; p = queue.shift()) {
       const body = Buffer.from(await (await get(`${fileBase}/${p}`)).arrayBuffer());
@@ -42,7 +41,24 @@ async function main() {
     }
   }
   await Promise.all(Array.from({ length: 8 }, worker));
-  console.log(`fetch-assets: ${clips.length} clips and the avatar model written to public/ (${done} files)`);
+
+  // Check optional avatar model
+  let avatarNotice = "using built-in procedural figure";
+  try {
+    const avatarRes = await fetch(`${fileBase}/avatar/signer.glb`, { headers, redirect: "follow" });
+    if (avatarRes.ok) {
+      const body = Buffer.from(await avatarRes.arrayBuffer());
+      const dest = join(pub, "avatar", "signer.glb");
+      await mkdir(dirname(dest), { recursive: true });
+      await writeFile(dest, body);
+      done++;
+      avatarNotice = "avatar model downloaded";
+    }
+  } catch {
+    // Optional avatar model skipped
+  }
+
+  console.log(`fetch-assets: ${clips.length} clips written to public/ (${done} total files, ${avatarNotice})`);
 }
 
 main().catch((e) => {
