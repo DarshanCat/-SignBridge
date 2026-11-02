@@ -131,11 +131,24 @@ export interface SignRegistry {
 export interface RecordResult {
   accepted: boolean;
   gloss: string;
+  signer_id?: string | null;
   reasons: string[];
-  stats: { frames: number; no_pose_frames: number; no_hand_frames: number; fps: number; seconds: number };
+  stats: { frames: number; no_pose_frames: number; no_hand_frames: number; fps: number; seconds: number; segments?: number };
   saved: boolean;
   feature_file: string | null;
   clip_file: string | null;
   clip: unknown;
   note: string;
+}
+
+export interface RecordPlan {
+  glosses: string[];
+  priority: string[];
+  note: string;
+}
+
+export interface RecordTakes {
+  signer_id: string;
+  counts: Record<string, number>;
+  total: number;
 }

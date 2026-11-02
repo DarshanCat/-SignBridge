@@ -76,7 +76,10 @@ Docker: `docker compose up --build` (images were built once earlier; compose was
 - Keyboard shortcuts also exist on English to Sign (P, A), Record sign (R, A) and Landmark check (R); the page shows an error banner when the backend is down.
 - **Landmark check tab:** records a 4 second local video together with the browser's landmarks and offers both as downloads;
   `python -m training.compare_landmarks` (from `backend/`) then compares them with Python MediaPipe on the same video. Nothing is uploaded.
-- **Record sign tab:** record a sign INCLUDE lacks (3-2-1 countdown, landmarks only). Promote a good take:
+- **Record sign tab:** two modes. Single sign: record a sign INCLUDE lacks (3-2-1 countdown, landmarks only). Guided session: enter a signer ID, takes
+  per sign and a list of signs (the 50 grammar words are preloaded, WHERE, GO, LIKE, NOT, HELP, WHAT, YES, NO first); it shows one sign at a time, counts only
+  accepted takes, explains rejected ones, can skip or go back, and resumes for the same signer ID. Takes are saved as landmarks only under
+  `data/recorded/<signer ID>/<SIGN>/`. The plan for training on them is `docs/TRAINING_PLAN_SELF_RECORDED.md`. Promote a good single take:
   `python -m retarget.promote --clip ..\data\recorded\WATER\<stamp>.clip.json [--replace]`.
 
 ## Implemented features
@@ -152,7 +155,7 @@ tools/            avatar conversion (Blender), supplement watchdog
 .\scripts\test.ps1           # backend pytest, tsc, eslint, vitest and the production build (stop dev servers first)
 ```
 
-Last full run (2026-11-02, `scripts\test.ps1`): backend pytest 329 passed, `tsc` clean, `eslint` clean, vitest 78 passed, `next build` ok. Backend tests use tiny
+Last full run (2026-11-02, `scripts\test.ps1`): backend pytest 347 passed, `tsc` clean, `eslint` clean, vitest 84 passed, `next build` ok. Backend tests use tiny
 synthetic models; their scores are not results. See `docs/PROJECT_STATUS.md` for the exact run.
 
 ## Known limitations

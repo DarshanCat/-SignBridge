@@ -8,6 +8,7 @@ import { SequencePlayer } from "@/lib/avatar/player";
 import { buildRecordRequest, countdownSteps, DURATIONS_S, isValidGloss, normalizeGloss } from "@/lib/recorder";
 import { shortcutHelp } from "@/lib/shortcuts";
 import { CaptureHints } from "./CaptureHints";
+import { RecordSessionPanel } from "./RecordSessionPanel";
 import { useShortcuts } from "./useShortcuts";
 import type { LandmarkCapture } from "./useLandmarkCapture";
 
@@ -23,6 +24,7 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 /** Record a sign for the vocabulary: webcam with landmark overlay, countdown, fixed duration, landmarks only (no video) sent to the API. */
 export function RecordSignPanel({ capture, backendUp }: { capture: LandmarkCapture; backendUp: boolean }) {
   const { state, extractor, error, stats, videoRef, canvasRef, start, stop, beginRecording, endRecording } = capture;
+  const [mode, setMode] = useState<"single" | "session">("single");
   const [gloss, setGloss] = useState("");
   const [seconds, setSeconds] = useState<number>(3);
   const [phase, setPhase] = useState<Phase>({ kind: "idle" });
@@ -80,10 +82,39 @@ export function RecordSignPanel({ capture, backendUp }: { capture: LandmarkCaptu
     }
   }
 
-  useShortcuts({ record: canRecord ? () => void record() : undefined, replay: result?.accepted ? () => player.restart() : undefined });
+  useShortcuts({
+    record: mode === "single" && canRecord ? () => void record() : undefined,
+    replay: mode === "single" && result?.accepted ? () => player.restart() : undefined,
+  });
+
+  const toggle = (
+    <div role="group" aria-label="Recording mode" className="flex gap-2">
+      {(["single", "session"] as const).map((m) => (
+        <button
+          key={m}
+          onClick={() => setMode(m)}
+          disabled={busy}
+          aria-pressed={mode === m}
+          className={`min-h-11 rounded-lg px-4 py-2 text-sm font-medium disabled:opacity-50 ${mode === m ? "bg-accent text-ink" : "bg-white/10 text-slate-200"}`}
+        >
+          {m === "single" ? "Single sign" : "Guided session"}
+        </button>
+      ))}
+    </div>
+  );
+
+  if (mode === "session") {
+    return (
+      <div className="space-y-4">
+        {toggle}
+        <RecordSessionPanel capture={capture} backendUp={backendUp} />
+      </div>
+    );
+  }
 
   return (
     <section className="space-y-4" aria-label="Record sign">
+      {toggle}
       <div className="rounded-xl border border-white/10 bg-panel p-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h2 className="text-lg font-semibold">Record a sign</h2>

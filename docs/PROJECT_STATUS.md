@@ -1,5 +1,13 @@
 # Project status
 
+## Guided recording session and the training plan for self-recorded signs (2026-11-02)
+
+Done (nothing trained, no self-recorded data exists yet):
+- Record sign tab, Guided session: signer ID, takes per sign, list of signs (the 50 grammar words preloaded, WHERE, GO, LIKE, NOT, HELP, WHAT, YES, NO first, from the new `GET /api/record/plan`). One sign at a time with "Take k of N", progress bar, skip and previous, stop; only accepted takes count; rejected takes show their reasons and are not stored; starting again with the same signer ID resumes (`GET /api/record/takes`). Takes are saved as landmarks only under `data/recorded/<SIGNER>/<GLOSS>/` (no clip is written in sessions). `POST /api/record/sign` gained `signer_id` and `make_clip`, and a new quality rule: the live segmenter must find a sign in the take (a take with the hands resting the whole time is rejected as "No sign movement"). Pure session logic in `frontend/src/lib/recordSession.ts`.
+- `training/make_combined_manifest.py`: builds a combined INCLUDE plus self-recorded manifest in a NEW folder with a signer-level split for the recorded part (test signer(s) and validation signer(s) are whole people; the builder fails if a signer would land in two splits), drops frames without a pose, cuts each take to the sign with the live segmenter, labels recorded INCLUDE glosses with the INCLUDE class name, leaves out classes with fewer than 5 training takes, never overwrites and never changes sources.
+- `docs/TRAINING_PLAN_SELF_RECORDED.md`: collection rules, pre-processing, split, training recipe, the five result tables to report, sample size reasoning, risks and the commands.
+- Tests with synthetic landmarks: a whole guided session through the real API (2 signers, 3 glosses, 4 accepted takes each, one deliberately bad take per gloss: 24 files in the right folders, rejected takes never stored or counted), signer folder layout, resume counts, bad signer IDs, the no-movement rule, the session state machine (resume, skip, back, completion), and the manifest builder (signer-disjoint splits, labels, trimming, refusals, sources untouched). Checked in the browser against the backend: the session setup lists the 50 signs in order, validates the signer ID, starts, shows WHERE take 1 of 3, skip goes to GO and back returns; Record is disabled without a camera. A real take through the camera was not tried (browser pane blocks it).
+
 ## Conversation mode, gloss to English quality, usability, checks (2026-11-02)
 
 Done in this phase (step 1, continuous signing, is in the entry below this one):

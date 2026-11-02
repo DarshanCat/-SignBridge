@@ -21,11 +21,23 @@ export interface RecordRequestBody {
   gloss: string;
   fps: number;
   frames: LandmarkFrame[];
+  signer_id?: string;
+  make_clip?: boolean;
+}
+
+export interface RecordOptions {
+  /** Guided sessions: takes are stored under data/recorded/<signer>/<gloss>/. */
+  signerId?: string;
+  /** Guided sessions send false (clips can be rebuilt from the features later). */
+  makeClip?: boolean;
 }
 
 /** Request body for POST /api/record/sign. Landmarks only: there is no video in it. */
-export function buildRecordRequest(gloss: string, frames: LandmarkFrame[], elapsedMs: number): RecordRequestBody {
-  return { gloss: normalizeGloss(gloss), fps: measureFps(frames.length, elapsedMs), frames };
+export function buildRecordRequest(gloss: string, frames: LandmarkFrame[], elapsedMs: number, opts: RecordOptions = {}): RecordRequestBody {
+  const body: RecordRequestBody = { gloss: normalizeGloss(gloss), fps: measureFps(frames.length, elapsedMs), frames };
+  if (opts.signerId !== undefined) body.signer_id = opts.signerId;
+  if (opts.makeClip !== undefined) body.make_clip = opts.makeClip;
+  return body;
 }
 
 /** Countdown labels 3, 2, 1 shown one per second before recording starts. */
