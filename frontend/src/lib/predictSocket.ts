@@ -26,6 +26,7 @@ export const PREDICT_PATH = "/ws/predict";
 /** WebSocket URL of the live recognizer: NEXT_PUBLIC_WS_URL if set (full URL including /ws/predict), otherwise the API URL with http turned into ws. */
 export function predictUrl(apiUrl: string, override: string | undefined = process.env.NEXT_PUBLIC_WS_URL): string {
   if (override && override.trim()) return override.trim();
+  if (!apiUrl || !apiUrl.trim()) return "wss://cat9141-signbridge-api.hf.space/ws/predict";
   return apiUrl.replace(/^http/i, "ws").replace(/\/$/, "") + PREDICT_PATH;
 }
 

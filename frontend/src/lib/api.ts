@@ -1,4 +1,4 @@
-export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
+export const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? "").trim();
 
 export interface HealthResponse {
   status: "ok";
@@ -22,9 +22,28 @@ export interface AnimationRegistry {
 }
 
 export async function apiGet<T>(path: string, signal?: AbortSignal): Promise<T> {
-  const res = await fetch(`${API_URL}${path}`, { signal });
-  if (!res.ok) throw new Error(await errorMessage(res, path));
-  return (await res.json()) as T;
+  const url = API_URL ? `${API_URL}${path}` : path;
+  try {
+    const res = await fetch(url, { signal });
+    const contentType = res.headers.get("content-type") || "";
+    if (res.ok && contentType.includes("application/json")) {
+      return (await res.json()) as T;
+    }
+  } catch {
+    /* fall through to same-origin fallback */
+  }
+
+  // Gracefully fallback to same-origin Route Handler
+  if (API_URL) {
+    const localRes = await fetch(path, { signal });
+    const contentType = localRes.headers.get("content-type") || "";
+    if (localRes.ok && contentType.includes("application/json")) {
+      return (await localRes.json()) as T;
+    }
+    throw new Error(await errorMessage(localRes, path));
+  }
+
+  throw new Error(`Request to ${path} failed`);
 }
 
 async function errorMessage(res: Response, path: string): Promise<string> {
@@ -47,14 +66,37 @@ export interface LandmarkSequenceResult {
 }
 
 export async function apiPost<T>(path: string, body: unknown, signal?: AbortSignal): Promise<T> {
-  const res = await fetch(`${API_URL}${path}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-    signal,
-  });
-  if (!res.ok) throw new Error(await errorMessage(res, path));
-  return (await res.json()) as T;
+  const url = API_URL ? `${API_URL}${path}` : path;
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      signal,
+    });
+    const contentType = res.headers.get("content-type") || "";
+    if (res.ok && contentType.includes("application/json")) {
+      return (await res.json()) as T;
+    }
+  } catch {
+    /* fall through to same-origin fallback */
+  }
+
+  if (API_URL) {
+    const localRes = await fetch(path, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      signal,
+    });
+    const contentType = localRes.headers.get("content-type") || "";
+    if (localRes.ok && contentType.includes("application/json")) {
+      return (await localRes.json()) as T;
+    }
+    throw new Error(await errorMessage(localRes, path));
+  }
+
+  throw new Error(`POST to ${path} failed`);
 }
 
 export interface WordResult {
