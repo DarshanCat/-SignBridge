@@ -1,0 +1,965 @@
+{
+ "note": "Authors' predefined split, signer independence not verified. The same 30 validation videos shrunk toward the centre (factor) and the uncropped run (factor 1.0), Python MediaPipe, baseline CNN, threshold 0.7. Made by tools/browser_path/zoom.py style code (see BROWSER_PATH.md).",
+ "rows": [
+  {
+   "id": "s000",
+   "factor": 1.0,
+   "width": 0.12532886862754822,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s000",
+   "factor": 0.6,
+   "width": 0.07526683807373047,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s000",
+   "factor": 0.45,
+   "width": 0.056501537561416626,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s000",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s001",
+   "factor": 1.0,
+   "width": 0.13096517324447632,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s001",
+   "factor": 0.6,
+   "width": 0.08091345429420471,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s001",
+   "factor": 0.45,
+   "width": 0.06013971567153931,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s001",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s002",
+   "factor": 1.0,
+   "width": 0.12823671102523804,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s002",
+   "factor": 0.6,
+   "width": 0.07748778164386749,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s002",
+   "factor": 0.45,
+   "width": 0.05906383693218231,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s002",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s003",
+   "factor": 1.0,
+   "width": 0.1369679868221283,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s003",
+   "factor": 0.6,
+   "width": 0.08200685679912567,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s003",
+   "factor": 0.45,
+   "width": 0.06147199869155884,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s003",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s004",
+   "factor": 1.0,
+   "width": 0.12482941150665283,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s004",
+   "factor": 0.6,
+   "width": 0.07497581839561462,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s004",
+   "factor": 0.45,
+   "width": 0.05623131990432739,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s004",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s005",
+   "factor": 1.0,
+   "width": 0.12758669257164001,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s005",
+   "factor": 0.6,
+   "width": 0.07673262059688568,
+   "ok": false,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s005",
+   "factor": 0.45,
+   "width": 0.05807317793369293,
+   "ok": false,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s005",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s006",
+   "factor": 1.0,
+   "width": 0.13088059425354004,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s006",
+   "factor": 0.6,
+   "width": 0.0785270631313324,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s006",
+   "factor": 0.45,
+   "width": 0.05930337309837341,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s006",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s007",
+   "factor": 1.0,
+   "width": 0.1298697590827942,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s007",
+   "factor": 0.6,
+   "width": 0.07751905918121338,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s007",
+   "factor": 0.45,
+   "width": 0.058420926332473755,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s007",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s008",
+   "factor": 1.0,
+   "width": 0.1359790712594986,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s008",
+   "factor": 0.6,
+   "width": 0.08439673483371735,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s008",
+   "factor": 0.45,
+   "width": 0.062190860509872437,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s008",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s009",
+   "factor": 1.0,
+   "width": 0.13867594301700592,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s009",
+   "factor": 0.6,
+   "width": 0.08382546901702881,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s009",
+   "factor": 0.45,
+   "width": 0.06309904158115387,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s009",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s010",
+   "factor": 1.0,
+   "width": 0.12960484623908997,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s010",
+   "factor": 0.6,
+   "width": 0.07768726348876953,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s010",
+   "factor": 0.45,
+   "width": 0.058917805552482605,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s010",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s011",
+   "factor": 1.0,
+   "width": 0.1301197111606598,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s011",
+   "factor": 0.6,
+   "width": 0.07905685901641846,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s011",
+   "factor": 0.45,
+   "width": 0.05895593762397766,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s011",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s012",
+   "factor": 1.0,
+   "width": 0.1344243437051773,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s012",
+   "factor": 0.6,
+   "width": 0.0799611359834671,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s012",
+   "factor": 0.45,
+   "width": 0.06007350981235504,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s012",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s013",
+   "factor": 1.0,
+   "width": 0.14238956570625305,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s013",
+   "factor": 0.6,
+   "width": 0.08604052662849426,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s013",
+   "factor": 0.45,
+   "width": 0.06456813216209412,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s013",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s014",
+   "factor": 1.0,
+   "width": 0.1163826733827591,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s014",
+   "factor": 0.6,
+   "width": 0.0704374611377716,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s014",
+   "factor": 0.45,
+   "width": 0.052372515201568604,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s014",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s015",
+   "factor": 1.0,
+   "width": 0.1488347202539444,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s015",
+   "factor": 0.6,
+   "width": 0.09042371809482574,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s015",
+   "factor": 0.45,
+   "width": 0.06788738071918488,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s015",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s016",
+   "factor": 1.0,
+   "width": 0.13368749618530273,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s016",
+   "factor": 0.6,
+   "width": 0.08104085922241211,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s016",
+   "factor": 0.45,
+   "width": 0.0617654025554657,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s016",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s017",
+   "factor": 1.0,
+   "width": 0.14915721118450165,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s017",
+   "factor": 0.6,
+   "width": 0.08973084390163422,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s017",
+   "factor": 0.45,
+   "width": 0.06772409379482269,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s017",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s018",
+   "factor": 1.0,
+   "width": 0.14310288429260254,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s018",
+   "factor": 0.6,
+   "width": 0.08581873774528503,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s018",
+   "factor": 0.45,
+   "width": 0.06441886723041534,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s018",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s019",
+   "factor": 1.0,
+   "width": 0.11968916654586792,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s019",
+   "factor": 0.6,
+   "width": 0.0722455382347107,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s019",
+   "factor": 0.45,
+   "width": 0.05436927080154419,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s019",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s020",
+   "factor": 1.0,
+   "width": 0.12353426218032837,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s020",
+   "factor": 0.6,
+   "width": 0.07500225305557251,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s020",
+   "factor": 0.45,
+   "width": 0.0562497079372406,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s020",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s021",
+   "factor": 1.0,
+   "width": 0.12805038690567017,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s021",
+   "factor": 0.6,
+   "width": 0.07603755593299866,
+   "ok": false,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s021",
+   "factor": 0.45,
+   "width": 0.05736011266708374,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s021",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s022",
+   "factor": 1.0,
+   "width": 0.1381024420261383,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s022",
+   "factor": 0.6,
+   "width": 0.08352546393871307,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s022",
+   "factor": 0.45,
+   "width": 0.06333638727664948,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s022",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s023",
+   "factor": 1.0,
+   "width": 0.13322292268276215,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s023",
+   "factor": 0.6,
+   "width": 0.08038616180419922,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s023",
+   "factor": 0.45,
+   "width": 0.06070505082607269,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s023",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s024",
+   "factor": 1.0,
+   "width": 0.13766628503799438,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s024",
+   "factor": 0.6,
+   "width": 0.08390825986862183,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s024",
+   "factor": 0.45,
+   "width": 0.06182187795639038,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s024",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s025",
+   "factor": 1.0,
+   "width": 0.1264980584383011,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s025",
+   "factor": 0.6,
+   "width": 0.07639305293560028,
+   "ok": false,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s025",
+   "factor": 0.45,
+   "width": 0.0575137734413147,
+   "ok": false,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s025",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s026",
+   "factor": 1.0,
+   "width": 0.13327136635780334,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s026",
+   "factor": 0.6,
+   "width": 0.07997056841850281,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s026",
+   "factor": 0.45,
+   "width": 0.060287415981292725,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s026",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s027",
+   "factor": 1.0,
+   "width": 0.11571452021598816,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s027",
+   "factor": 0.6,
+   "width": 0.07032555341720581,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s027",
+   "factor": 0.45,
+   "width": 0.052375733852386475,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s027",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s028",
+   "factor": 1.0,
+   "width": 0.13722360134124756,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s028",
+   "factor": 0.6,
+   "width": 0.08165311813354492,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s028",
+   "factor": 0.45,
+   "width": 0.06159219145774841,
+   "ok": false,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s028",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  },
+  {
+   "id": "s029",
+   "factor": 1.0,
+   "width": 0.13471396267414093,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s029",
+   "factor": 0.6,
+   "width": 0.08240868151187897,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s029",
+   "factor": 0.45,
+   "width": 0.062014028429985046,
+   "ok": true,
+   "accepted": true,
+   "pose_rate": 1.0
+  },
+  {
+   "id": "s029",
+   "factor": 0.3,
+   "width": null,
+   "ok": false,
+   "accepted": false,
+   "pose_rate": 0.0
+  }
+ ]
+}

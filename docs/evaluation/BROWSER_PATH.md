@@ -125,7 +125,20 @@ Authors' predefined split, signer independence not verified. 30 of the 100 valid
 
 At 30 percent size the body pose was not found at all. The native INCLUDE signers measure 0.116 to 0.149 (median 0.133); no size above 0.15 is covered by this data, so a signer who fills the frame (shoulders 0.25 or more) is unmeasured, not known to be good.
 
-The app therefore warns when the smoothed shoulder width is below **0.10** (`MIN_SHOULDER_WIDTH` in `frontend/src/lib/overlay.ts`): below it accuracy falls under 0.75 and confident wrong answers appear. The framing guide drawn on the camera picture puts the shoulders at about 22 percent of the width, between the measured range and a typical close webcam picture. Both numbers are to be re-checked on real webcam takes from the guided sessions.
+The app therefore warns when the smoothed shoulder width is below **0.10** (`MIN_SHOULDER_WIDTH` in `frontend/src/lib/overlay.ts`): below it accuracy falls under 0.75 and confident wrong answers appear. The framing guide drawn on the camera picture puts the shoulders at about 14 percent of the width, inside the tested range (it was 22 percent before the experiment of the next section, which could not support a larger size). Both numbers are to be re-checked on real webcam takes from the guided sessions.
+
+## Framing above the dataset range: cropping toward the signer
+
+Authors' predefined split, signer independence not verified. The framing study above only covers signers who are as large as or smaller than the INCLUDE signers (shoulder width 0.116 to 0.149 of the picture width, bins up to 0.17). To test larger sizes, the same 30 validation videos were cropped toward the signer (the centre of the crop is the median shoulder midpoint of the uncropped run, a little above the middle so that the raised hands stay in) to 75, 60 and 50 percent of the width and height and resized back to 1280x720, then classified with Python MediaPipe, the baseline CNN and threshold 0.7. Data: `framing_zoom_in.json`, `framing_zoom_study.json`; script: `tools/browser_path/zoom_in.py`.
+
+| Picture | Median shoulder width | Accuracy | Wrong accepted | Frames with a hand found | Videos |
+|---|---|---|---|---|---|
+| uncropped (same videos) | 0.132 | 0.87 | 0.00 | about 0.87 | 30 |
+| crop to 75 percent of the width and height | 0.175 | 0.30 | 0.20 | 0.63 | 30 |
+| crop to 60 percent of the width and height | 0.216 | 0.37 | 0.03 | 0.36 | 30 |
+| crop to 50 percent of the width and height | 0.259 | 0.43 | 0.03 | 0.33 | 30 |
+
+Reading: the crop makes the signer larger but also cuts the signing space off. A hand is found in only 63, 36 and 33 percent of frames at the three crops, against about 87 percent uncropped, and accuracy falls to 0.30 to 0.43. Size and lost hands cannot be separated in this experiment, so it neither supports nor excludes a loss for large signers who keep their hands in the picture. Sizes above 0.15 therefore remain *untested* (a real webcam recording of a close signer with both hands in view would be needed), and the capture guide was changed to sit inside the tested range, with the shoulders at about 14 percent of the picture width, instead of the 22 percent chosen before this experiment. The size warning (below 0.10) is unchanged.
 
 ## Camera request
 
