@@ -1,4 +1,4 @@
-import type { LandmarkFrame } from "./landmarks";
+import { REFERENCE_ASPECT, type LandmarkFrame } from "./landmarks";
 
 /** Formats tried for the local video recording, best first. */
 export const VIDEO_MIME_CANDIDATES = ["video/webm;codecs=vp9", "video/webm;codecs=vp8", "video/webm", "video/mp4"];
@@ -27,12 +27,15 @@ export interface CheckFile {
   video_mime: string;
   video_duration_ms: number;
   extractor: { delegate: "cpu" | "gpu"; model_complexity: 0 };
+  /** Frames already have y rescaled to this aspect (see toFrame); video_aspect is the recorded video's own width / height. */
+  reference_aspect: number;
+  video_aspect: number | null;
   frames: TimedFrame[];
 }
 
 /** Landmark file for the Python comparison. Frames before the video started or after it ended are dropped. */
 export function buildCheckFile(
-  stem: string, mime: string, durationMs: number, frames: LandmarkFrame[], times: number[], startMs: number, cpu: boolean, now: Date,
+  stem: string, mime: string, durationMs: number, frames: LandmarkFrame[], times: number[], startMs: number, cpu: boolean, now: Date, videoAspect: number | null = null,
 ): CheckFile {
   const out: TimedFrame[] = [];
   frames.forEach((f, i) => {
@@ -46,6 +49,8 @@ export function buildCheckFile(
     video_mime: mime,
     video_duration_ms: Math.round(durationMs),
     extractor: { delegate: cpu ? "cpu" : "gpu", model_complexity: 0 },
+    reference_aspect: REFERENCE_ASPECT,
+    video_aspect: videoAspect,
     frames: out,
   };
 }

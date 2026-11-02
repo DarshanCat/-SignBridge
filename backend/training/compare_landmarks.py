@@ -29,6 +29,27 @@ class CompareError(ValueError):
     pass
 
 
+def scale_y(frames: list[LandmarkFrame], factor: float) -> list[LandmarkFrame]:
+    """Frames with every y multiplied by factor (x and z unchanged): the same rescaling the browser applies in toFrame (16:9 reference)."""
+    def pts(p):
+        return None if p is None else [pt.model_copy(update={"y": pt.y * factor}) for pt in p]
+
+    return [LandmarkFrame(pose=pts(f.pose), left_hand=pts(f.left_hand), right_hand=pts(f.right_hand)) for f in frames]
+
+
+def video_aspect(video: Path) -> float:
+    import cv2
+
+    cap = cv2.VideoCapture(str(video))
+    try:
+        w, h = cap.get(cv2.CAP_PROP_FRAME_WIDTH), cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    finally:
+        cap.release()
+    if not (w > 0 and h > 0):
+        raise CompareError(f"cannot read the size of {video}")
+    return w / h
+
+
 def load_browser(path: Path) -> tuple[list[LandmarkFrame], np.ndarray, dict]:
     """Browser landmark file: {version, video_duration_ms, frames: [{t, pose, left_hand, right_hand}]} with t in ms from the start of the video."""
     try:
@@ -172,6 +193,9 @@ def verdict(report: dict) -> str:
 def run(video: Path, landmarks: Path, model_dir: Path | None) -> dict:
     frames_b, t_b, meta = load_browser(landmarks)
     frames_p, t_p = python_landmarks(video, meta.get("video_duration_ms"))
+    ref = meta.get("reference_aspect")  # newer browser files already carry y rescaled to this aspect; give Python the same rescaling
+    if ref:
+        frames_p = scale_y(frames_p, float(ref) / video_aspect(video))
     fb, ok_b = to_features(frames_b)
     fp, ok_p = to_features(frames_p)
     tol = max(float(np.median(np.diff(t_b))), float(np.median(np.diff(t_p)))) * 0.75

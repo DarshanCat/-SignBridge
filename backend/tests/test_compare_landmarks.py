@@ -83,3 +83,16 @@ def test_browser_file_loading_and_errors(tmp_path) -> None:
         p.write_text(bad)
         with pytest.raises(CompareError):
             load_browser(p)
+
+
+def test_scale_y_matches_the_browser_rescaling():
+    from app.schemas.landmarks import Point
+    from training.compare_landmarks import scale_y
+
+    f = LandmarkFrame(pose=[Point(x=0.4, y=0.5, z=0.1)], left_hand=None, right_hand=[Point(x=0.6, y=0.3, z=-0.2)])
+    out = scale_y([f], (16 / 9) / (4 / 3))[0]
+    assert out.pose[0].x == 0.4 and out.pose[0].z == 0.1
+    assert abs(out.pose[0].y - 0.5 * 4 / 3) < 1e-9
+    assert out.left_hand is None
+    assert abs(out.right_hand[0].y - 0.4) < 1e-9
+    assert f.pose[0].y == 0.5  # input not modified

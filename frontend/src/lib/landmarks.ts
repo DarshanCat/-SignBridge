@@ -19,11 +19,25 @@ export interface HolisticResults {
 
 export const BUFFER_FRAMES = 60;
 
-const strip = (pts?: Point[]): Point[] | null =>
-  pts && pts.length ? pts.map((p) => ({ x: p.x, y: p.y, z: p.z ?? 0 })) : null;
+/**
+ * MediaPipe gives x as a fraction of the image width and y as a fraction of its height, so one unit of y is a different physical length
+ * than one unit of x unless the image is square. The model was trained on 16:9 INCLUDE videos; a 4:3 webcam stretches y by (16/9)/(4/3) in
+ * those units, which changes the pose the model sees (measured on test videos: wrong signs on 4:3 input, right signs after resizing to 16:9).
+ * toFrame therefore rescales y to what the same pose would be in a 16:9 image. x and z are unchanged. Backend normalization stays as it is.
+ */
+export const REFERENCE_ASPECT = 16 / 9;
 
-export function toFrame(r: HolisticResults): LandmarkFrame {
-  return { pose: strip(r.poseLandmarks), left_hand: strip(r.leftHandLandmarks), right_hand: strip(r.rightHandLandmarks) };
+export function yScaleFor(aspect: number): number {
+  return Number.isFinite(aspect) && aspect > 0 ? REFERENCE_ASPECT / aspect : 1;
+}
+
+const strip = (pts: Point[] | undefined, ys: number): Point[] | null =>
+  pts && pts.length ? pts.map((p) => ({ x: p.x, y: p.y * ys, z: p.z ?? 0 })) : null;
+
+/** aspect: width / height of the image the landmarks were measured on (the camera video); omit for no correction. */
+export function toFrame(r: HolisticResults, aspect: number = REFERENCE_ASPECT): LandmarkFrame {
+  const ys = yScaleFor(aspect);
+  return { pose: strip(r.poseLandmarks, ys), left_hand: strip(r.leftHandLandmarks, ys), right_hand: strip(r.rightHandLandmarks, ys) };
 }
 
 /** Append a frame, keeping only the newest `max` frames (landmarks only; no video is stored). */

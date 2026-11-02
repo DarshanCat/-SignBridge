@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { appendFrame, EMPTY_BUFFER, MAX_MISSING_POSE, pushFrame, summarize, toFrame, type BufferState, type LandmarkFrame } from "./landmarks";
+import { appendFrame, EMPTY_BUFFER, MAX_MISSING_POSE, pushFrame, summarize, toFrame, yScaleFor, type BufferState, type LandmarkFrame } from "./landmarks";
 
 const empty: LandmarkFrame = { pose: null, left_hand: null, right_hand: null };
 
@@ -48,5 +48,28 @@ describe("landmarks", () => {
       st = appendFrame(st, withPose);
       expect(st).toEqual({ frames: [withPose], missingStreak: 0 });
     });
+  });
+});
+
+describe("aspect correction", () => {
+  const r = { poseLandmarks: [{ x: 0.4, y: 0.5, z: 0.1 }], rightHandLandmarks: [{ x: 0.6, y: 0.3, z: -0.2 }] };
+
+  it("leaves a 16:9 image untouched", () => {
+    const f = toFrame(r, 16 / 9);
+    expect(f.pose?.[0]).toEqual({ x: 0.4, y: 0.5, z: 0.1 });
+  });
+
+  it("stretches y by 4/3 for a 4:3 webcam and never touches x or z", () => {
+    const f = toFrame(r, 4 / 3);
+    expect(f.pose?.[0].x).toBe(0.4);
+    expect(f.pose?.[0].z).toBe(0.1);
+    expect(f.pose?.[0].y).toBeCloseTo(0.5 * (4 / 3));
+    expect(f.right_hand?.[0].y).toBeCloseTo(0.3 * (4 / 3));
+  });
+
+  it("falls back to no scaling for an unusable aspect", () => {
+    expect(yScaleFor(0)).toBe(1);
+    expect(yScaleFor(Number.NaN)).toBe(1);
+    expect(yScaleFor(16 / 9)).toBeCloseTo(1);
   });
 });

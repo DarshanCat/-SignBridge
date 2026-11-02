@@ -86,7 +86,8 @@ export function useLandmarkCapture(): LandmarkCapture {
         holisticRef.current = await createHolistic((r) => {
           drawOverlay(canvasRef.current?.getContext("2d") as CanvasRenderingContext2D, canvasRef.current?.width ?? 640, canvasRef.current?.height ?? 480, r);
           setPose(poseReadout(r.poseLandmarks));
-          const frame = toFrame(r);
+          const v = videoRef.current;
+          const frame = toFrame(r, v && v.videoWidth && v.videoHeight ? v.videoWidth / v.videoHeight : undefined);
           bufferRef.current = appendFrame(bufferRef.current, frame);
           recordRef.current?.push(frame);
           listenerRef.current?.(frame, performance.now());

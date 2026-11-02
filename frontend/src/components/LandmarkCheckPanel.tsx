@@ -90,7 +90,8 @@ export function LandmarkCheckPanel({ capture }: { capture: LandmarkCapture }) {
     setPhase("saving");
     const stem = fileStem(new Date());
     const durationMs = t1 - t0;
-    const file = buildCheckFile(stem, mime, durationMs, frames, times, t0, USE_CPU_INFERENCE, new Date());
+    const file = buildCheckFile(stem, mime, durationMs, frames, times, t0, USE_CPU_INFERENCE, new Date(),
+      videoRef.current?.videoWidth && videoRef.current?.videoHeight ? videoRef.current.videoWidth / videoRef.current.videoHeight : null);
     const videoUrl = URL.createObjectURL(new Blob(chunks, { type: mime }));
     const landmarksUrl = URL.createObjectURL(new Blob([JSON.stringify(file)], { type: "application/json" }));
     urls.current = [videoUrl, landmarksUrl];

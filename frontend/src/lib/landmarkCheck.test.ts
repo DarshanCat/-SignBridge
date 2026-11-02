@@ -19,7 +19,7 @@ describe("landmark check helpers", () => {
   it("builds the landmark file with times relative to the video start and drops frames outside the recording", () => {
     const file = buildCheckFile("s", "video/webm", 1000, [f, f, f, f], [990, 1100, 1900, 2200], 1000, true, new Date(0));
     expect(file.frames.map((x) => x.t)).toEqual([100, 900]); // 990 is before the start, 2200 after the end
-    expect(file).toMatchObject({ version: 1, video_file: "s.webm", video_duration_ms: 1000, extractor: { delegate: "cpu" } });
+    expect(file).toMatchObject({ version: 1, video_file: "s.webm", video_duration_ms: 1000, extractor: { delegate: "cpu" }, reference_aspect: 16 / 9, video_aspect: null });
   });
 
   it("prints the comparison command for the two files", () => {
