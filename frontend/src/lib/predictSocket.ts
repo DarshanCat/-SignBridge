@@ -204,14 +204,17 @@ export function connectPredict(
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ frames, commit }),
         })
-          .then((r) => r.json())
-          .then((pred) => {
-            if (pred) {
-              h.onPrediction?.(pred);
-              if (commit && pred.accepted && pred.label && pred.label !== "UNRECOGNIZED") {
-                localSequence.push(pred.gloss || pred.label.toUpperCase());
-                h.onSequence?.({ sequence: [...localSequence], english: localSequence.join(" ") });
-              }
+          .then(async (r) => ({ ok: r.ok, body: await r.json().catch(() => null) }))
+          .then(({ ok, body: pred }) => {
+            // an error answer carries no prediction: show the error, never treat it as a result
+            if (!ok || !pred || pred.type !== "prediction") {
+              h.onError?.(typeof pred?.detail === "string" ? pred.detail : "Recognition is unavailable.");
+              return;
+            }
+            h.onPrediction?.(pred);
+            if (commit && pred.accepted && pred.label && pred.label !== "UNRECOGNIZED") {
+              localSequence.push(pred.gloss || pred.label.toUpperCase());
+              h.onSequence?.({ sequence: [...localSequence], english: localSequence.join(" ") });
             }
           })
           .catch((err) => {

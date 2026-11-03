@@ -47,3 +47,4 @@ frontend/public/animations/*.json
 
 # assembled deployment folders
 build/
+frontend/.vitest/
