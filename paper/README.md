@@ -28,6 +28,9 @@ All numbers are from `docs/evaluation/`; nothing was estimated.
 | Vertical scale sweep, noise and dropout (Fig. 2, Table III) | `BROWSER_PATH.md`, `browser_path_validation_sweep.json` |
 | Signer size in the picture (Fig. 3, Section VII) | `BROWSER_PATH.md` (framing section) |
 | Segmentation figures in the case study | `SEGMENTATION.md` |
+| Padding test (Table III, Section V-A), validation only | `padding_test_val.json`, `padding_test_val.md` (script `tools/browser_path/padding_test.py`, `padding_stats.py`) |
+| Per-sign loss, hand range correlation and calibration (Sections V-A and VI), validation only | `persign_calibration_val.json` (script `tools/browser_path/persign_calibration.py`) |
+| Pipeline figure (Fig. 1) | no data; drawn by `figures/make_figures.py` |
 | Larger browser corpora (211 validation and 312 test videos, two framings), six seed-0 models, raw per video results | `eval_val.json`, `eval_test.json` (not used in the text yet; they feed the pending tables) |
 | The same, as readable validation tables with intervals and paired tests | `validation_tables_seed0.md` |
 | Which videos make up those corpora | `browser_corpus_val_samples.json`, `browser_corpus_test_samples.json` |

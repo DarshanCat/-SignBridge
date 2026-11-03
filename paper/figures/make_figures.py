@@ -4,6 +4,7 @@
 
 fig_browser_vs_offline.pdf   accuracy and wrong-accepted rate, offline against the browser path (test videos, CNN, n = 100)
 fig_yscale.pdf               accuracy against a y scale error, browser 16:9 and 4:3 (validation videos, CNN)
+fig_pipeline.pdf             compact flow of the browser deployment pipeline (Section IV; no data)
 fig_framing.pdf              accuracy against shoulder width as a fraction of the picture width (validation videos shrunk toward the centre, CNN)
 
 Inputs, all in docs/evaluation (the only place this script reads from; nothing comes from a scratch folder):
@@ -120,8 +121,47 @@ def framing():
     plt.close(fig)
 
 
+def pipeline():
+    """Compact flow of Section IV: what runs in the browser and what runs on the server."""
+    from matplotlib.patches import FancyBboxPatch
+
+    fig, ax = plt.subplots(figsize=(W, 2.0))
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 6.2)
+    ax.axis("off")
+
+    def box(x, y, w, h, text, fc, ec):
+        ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.02,rounding_size=0.15", fc=fc, ec=ec, lw=0.8))
+        ax.text(x + w / 2, y + h / 2, text, ha="center", va="center", fontsize=6.3, linespacing=1.15)
+
+    def arrow(x0, y0, x1, y1):
+        ax.annotate("", xy=(x1, y1), xytext=(x0, y0), arrowprops={"arrowstyle": "-|>", "lw": 0.8, "color": "#444444", "shrinkA": 0, "shrinkB": 0, "mutation_scale": 7})
+
+    ax.text(0.0, 6.0, "browser", fontsize=6.5, color=BLUE, weight="bold", va="center")
+    ax.text(0.0, 2.75, "server", fontsize=6.5, color=GREY, weight="bold", va="center")
+    ytop, ybot, h = 3.95, 0.45, 1.5
+    w = 2.9
+    xs = [0.0, 3.55, 7.1]
+    box(xs[0], ytop, w, h, "camera picture\n(1280\u00d7720 asked;\nany shape kept)", "#e8f0fa", BLUE)
+    box(xs[1], ytop, w, h, "MediaPipe Holistic\n75 landmarks\n(pose, both hands)", "#e8f0fa", BLUE)
+    box(xs[2], ytop, w, h, "y′ = y·(16/9)/(w/h)\nlandmark buffer\n(≤60 frames)", "#e8f0fa", BLUE)
+    arrow(xs[0] + w, ytop + h / 2, xs[1], ytop + h / 2)
+    arrow(xs[1] + w, ytop + h / 2, xs[2], ytop + h / 2)
+    arrow(xs[2] + w / 2, ytop, xs[2] + w / 2, ybot + h)
+    ax.text(xs[2] + w / 2 - 0.12, 3.2, "landmarks only\n(no video)", fontsize=5.8, color="#444444", va="center", ha="right")
+    box(xs[2], ybot, w, h, "shoulder-width\nnormalization,\nresample to 32", "#f1f1f1", GREY)
+    box(xs[1], ybot, w, h, "1D CNN\nsoftmax, top-1", "#f1f1f1", GREY)
+    box(xs[0], ybot, w, h, "confidence ≥ 0.7?\nlabel or\nUNRECOGNIZED", "#f1f1f1", GREY)
+    arrow(xs[2], ybot + h / 2, xs[1] + w, ybot + h / 2)
+    arrow(xs[1], ybot + h / 2, xs[0] + w, ybot + h / 2)
+    fig.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
+    fig.savefig(HERE / "fig_pipeline.pdf")
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     browser_vs_offline()
     yscale()
     framing()
+    pipeline()
     print("figures written to", HERE)

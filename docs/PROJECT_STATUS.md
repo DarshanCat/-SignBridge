@@ -1,5 +1,9 @@
 # Project status
 
+## Paper additions: padding test, per-sign loss, calibration, pipeline figure, ethics (2026-11-03)
+
+All analyses use validation data only (no new test-split use; the disclosure list is unchanged). Padding test (`tools/browser_path/padding_test.py`, 100 validation videos, Python MediaPipe, baseline CNN seed 0, threshold 0.7): native 16:9 0.77, 640x360 16:9 0.72, black 4:3 letterbox 0.59, 4:3 letterbox with edge-replicated bars 0.73, black 1:1 letterbox 0.61, 4:3 centre crop 0.68; black padding explains most of the residual 4:3 loss in this benchmark, the crop is confounded by signer size, a real 4:3 webcam has no bars and was not measured. Per-sign loss: Fish, Election, Sign, Sport lose most; vertical hand range does not explain it (Spearman -0.10, p 0.16). Calibration (211 validation videos): ECE 0.04 offline and 16:9, 0.07 in rescaled 4:3, 0.52 to 0.65 without the rescale. Paper Sections IV, V, VI, IX, abstract and conclusion updated, Ethics Statement and Code Availability added, 8 pages. The Word version of the paper and the report were not rebuilt.
+
 ## Three-seed results (2026-11-03)
 
 All twelve additional models finished (seeds 1 and 2, baseline and augmented, CNN, BiGRU, Transformer). Light evaluations (four conditions, no sweeps) ran on the validation corpus (211 videos) and then once on the test corpus (312 videos) for each of the twelve models. Raw per-video results: `docs/evaluation/eval_{val,test}_s{1,2}.json`; aggregation (mean and sample SD over seeds 0 to 2, validation-chosen threshold per model): `docs/evaluation/three_seed_results.md`, `three_seed_per_seed.json` and `three_seed_summary.json` (the report's PENDING cells read the last one at the next rebuild; the report and the paper were not rebuilt or edited).
