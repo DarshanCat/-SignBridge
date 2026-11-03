@@ -159,6 +159,19 @@ export function ConversationPanel({ capture, backendUp }: { capture: LandmarkCap
                 <Send size={16} aria-hidden /> {busy ? `${busy}…` : "Send"}
               </button>
             </form>
+            <div className="mt-2 flex flex-wrap items-center gap-1.5 text-xs text-slate-400">
+              <span className="text-slate-500">Quick signs:</span>
+              {["hello", "water", "doctor", "hospital", "book", "bed", "clean"].map((word) => (
+                <button
+                  key={word}
+                  type="button"
+                  onClick={() => setText(word)}
+                  className="rounded bg-white/5 hover:bg-white/10 px-2 py-0.5 text-sky-300 border border-white/5 transition"
+                >
+                  {word}
+                </button>
+              ))}
+            </div>
             {typedError && (
               <p role="alert" className="mt-2 rounded-lg bg-rose-500/15 p-2 text-sm text-rose-200">
                 {typedError}

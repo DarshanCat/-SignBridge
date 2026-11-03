@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import fs from "node:fs";
 import path from "node:path";
+import signRegistry from "@/config/sign_registry.json";
 
 export async function POST(req: Request) {
   try {
@@ -12,6 +13,14 @@ export async function POST(req: Request) {
       for (const file of fs.readdirSync(animDir)) {
         if (file.endsWith(".json")) {
           existing.add(file.replace(/\.json$/i, "").toUpperCase());
+        }
+      }
+    }
+    // Also include any registered sign with an asset_id
+    if (Array.isArray(signRegistry?.signs)) {
+      for (const s of signRegistry.signs) {
+        if (s.asset_id && s.gloss) {
+          existing.add(s.gloss.toUpperCase());
         }
       }
     }

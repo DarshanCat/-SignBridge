@@ -131,6 +131,19 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
             {busy ? "Translating…" : "Translate"}
           </button>
         </form>
+        <div className="mt-2 flex flex-wrap items-center gap-1.5 text-xs text-slate-400">
+          <span className="text-slate-500">Quick signs:</span>
+          {["hello", "water", "doctor", "hospital", "book", "bed", "clean"].map((word) => (
+            <button
+              key={word}
+              type="button"
+              onClick={() => setText(word)}
+              className="rounded bg-white/5 hover:bg-white/10 px-2 py-0.5 text-sky-300 border border-white/5 transition"
+            >
+              {word}
+            </button>
+          ))}
+        </div>
         {busy && stage && (
           <p aria-live="polite" className="mt-2 flex items-center gap-2 text-xs text-sky-300">
             <span className="inline-block h-3 w-3 animate-spin rounded-full border-2 border-sky-300 border-t-transparent" aria-hidden />

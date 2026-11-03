@@ -1,7 +1,7 @@
 "use client";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { Component, useEffect, useMemo, type ReactNode } from "react";
+import { Component, Suspense, useEffect, useMemo, type ReactNode } from "react";
 import type { Mesh, MeshStandardMaterial } from "three";
 import { clone } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { PoseSmoother, withRelaxedRest } from "@/lib/avatar/idle";
@@ -67,7 +67,9 @@ class GlbBoundary extends Component<{ player: SequencePlayer; onKind?: (k: Avata
 export function SignerAvatar({ player, onKind }: { player: SequencePlayer; onKind?: (k: AvatarKind) => void }) {
   return (
     <GlbBoundary player={player} onKind={onKind}>
-      <GlbModel player={player} onKind={onKind} />
+      <Suspense fallback={<Fallback player={player} onKind={onKind} />}>
+        <GlbModel player={player} onKind={onKind} />
+      </Suspense>
     </GlbBoundary>
   );
 }

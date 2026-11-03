@@ -1,10 +1,11 @@
 "use client";
 import { ContactShadows, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { Component, useMemo, type ReactNode } from "react";
+import { Component, Suspense, useMemo, type ReactNode } from "react";
 import { CanvasTexture, SRGBColorSpace } from "three";
 import type { SequencePlayer } from "@/lib/avatar/player";
 import { SignerAvatar, type AvatarKind } from "./GlbHumanoid";
+import { Humanoid } from "./Humanoid";
 
 function webglAvailable(): boolean {
   try {
@@ -88,7 +89,9 @@ export default function AvatarViewer({ player, onKind }: { player: SequencePlaye
         <directionalLight position={[2.6, 1.8, 2.2]} intensity={0.55} color="#a9c4ff" />
         <directionalLight position={[0.6, 2.6, -2.6]} intensity={1.0} color="#9fd9ff" />
         <Backdrop />
-        <SignerAvatar player={player} onKind={onKind} />
+        <Suspense fallback={<Humanoid player={player} />}>
+          <SignerAvatar player={player} onKind={onKind} />
+        </Suspense>
         <ContactShadows position={[0, 0.003, 0]} opacity={0.6} scale={4} blur={2.4} far={2.2} resolution={512} color="#02040b" />
         <OrbitControls target={[0, 1.25, 0]} enablePan={false} minDistance={1.3} maxDistance={5} maxPolarAngle={Math.PI * 0.52} />
       </Canvas>

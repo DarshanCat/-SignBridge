@@ -1,27 +1,33 @@
 import { NextResponse } from "next/server";
 import fs from "node:fs";
 import path from "node:path";
+import signRegistry from "@/config/sign_registry.json";
 
 export async function GET() {
   try {
     const animDir = path.join(process.cwd(), "public", "animations");
-    if (!fs.existsSync(animDir)) {
-      return NextResponse.json({
-        count: 0,
-        animations: [],
-        message: "No sign animation clips available yet.",
-        invalid: [],
-      });
+    const map = new Map<string, string>();
+
+    if (fs.existsSync(animDir)) {
+      const files = fs.readdirSync(animDir).filter((f) => f.endsWith(".json"));
+      for (const file of files) {
+        const gloss = file.replace(/\.json$/i, "").toUpperCase();
+        map.set(gloss, `/animations/${file}`);
+      }
     }
 
-    const files = fs.readdirSync(animDir).filter((f) => f.endsWith(".json"));
-    const animations = files.map((file) => {
-      const gloss = file.replace(/\.json$/i, "").toUpperCase();
-      return {
-        gloss,
-        clip_url: `/animations/${file}`,
-      };
-    });
+    if (Array.isArray(signRegistry?.signs)) {
+      for (const s of signRegistry.signs) {
+        if (s.asset_id && s.gloss && !map.has(s.gloss.toUpperCase())) {
+          map.set(s.gloss.toUpperCase(), `/animations/${s.asset_id}`);
+        }
+      }
+    }
+
+    const animations = Array.from(map.entries()).map(([gloss, clip_url]) => ({
+      gloss,
+      clip_url,
+    }));
 
     return NextResponse.json({
       count: animations.length,
