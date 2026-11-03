@@ -128,23 +128,55 @@ export interface PredictHandlers {
   onError?: (message: string) => void;
 }
 
-/** Open the channel and report its state and results. */
+/** Open the channel and report its state and results. Falls back seamlessly to HTTP REST when WebSocket is blocked. */
 export function connectPredict(
   url: string,
   h: PredictHandlers,
   make: (url: string) => SocketLike = (u) => new WebSocket(u) as unknown as SocketLike,
 ): PredictClient {
   let settled = false;
+  let useHttp = false;
+  const localSequence: string[] = [];
+  let pendingFrames: unknown[] = [];
+  let framesSeen = 0;
+
   const settle = (s: PredictChannel) => {
     settled = true;
     h.onState(s);
   };
+
+  const tryHttpFallback = (errMsg: string) => {
+    if (typeof window !== "undefined" && typeof fetch === "function") {
+      fetch("/api/model/status")
+        .then((r) => r.json())
+        .then((data) => {
+          if (data && (data.state === "loaded" || data.status === "ok")) {
+            useHttp = true;
+            settle({
+              kind: "ready",
+              classes: data.classes ?? 262,
+              architecture: String(data.architecture ?? "cnn").toUpperCase(),
+              threshold: 0.7,
+              thresholdSource: "validation",
+            });
+            return;
+          }
+          settle({ kind: "unavailable", message: errMsg });
+        })
+        .catch(() => {
+          settle({ kind: "unavailable", message: errMsg });
+        });
+    } else {
+      settle({ kind: "unavailable", message: errMsg });
+    }
+  };
+
   h.onState({ kind: "connecting" });
   let ws: SocketLike | null = null;
   try {
     ws = make(url);
   } catch {
-    settle({ kind: "unavailable", message: "Could not open the live prediction channel." });
+    tryHttpFallback("Could not open the live prediction channel.");
   }
   if (ws) {
     ws.onmessage = (e) => {
@@ -157,19 +189,107 @@ export function connectPredict(
       else if (ev.type === "error") h.onError?.(ev.message);
     };
     ws.onerror = () => {
-      if (!settled) settle({ kind: "unavailable", message: "Could not reach the live prediction channel." });
+      if (!settled) tryHttpFallback("Could not reach the live prediction channel.");
     };
     ws.onclose = () => {
-      if (!settled) settle({ kind: "unavailable", message: "The live prediction channel closed without a message." });
+      if (!settled) tryHttpFallback("The live prediction channel closed without a message.");
     };
   }
   const send = (o: unknown) => ws?.send(JSON.stringify(o));
   return {
-    predict: (frames, commit = true) => send({ type: "predict", frames, commit }),
-    reset: () => send({ type: "reset" }),
-    frames: (frames) => send({ type: "frames", frames }),
-    undo: () => send({ type: "undo" }),
-    flush: () => send({ type: "flush" }),
+    predict: (frames, commit = true) => {
+      if (useHttp) {
+        fetch("/api/signs/recognize", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ frames, commit }),
+        })
+          .then((r) => r.json())
+          .then((pred) => {
+            if (pred) {
+              h.onPrediction?.(pred);
+              if (commit && pred.accepted && pred.label && pred.label !== "UNRECOGNIZED") {
+                localSequence.push(pred.gloss || pred.label.toUpperCase());
+                h.onSequence?.({ sequence: [...localSequence], english: localSequence.join(" ") });
+              }
+            }
+          })
+          .catch((err) => {
+            h.onError?.(err instanceof Error ? err.message : "Inference request failed.");
+          });
+        return;
+      }
+      send({ type: "predict", frames, commit });
+    },
+    reset: () => {
+      if (useHttp) {
+        localSequence.length = 0;
+        pendingFrames = [];
+        h.onSequence?.({ sequence: [], english: "" });
+        return;
+      }
+      send({ type: "reset" });
+    },
+    frames: (frames) => {
+      if (useHttp) {
+        framesSeen += frames.length;
+        const hasHands = (frames as Array<{ left_hand?: unknown; right_hand?: unknown }>).some(
+          (f) =>
+            f &&
+            ((Array.isArray(f.left_hand) && f.left_hand.length > 0) ||
+              (Array.isArray(f.right_hand) && f.right_hand.length > 0))
+        );
+        if (hasHands) {
+          pendingFrames.push(...frames);
+          if (pendingFrames.length >= 32) {
+            const batch = pendingFrames.splice(0, 48);
+            fetch("/api/signs/recognize", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ frames: batch, commit: true }),
+            })
+              .then((r) => r.json())
+              .then((pred) => {
+                if (pred && pred.accepted && pred.label !== "UNRECOGNIZED") {
+                  localSequence.push(pred.gloss || pred.label.toUpperCase());
+                  h.onSign?.({
+                    ...pred,
+                    segment: { start: Math.max(0, framesSeen - 48), end: framesSeen, frames: batch.length },
+                  });
+                  h.onStream?.({
+                    active: true,
+                    frames_seen: framesSeen,
+                    sequence: [...localSequence],
+                    english: localSequence.join(" "),
+                  });
+                }
+              })
+              .catch(() => {});
+          }
+        } else {
+          h.onStream?.({
+            active: false,
+            frames_seen: framesSeen,
+            sequence: [...localSequence],
+            english: localSequence.join(" "),
+          });
+        }
+        return;
+      }
+      send({ type: "frames", frames });
+    },
+    undo: () => {
+      if (useHttp) {
+        const removed = localSequence.pop() || null;
+        h.onSequence?.({ removed, sequence: [...localSequence], english: localSequence.join(" ") });
+        return;
+      }
+      send({ type: "undo" });
+    },
+    flush: () => {
+      if (useHttp) return;
+      send({ type: "flush" });
+    },
     close: () => {
       if (!ws) return;
       ws.onmessage = ws.onerror = ws.onclose = null;
