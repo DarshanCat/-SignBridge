@@ -248,6 +248,8 @@ Three measurements became product behavior. First, the prototype requests 1280$\
 
 \textbf{Reproducibility.} The code, the benchmark scripts, the per-video result rows and the evaluation reports are in the project repository; the INCLUDE videos, the derived features, the trained weights and the avatar clips are not distributed there, and the benchmark needs the dataset archives from the INCLUDE authors.
 
+\textbf{Residual 4:3 gap.} After the exact vertical rescale the CNN still loses accuracy in 4:3 pictures (0.65 against 0.78 in 16:9 on the test videos). The loss is not explained by vertical scale, signer size or picture resolution (Section~\ref{sec:gap}). That the black padding of the letterbox disturbs MediaPipe is an untested hypothesis, and we do not claim it as a cause.
+
 \textbf{Real webcams.} All browser results use dataset videos re-encoded as pictures; they do not include a real webcam, real lighting, real users or a left-handed signer. The framing study covers sizes up to the dataset range only. One sample per class gives wide intervals, and the single-seed CNN study of Section~\ref{sec:gap} has no training-variance estimate.
 
 \textbf{Licence.} The INCLUDE licence is stated inconsistently: CC BY 4.0 in the Zenodo record and CC BY-NC-SA 4.0 on a third-party page. We follow the stricter reading: INCLUDE-derived material (features, weights, clips) is shared non-commercially under CC BY-NC-SA 4.0 with attribution, and the data and model files are not in the public repository. The avatar character's licence terms are unconfirmed and it is not distributed.
