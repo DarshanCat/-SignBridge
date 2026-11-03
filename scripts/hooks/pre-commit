@@ -1,0 +1,12 @@
+#!/bin/sh
+# Rejects: added files under frontend/public/animations/ or data/, and added lines in .json files with "signer_reviewed": true.
+fail=0
+added=$(git diff --cached --name-only --diff-filter=AR)
+bad=$(printf '%s\n' "$added" | grep -E '^(frontend/public/animations/|data/)')
+if [ -n "$bad" ]; then
+  echo "pre-commit: these files must stay out of git (CLAUDE.md):"; echo "$bad"; fail=1
+fi
+if git diff --cached -U0 --diff-filter=AMR -- '*.json' | grep -E '^\+[^+].*"signer_reviewed"[[:space:]]*:[[:space:]]*true' >/dev/null; then
+  echo 'pre-commit: a commit may not add "signer_reviewed": true (no clip is signer reviewed).'; fail=1
+fi
+exit $fail

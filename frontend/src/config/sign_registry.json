@@ -50,18 +50,6 @@
       "signer_reviewed": false
     },
     {
-      "gloss": "WATER",
-      "meaning": "water",
-      "context": "UNSPECIFIED: a clip file exists but its origin is not documented and no signer has reviewed it; WATER is not an INCLUDE class",
-      "reference_source": null,
-      "asset_id": "water.json",
-      "license": null,
-      "attribution": null,
-      "verification_status": "clip_unreviewed",
-      "visually_reviewed": false,
-      "signer_reviewed": false
-    },
-    {
       "gloss": "FOOD",
       "meaning": "food",
       "context": "UNSPECIFIED: placeholder gloss; sign, handshape and context not yet defined by an ISL reference",

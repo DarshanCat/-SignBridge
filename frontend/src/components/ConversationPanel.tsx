@@ -161,7 +161,7 @@ export function ConversationPanel({ capture, backendUp }: { capture: LandmarkCap
             </form>
             <div className="mt-2 flex flex-wrap items-center gap-1.5 text-xs text-slate-400">
               <span className="text-slate-500">Quick signs:</span>
-              {["hello", "water", "doctor", "hospital", "book", "bed", "clean"].map((word) => (
+              {["hello", "doctor", "hospital", "book", "bed", "clean"].map((word) => (
                 <button
                   key={word}
                   type="button"

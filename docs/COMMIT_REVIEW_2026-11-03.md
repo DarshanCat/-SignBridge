@@ -29,3 +29,12 @@ Checked against a web instance pointed at a dead backend: both status routes ans
 ## Still open
 
 The WATER clip's origin is not documented. It is on disk, ignored by git, listed as an unreviewed clip and still present in the history of d58f39f. Decide whether to keep it, replace it with a clip built from signer recordings, or remove it.
+
+## WATER removed
+
+At the owner's request the WATER registry entry and the local `water.json` clip were deleted, and WATER was dropped from the example word chips of the Conversation and English to Sign tabs. The history is unchanged: `water.json` is still in commit d58f39f. The "Still open" item above is closed.
+
+## Guards added
+
+- `vitest.config.ts` runs only `src/**/*.test.*` and excludes `.next/`, so the count is 23 files and 137 tests from `frontend/` (before, the copy inside `.next/standalone` doubled it).
+- `scripts/hooks/pre-commit` (installed by `scripts/install-hooks.ps1`, which sets `core.hooksPath`) rejects a commit that adds files under `frontend/public/animations/` or `data/`, or adds the line `"signer_reviewed": true`.
