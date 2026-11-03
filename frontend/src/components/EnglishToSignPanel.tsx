@@ -47,7 +47,7 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
     return () => ctl.abort();
   }, [backendUp]);
 
-  const statusOf = (gloss: string) => registry?.signs.find((s) => s.gloss === gloss)?.status;
+  const statusOf = (gloss: string) => registry?.signs?.find((s) => s.gloss === gloss)?.status;
 
   useEffect(() => {
     player.setRate(rate);
@@ -243,21 +243,21 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
         ) : (
           <>
             <p className="mt-2 text-xs text-amber-300">
-              {registry.totals.verified} verified, {registry.totals.clip_unreviewed} with an unreviewed clip, {registry.totals.no_clip} without
-              any clip, of {registry.totals.signs} registered glosses. A sign is only verified after a visual check and ISL signer review.
+              {registry.totals?.verified ?? 0} verified, {registry.totals?.clip_unreviewed ?? 0} with an unreviewed clip, {registry.totals?.no_clip ?? 0} without
+              any clip, of {registry.totals?.signs ?? (registry.signs?.length || 0)} registered glosses. A sign is only verified after a visual check and ISL signer review.
             </p>
-            {registry.unregistered_clips.length > 0 && (
+            {Array.isArray(registry.unregistered_clips) && registry.unregistered_clips.length > 0 && (
               <p className="mt-1 text-xs text-rose-300">Clips not in the sign registry: {registry.unregistered_clips.join(", ")}</p>
             )}
             <ul className="mt-2 flex flex-wrap gap-2">
-              {registry.signs.map((i) => (
+              {(registry.signs ?? []).map((i) => (
                 <li
                   key={i.gloss}
                   className={`rounded px-2 py-0.5 text-xs ${i.status === "verified" ? "bg-emerald-400/20 text-emerald-200" : i.status === "no_clip" ? "bg-white/5 text-slate-400" : "bg-amber-400/20 text-amber-200"}`}
-                  title={i.problems.join("; ") || i.meaning}
+                  title={(Array.isArray(i.problems) ? i.problems.join("; ") : "") || i.meaning}
                 >
                   {i.gloss}
-                  {i.status === "no_clip" ? " (no animation)" : i.status === "verified" ? "" : ` (${i.status.replace("_", " ")})`}
+                  {i.status === "no_clip" ? " (no animation)" : i.status === "verified" ? "" : ` (${String(i.status || "").replace("_", " ")})`}
                 </li>
               ))}
             </ul>
