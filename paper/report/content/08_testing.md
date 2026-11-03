@@ -6,13 +6,13 @@ Testing has four layers: automated unit and integration tests, a benchmark of th
 
 ## Automated tests
 
-The test script runs the backend tests with pytest, the TypeScript compiler, ESLint, the frontend tests with Vitest and the production build. On the current repository head the backend suite has 367 tests and the frontend suite has 122 tests, and all of them pass; the TypeScript compiler, ESLint and the production build are clean.
+The test script runs the backend tests with pytest, the TypeScript compiler, ESLint, the frontend tests with Vitest and the production build. On the current repository head the backend suite has 367 tests and the frontend suite has 137 tests, and all of them pass; the TypeScript compiler, ESLint and the production build are clean.
 
 Table: Automated test suites. {#tab:tests}
 | Suite | Tests | What it covers |
 |---|---|---|
 | Backend (pytest) | 367 in 31 files | landmark normalization, preprocessing, models, training pipeline, inference, API, WebSocket, recorder, retargeting, text to gloss, gloss to English, registry, data tools, deployment switches, augmentation, checkpoint and resume |
-| Frontend (Vitest) | 122 in 22 files | landmark conversion and buffers, camera request and fallback, overlay and framing warning, WebSocket client, recorder, shortcuts, avatar player, rig mapping, idle and smoothing layer, non-manual markers, sentence planning, status logic, deployment switches, the HTTP fallback route (a failed upstream call never returns a label) |
+| Frontend (Vitest) | 137 in 23 files | landmark conversion and buffers, camera request and fallback, overlay and framing warning, WebSocket client, recorder, shortcuts, avatar player, rig mapping, idle and smoothing layer, non-manual markers, sentence planning, status logic, deployment switches, the HTTP fallback route (a failed upstream call never returns a label), honest status routes, registry and plan rules |
 | Type check, lint, production build | pass | the whole frontend |
 
 Table: The largest backend test files. {#tab:backendtests}

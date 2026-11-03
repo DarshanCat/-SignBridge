@@ -52,14 +52,14 @@
     {
       "gloss": "WATER",
       "meaning": "water",
-      "context": "Standard Indian Sign Language (ISL) drink / water gesture at chin and mouth",
+      "context": "UNSPECIFIED: a clip file exists but its origin is not documented and no signer has reviewed it; WATER is not an INCLUDE class",
       "reference_source": null,
       "asset_id": "water.json",
-      "license": "CC BY-NC-SA 4.0",
-      "attribution": "SignBridge ISL Vocabulary Standardizer",
-      "verification_status": "signer_reviewed",
-      "visually_reviewed": true,
-      "signer_reviewed": true
+      "license": null,
+      "attribution": null,
+      "verification_status": "clip_unreviewed",
+      "visually_reviewed": false,
+      "signer_reviewed": false
     },
     {
       "gloss": "FOOD",

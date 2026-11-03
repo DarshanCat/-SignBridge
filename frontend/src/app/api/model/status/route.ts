@@ -1,11 +1,8 @@
 import { NextResponse } from "next/server";
+import { proxyGet } from "../../../../lib/upstreamProxy";
 
+/** The real backend's model status, or an error: this route never says "loaded" on its own. */
 export async function GET() {
-  return NextResponse.json({
-    state: "loaded",
-    loaded: true,
-    model_path: "models/isl_model.pt",
-    classes: 262,
-    message: "Model loaded with 262 sign class(es).",
-  });
+  const r = await proxyGet("/api/model/status", process.env.SIGNBRIDGE_UPSTREAM_URL ?? process.env.NEXT_PUBLIC_API_URL);
+  return NextResponse.json(r.body, { status: r.status });
 }

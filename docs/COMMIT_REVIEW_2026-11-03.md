@@ -17,9 +17,15 @@ Reviewed on 2026-11-03 against the rules of `CLAUDE.md`: never invent prediction
 - `/api/signs/recognize` now forwards the landmark frames to the real API (`POST /api/signs/translate` on `SIGNBRIDGE_UPSTREAM_URL` or `NEXT_PUBLIC_API_URL`) and returns the real answer; on any failure (no upstream, network error, timeout, non-success status, invalid answer) it returns an error status and no label, confidence or alternatives. Frames without hands are answered UNRECOGNIZED with reason `no_hands` and no numbers. The client shows an error answer as an error. Eighteen tests (`frontend/src/lib/recognizeProxy.test.ts`) cover every failure mode and check that no prediction field is present.
 - `water.json` was removed from the git index (git rm with its cached option); it is covered by `.gitignore` (`frontend/public/animations/*.json`) and stays on disk. It remains in the history of d58f39f.
 
-## Left for the owner to decide (not changed)
+## Second follow-up: the remaining findings, fixed at the owner's request
 
-1. `/api/health` and `/api/model/status` constants and the same-origin fallback in `lib/api.ts` (they report a healthy backend and a loaded model that were not checked).
-2. The WATER registry entry and clip file that claim a signer review. Suggested: set the flags back to false and the status to `clip_unreviewed` (or `no_clip` if the clip is removed), and document where the clip came from.
-3. The TypeScript copy of the text to gloss rules, and the plan and registry routes (keep with tests, or remove and rely on the Python backend).
-4. Four copies of backend config files in `frontend/src/config`.
+1. `/api/health` and `/api/model/status` now proxy the real backend (`SIGNBRIDGE_UPSTREAM_URL` or `NEXT_PUBLIC_API_URL`) and answer with an error (502 or 503) when it is unreachable, so the status panel can no longer show a healthy backend or a loaded model that was not checked.
+2. The WATER registry entry in `frontend/src/config/sign_registry.json` no longer claims a review: `signer_reviewed` and `visually_reviewed` are false, the status is `clip_unreviewed`, and the unsupported licence and attribution are cleared. The clip file (untracked) states that its origin is not documented and that it is not signer reviewed. A test now fails if any entry of the shipped registry config claims a review.
+3. The registry, plan and animations routes count a clip only if its file exists (an empty clips folder means every registered asset is missing); the registry follows the Python rule that `verified` needs a clip and both review flags. Fifteen tests cover the proxy, the registry and the plan.
+4. The untested TypeScript copy of the text to gloss rules (`/api/nlp/text-to-gloss`) was removed, together with the three config copies that only it used (`gloss_dictionary.json`, `translation.json`, `signer_roles.json`). With the backend down, text to gloss now fails with an error instead of using a second implementation of the rules. `sign_registry.json` stays because the registry and animations routes read it.
+
+Checked against a web instance pointed at a dead backend: both status routes answered HTTP 502 with an error and none of the healthy fields.
+
+## Still open
+
+The WATER clip's origin is not documented. It is on disk, ignored by git, listed as an unreviewed clip and still present in the history of d58f39f. Decide whether to keep it, replace it with a clip built from signer recordings, or remove it.
