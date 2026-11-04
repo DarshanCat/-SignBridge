@@ -2,13 +2,14 @@
 import { Pause, Play, RotateCcw, SkipBack, Square } from "lucide-react";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { apiGet, apiPost, type AvatarPlan, type SignRegistry, type TextToGloss } from "@/lib/api";
-import { SequencePlayer } from "@/lib/avatar/player";
+import { DEFAULT_SIGN_RATE, SequencePlayer } from "@/lib/avatar/player";
 import { loadPlaylist } from "@/lib/avatar/loader";
 import { describeTokens, glossesToPlan, playOrder, type TokenView } from "@/lib/avatar/sentence";
 import { RIG_TEST_CLIP } from "@/lib/avatar/rigTest";
 import { shortcutHelp } from "@/lib/shortcuts";
 import type { AvatarKind } from "./avatar/GlbHumanoid";
 import { AvatarStage, StageBadge, StageCaption } from "./ui/AvatarStage";
+import { SourceSkeleton } from "./ui/SourceSkeleton";
 import { SpeedControl } from "./ui/SpeedControl";
 import { useShortcuts } from "./useShortcuts";
 
@@ -29,12 +30,18 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
   const [result, setResult] = useState<Result | null>(null);
   const [rigTest, setRigTest] = useState(false);
   const [registry, setRegistry] = useState<SignRegistry | null>(null);
-  const [rate, setRate] = useState(1);
+  const [rate, setRate] = useState(DEFAULT_SIGN_RATE);
   const [ms, setMs] = useState<number | null>(null);
   const [stage, setStage] = useState<string | null>(null);
   const [kind, setKind] = useState<AvatarKind | null>(null);
+  const [showSource, setShowSource] = useState(false);
 
   useEffect(() => () => player.dispose(), [player]);
+
+  // ?debug-player in the address exposes the player (window.__sbPlayer) so a sign can be stepped to an exact moment (screenshots, checks)
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).has("debug-player")) (window as unknown as { __sbPlayer?: SequencePlayer }).__sbPlayer = player;
+  }, [player]);
 
   useEffect(() => {
     if (!backendUp) return;
@@ -131,6 +138,7 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
             </>
           }
           caption={captionNode}
+          overlay={showSource ? <SourceSkeleton player={player} /> : undefined}
         />
         <div className="flex flex-wrap items-center gap-3" role="group" aria-label="Playback">
           <button className="btn btn-primary" disabled={!hasPlaylist} onClick={() => (playing ? player.pause() : player.play())}>
@@ -144,6 +152,9 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
           </button>
           <button className="btn" disabled={!hasPlaylist || snap.status === "idle"} onClick={() => player.stop()}>
             <Square size={18} aria-hidden /> Stop
+          </button>
+          <button className="btn" aria-pressed={showSource} onClick={() => setShowSource((v) => !v)}>
+            {showSource ? "Hide source skeleton" : "Show source skeleton"}
           </button>
           <div className="ml-auto">
             <SpeedControl rate={rate} onChange={setRate} />

@@ -103,14 +103,16 @@ export class PoseSmoother {
   /** tau: time constant in seconds (the pose covers 63 percent of the remaining distance in tau). */
   constructor(private tau = 0.07) {}
 
+  /** The time constant can be given per step: short inside a sign (it keeps the handshape crisp), longer between signs. */
+
   reset(): void {
     this.q.clear();
     this.f.clear();
     this.spread = {};
   }
 
-  step(target: Pose, spread: Spread, dt: number): { pose: Pose; spread: Spread } {
-    const a = dt <= 0 ? 1 : 1 - Math.exp(-dt / this.tau);
+  step(target: Pose, spread: Spread, dt: number, tau: number = this.tau): { pose: Pose; spread: Spread } {
+    const a = dt <= 0 ? 1 : 1 - Math.exp(-dt / tau);
     const pose: Pose = {};
     for (const [bone, e] of Object.entries(target)) {
       if (bone.includes(".")) {

@@ -3,7 +3,7 @@ import { cameraBoxStyle, FramingGuide } from "./CameraFrame";
 import { Camera, CameraOff, Eraser, Pause, Play, RotateCcw, Send, Undo2 } from "lucide-react";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { apiPost, type AvatarPlan, type TextToGloss } from "@/lib/api";
-import { SequencePlayer } from "@/lib/avatar/player";
+import { DEFAULT_SIGN_RATE, SequencePlayer } from "@/lib/avatar/player";
 import type { SignClip } from "@/lib/avatar/clip";
 import { textToClips } from "@/lib/avatar/pipeline";
 import { appendMessage, MAX_TYPED_LENGTH, signedMessage, signingSummary, typedMessage, type ChatMessage } from "@/lib/conversation";
@@ -12,6 +12,7 @@ import { CaptureHints } from "./CaptureHints";
 import type { LandmarkCapture } from "./useLandmarkCapture";
 import { useContinuousSigning } from "./useContinuousSigning";
 import { AvatarStage, StageBadge, StageCaption } from "./ui/AvatarStage";
+import { SourceSkeleton } from "./ui/SourceSkeleton";
 import type { AvatarKind } from "./avatar/GlbHumanoid";
 import { useShortcuts } from "./useShortcuts";
 
@@ -26,7 +27,12 @@ const btn = "btn btn-sm";
 export function ConversationPanel({ capture, backendUp }: { capture: LandmarkCapture; backendUp: boolean }) {
   const { state, error: cameraError, videoRef, canvasRef, start, stop } = capture;
   const running = state === "running";
-  const [player] = useState(() => new SequencePlayer());
+  const [player] = useState(() => {
+    const p = new SequencePlayer();
+    p.setRate(DEFAULT_SIGN_RATE);
+    return p;
+  });
+  const [showSource, setShowSource] = useState(false);
   const snap = useSyncExternalStore(player.subscribe.bind(player), () => player.snapshot(), () => player.snapshot());
   const live = useContinuousSigning(capture, true);
   const [log, setLog] = useState<ChatMessage[]>([]);
@@ -139,6 +145,7 @@ export function ConversationPanel({ capture, backendUp }: { capture: LandmarkCap
             </>
           }
           caption={captionNode}
+          overlay={showSource ? <SourceSkeleton player={player} /> : undefined}
         />
         <div className="flex flex-wrap items-center gap-3" role="group" aria-label="Playback">
           <button className="btn btn-primary" onClick={playPause} disabled={!snap.total && !last}>
@@ -146,6 +153,9 @@ export function ConversationPanel({ capture, backendUp }: { capture: LandmarkCap
           </button>
           <button className="btn" onClick={replayLast} disabled={!last?.clips.length}>
             <RotateCcw size={18} aria-hidden /> Replay
+          </button>
+          <button className="btn" aria-pressed={showSource} onClick={() => setShowSource((v) => !v)}>
+            {showSource ? "Hide source skeleton" : "Show source skeleton"}
           </button>
         </div>
         <p className="text-sm font-semibold text-ink2">Keyboard (when not typing): {shortcutHelp(["send", "undo", "clear", "play", "replay"])}.</p>

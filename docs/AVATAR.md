@@ -71,3 +71,16 @@ The face of the VRM is driven by rules and is **not taken from signer-validated 
 ### Model and licence
 
 The development model is the sample `VRM1_Constraint_Twist_Sample.vrm` of pixiv Inc. (from `github.com/pixiv/three-vrm`, 10,776,032 bytes). Its own metadata states author pixiv Inc., licence URL `https://vrm.dev/licenses/1.0/`, redistribution and modification allowed, credit notation unnecessary. Like the Mixamo model it is kept out of git (`frontend/public/avatar/` is ignored); replace the file with any VRM to change the character. This is a stand-in character, not a signer, and no clip is signer reviewed.
+
+## Sign clarity on the VRM avatar, 2026-11-04
+
+The signing motion is now retargeted at run time from the source landmarks of each clip, onto the avatar's own body. The recognition model, its data and every evaluation result are untouched, and no clip's motion tracks changed (the clips only gained an optional `landmarks` block, written by `backend/retarget/add_source_landmarks.py` from the INCLUDE feature files; clips without it play as before). No clip is signer reviewed.
+
+- **Measurement first** (`frontend/src/lib/avatar/retargetMeasure.test.ts`, report in `docs/avatar_retarget/MEASUREMENT.md`): forward kinematics on the real `signer.vrm` for 10 clips against the source landmarks, per joint, before (the clips' own tracks) and after.
+- **Source correction**: stored features are normalized by picture width and height, and INCLUDE is 16:9, so vertical distances are 16/9 too long; the retarget corrects them (`sourceLandmarks.ts`). Hand points are re-anchored at the pose wrist because the hand model's depth is relative to its own wrist.
+- **Retarget** (`retarget.ts`, `anatomy.ts`): hand positions are mapped relative to the avatar's own shoulders and face (the avatar's mouth is read from its mouth morph), two bone IK with an anatomical elbow, forearm and wrist twist from the palm orientation, finger directions and thumb opposition per joint, and a head sphere and torso ellipse collision.
+- **Player** (`player.ts`, `peak.ts`, `solverSampler.ts`): less smoothing inside a sign (time constant 0.025 s) than between signs (0.07 s), a hold of 0.28 s of clip time at the slowest moment of the stroke (a repeat of the pose the clip already has, nothing invented), and a default speed of 0.75x with the speed control kept (0.5, 0.75, 1, 1.5).
+- **Visibility**: the camera eases to a hands and upper body framing while signing (it stops once the viewer orbits), a soft light rides on each hand, and the hands have a warm outline.
+- **Source skeleton toggle** ("Show source skeleton" in English to Sign and in the conversation): draws the source landmarks of the playing sign, on the avatar's clock, next to the avatar.
+- `?legacy-retarget` in the URL plays the clips' own tracks, for comparison.
+- Frame sheets, source skeleton against avatar, before and after, for five signs: `docs/screenshots/avatar_retarget/`.

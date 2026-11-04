@@ -11,10 +11,25 @@ export interface Track {
   bone: string;
   keyframes: Keyframe[];
 }
+/**
+ * Source landmarks of the dataset sample the clip was retargeted from (added by backend/retarget/add_source_landmarks.py), at the keyframe
+ * times t. Values are the stored normalized features (origin shoulder midpoint, unit shoulder width, image axes x right, y down, z depth).
+ * pose holds the MediaPipe pose points named in pose_idx; left and right hold the 21 hand points, or null when the hand was not detected.
+ */
+export interface ClipLandmarks {
+  version: number;
+  t: number[];
+  pose_idx: number[];
+  pose: number[][][];
+  left: (number[][] | null)[];
+  right: (number[][] | null)[];
+}
+
 export interface SignClip {
   gloss: string;
   duration: number;
   tracks: Track[];
+  landmarks?: ClipLandmarks;
   source: { author: string; license: string; description: string; review_status?: "not_signer_reviewed" | "signer_reviewed" };
 }
 
@@ -42,7 +57,21 @@ export function parseClip(raw: unknown): SignClip {
       prev = k.t;
     }
   }
-  return c as SignClip;
+  const clip = c as SignClip;
+  if (clip.landmarks !== undefined && !validLandmarks(clip.landmarks)) delete clip.landmarks; // optional extra: an unusable one is ignored, never fatal
+  return clip;
+}
+
+const isPoint = (p: unknown): boolean => Array.isArray(p) && p.length === 3 && p.every(isNum);
+
+function validLandmarks(l: unknown): l is ClipLandmarks {
+  const m = l as Partial<ClipLandmarks> | null;
+  if (!m || m.version !== 1 || !Array.isArray(m.t) || !m.t.length || !m.t.every(isNum)) return false;
+  if (!Array.isArray(m.pose_idx) || !m.pose_idx.every(isNum) || !Array.isArray(m.pose) || !Array.isArray(m.left) || !Array.isArray(m.right)) return false;
+  const n = m.t.length;
+  if (m.pose.length !== n || m.left.length !== n || m.right.length !== n) return false;
+  const hand = (h: unknown) => h === null || (Array.isArray(h) && h.length === 21 && h.every(isPoint));
+  return m.pose.every((f) => Array.isArray(f) && f.length === m.pose_idx!.length && f.every(isPoint)) && m.left.every(hand) && m.right.every(hand);
 }
 
 /** Linearly interpolate every track at time t (seconds). Bones without tracks are omitted (rest pose). */

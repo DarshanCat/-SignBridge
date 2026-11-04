@@ -1,6 +1,6 @@
 "use client";
 
-const RATES = [0.5, 1, 1.5] as const;
+const RATES = [0.5, 0.75, 1, 1.5] as const;
 
 /** Playback speed as a segmented control (radio group): large targets, arrow keys move between options. */
 export function SpeedControl({ rate, onChange }: { rate: number; onChange: (r: number) => void }) {

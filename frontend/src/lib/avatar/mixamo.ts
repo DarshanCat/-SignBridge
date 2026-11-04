@@ -13,7 +13,7 @@ import type { Pose } from "./clip";
  */
 
 const FINGERS = ["Thumb", "Index", "Middle", "Ring", "Pinky"] as const;
-const FINGER_SPLIT: Record<string, [number, number, number]> = {
+export const FINGER_SPLIT: Record<string, [number, number, number]> = {
   Thumb: [0.3, 0.4, 0.3],
   Index: [0.4, 0.4, 0.2],
   Middle: [0.4, 0.4, 0.2],
@@ -160,9 +160,10 @@ export function applyMixamoPose(rig: MixamoRig, pose: Pose, spread: Record<strin
   const canon = new Map<string, Quaternion>();
   for (const j of rig.joints) {
     const key = j.clipBone.split("#")[0];
+    const direct = pose[j.clipBone]; // a solved pose gives this joint its own full rotation (finger joints: name#1 to name#3)
     const e = pose[key] ?? [0, 0, 0];
     const fan = j.rotateX && j.clipBone.endsWith("#1") ? (spread[key] ?? 0) : 0;
-    const r = j.rotateX ? tmpE.set(e[0] * j.fraction, 0, fan, "XYZ") : tmpE.set(e[0], e[1], e[2], "XYZ");
+    const r = direct ? tmpE.set(direct[0], direct[1], direct[2], "XYZ") : j.rotateX ? tmpE.set(e[0] * j.fraction, 0, fan, "XYZ") : tmpE.set(e[0], e[1], e[2], "XYZ");
     const local = new Quaternion().setFromEuler(r);
     const parent = j.parentClip ? (canon.get(j.parentClip) ?? new Quaternion()) : new Quaternion();
     const w = parent.clone().multiply(local);

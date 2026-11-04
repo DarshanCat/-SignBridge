@@ -28,12 +28,15 @@ export function AvatarStage({
   onKind,
   badges,
   caption,
+  overlay,
   className = "",
 }: {
   player: SequencePlayer;
   onKind?: (k: AvatarKind) => void;
   badges?: ReactNode;
   caption: ReactNode;
+  /** Drawn at the right of the stage (the source skeleton). */
+  overlay?: ReactNode;
   className?: string;
 }) {
   const [loaded, setLoaded] = useState(false);
@@ -59,6 +62,7 @@ export function AvatarStage({
           Loading the avatar…
         </p>
       )}
+      {overlay && <div className="absolute right-3 top-14 z-[2] hidden sm:block">{overlay}</div>}
       {badges && <div className="absolute left-4 top-4 z-[2] flex max-w-[calc(100%-2rem)] flex-wrap gap-2">{badges}</div>}
       <div className="glass absolute inset-x-3 bottom-3 z-[2] rounded-3xl px-4 py-3 sm:inset-x-5 sm:bottom-5 sm:px-6 sm:py-4" style={{ boxShadow: "0 10px 30px rgb(var(--shadow-rgb) / 0.16)" }}>
         {caption}
