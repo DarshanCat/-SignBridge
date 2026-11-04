@@ -4,6 +4,8 @@ import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { API_URL } from "@/lib/api";
 import { ConversationPanel } from "@/components/ConversationPanel";
 import { EnglishToSignPanel } from "@/components/EnglishToSignPanel";
+import { KnownSignsPanel } from "@/components/KnownSignsPanel";
+import { TestSentencesPanel } from "@/components/TestSentencesPanel";
 import { LandmarkCheckPanel } from "@/components/LandmarkCheckPanel";
 import { RecordSignPanel } from "@/components/RecordSignPanel";
 import { StatusPanel } from "@/components/StatusPanel";
@@ -119,7 +121,13 @@ export default function Home() {
           <div key={mode} role="tabpanel" id={`panel-${mode}`} aria-labelledby={`tab-${mode}`} className="fade-up">
             {mode === "conversation" && <ConversationPanel capture={capture} backendUp={backendUp} />}
             {mode === "sign-to-english" && <WebcamPanel capture={capture} backendUp={backendUp} />}
-            {mode === "english-to-sign" && <EnglishToSignPanel backendUp={backendUp} />}
+            {mode === "english-to-sign" && (
+              <>
+                <EnglishToSignPanel backendUp={backendUp} />
+                <TestSentencesPanel backendUp={backendUp} />
+              </>
+            )}
+            {(mode === "conversation" || mode === "sign-to-english") && <KnownSignsPanel backendUp={backendUp} />}
             {mode === "record-sign" && !RECORDING_DISABLED && <RecordSignPanel capture={capture} backendUp={backendUp} />}
             {mode === "landmark-check" && <LandmarkCheckPanel capture={capture} />}
           </div>

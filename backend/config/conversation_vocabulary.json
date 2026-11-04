@@ -1,0 +1,224 @@
+{
+ "_notice": "Conversation vocabulary (docs/CONVERSATION_VOCABULARY.md). include_class is the exact INCLUDE class name the live model can output, or null when the sign must be recorded. No sign here is signer reviewed.",
+ "signs": [
+  {
+   "gloss": "WHAT",
+   "group": "question",
+   "include_class": null
+  },
+  {
+   "gloss": "WHERE",
+   "group": "question",
+   "include_class": null
+  },
+  {
+   "gloss": "HOW",
+   "group": "question",
+   "include_class": null
+  },
+  {
+   "gloss": "WHO",
+   "group": "question",
+   "include_class": null
+  },
+  {
+   "gloss": "WHEN",
+   "group": "question",
+   "include_class": null
+  },
+  {
+   "gloss": "WHY",
+   "group": "question",
+   "include_class": null
+  },
+  {
+   "gloss": "I",
+   "group": "pronoun",
+   "include_class": "I"
+  },
+  {
+   "gloss": "YOU",
+   "group": "pronoun",
+   "include_class": "you"
+  },
+  {
+   "gloss": "HE",
+   "group": "pronoun",
+   "include_class": "he",
+   "note": "The request lists HE/SHE as one item; INCLUDE has both as separate classes."
+  },
+  {
+   "gloss": "SHE",
+   "group": "pronoun",
+   "include_class": "she",
+   "note": "See HE."
+  },
+  {
+   "gloss": "WE",
+   "group": "pronoun",
+   "include_class": "we"
+  },
+  {
+   "gloss": "DO",
+   "group": "verb",
+   "include_class": null,
+   "note": "Not in the gloss dictionary yet: the text to gloss writes it FS:DO (fingerspelled)."
+  },
+  {
+   "gloss": "GO",
+   "group": "verb",
+   "include_class": null
+  },
+  {
+   "gloss": "COME",
+   "group": "verb",
+   "include_class": null
+  },
+  {
+   "gloss": "EAT",
+   "group": "verb",
+   "include_class": null
+  },
+  {
+   "gloss": "DRINK",
+   "group": "verb",
+   "include_class": null
+  },
+  {
+   "gloss": "WANT",
+   "group": "verb",
+   "include_class": null
+  },
+  {
+   "gloss": "LIKE",
+   "group": "verb",
+   "include_class": null
+  },
+  {
+   "gloss": "KNOW",
+   "group": "verb",
+   "include_class": null
+  },
+  {
+   "gloss": "HELP",
+   "group": "verb",
+   "include_class": null
+  },
+  {
+   "gloss": "WORK",
+   "group": "verb",
+   "include_class": null
+  },
+  {
+   "gloss": "NAME",
+   "group": "verb",
+   "include_class": null
+  },
+  {
+   "gloss": "YES",
+   "group": "answer",
+   "include_class": null
+  },
+  {
+   "gloss": "NO",
+   "group": "answer",
+   "include_class": null
+  },
+  {
+   "gloss": "GOOD",
+   "group": "answer",
+   "include_class": "good"
+  },
+  {
+   "gloss": "BAD",
+   "group": "answer",
+   "include_class": "bad"
+  },
+  {
+   "gloss": "OK",
+   "group": "answer",
+   "include_class": null,
+   "note": "Not in the gloss dictionary yet. INCLUDE has a class Alright; no signer has confirmed it is the same sign as OK, so OK is recorded and the two can be compared afterwards."
+  },
+  {
+   "gloss": "THANK-YOU",
+   "group": "answer",
+   "include_class": "Thank you"
+  },
+  {
+   "gloss": "SORRY",
+   "group": "answer",
+   "include_class": null,
+   "note": "Not in the gloss dictionary yet (shown as FS:SORRY)."
+  },
+  {
+   "gloss": "PLEASE",
+   "group": "answer",
+   "include_class": null
+  },
+  {
+   "gloss": "HELLO",
+   "group": "greeting",
+   "include_class": "Hello"
+  },
+  {
+   "gloss": "BYE",
+   "group": "greeting",
+   "include_class": null,
+   "note": "Not in the gloss dictionary yet (shown as FS:BYE)."
+  },
+  {
+   "gloss": "NOT",
+   "group": "extra",
+   "include_class": null,
+   "note": "Needed for negation (the NLP produces it)."
+  },
+  {
+   "gloss": "CAN",
+   "group": "extra",
+   "include_class": null
+  },
+  {
+   "gloss": "NEED",
+   "group": "extra",
+   "include_class": null
+  },
+  {
+   "gloss": "HAVE",
+   "group": "extra",
+   "include_class": null
+  },
+  {
+   "gloss": "LIVE",
+   "group": "extra",
+   "include_class": null
+  },
+  {
+   "gloss": "MEET",
+   "group": "extra",
+   "include_class": null
+  },
+  {
+   "gloss": "SEE",
+   "group": "extra",
+   "include_class": null
+  },
+  {
+   "gloss": "HOME",
+   "group": "extra",
+   "include_class": null
+  }
+ ],
+ "test_sentences": [
+  "What are you doing?",
+  "Where are you going?",
+  "What is your name?",
+  "How are you?",
+  "Who is he?",
+  "Why do you want help?",
+  "I like to eat and drink.",
+  "When do you come home?",
+  "Yes, I know. Thank you.",
+  "I am sorry, I need help."
+ ]
+}

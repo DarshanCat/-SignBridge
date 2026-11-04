@@ -40,6 +40,7 @@ export function RecordSessionPanel({ capture, backendUp }: { capture: LandmarkCa
   const [glossText, setGlossText] = useState("");
   const [plan, setPlan] = useState<RecordPlan | null>(null);
   const [planError, setPlanError] = useState<string | null>(null);
+  const [presetNote, setPresetNote] = useState<string | null>(null);
   const [seconds, setSeconds] = useState<number>(3);
   const [session, setSession] = useState<SessionState | null>(null);
   const [last, setLast] = useState<{ gloss: string; result: RecordResult | null; error: string | null } | null>(null);
@@ -63,6 +64,18 @@ export function RecordSessionPanel({ capture, backendUp }: { capture: LandmarkCa
       });
     return () => ctl.abort();
   }, [backendUp]);
+
+  /** Fill the sign list from a preset: undefined is the 50 grammar words, "conversation" only the conversation vocabulary signs that must be recorded. */
+  async function loadPreset(preset: "conversation" | undefined) {
+    try {
+      const p = await apiGet<RecordPlan>(preset ? `/api/record/plan?preset=${preset}` : "/api/record/plan");
+      setGlossText(p.glosses.join("\n"));
+      setPlanError(null);
+      setPresetNote(preset ? `${p.glosses.length} signs to record (the others of the vocabulary are INCLUDE classes the model already knows)` : `${p.glosses.length} grammar words`);
+    } catch (e) {
+      setPlanError(e instanceof Error ? e.message : "Could not load the preset.");
+    }
+  }
 
   const gloss = session ? currentGloss(session) : null;
   const canRecord = running && backendUp && !!session && !!gloss && !recorder.busy;
@@ -178,8 +191,18 @@ export function RecordSessionPanel({ capture, backendUp }: { capture: LandmarkCa
                 </select>
               </label>
             </div>
+            <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Sign list presets">
+              <span className="text-sm text-ink2">Preset:</span>
+              <button type="button" className="btn btn-sm" disabled={!backendUp} onClick={() => void loadPreset(undefined)}>
+                50 grammar words
+              </button>
+              <button type="button" className="btn btn-sm" disabled={!backendUp} onClick={() => void loadPreset("conversation")}>
+                Conversation vocabulary
+              </button>
+              {presetNote && <span className="text-sm text-ink2" aria-live="polite">{presetNote}</span>}
+            </div>
             <label className="block text-sm text-ink2">
-              Signs to record, in order (the 50 grammar words, priority words first; edit freely)
+              Signs to record, in order (a preset above fills this list; edit freely)
               <textarea
                 value={glossText}
                 onChange={(e) => setGlossText(e.target.value)}

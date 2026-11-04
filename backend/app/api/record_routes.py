@@ -87,9 +87,22 @@ class RecordPlanResponse(BaseModel):
 
 
 @router.get("/api/record/plan", response_model=RecordPlanResponse)
-def record_plan(settings: Settings = Depends(get_settings)) -> RecordPlanResponse:
-    """The glosses a guided session should record, in order."""
+def record_plan(preset: str | None = None, settings: Settings = Depends(get_settings)) -> RecordPlanResponse:
+    """The glosses a guided session should record, in order. preset=conversation lists only the conversation vocabulary signs that must be recorded."""
+    from app.conversation_vocab import load_vocabulary
     from app.recording import PRIORITY_GLOSSES
+
+    if preset == "conversation":
+        try:
+            todo = load_vocabulary().to_record()
+        except (OSError, ValueError, KeyError):
+            raise HTTPException(status_code=503, detail="The conversation vocabulary file is missing or invalid.") from None
+        return RecordPlanResponse(
+            glosses=todo, priority=[g for g in PRIORITY_GLOSSES if g in todo],
+            note="Conversation vocabulary signs that are not INCLUDE classes (they must be recorded).",
+        )
+    if preset is not None:
+        raise HTTPException(status_code=422, detail="Unknown preset.")
 
     try:
         lex = load_lexicon(settings.gloss_dictionary)
