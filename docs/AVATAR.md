@@ -47,3 +47,27 @@ avatar cannot sign anything yet.** The only motion it can perform is a labelled 
 Sign provenance and review status live in `backend/config/sign_registry.json`; see `AVATAR_ASSET_AUDIT.md` for the audit,
 the add-a-sign workflow and the missing assets, and `DEMO_GUIDE.md` for what may be shown. The player now has `stop`, `reset`
 and `dispose`, and blends 0.2 s between consecutive signs.
+
+## Anime avatar (VRM), 2026-11-04
+
+The avatar loader now tries three models in order: `frontend/public/avatar/signer.vrm` (anime, VRM 1.0 or 0.x, via `@pixiv/three-vrm` 3.5.5, pinned), then the Mixamo `signer.glb`, then the built-in procedural figure. A model that is missing, is not a VRM or lacks the humanoid bones is skipped and the reason is written to the browser console. The label under the avatar names the model in use.
+
+What is the same as before, so no clip, retarget or evaluation result changed: the clips (`frontend/public/animations/*.json`), the sequence player, the idle layer (breathing, weight shift, relaxed hands) and the pose smoothing are shared by all three models.
+
+- **Bone mapping** (`frontend/src/lib/avatar/vrmRig.ts`): the 20 clip bones (torso, arms, three joints per finger) map to the VRM 1.0 humanoid bones (`Spine2` to `chest`, `LeftArm` to `leftUpperArm`, thumb to `Metacarpal`, `Proximal`, `Distal`, little finger for the pinky, and so on). The rig drives the VRM's normalized humanoid, and `vrm.update()` copies the pose to the real skeleton.
+- **Rest pose** is derived from the loaded model, not assumed: the arms-down pose is measured from the arm, forearm, hand and finger base positions (the same function as for the Mixamo model, `armsDownFromBones`).
+- **Forward kinematics tests** (`vrmRig.test.ts`): the Mixamo checks (arms down at rest, thumbs outward, arm raise and lift directions for both sides, elbow bend, finger curl split over three joints, torso and head) run against a synthetic VRM T-pose skeleton always, and against the real `signer.vrm` when it is present.
+- **Materials**: the VRM's own MToon materials are used. The outline is softened (about 1.8 times the model's width, coloured from the base colour instead of black) and the scene gets anime style lighting (soft key, pink fill, cool rim, high ambient) with tone mapping switched off while a VRM is shown.
+- **Camera**: the anime avatar is framed from the waist up so that the face and both hands fill the stage.
+
+### Face (rule-based approximations, not validated)
+
+The face of the VRM is driven by rules and is **not taken from signer-validated data** and not tracked from a person (`frontend/src/lib/avatar/face.ts`):
+
+- Natural blinking: a blink every 2.6 to 6 s (seeded random), about a quarter of a second long, with an occasional quick double blink.
+- A neutral expression while signing; only the markers below change it.
+- Non-manual markers, on top of the existing head movements (`nmm.ts`): yes-no questions raise the brows and widen the eyes with the VRM `surprised` preset at 0.4, negation frowns with the `sad` preset at 0.45, both eased in and out with the same envelope as the head movement. A VRM has no eyebrow preset, so these whole-face presets are the closest available; each weight is kept small. Wh-questions keep only the head tilt. There is no lip sync and no mouth shapes for signs.
+
+### Model and licence
+
+The development model is the sample `VRM1_Constraint_Twist_Sample.vrm` of pixiv Inc. (from `github.com/pixiv/three-vrm`, 10,776,032 bytes). Its own metadata states author pixiv Inc., licence URL `https://vrm.dev/licenses/1.0/`, redistribution and modification allowed, credit notation unnecessary. Like the Mixamo model it is kept out of git (`frontend/public/avatar/` is ignored); replace the file with any VRM to change the character. This is a stand-in character, not a signer, and no clip is signer reviewed.

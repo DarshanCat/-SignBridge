@@ -26,7 +26,7 @@ const FORWARD = new Vector3(0, 0, 1);
 
 export interface Joint {
   clipBone: string; // our clip bone name, e.g. hand_l.index
-  bone: Bone;
+  bone: Object3D; // a Mixamo Bone or, for a VRM, a normalized humanoid bone node
   qc: Quaternion; // T-pose world rotation turned into the arms-down canonical pose
   fraction: number; // share of the clip rotation (finger curl is split over three joints)
   parentClip: string | null; // canonical parent (clip bone name), null for the canonical root
@@ -67,13 +67,27 @@ export function missingMixamoBones(root: Object3D): string[] {
 const worldPos = (b: Object3D) => b.getWorldPosition(new Vector3());
 const worldQuat = (b: Object3D) => b.getWorldQuaternion(new Quaternion());
 
+/** The bones that fix the arm direction and the palm normal of one side; any skeleton (Mixamo, VRM) can supply them. */
+export interface ArmBones {
+  arm: Object3D;
+  foreArm: Object3D;
+  hand: Object3D;
+  indexBase: Object3D;
+  middleBase: Object3D;
+  pinkyBase: Object3D;
+}
+
 /** Rotation that takes the T-pose arm to the arms-down pose with the palm facing forward, measured from the skeleton. */
 export function armsDownRotation(root: Object3D, side: "Left" | "Right"): Quaternion {
   const get = (n: string) => findBone(root, `${side}${n}`) as Bone;
-  const dir = worldPos(get("ForeArm")).sub(worldPos(get("Arm"))).normalize();
+  return armsDownFromBones({ arm: get("Arm"), foreArm: get("ForeArm"), hand: get("Hand"), indexBase: get("HandIndex1"), middleBase: get("HandMiddle1"), pinkyBase: get("HandPinky1") });
+}
+
+export function armsDownFromBones(b: ArmBones): Quaternion {
+  const dir = worldPos(b.foreArm).sub(worldPos(b.arm)).normalize();
   const down = new Quaternion().setFromUnitVectors(dir, REST_DOWN);
-  const f = worldPos(get("HandMiddle1")).sub(worldPos(get("Hand")));
-  const u = worldPos(get("HandPinky1")).sub(worldPos(get("HandIndex1")));
+  const f = worldPos(b.middleBase).sub(worldPos(b.hand));
+  const u = worldPos(b.pinkyBase).sub(worldPos(b.indexBase));
   const n = new Vector3().crossVectors(f, u).normalize();
   if (n.y > 0) n.negate(); // a Mixamo T-pose has the palms facing down
   n.applyQuaternion(down);
@@ -87,11 +101,27 @@ export function armsDownRotation(root: Object3D, side: "Left" | "Right"): Quater
 export function buildMixamoRig(root: Object3D): MixamoRig {
   const missing = missingMixamoBones(root);
   if (missing.length) throw new Error(`avatar skeleton is missing bones: ${missing.join(", ")}`);
+  return buildRigFromLookup(root, (n) => findBone(root, n) as Bone);
+}
+
+/**
+ * Build the rig from any skeleton. `lookup` returns the bone for a slot named like the Mixamo suffixes ("Spine2", "LeftArm", "LeftHandIndex1");
+ * a VRM supplies its normalized humanoid bones through the table in vrmRig.ts. The arms-down rest pose is derived from the bones it returns.
+ */
+export function buildRigFromLookup(root: Object3D, lookup: (slot: string) => Object3D): MixamoRig {
   root.updateMatrixWorld(true);
-  const D = { Left: armsDownRotation(root, "Left"), Right: armsDownRotation(root, "Right") };
+  const armBones = (side: "Left" | "Right"): ArmBones => ({
+    arm: lookup(`${side}Arm`),
+    foreArm: lookup(`${side}ForeArm`),
+    hand: lookup(`${side}Hand`),
+    indexBase: lookup(`${side}HandIndex1`),
+    middleBase: lookup(`${side}HandMiddle1`),
+    pinkyBase: lookup(`${side}HandPinky1`),
+  });
+  const D = { Left: armsDownFromBones(armBones("Left")), Right: armsDownFromBones(armBones("Right")) };
   const joints: Joint[] = [];
   const add = (clipBone: string, mixamo: string, parentClip: string | null, d: Quaternion | null, fraction = 1, rotateX = false) => {
-    const bone = findBone(root, mixamo) as Bone;
+    const bone = lookup(mixamo);
     const qc = (d ? d.clone() : new Quaternion()).multiply(worldQuat(bone));
     joints.push({ clipBone, bone, qc, fraction, parentClip, rotateX });
   };

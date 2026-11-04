@@ -230,7 +230,7 @@ export function EnglishToSignPanel({ backendUp }: { backendUp: boolean }) {
           </label>
         </div>
         <p className="mt-2 text-xs text-slate-500">Keyboard (when not typing): {shortcutHelp(["play", "replay"])}.</p>
-        <p className="mt-2 text-xs text-slate-500">Avatar model: {kind === "glb" ? "Mixamo model from /avatar/signer.glb (terms not yet confirmed)" : kind === "procedural" ? "built in procedural humanoid (no signer.glb found or usable)" : "loading the 3D model…"}.</p>
+        <p className="mt-2 text-xs text-slate-500">Avatar model: {kind === "vrm" ? "anime model (VRM) from /avatar/signer.vrm; the face, blinking and head markers are rule-based approximations, not signer reviewed" : kind === "glb" ? "Mixamo model from /avatar/signer.glb (terms not yet confirmed)" : kind === "procedural" ? "built in procedural humanoid (no signer.glb found or usable)" : "loading the 3D model…"}.</p>
         <button onClick={runRigTest} className="mt-3 text-xs text-slate-400 underline">
           Run rig self-test (a generic arm motion to check the avatar works; not a sign)
         </button>

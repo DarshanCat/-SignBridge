@@ -144,6 +144,12 @@ export class SequencePlayer {
     return withNmm(pose, this.nmm, this.elapsed, total);
   }
 
+  /** Non-manual marker state for the face: the tags, the playing time and the sentence length, or null when no sentence is playing. */
+  nmmState(): { tags: readonly string[]; t: number; total: number } | null {
+    if (this.status === "idle" || this.status === "finished" || !this.playlist.length || !this.nmm.length) return null;
+    return { tags: this.nmm, t: this.elapsed, total: this.playlist.reduce((acc, c) => acc + c.duration, 0) };
+  }
+
   snapshot(): PlayerSnapshot {
     return this.snap;
   }
