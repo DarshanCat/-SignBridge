@@ -1,2 +1,3 @@
 deploy/huggingface-space/*.sh text eol=lf
 tools/browser_path/*.sh text eol=lf
+scripts/hooks/* text eol=lf

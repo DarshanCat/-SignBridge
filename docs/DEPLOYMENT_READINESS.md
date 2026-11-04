@@ -47,6 +47,7 @@ audited via PyPI), and the `@mediapipe/holistic` npm package's bundled WASM.
 - Environment variables: `SIGNBRIDGE_CORS_ORIGINS`, `SIGNBRIDGE_MODEL_DIR`, `SIGNBRIDGE_ANIMATION_DIR`,
   `SIGNBRIDGE_TRANSLATION_CONFIG`, `SIGNBRIDGE_SIGN_REGISTRY`, `SIGNBRIDGE_MIN_CONFIDENCE`, `SIGNBRIDGE_MAX_BODY_BYTES`,
   `NEXT_PUBLIC_API_URL` (see `.env.example`).
+  `SIGNBRIDGE_UPSTREAM_URL` (web server only, read at run time): the backend that the web app's same-origin routes `/api/health`, `/api/model/status` and `/api/signs/recognize` forward to; when unset they use `NEXT_PUBLIC_API_URL`, and when neither is set (or the backend does not answer) they return an error (503 or 502) and never a result. Set it where the web server can reach the API but the browser's address differs, for example `http://api:8000` in Docker Compose.
 - Missing model: reported as `not_trained`; corrupt model: `error` with the detail in the log; missing vocabulary or
   registry: 503. All tested.
 
@@ -75,6 +76,7 @@ Files: `backend/Dockerfile`, `frontend/Dockerfile`, `docker-compose.yml`, `.dock
 | HTTPS | Required for `getUserMedia` on non-localhost origins; terminate TLS at the host or a proxy |
 | Frontend | The page is fully client-side, so it could also be exported as static files; the current build uses the Next standalone server |
 | Frontend to API | Set `NEXT_PUBLIC_API_URL` at build time and `SIGNBRIDGE_CORS_ORIGINS` to the exact web origin |
+| Web server to API | Set `SIGNBRIDGE_UPSTREAM_URL` (run time) when the server's address for the API differs from the browser's; the avatar routes read clip files from the web image's `public/animations`, so on a host that does not ship those files they report no clips |
 | Timeouts and latency | Requests are small (under 0.2 MB) and fast locally (Phase 9: median 57 ms for a 60-frame extract call on localhost); WAN latency unmeasured |
 | Asset hosting | Clips are small JSON files served by the web app; models are mounted volumes |
 | Cost / free tiers | Not researched. Check each provider's current limits for image size, RAM and sleeping policies before choosing |

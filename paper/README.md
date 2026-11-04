@@ -12,9 +12,9 @@ This redraws the figures (`figures\make_figures.py`, needs matplotlib, which the
 
 ## What is still open
 
-- Every `\pending{...}` in `main.tex` (red in the PDF) is a number or sentence that needs the three-seed runs (Tables IV, V and VI, the abstract, the results paragraph of Section VI, the conclusion, the last item of the test-split list). Search for `\pending` and `\todo`.
+- No `\pending` cell is left: the three-seed tables and sentences come from `docs/evaluation/three_seed_results.md` (script `tools/browser_path/three_seed.py`). Search for `\todo` for the rest.
 - Every entry of `refs.bib` is marked `[VERIFY]` in a comment: check title, authors, venue, year, pages and DOI of each one against the publisher page. Delete an entry, and the sentence that cites it, if it cannot be confirmed.
-- The author email and the acknowledgment are `\todo{...}` placeholders.
+- The author email, the acknowledgment and the repository visibility are `\todo{...}` placeholders. The body is 6 pages plus one page of references.
 
 ## Where the numbers come from
 
@@ -28,6 +28,7 @@ All numbers are from `docs/evaluation/`; nothing was estimated.
 | Vertical scale sweep, noise and dropout (Fig. 2, Table III) | `BROWSER_PATH.md`, `browser_path_validation_sweep.json` |
 | Signer size in the picture (Fig. 3, Section VII) | `BROWSER_PATH.md` (framing section) |
 | Segmentation figures in the case study | `SEGMENTATION.md` |
+| Three-seed table, differences and trade-off cells (Table IV, Table V) | `three_seed_results.md`, `three_seed_deltas.json`, `three_seed_summary.json` (script `tools/browser_path/three_seed.py`) |
 | Padding test (Table III, Section V-A), validation only | `padding_test_val.json`, `padding_test_val.md` (script `tools/browser_path/padding_test.py`, `padding_stats.py`) |
 | Per-sign loss, hand range correlation and calibration (Sections V-A and VI), validation only | `persign_calibration_val.json` (script `tools/browser_path/persign_calibration.py`) |
 | Pipeline figure (Fig. 1) | no data; drawn by `figures/make_figures.py` |

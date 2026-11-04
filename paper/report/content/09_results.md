@@ -1,6 +1,6 @@
 # Results
 
-All numbers in this chapter come from `docs/evaluation` and are on the authors' predefined split of INCLUDE, signer independence not verified. Numbers that need the three-seed runs are marked {{PENDING}} in red; they are filled automatically when the file `docs/evaluation/three_seed_summary.json` exists and the report is rebuilt.
+All numbers in this chapter come from `docs/evaluation` and are on the authors' predefined split of INCLUDE, signer independence not verified. The three-seed numbers are read at each build from `docs/evaluation/three_seed_summary.json`, which `tools/browser_path/three_seed.py` writes from the per-video result files.
 
 ## Model comparison
 
@@ -55,7 +55,7 @@ Table: The 1D CNN on 100 test videos at threshold 0.7. {#tab:bvo}
 
 The results lead to four findings. In native 16:9 the browser path is within noise of the offline path (0.78 against 0.82; 6 videos lost and 2 gained, exact McNemar p = 0.29). In 4:3 the loss is large (0.65; 22 videos lost and 5 gained, p = 0.002) and wrong answers increase from 0.03 to 0.07. On identical frames the browser is 3 to 5 points below Python MediaPipe, which is not significant at this sample size, so the extractor is a minor contributor and the picture is the major one. Without the vertical rescale, 4:3 input gives 0.07 accuracy with 29 percent confident wrong answers: the model fails by answering wrongly, not by hesitating. A 16:9 picture resized to 640 x 360 gives 0.80 and a centre crop of the 16:9 frame to 4:3 (a webcam-like fill) with the rescale gives 0.76.
 
-The loss that remains in 4:3 after the exact rescale (0.65 against 0.78 in 16:9 on the test videos, 0.58 against 0.75 on the validation videos) is **not explained** by anything that was measured. It is not a vertical scale error, because the rescale is exact. It is not signer size, because letterboxing keeps the picture width. It is not resolution, because the smaller 16:9 picture scores 0.80. A possible cause is that the black padding of the letterbox disturbs MediaPipe; this is an **untested hypothesis**, and a padded 16:9 picture and an unpadded 4:3 crop of identical content would test it.
+The loss that remains in 4:3 after the exact rescale (0.65 against 0.78 in 16:9 on the test videos, 0.58 against 0.75 on the validation videos) is **not explained** by vertical scale, signer size or resolution. It is not a vertical scale error, because the rescale is exact. It is not signer size, because letterboxing keeps the picture width. It is not resolution, because the smaller 16:9 picture scores 0.80. A padding test on the 100 validation videos (Python MediaPipe, baseline CNN, threshold 0.7) points to the black bars of the letterbox: black bars give 0.59, the same picture with the bars filled by replicated edge pixels gives 0.73 (exact McNemar test against the black bars, p = 0.007), a native 16:9 picture gives 0.77 and a 16:9 picture of the same 640 by 360 resolution gives 0.72. An unpadded 4:3 centre crop scores 0.68 but enlarges the signer and cuts the sides, so it cannot separate those factors from padding. The test used Python landmarks only, and a real 4:3 webcam has no bars, so the loss on real cameras is unmeasured (`docs/evaluation/padding_test_val.md`).
 
 ### Vertical scale, noise and hand dropout
 
@@ -111,7 +111,19 @@ Table: Three-seed summary, mean and spread over seeds 0, 1 and 2, accuracy at th
 | Wrong-accepted rate, browser 16:9 | {{3s:cnn_base.wrong_accepted}} | {{3s:cnn_aug.wrong_accepted}} | {{3s:bigru_base.wrong_accepted}} | {{3s:bigru_aug.wrong_accepted}} | {{3s:transformer_base.wrong_accepted}} | {{3s:transformer_aug.wrong_accepted}} |
 | Validation-chosen threshold | {{3s:cnn_base.threshold}} | {{3s:cnn_aug.threshold}} | {{3s:bigru_base.threshold}} | {{3s:bigru_aug.threshold}} | {{3s:transformer_base.threshold}} | {{3s:transformer_aug.threshold}} |
 
-The interpretation of the three-seed numbers is pending. Two points can already be stated. The augmentation cannot be expected to close the loss that remains in 4:3 after the exact rescale, because that loss is explained neither by vertical scale nor by signer size nor by resolution. And augmentation changes how confident a model is, so the validation-chosen threshold can differ between baseline and augmented models; the threshold column of the table reports it per model.
+The effect of the augmentation is the difference between each augmented model and the baseline of the same seed, with a 95 percent t-interval over the three differences ([[tab:threeseeddelta]]). Three seeds give wide intervals, so an interval that contains zero is read as no clear change.
+
+Table: Augmented minus baseline accuracy at each model's validation-chosen threshold, 312 test videos, mean and 95 percent t-interval over three seeds (authors' predefined split, signer independence not verified). {#tab:threeseeddelta}
+| Condition | CNN | BiGRU | Transformer |
+|---|---|---|---|
+| Offline features | {{3s:delta.cnn.offline.acc}} | {{3s:delta.bigru.offline.acc}} | {{3s:delta.transformer.offline.acc}} |
+| Browser, 16:9 | {{3s:delta.cnn.br16x9.acc}} | {{3s:delta.bigru.br16x9.acc}} | {{3s:delta.transformer.br16x9.acc}} |
+| Browser, 4:3 with rescale | {{3s:delta.cnn.br4x3.acc}} | {{3s:delta.bigru.br4x3.acc}} | {{3s:delta.transformer.br4x3.acc}} |
+| Browser, 4:3 raw | {{3s:delta.cnn.br4x3_raw.acc}} | {{3s:delta.bigru.br4x3_raw.acc}} | {{3s:delta.transformer.br4x3_raw.acc}} |
+| Wrong-accepted rate, browser 16:9 | {{3s:delta.cnn.br16x9.wa}} | {{3s:delta.bigru.br16x9.wa}} | {{3s:delta.transformer.br16x9.wa}} |
+| Change of the 16:9 minus 4:3 gap | {{3s:delta.cnn.gapchange}} | {{3s:delta.bigru.gapchange}} | {{3s:delta.transformer.gapchange}} |
+
+The augmentation clearly helps in one case, the one it was designed for: for the CNN it lifts the accuracy on the unrescaled 4:3 picture from {{3s:cnn_base.br4x3_raw}} to {{3s:cnn_aug.br4x3_raw}} (change {{3s:delta.cnn.br4x3_raw.acc}}). In every other accuracy cell the interval contains zero: there is no clear change offline, in 16:9 or in rescaled 4:3 for any of the three architectures, and no clear regression either, although the spread between seeds is large. Without a threshold, the BiGRU's top-1 accuracy on the unrescaled picture rises by {{3s:delta.bigru.br4x3_raw.top1}}. The gap between 16:9 and rescaled 4:3 does not change clearly, as expected, because the augmentation does not address black padding. The augmented CNN on the unrescaled picture ({{3s:cnn_aug.br4x3_raw}}) still scores below the baseline CNN on the rescaled picture ({{3s:cnn_base.br4x3}}), so the augmentation does not replace the rescale. The CNN is the best architecture in every condition. The validation-chosen threshold differs between models (the threshold row of the first table), and it is 0.95 for all six Transformer models, which lowers their thresholded accuracy. The perturbation sweeps were run for seed 0 only and are not interpreted here.
 
 ## Segmentation
 

@@ -15,4 +15,7 @@ services:
       dockerfile: frontend/Dockerfile
       args: { NEXT_PUBLIC_API_URL: "http://localhost:8000" }
     depends_on: [api]
+    environment:
+      # where the web server (not the browser) reaches the API; used by /api/health, /api/model/status and /api/signs/recognize
+      SIGNBRIDGE_UPSTREAM_URL: "http://api:8000"
     ports: ["3000:3000"]

@@ -81,4 +81,4 @@ python paper\report\make_charts.py       # charts from docs/evaluation and the s
 python paper\report\build_report.py      # the Word file; Word is used to update the table of contents and to count pages
 ```
 
-When the three-seed runs are complete, a summary file `docs/evaluation/three_seed_summary.json` with the keys used in the three-seed table fills the pending cells at the next build.
+The summary file `docs/evaluation/three_seed_summary.json`, written by `tools/browser_path/three_seed.py`, holds the keys used in the three-seed tables (`model.condition` for the means, `delta.architecture.condition.metric` for the differences) and fills them at each build.

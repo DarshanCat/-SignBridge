@@ -11,6 +11,7 @@ RUN pip install --no-cache-dir -r requirements.txt -r requirements-nlp.txt \
 
 COPY backend/app ./app
 COPY backend/nlp ./nlp
+COPY backend/retarget ./retarget
 COPY backend/config ./config
 RUN useradd --create-home --uid 10001 signbridge && mkdir -p /srv/backend/models /srv/animations && chown -R signbridge /srv
 USER signbridge

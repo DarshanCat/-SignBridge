@@ -30,7 +30,7 @@ for _name in ("browser_path_rows.json", "browser_path_validation_sweep.json", "B
         raise SystemExit(f"missing input {EVAL / _name}")
 plt.rcParams.update({"font.size": 8, "axes.titlesize": 8, "axes.labelsize": 8, "legend.fontsize": 7, "xtick.labelsize": 7, "ytick.labelsize": 7,
                      "pdf.fonttype": 42, "ps.fonttype": 42, "axes.spines.top": False, "axes.spines.right": False})
-W, H = 3.4, 2.35  # inches, one IEEE column
+W, H = 3.4, 2.05  # inches, one IEEE column
 BLUE, RED, GREY, GREEN = "#1f5fa8", "#c0392b", "#7f8c8d", "#2e8b57"
 
 
@@ -125,7 +125,7 @@ def pipeline():
     """Compact flow of Section IV: what runs in the browser and what runs on the server."""
     from matplotlib.patches import FancyBboxPatch
 
-    fig, ax = plt.subplots(figsize=(W, 2.0))
+    fig, ax = plt.subplots(figsize=(W, 1.8))
     ax.set_xlim(0, 10)
     ax.set_ylim(0, 6.2)
     ax.axis("off")
