@@ -1,7 +1,6 @@
 "use client";
 import { cameraBoxStyle, FramingGuide } from "./CameraFrame";
 import { Camera, CameraOff, Eraser, Pause, Play, RotateCcw, Send, Undo2 } from "lucide-react";
-import dynamic from "next/dynamic";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { apiPost, type AvatarPlan, type TextToGloss } from "@/lib/api";
 import { SequencePlayer } from "@/lib/avatar/player";
@@ -12,15 +11,12 @@ import { shortcutHelp } from "@/lib/shortcuts";
 import { CaptureHints } from "./CaptureHints";
 import type { LandmarkCapture } from "./useLandmarkCapture";
 import { useContinuousSigning } from "./useContinuousSigning";
+import { AvatarStage, StageBadge, StageCaption } from "./ui/AvatarStage";
+import type { AvatarKind } from "./avatar/GlbHumanoid";
 import { useShortcuts } from "./useShortcuts";
 
-const AvatarViewer = dynamic(() => import("./avatar/AvatarViewer"), {
-  ssr: false,
-  loading: () => <p className="flex h-full items-center justify-center text-sm text-slate-400">Loading 3D scene…</p>,
-});
-
 const AUTO_SEND_MS = 3000;
-const btn = "inline-flex min-h-11 items-center gap-2 rounded-lg bg-white/10 px-3 py-2 text-sm disabled:opacity-40";
+const btn = "btn btn-sm";
 
 /**
  * One screen for both directions. The deaf user signs in front of the camera: recognized signs build a sentence that is sent as a message.
@@ -39,7 +35,8 @@ export function ConversationPanel({ capture, backendUp }: { capture: LandmarkCap
   const [typedError, setTypedError] = useState<string | null>(null);
   const [autoSend, setAutoSend] = useState(false);
   const nextId = useRef(1);
-  const [last, setLast] = useState<{ clips: SignClip[]; nmm: string[] } | null>(null);
+  const [last, setLast] = useState<{ clips: SignClip[]; nmm: string[]; text: string } | null>(null);
+  const [avatarKind, setAvatarKind] = useState<AvatarKind | null>(null);
   const logEnd = useRef<HTMLDivElement>(null);
 
   useEffect(() => () => player.dispose(), [player]);
@@ -82,7 +79,7 @@ export function ConversationPanel({ capture, backendUp }: { capture: LandmarkCap
       nextId.current += 1;
       setLog((l) => appendMessage(l, m));
       setText("");
-      setLast({ clips: out.clips, nmm: out.gloss.nmm });
+      setLast({ clips: out.clips, nmm: out.gloss.nmm, text: input });
       player.load(out.clips);
       player.setNmm(out.gloss.nmm);
       if (out.clips.length) player.play();
@@ -116,21 +113,56 @@ export function ConversationPanel({ capture, backendUp }: { capture: LandmarkCap
   const modelMissing = live.channel.kind === "model_not_trained";
   const channelDown = running && live.channel.kind === "unavailable";
 
+  const reviewNote = " · clip not signer-reviewed";
+  const progress = snap.total ? (snap.index + (snap.status === "playing" || snap.status === "paused" ? 0.5 : 0)) / snap.total : 0;
+  const lastText = last?.text ? `“${last.text}”` : undefined;
+  const captionNode =
+    snap.status === "playing" || snap.status === "paused" ? (
+      <StageCaption gloss={snap.gloss} sentence={lastText} detail={`${snap.status === "paused" ? "Paused at" : "Signing"} ${snap.index + 1} of ${snap.total}${reviewNote}`} progress={progress} />
+    ) : snap.status === "finished" ? (
+      <StageCaption sentence={lastText} detail="Finished." progress={1} done />
+    ) : (
+      <StageCaption detail="Type a message to see it signed." />
+    );
+
   return (
-    <section className="space-y-4" aria-label="Conversation">
-      <div className="grid gap-4 lg:grid-cols-2">
-        <div className="space-y-4">
-          <div className="rounded-xl border border-white/10 bg-panel p-4">
-            <h2 className="text-lg font-semibold">Conversation</h2>
-            <div role="log" aria-live="polite" aria-label="Messages" className="mt-3 max-h-80 min-h-40 space-y-2 overflow-y-auto rounded-lg bg-black/30 p-3">
-              {log.length === 0 && <p className="text-sm text-slate-400">No messages yet. Sign to the camera, or type a message below.</p>}
+    <section className="grid gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]" aria-label="Conversation">
+      <div className="space-y-4 lg:sticky lg:top-4 lg:self-start">
+        <h2 className="eyebrow">Avatar (signs typed messages)</h2>
+        <AvatarStage
+          player={player}
+          onKind={setAvatarKind}
+          badges={
+            <>
+              <StageBadge>{avatarKind === "vrm" ? "Avatar: anime (VRM)" : avatarKind === "glb" ? "Avatar: Mixamo model" : avatarKind === "procedural" ? "Avatar: built-in figure" : "Avatar: loading"}</StageBadge>
+              <StageBadge tone="warn">Clip not signer-reviewed</StageBadge>
+            </>
+          }
+          caption={captionNode}
+        />
+        <div className="flex flex-wrap items-center gap-3" role="group" aria-label="Playback">
+          <button className="btn btn-primary" onClick={playPause} disabled={!snap.total && !last}>
+            {snap.status === "playing" ? <Pause size={18} aria-hidden /> : <Play size={18} aria-hidden />} {snap.status === "playing" ? "Pause" : "Play"}
+          </button>
+          <button className="btn" onClick={replayLast} disabled={!last?.clips.length}>
+            <RotateCcw size={18} aria-hidden /> Replay
+          </button>
+        </div>
+        <p className="text-sm font-semibold text-ink2">Keyboard (when not typing): {shortcutHelp(["send", "undo", "clear", "play", "replay"])}.</p>
+      </div>
+
+      <div className="space-y-4">
+        <div className="card">
+            <h2 className="card-title">Conversation</h2>
+            <div role="log" aria-live="polite" aria-label="Messages" className="mt-3 max-h-80 min-h-40 space-y-2 overflow-y-auto rounded-2xl bg-surface2 p-3">
+              {log.length === 0 && <p className="text-sm text-ink2">No messages yet. Sign to the camera, or type a message below.</p>}
               {log.map((m) => (
                 <div key={m.id} className={`flex ${m.from === "signer" ? "justify-start" : "justify-end"}`}>
-                  <div className={`max-w-[85%] rounded-lg px-3 py-2 text-sm ${m.from === "signer" ? "bg-sky-400/20 text-sky-50" : "bg-emerald-400/20 text-emerald-50"}`}>
-                    <p className="text-[11px] uppercase tracking-wide text-slate-300">{m.from === "signer" ? "Signed" : "Typed, signed by the avatar"}</p>
+                  <div className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm ${m.from === "signer" ? "bg-infobg text-infofg" : "bg-goodbg text-goodfg"}`}>
+                    <p className="text-[11px] uppercase tracking-wide text-ink2">{m.from === "signer" ? "Signed" : "Typed, signed by the avatar"}</p>
                     <p className="mt-0.5 break-words text-base">{m.text}</p>
-                    <p className="mt-1 break-words text-xs text-slate-300">Gloss: {m.gloss.join(" ") || "none"}</p>
-                    {m.from === "typist" && <p className={`text-xs ${m.notSigned.length ? "text-amber-200" : "text-slate-300"}`}>{signingSummary(m)}</p>}
+                    <p className="mt-1 break-words text-sm text-ink2">Gloss: {m.gloss.join(" ") || "none"}</p>
+                    {m.from === "typist" && <p className={`text-sm ${m.notSigned.length ? "text-warnfg" : "text-ink2"}`}>{signingSummary(m)}</p>}
                   </div>
                 </div>
               ))}
@@ -153,70 +185,70 @@ export function ConversationPanel({ capture, backendUp }: { capture: LandmarkCap
                 onChange={(e) => setText(e.target.value)}
                 maxLength={MAX_TYPED_LENGTH}
                 placeholder="Type a message for the avatar to sign"
-                className="min-h-11 flex-1 rounded-lg border border-white/10 bg-ink px-3 py-2 text-base"
+                className="input flex-1"
               />
-              <button type="submit" disabled={!backendUp || !!busy || !text.trim()} className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-ink disabled:opacity-50">
+              <button type="submit" disabled={!backendUp || !!busy || !text.trim()} className="btn btn-primary">
                 <Send size={16} aria-hidden /> {busy ? `${busy}…` : "Send"}
               </button>
             </form>
-            <div className="mt-2 flex flex-wrap items-center gap-1.5 text-xs text-slate-400">
-              <span className="text-slate-500">Quick signs:</span>
+            <div className="mt-2 flex flex-wrap items-center gap-1.5 text-sm text-ink2">
+              <span className="text-ink2">Quick signs:</span>
               {["hello", "doctor", "hospital", "book", "bed", "clean"].map((word) => (
                 <button
                   key={word}
                   type="button"
                   onClick={() => setText(word)}
-                  className="rounded bg-white/5 hover:bg-white/10 px-2 py-0.5 text-sky-300 border border-white/5 transition"
+                  className="chip min-h-11"
                 >
                   {word}
                 </button>
               ))}
             </div>
             {typedError && (
-              <p role="alert" className="mt-2 rounded-lg bg-rose-500/15 p-2 text-sm text-rose-200">
+              <p role="alert" className="mt-2 notice notice-bad">
                 {typedError}
               </p>
             )}
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-panel p-4">
+        <div className="card">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-300">Signing (deaf user)</h3>
+              <h3 className="eyebrow">Signing (deaf user)</h3>
               <button onClick={running ? stop : start} disabled={state === "starting"} className={btn}>
                 {running ? <CameraOff size={16} aria-hidden /> : <Camera size={16} aria-hidden />}
                 {state === "starting" ? "Starting…" : running ? "Stop camera" : "Start camera"}
               </button>
             </div>
-            <div className="relative mt-3 overflow-hidden rounded-lg bg-black/60" style={cameraBoxStyle(capture.resolution)}>
+            <div className="relative mx-auto mt-3 max-w-3xl overflow-hidden rounded-3xl border border-edge/50 bg-cam text-camfg" style={cameraBoxStyle(capture.resolution)}>
               <video ref={videoRef} playsInline muted className="h-full w-full object-cover" aria-label="Webcam preview" />
               <canvas ref={canvasRef} width={capture.resolution?.width ?? 640} height={capture.resolution?.height ?? 480} className="pointer-events-none absolute inset-0 h-full w-full" />
               <FramingGuide capture={capture} />
-              {!running && <p className="absolute inset-0 flex items-center justify-center p-4 text-center text-sm text-slate-400">{state === "starting" ? "Waiting for camera…" : "Camera is off. Video stays in your browser; only landmarks are sent."}</p>}
+              {!running && <p className="absolute inset-0 flex items-center justify-center p-4 text-center text-sm text-camfg">{state === "starting" ? "Waiting for camera…" : "Camera is off. Video stays in your browser; only landmarks are sent."}</p>}
             </div>
             <CaptureHints capture={capture} />
             {cameraError && (
-              <p role="alert" className="mt-2 rounded-lg bg-rose-500/15 p-3 text-sm text-rose-200">
+              <p role="alert" className="mt-2 notice notice-bad">
                 {cameraError}
               </p>
             )}
-            {modelMissing && <p className="mt-2 rounded-lg bg-amber-400/15 p-3 text-sm text-amber-200">Model not trained: signs cannot be recognized. Typed messages still work.</p>}
-            {channelDown && <p className="mt-2 rounded-lg bg-amber-400/15 p-3 text-sm text-amber-200">{live.channel.kind === "unavailable" ? live.channel.message : ""} The live recognition channel is down; is the backend running?</p>}
-            {live.error && <p className="mt-2 text-sm text-rose-300">{live.error}</p>}
+            {modelMissing && <p className="mt-2 notice notice-warn">Model not trained: signs cannot be recognized. Typed messages still work.</p>}
+            {channelDown && <p className="mt-2 notice notice-warn">{live.channel.kind === "unavailable" ? live.channel.message : ""} The live recognition channel is down; is the backend running?</p>}
+            {live.error && <p className="mt-2 text-sm text-badfg">{live.error}</p>}
 
             {live.ready && (
               <div className="mt-3 space-y-2" aria-live="polite">
-                <p className={`text-sm ${live.signing ? "text-emerald-300" : "text-slate-300"}`}>{live.signing ? "Signing…" : "Resting. Sign now, then lower your hands between signs."}</p>
+                <p className={`text-sm ${live.signing ? "text-goodfg" : "text-ink2"}`}>{live.signing ? "Signing…" : "Resting. Sign now, then lower your hands between signs."}</p>
                 <div className="flex flex-wrap gap-2">
                   {live.sequence.map((g, i) => (
-                    <span key={`${g}-${i}`} className="rounded bg-sky-400/20 px-2 py-0.5 text-xs text-sky-200">
+                    <span key={`${g}-${i}`} className="tag tag-info !px-3 !py-1 !text-sm">
                       {g}
                     </span>
                   ))}
-                  {live.sequence.length === 0 && <span className="text-xs text-slate-500">No signs yet.</span>}
+                  {live.sequence.length === 0 && <span className="text-sm text-ink2">No signs yet.</span>}
                 </div>
                 {sentence && <p className="text-base font-medium">{sentence}</p>}
                 <div className="flex flex-wrap gap-2">
-                  <button className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-accent px-3 py-2 text-sm font-medium text-ink disabled:opacity-40" onClick={sendSigned} disabled={!canSendSigned}>
+                  <button className="btn btn-primary" onClick={sendSigned} disabled={!canSendSigned}>
                     <Send size={16} aria-hidden /> Send signed sentence
                   </button>
                   <button className={btn} onClick={live.undo} disabled={!live.sequence.length}>
@@ -226,14 +258,14 @@ export function ConversationPanel({ capture, backendUp }: { capture: LandmarkCap
                     <Eraser size={16} aria-hidden /> Clear
                   </button>
                 </div>
-                <label className="flex items-center gap-2 text-xs text-slate-300">
+                <label className="flex items-center gap-2 text-sm text-ink2">
                   <input type="checkbox" checked={autoSend} onChange={(e) => setAutoSend(e.target.checked)} />
                   Send automatically after {AUTO_SEND_MS / 1000} s of rest
                 </label>
                 {live.log.length > 0 && (
-                  <ul className="text-xs text-slate-400" aria-label="Recent signs">
+                  <ul className="text-sm text-ink2" aria-label="Recent signs">
                     {live.log.map((e) => (
-                      <li key={e.id} className={e.accepted ? "text-slate-300" : "text-amber-300"}>
+                      <li key={e.id} className={e.accepted ? "text-ink2" : "text-warnfg"}>
                         {e.text}
                       </li>
                     ))}
@@ -242,29 +274,6 @@ export function ConversationPanel({ capture, backendUp }: { capture: LandmarkCap
               </div>
             )}
           </div>
-        </div>
-
-        <div className="rounded-xl border border-white/10 bg-panel p-4 lg:sticky lg:top-4 lg:self-start">
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-300">Avatar (signs typed messages)</h3>
-          <div className="mt-3 aspect-[4/3] overflow-hidden rounded-lg bg-black/60">
-            <AvatarViewer player={player} onKind={() => {}} />
-          </div>
-          <p aria-live="polite" className="mt-2 min-h-5 text-sm text-slate-300">
-            {snap.status === "playing" && `Signing ${snap.gloss} (${snap.index + 1} of ${snap.total}), clip not signer-reviewed`}
-            {snap.status === "paused" && `Paused at ${snap.gloss}`}
-            {snap.status === "finished" && "Finished."}
-            {snap.status === "idle" && "Type a message to see it signed."}
-          </p>
-          <div className="mt-2 flex flex-wrap gap-2">
-            <button className={btn} onClick={playPause} disabled={!snap.total && !last}>
-              {snap.status === "playing" ? <Pause size={16} aria-hidden /> : <Play size={16} aria-hidden />} {snap.status === "playing" ? "Pause" : "Play"}
-            </button>
-            <button className={btn} onClick={replayLast} disabled={!last?.clips.length}>
-              <RotateCcw size={16} aria-hidden /> Replay
-            </button>
-          </div>
-          <p className="mt-3 text-xs text-slate-500">Keyboard (when not typing): {shortcutHelp(["send", "undo", "clear", "play", "replay"])}.</p>
-        </div>
       </div>
     </section>
   );

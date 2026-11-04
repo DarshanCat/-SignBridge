@@ -7,6 +7,7 @@ import { clone } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { PoseSmoother, withRelaxedRest } from "@/lib/avatar/idle";
 import { applyMixamoPose, buildMixamoRig } from "@/lib/avatar/mixamo";
 import type { SequencePlayer } from "@/lib/avatar/player";
+import { useReducedMotion } from "./useReducedMotion";
 import { Humanoid } from "./Humanoid";
 import { VrmModel } from "./VrmHumanoid";
 
@@ -20,6 +21,7 @@ function GlbModel({ player, onKind }: { player: SequencePlayer; onKind?: (k: Ava
   const rig = useMemo(() => buildMixamoRig(model), [model]);
 
   const smoother = useMemo(() => new PoseSmoother(), []);
+  const calm = useReducedMotion();
 
   useEffect(() => {
     model.traverse((o) => {
@@ -42,7 +44,7 @@ function GlbModel({ player, onKind }: { player: SequencePlayer; onKind?: (k: Ava
   useFrame((state, delta) => {
     const dt = Math.min(delta, 0.1);
     player.tick(dt);
-    const target = withRelaxedRest(player.pose(), state.clock.elapsedTime);
+    const target = withRelaxedRest(player.pose(), state.clock.elapsedTime, calm);
     const smooth = smoother.step(target.pose, target.spread, dt);
     applyMixamoPose(rig, smooth.pose, smooth.spread);
   });

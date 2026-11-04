@@ -31,13 +31,22 @@ interface LogEntry {
  * Two modes: one isolated sign per button press, or continuous signing where the server finds the start and end of every sign
  * (hands down or still between signs) and the sentence builds up by itself. Only landmarks are sent, never video.
  */
+/** What the recognizer has understood so far (shown as a caption next to the avatar). */
+export interface Heard {
+  sequence: string[];
+  english: string | null;
+  signing: boolean;
+}
+
 export function PredictionPanel({
   running,
   runId,
   bufferFrames,
   getBuffer,
   setFrameListener,
+  onHeard,
 }: {
+  onHeard?: (h: Heard) => void;
   running: boolean;
   runId: number;
   bufferFrames: number;
@@ -111,8 +120,14 @@ export function PredictionPanel({
   const shown = running && result && result.runId === runId ? result.value : null;
   const err = running && problem && problem.runId === runId ? problem.message : null;
   const st = running && stream && stream.runId === runId ? stream.value : null;
+  const heardSequence = st?.sequence;
+  const heardEnglish = st?.english ?? null;
+  const heardSigning = !!st?.active;
+  useEffect(() => {
+    onHeard?.({ sequence: heardSequence ?? [], english: heardEnglish, signing: heardSigning });
+  }, [heardSequence, heardEnglish, heardSigning, onHeard]);
   const pct = Math.min(100, Math.round((bufferFrames / BUFFER_FRAMES) * 100));
-  const btn = "inline-flex items-center gap-2 rounded-lg bg-white/10 px-3 py-2 text-sm disabled:opacity-40";
+  const btn = "btn btn-sm";
 
   useShortcuts({
     undo: ready && continuous && st?.sequence.length ? () => client.current?.undo() : undefined,
@@ -133,37 +148,37 @@ export function PredictionPanel({
   }
 
   return (
-    <div className="mt-4 rounded-lg border border-white/10 p-3" aria-label="Live prediction">
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-300">Live prediction</h3>
+    <div className="mt-4 rounded-2xl border border-line p-3" aria-label="Live prediction">
+      <h3 className="eyebrow">Live prediction</h3>
       <div className="mt-2" aria-label="Landmark buffer">
-        <div className="flex justify-between text-xs text-slate-400">
+        <div className="flex justify-between text-sm text-ink2">
           <span>Landmark buffer</span>
           <span>
             {bufferFrames} / {BUFFER_FRAMES} frames
           </span>
         </div>
-        <div className="mt-1 h-2 overflow-hidden rounded bg-white/10" role="progressbar" aria-valuemin={0} aria-valuemax={BUFFER_FRAMES} aria-valuenow={bufferFrames}>
-          <div className="h-full bg-accent" style={{ width: `${pct}%` }} />
+        <div className="mt-1 h-2 overflow-hidden rounded-full bg-soft" role="progressbar" aria-label="Landmark buffer" aria-valuemin={0} aria-valuemax={BUFFER_FRAMES} aria-valuenow={bufferFrames}>
+          <div className="h-full rounded-full bg-accent" style={{ width: `${pct}%` }} />
         </div>
       </div>
 
-      <div aria-live="polite" className="mt-3 rounded-lg bg-white/5 p-3 text-sm">
-        {current.kind === "idle" && <p className="text-slate-400">Start the camera to open the live prediction channel.</p>}
-        {current.kind === "connecting" && <p className="text-slate-400">Connecting to the live prediction channel…</p>}
+      <div aria-live="polite" className="mt-3 rounded-2xl bg-surface2 p-3 text-sm">
+        {current.kind === "idle" && <p className="text-ink2">Start the camera to open the live prediction channel.</p>}
+        {current.kind === "connecting" && <p className="text-ink2">Connecting to the live prediction channel…</p>}
         {current.kind === "model_not_trained" && (
           <>
-            <p className="font-semibold text-amber-300">Model not trained</p>
-            <p className="mt-1 text-xs text-slate-300">{current.message} Landmarks are buffered locally only; no sign, gloss, confidence score or English text is produced.</p>
+            <p className="font-semibold text-warnfg">Model not trained</p>
+            <p className="mt-1 text-sm text-ink2">{current.message} Landmarks are buffered locally only; no sign, gloss, confidence score or English text is produced.</p>
           </>
         )}
-        {current.kind === "not_implemented" && <p className="font-semibold text-amber-300">{current.message}</p>}
+        {current.kind === "not_implemented" && <p className="font-semibold text-warnfg">{current.message}</p>}
         {current.kind === "unavailable" && (
-          <p className="text-amber-300">
+          <p className="text-warnfg">
             {current.message} Is the backend running? Start it with scripts\serve.ps1, then stop and start the camera.
           </p>
         )}
         {current.kind === "ready" && (
-          <p className="text-xs text-slate-400">
+          <p className="text-sm text-ink2">
             Model ready: {current.classes} classes ({current.architecture}). Signs below {Math.round(current.threshold * 100)}% confidence are shown as
             unrecognized (threshold from {current.thresholdSource === "validation" ? "the validation split" : "the default setting"}).
           </p>
@@ -176,7 +191,7 @@ export function PredictionPanel({
             <input type="checkbox" checked={continuous} onChange={(e) => setContinuous(e.target.checked)} className="mt-1" />
             <span>
               Continuous signing
-              <span className="block text-xs text-slate-400">
+              <span className="block text-sm text-ink2">
                 The server detects each sign from your hand movement. Lower your hands (or hold them still) between signs. Signs signed back to
                 back without a pause cannot be separated.
               </span>
@@ -185,16 +200,16 @@ export function PredictionPanel({
 
           {continuous ? (
             <div className="space-y-2" aria-live="polite">
-              <p className={`text-sm ${st?.active ? "text-emerald-300" : "text-slate-300"}`}>
+              <p className={`text-sm ${st?.active ? "text-goodfg" : "text-ink2"}`}>
                 {st?.active ? "Signing…" : "Resting. Sign now, then lower your hands."}
               </p>
               <div className="flex flex-wrap gap-2">
                 {(st?.sequence ?? []).map((g, i) => (
-                  <span key={`${g}-${i}`} className="rounded bg-sky-400/20 px-2 py-0.5 text-xs text-sky-200">
+                  <span key={`${g}-${i}`} className="tag tag-info !px-3 !py-1 !text-sm">
                     {g}
                   </span>
                 ))}
-                {!st?.sequence.length && <span className="text-xs text-slate-500">No signs yet.</span>}
+                {!st?.sequence.length && <span className="text-sm text-ink2">No signs yet.</span>}
               </div>
               {st?.english && <p className="text-base font-medium">{st.english}</p>}
               <div className="flex flex-wrap gap-2">
@@ -206,9 +221,9 @@ export function PredictionPanel({
                 </button>
               </div>
               {log.length > 0 && (
-                <ul className="text-xs text-slate-400" aria-label="Recent signs">
+                <ul className="text-sm text-ink2" aria-label="Recent signs">
                   {log.map((e) => (
-                    <li key={e.id} className={e.accepted ? "text-slate-300" : "text-amber-300"}>
+                    <li key={e.id} className={e.accepted ? "text-ink2" : "text-warnfg"}>
                       {e.text}
                     </li>
                   ))}
@@ -221,7 +236,7 @@ export function PredictionPanel({
                 <button
                   onClick={recognize}
                   disabled={bufferFrames === 0 || waiting}
-                  className="inline-flex items-center gap-2 rounded-lg bg-accent px-3 py-2 text-sm font-medium text-ink disabled:opacity-40"
+                  className="btn btn-primary"
                 >
                   <ScanSearch size={16} aria-hidden /> {waiting ? "Recognizing…" : "Recognize sign"}
                 </button>
@@ -229,19 +244,19 @@ export function PredictionPanel({
                   <Eraser size={16} aria-hidden /> Clear sentence
                 </button>
               </div>
-              <p className="text-xs text-slate-400">Recognizes one isolated sign from the last ~2 seconds of landmarks.</p>
+              <p className="text-sm text-ink2">Recognizes one isolated sign from the last ~2 seconds of landmarks.</p>
               {shown && (
                 <div aria-live="polite" className="space-y-1 text-sm">
                   {shown.accepted ? (
-                    <p className="text-emerald-300">
+                    <p className="text-goodfg">
                       {shown.label} ({(shown.confidence * 100).toFixed(1)}%) as gloss {shown.gloss}
                     </p>
                   ) : (
-                    <p className="text-amber-300">
+                    <p className="text-warnfg">
                       Unrecognized: best guess has only {(shown.confidence * 100).toFixed(1)}% confidence, below the {Math.round(shown.threshold * 100)}% threshold.
                     </p>
                   )}
-                  <ul className="text-xs text-slate-300">
+                  <ul className="text-sm text-ink2">
                     {shown.alternatives.map((a) => (
                       <li key={a.label}>
                         {a.label}: {(a.confidence * 100).toFixed(1)}%
@@ -250,7 +265,7 @@ export function PredictionPanel({
                   </ul>
                   {shown.sequence.length > 0 && (
                     <>
-                      <p className="text-xs text-slate-400">Gloss sequence: {shown.sequence.join(" ")}</p>
+                      <p className="text-sm text-ink2">Gloss sequence: {shown.sequence.join(" ")}</p>
                       <p className="text-base font-medium">{shown.english}</p>
                     </>
                   )}
@@ -258,8 +273,8 @@ export function PredictionPanel({
               )}
             </div>
           )}
-          <p className="text-xs text-slate-500">Keyboard (when not typing): {shortcutHelp(continuous ? ["undo", "clear"] : ["record", "clear"])}. In this panel R recognizes the buffered sign.</p>
-          {err && <p className="text-sm text-rose-300">{err}</p>}
+          <p className="text-sm text-ink2">Keyboard (when not typing): {shortcutHelp(continuous ? ["undo", "clear"] : ["record", "clear"])}. In this panel R recognizes the buffered sign.</p>
+          {err && <p className="text-sm text-badfg">{err}</p>}
         </div>
       )}
     </div>

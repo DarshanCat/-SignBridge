@@ -9,6 +9,7 @@ import { PoseSmoother, withRelaxedRest } from "@/lib/avatar/idle";
 import { applyMixamoPose } from "@/lib/avatar/mixamo";
 import type { SequencePlayer } from "@/lib/avatar/player";
 import { buildVrmRig } from "@/lib/avatar/vrmRig";
+import { useReducedMotion } from "./useReducedMotion";
 
 export const VRM_URL = "/avatar/signer.vrm";
 
@@ -73,6 +74,7 @@ function useVrm(): VRM {
 /** Anime avatar (VRM) driven by the same clips, idle layer and smoothing as the Mixamo model. Throws if the file or its humanoid is unusable. */
 export function VrmModel({ player, onReady }: { player: SequencePlayer; onReady?: () => void }) {
   const vrm = useVrm();
+  const calm = useReducedMotion();
   const gl = useThree((s) => s.gl);
   const rig = useMemo(() => {
     vrm.scene.updateMatrixWorld(true);
@@ -93,7 +95,7 @@ export function VrmModel({ player, onReady }: { player: SequencePlayer; onReady?
   useFrame((state, delta) => {
     const dt = Math.min(delta, 0.1);
     player.tick(dt);
-    const target = withRelaxedRest(player.pose(), state.clock.elapsedTime);
+    const target = withRelaxedRest(player.pose(), state.clock.elapsedTime, calm);
     const smooth = smoother.step(target.pose, target.spread, dt);
     applyMixamoPose(rig, smooth.pose, smooth.spread);
     const em = vrm.expressionManager;

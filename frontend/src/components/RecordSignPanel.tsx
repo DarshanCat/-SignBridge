@@ -1,7 +1,6 @@
 "use client";
 import { cameraBoxStyle, FramingGuide } from "./CameraFrame";
 import { Camera, CameraOff, Circle } from "lucide-react";
-import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { apiPost, type RecordResult } from "@/lib/api";
 import { parseClip, type SignClip } from "@/lib/avatar/clip";
@@ -10,13 +9,9 @@ import { buildRecordRequest, countdownSteps, DURATIONS_S, isValidGloss, normaliz
 import { shortcutHelp } from "@/lib/shortcuts";
 import { CaptureHints } from "./CaptureHints";
 import { RecordSessionPanel } from "./RecordSessionPanel";
+import { AvatarStage, StageBadge, StageCaption } from "./ui/AvatarStage";
 import { useShortcuts } from "./useShortcuts";
 import type { LandmarkCapture } from "./useLandmarkCapture";
-
-const AvatarViewer = dynamic(() => import("./avatar/AvatarViewer"), {
-  ssr: false,
-  loading: () => <p className="flex h-full items-center justify-center text-sm text-slate-400">Loading 3D scene…</p>,
-});
 
 type Phase = { kind: "idle" } | { kind: "countdown"; n: number } | { kind: "recording"; left: number } | { kind: "sending" };
 
@@ -96,7 +91,7 @@ export function RecordSignPanel({ capture, backendUp }: { capture: LandmarkCaptu
           onClick={() => setMode(m)}
           disabled={busy}
           aria-pressed={mode === m}
-          className={`min-h-11 rounded-lg px-4 py-2 text-sm font-medium disabled:opacity-50 ${mode === m ? "bg-accent text-ink" : "bg-white/10 text-slate-200"}`}
+          className={`btn btn-sm ${mode === m ? "btn-primary" : ""}`}
         >
           {m === "single" ? "Single sign" : "Guided session"}
         </button>
@@ -116,50 +111,50 @@ export function RecordSignPanel({ capture, backendUp }: { capture: LandmarkCaptu
   return (
     <section className="space-y-4" aria-label="Record sign">
       {toggle}
-      <div className="rounded-xl border border-white/10 bg-panel p-4">
+      <div className="card">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h2 className="text-lg font-semibold">Record a sign</h2>
+          <h2 className="card-title">Record a sign</h2>
           <button
             onClick={running ? stop : start}
             disabled={state === "starting" || busy}
-            className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-3 py-2 text-sm disabled:opacity-50"
+            className="btn btn-sm"
           >
             {running ? <CameraOff size={16} aria-hidden /> : <Camera size={16} aria-hidden />}
             {state === "starting" ? "Starting…" : running ? "Stop camera" : "Start camera"}
           </button>
         </div>
-        <p className="mt-1 text-xs text-slate-400">
+        <p className="mt-1 text-sm text-ink2">
           For signs the INCLUDE dataset lacks. Only landmarks are sent and stored (no video), in the same 225 feature format as INCLUDE. A take is rejected if
           too many frames have no hand or no body.
         </p>
 
-        <div className="relative mt-3 overflow-hidden rounded-lg bg-black/60" style={cameraBoxStyle(capture.resolution)}>
+        <div className="relative mx-auto mt-3 max-w-3xl overflow-hidden rounded-3xl border border-edge/50 bg-cam text-camfg" style={cameraBoxStyle(capture.resolution)}>
           <video ref={videoRef} playsInline muted className="h-full w-full object-cover" aria-label="Webcam preview" />
           <canvas ref={canvasRef} width={capture.resolution?.width ?? 640} height={capture.resolution?.height ?? 480} className="pointer-events-none absolute inset-0 h-full w-full" />
           <FramingGuide capture={capture} />
           {!running && (
-            <p className="absolute inset-0 flex items-center justify-center p-4 text-center text-sm text-slate-400">
+            <p className="absolute inset-0 flex items-center justify-center p-4 text-center text-sm text-camfg">
               {state === "starting" ? (extractor === "loading" ? "Loading the landmark model…" : "Waiting for camera…") : "Camera is off."}
             </p>
           )}
           {phase.kind === "countdown" && (
-            <p aria-live="assertive" className="absolute inset-0 flex items-center justify-center bg-black/40 text-8xl font-bold">
+            <p aria-live="assertive" className="absolute inset-0 flex items-center justify-center bg-cam/60 text-8xl font-bold text-camfg">
               {phase.n}
             </p>
           )}
           {phase.kind === "recording" && (
-            <p className="absolute left-3 top-3 inline-flex items-center gap-2 rounded bg-rose-600 px-2 py-1 text-sm font-semibold">
+            <p className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-2xl bg-[#b3123a] px-2.5 py-1 text-sm font-extrabold text-white">
               <Circle size={12} fill="currentColor" aria-hidden /> REC {phase.left}s
             </p>
           )}
         </div>
         <CaptureHints capture={capture} />
         {error && (
-          <p role="alert" className="mt-3 rounded-lg bg-rose-500/15 p-3 text-sm text-rose-200">
+          <p role="alert" className="mt-3 notice notice-bad">
             {error}
           </p>
         )}
-        <p className="mt-2 text-xs text-slate-400">
+        <p className="mt-2 text-sm text-ink2">
           Live: {stats.frames} buffered frames, {stats.withPose} with body, {stats.withHands} with hands.
         </p>
 
@@ -170,19 +165,19 @@ export function RecordSignPanel({ capture, backendUp }: { capture: LandmarkCaptu
             void record();
           }}
         >
-          <label className="text-xs text-slate-300">
+          <label className="text-sm text-ink2">
             Gloss name
             <input
               value={gloss}
               onChange={(e) => setGloss(e.target.value)}
               maxLength={40}
               placeholder="e.g. WATER"
-              className="mt-1 block w-48 rounded-lg border border-white/10 bg-ink px-3 py-2 text-sm"
+              className="input mt-1 block !w-48 !text-base"
             />
           </label>
-          <label className="text-xs text-slate-300">
+          <label className="text-sm text-ink2">
             Duration
-            <select value={seconds} onChange={(e) => setSeconds(Number(e.target.value))} className="mt-1 block rounded-lg bg-ink px-3 py-2 text-sm">
+            <select value={seconds} onChange={(e) => setSeconds(Number(e.target.value))} className="input mt-1 block !w-auto !text-base">
               {DURATIONS_S.map((d) => (
                 <option key={d} value={d}>
                   {d} s
@@ -193,26 +188,26 @@ export function RecordSignPanel({ capture, backendUp }: { capture: LandmarkCaptu
           <button
             type="submit"
             disabled={!canRecord}
-            className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-ink disabled:opacity-50"
+            className="btn btn-primary"
           >
             {busy ? (phase.kind === "sending" ? "Saving…" : "Recording…") : "Record (3-2-1)"}
           </button>
         </form>
-        {gloss.trim() !== "" && !isValidGloss(gloss) && <p className="mt-2 text-xs text-amber-300">Use letters, digits and hyphens only (up to 32 characters).</p>}
-        {gloss.trim() !== "" && isValidGloss(gloss) && <p className="mt-2 text-xs text-slate-400">Will be saved as {normalizeGloss(gloss)}.</p>}
-        {!backendUp && <p role="alert" className="mt-2 text-xs text-amber-300">Backend unreachable: recordings cannot be saved. Start it with scripts\serve.ps1.</p>}
-        <p className="mt-2 text-xs text-slate-500">Keyboard (when not typing in a field): {shortcutHelp(["record", "replay"])}.</p>
+        {gloss.trim() !== "" && !isValidGloss(gloss) && <p className="mt-2 text-sm text-warnfg">Use letters, digits and hyphens only (up to 32 characters).</p>}
+        {gloss.trim() !== "" && isValidGloss(gloss) && <p className="mt-2 text-sm text-ink2">Will be saved as {normalizeGloss(gloss)}.</p>}
+        {!backendUp && <p role="alert" className="mt-2 text-sm text-warnfg">Backend unreachable: recordings cannot be saved. Start it with scripts\serve.ps1.</p>}
+        <p className="mt-2 text-sm text-ink2">Keyboard (when not typing in a field): {shortcutHelp(["record", "replay"])}.</p>
         {problem && (
-          <p role="alert" className="mt-2 rounded-lg bg-rose-500/15 p-2 text-sm text-rose-200">
+          <p role="alert" className="mt-2 notice notice-bad">
             {problem}
           </p>
         )}
 
         <div aria-live="polite" className="mt-3 space-y-1 text-sm">
           {result && !result.accepted && (
-            <div className="rounded-lg bg-amber-400/10 p-3 text-amber-200">
+            <div className="notice notice-warn">
               <p className="font-semibold">Take rejected and not saved.</p>
-              <ul className="mt-1 list-disc pl-5 text-xs">
+              <ul className="mt-1 list-disc pl-5 text-sm">
                 {result.reasons.map((r) => (
                   <li key={r}>{r}</li>
                 ))}
@@ -220,9 +215,9 @@ export function RecordSignPanel({ capture, backendUp }: { capture: LandmarkCaptu
             </div>
           )}
           {result && result.accepted && (
-            <div className="rounded-lg bg-emerald-400/10 p-3 text-emerald-200">
+            <div className="notice notice-good">
               <p className="font-semibold">Saved {result.gloss}.</p>
-              <p className="mt-1 text-xs">
+              <p className="mt-1 text-sm">
                 {result.stats.frames} frames in {result.stats.seconds}s ({result.stats.fps} fps), {result.stats.no_hand_frames} without a hand. Features:
                 data/recorded/{result.feature_file}. Clip: data/recorded/{result.clip_file} (self-recorded, not signer reviewed; copy it into
                 frontend/public/animations and register it to use it).
@@ -233,13 +228,18 @@ export function RecordSignPanel({ capture, backendUp }: { capture: LandmarkCaptu
       </div>
 
       {result?.accepted && (
-        <div className="rounded-xl border border-white/10 bg-panel p-4">
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-300">Preview of the retargeted take</h3>
-          <div className="mt-2 aspect-[4/3] overflow-hidden rounded-lg bg-black/60">
-            <AvatarViewer player={player} onKind={() => {}} />
+        <div className="card">
+          <h3 className="eyebrow">Preview of the retargeted take</h3>
+          <div className="mt-3">
+            <AvatarStage
+              className="h-[420px] sm:h-[520px]"
+              player={player}
+              badges={<StageBadge tone="warn">Self-recorded, not signer-reviewed</StageBadge>}
+              caption={<StageCaption detail="Automatic retarget of your take. It can look wrong or unnatural." />}
+            />
           </div>
           <div className="mt-2 flex gap-2">
-            <button className="rounded-lg bg-white/10 px-3 py-2 text-sm" onClick={() => player.restart()}>
+            <button className="btn btn-sm" onClick={() => player.restart()}>
               Replay
             </button>
           </div>

@@ -1,8 +1,8 @@
 "use client";
 import { ContactShadows, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { Component, Suspense, useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
-import { CanvasTexture, SRGBColorSpace, type Camera, type Vector3 } from "three";
+import { Component, Suspense, useCallback, useEffect, useState, type ReactNode } from "react";
+import type { Camera, Vector3 } from "three";
 import { useThree } from "@react-three/fiber";
 import type { SequencePlayer } from "@/lib/avatar/player";
 import { SignerAvatar, type AvatarKind } from "./GlbHumanoid";
@@ -35,35 +35,9 @@ class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean
   }
 }
 
-/** Simple studio wall: one big plane with a soft radial gradient, lighter behind the signer so the silhouette reads. */
-function Backdrop() {
-  const texture = useMemo(() => {
-    const c = document.createElement("canvas");
-    c.width = c.height = 512;
-    const g = c.getContext("2d");
-    if (g) {
-      const grad = g.createRadialGradient(256, 230, 20, 256, 256, 330);
-      grad.addColorStop(0, "#2b3a66");
-      grad.addColorStop(0.55, "#18233f");
-      grad.addColorStop(1, "#0b1122");
-      g.fillStyle = grad;
-      g.fillRect(0, 0, 512, 512);
-    }
-    const t = new CanvasTexture(c);
-    t.colorSpace = SRGBColorSpace;
-    return t;
-  }, []);
-  return (
-    <mesh position={[0, 1.4, -2.6]}>
-      <planeGeometry args={[14, 9]} />
-      <meshBasicMaterial map={texture} fog={false} toneMapped={false} />
-    </mesh>
-  );
-}
-
 /** Camera and orbit target per avatar: the anime avatar is framed from the waist up so that the face and both hands fill the stage. */
 export const FRAMING = {
-  vrm: { position: [0, 1.34, 1.95], target: [0, 1.2, 0] },
+  vrm: { position: [0, 1.32, 1.72], target: [0, 1.18, 0] },
   other: { position: [0, 1.3, 2.45], target: [0, 1.25, 0] },
 } as const;
 
@@ -153,15 +127,13 @@ export default function AvatarViewer({ player, onKind }: { player: SequencePlaye
   }
   return (
     <SceneBoundary>
-      <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 1.3, 2.45], fov: 34 }} aria-label="3D signing avatar">
-        <color attach="background" args={["#0f1730"]} />
+      <Canvas shadows dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }} camera={{ position: [0, 1.3, 2.45], fov: 34 }} role="img" aria-label="3D signing avatar" style={{ background: "transparent" }}>
         {kind === "vrm" ? <AnimeLights /> : <StudioLights />}
         <Framing kind={kind} />
-        <Backdrop />
         <Suspense fallback={<Humanoid player={player} />}>
           <SignerAvatar player={player} onKind={handleKind} />
         </Suspense>
-        <ContactShadows position={[0, 0.003, 0]} opacity={0.6} scale={4} blur={2.4} far={2.2} resolution={512} color="#02040b" />
+        <ContactShadows position={[0, 0.003, 0]} opacity={0.3} scale={4} blur={2.8} far={2.2} resolution={512} color="#4a1d4a" />
         <OrbitControls makeDefault target={[0, 1.25, 0]} enablePan={false} minDistance={1.3} maxDistance={5} maxPolarAngle={Math.PI * 0.52} />
       </Canvas>
     </SceneBoundary>

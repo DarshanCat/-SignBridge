@@ -25,7 +25,7 @@ import type { LandmarkCapture } from "./useLandmarkCapture";
 import { useShortcuts } from "./useShortcuts";
 import { useTakeRecorder } from "./useTakeRecorder";
 
-const btn = "inline-flex min-h-11 items-center gap-2 rounded-lg bg-white/10 px-3 py-2 text-sm disabled:opacity-40";
+const btn = "btn btn-sm";
 
 /**
  * Guided recording session: one gloss at a time, N saved takes each, for one signer. Takes go to data/recorded/<signer>/<GLOSS>/ as landmarks
@@ -100,63 +100,63 @@ export function RecordSessionPanel({ capture, backendUp }: { capture: LandmarkCa
 
   return (
     <section className="space-y-4" aria-label="Guided recording session">
-      <div className="rounded-xl border border-white/10 bg-panel p-4">
+      <div className="card">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h2 className="text-lg font-semibold">Guided session</h2>
+          <h2 className="card-title">Guided session</h2>
           <button onClick={running ? stop : start} disabled={state === "starting" || recorder.busy} className={btn}>
             {running ? <CameraOff size={16} aria-hidden /> : <Camera size={16} aria-hidden />}
             {state === "starting" ? "Starting…" : running ? "Stop camera" : "Start camera"}
           </button>
         </div>
-        <p className="mt-1 text-xs text-slate-400">
+        <p className="mt-1 text-sm text-ink2">
           Records several takes of each sign for one signer. Only landmarks are stored (no video), under data/recorded/&lt;signer ID&gt;/&lt;SIGN&gt;/. Get the
           consent of the person you record and use an ID, not a name.
         </p>
 
-        <div className="relative mt-3 overflow-hidden rounded-lg bg-black/60" style={cameraBoxStyle(capture.resolution)}>
+        <div className="relative mx-auto mt-3 max-w-3xl overflow-hidden rounded-3xl border border-edge/50 bg-cam text-camfg" style={cameraBoxStyle(capture.resolution)}>
           <video ref={videoRef} playsInline muted className="h-full w-full object-cover" aria-label="Webcam preview" />
           <canvas ref={canvasRef} width={capture.resolution?.width ?? 640} height={capture.resolution?.height ?? 480} className="pointer-events-none absolute inset-0 h-full w-full" />
           <FramingGuide capture={capture} />
           {!running && (
-            <p className="absolute inset-0 flex items-center justify-center p-4 text-center text-sm text-slate-400">
+            <p className="absolute inset-0 flex items-center justify-center p-4 text-center text-sm text-camfg">
               {state === "starting" ? (extractor === "loading" ? "Loading the landmark model…" : "Waiting for camera…") : "Camera is off."}
             </p>
           )}
           {recorder.phase.kind === "countdown" && (
-            <p aria-live="assertive" className="absolute inset-0 flex items-center justify-center bg-black/40 text-8xl font-bold">
+            <p aria-live="assertive" className="absolute inset-0 flex items-center justify-center bg-cam/60 text-8xl font-bold text-camfg">
               {recorder.phase.n}
             </p>
           )}
           {recorder.phase.kind === "recording" && (
-            <p className="absolute left-3 top-3 inline-flex items-center gap-2 rounded bg-rose-600 px-2 py-1 text-sm font-semibold">
+            <p className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-2xl bg-[#b3123a] px-2.5 py-1 text-sm font-extrabold text-white">
               <Circle size={12} fill="currentColor" aria-hidden /> REC {recorder.phase.left}s
             </p>
           )}
         </div>
         <CaptureHints capture={capture} />
         {error && (
-          <p role="alert" className="mt-3 rounded-lg bg-rose-500/15 p-3 text-sm text-rose-200">
+          <p role="alert" className="mt-3 notice notice-bad">
             {error}
           </p>
         )}
-        <p className="mt-2 text-xs text-slate-400">
+        <p className="mt-2 text-sm text-ink2">
           Live: {stats.frames} buffered frames, {stats.withPose} with body, {stats.withHands} with hands.
         </p>
 
         {!session && (
           <div className="mt-4 space-y-3">
             <div className="flex flex-wrap gap-3">
-              <label className="text-xs text-slate-300">
+              <label className="text-sm text-ink2">
                 Signer ID
                 <input
                   value={signerId}
                   onChange={(e) => setSignerId(e.target.value)}
                   maxLength={32}
                   placeholder="e.g. P01"
-                  className="mt-1 block w-32 rounded-lg border border-white/10 bg-ink px-3 py-2 text-sm"
+                  className="input mt-1 block !w-32 !text-base"
                 />
               </label>
-              <label className="text-xs text-slate-300">
+              <label className="text-sm text-ink2">
                 Takes per sign
                 <input
                   type="number"
@@ -164,12 +164,12 @@ export function RecordSessionPanel({ capture, backendUp }: { capture: LandmarkCa
                   max={MAX_TAKES}
                   value={takes}
                   onChange={(e) => setTakes(Number(e.target.value))}
-                  className="mt-1 block w-24 rounded-lg border border-white/10 bg-ink px-3 py-2 text-sm"
+                  className="input mt-1 block !w-24 !text-base"
                 />
               </label>
-              <label className="text-xs text-slate-300">
+              <label className="text-sm text-ink2">
                 Seconds per take
-                <select value={seconds} onChange={(e) => setSeconds(Number(e.target.value))} className="mt-1 block rounded-lg bg-ink px-3 py-2 text-sm">
+                <select value={seconds} onChange={(e) => setSeconds(Number(e.target.value))} className="input mt-1 block !w-auto !text-base">
                   {DURATIONS_S.map((d) => (
                     <option key={d} value={d}>
                       {d} s
@@ -178,36 +178,36 @@ export function RecordSessionPanel({ capture, backendUp }: { capture: LandmarkCa
                 </select>
               </label>
             </div>
-            <label className="block text-xs text-slate-300">
+            <label className="block text-sm text-ink2">
               Signs to record, in order (the 50 grammar words, priority words first; edit freely)
               <textarea
                 value={glossText}
                 onChange={(e) => setGlossText(e.target.value)}
                 rows={6}
-                className="mt-1 block w-full rounded-lg border border-white/10 bg-ink px-3 py-2 font-mono text-sm"
+                className="input mt-1 block !font-mono !text-base"
                 spellCheck={false}
               />
             </label>
-            {planError && <p className="text-xs text-amber-300">{planError}</p>}
-            {!backendUp && <p role="alert" className="text-xs text-amber-300">Backend unreachable: takes cannot be saved. Start it with scripts\serve.ps1.</p>}
+            {planError && <p className="text-sm text-warnfg">{planError}</p>}
+            {!backendUp && <p role="alert" className="text-sm text-warnfg">Backend unreachable: takes cannot be saved. Start it with scripts\serve.ps1.</p>}
             {setupErrors.length > 0 && (
-              <ul role="alert" className="rounded-lg bg-rose-500/15 p-3 text-sm text-rose-200">
+              <ul role="alert" className="notice notice-bad">
                 {setupErrors.map((e) => (
                   <li key={e}>{e}</li>
                 ))}
               </ul>
             )}
-            <button onClick={() => void startSessionClicked()} disabled={!backendUp} className="min-h-11 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-ink disabled:opacity-50">
+            <button onClick={() => void startSessionClicked()} disabled={!backendUp} className="btn btn-primary">
               Start session
             </button>
-            <p className="text-xs text-slate-500">Starting again with the same signer ID continues where that signer stopped.</p>
+            <p className="text-sm text-ink2">Starting again with the same signer ID continues where that signer stopped.</p>
           </div>
         )}
 
         {session && p && (
           <div className="mt-4 space-y-3" aria-live="polite">
             <div>
-              <div className="flex justify-between text-xs text-slate-400">
+              <div className="flex justify-between text-sm text-ink2">
                 <span>
                   Signer {session.config.signerId}: {p.glossesDone} of {p.glossesTotal} signs complete
                 </span>
@@ -215,27 +215,27 @@ export function RecordSessionPanel({ capture, backendUp }: { capture: LandmarkCa
                   {p.takes} / {p.targetTakes} takes
                 </span>
               </div>
-              <div className="mt-1 h-2 overflow-hidden rounded bg-white/10" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={pct}>
-                <div className="h-full bg-accent" style={{ width: `${pct}%` }} />
+              <div className="mt-1 h-2 overflow-hidden rounded-full bg-soft" role="progressbar" aria-label="Session progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={pct}>
+                <div className="h-full rounded-full bg-accent" style={{ width: `${pct}%` }} />
               </div>
             </div>
 
             {session.done ? (
-              <p className="rounded-lg bg-emerald-400/10 p-3 text-emerald-200">Session complete: every sign has {session.config.takesPerGloss} saved takes.</p>
+              <p className="notice notice-good">Session complete: every sign has {session.config.takesPerGloss} saved takes.</p>
             ) : (
-              <div className="rounded-lg bg-white/5 p-4 text-center">
-                <p className="text-xs uppercase tracking-wide text-slate-400">Sign this</p>
+              <div className="rounded-2xl bg-surface2 p-4 text-center">
+                <p className="text-sm uppercase tracking-wide text-ink2">Sign this</p>
                 <p className="mt-1 break-words text-4xl font-bold">{gloss}</p>
-                <p className="mt-2 text-sm text-slate-300">
+                <p className="mt-2 text-sm text-ink2">
                   Take {Math.min((session.accepted[gloss!] ?? 0) + 1, session.config.takesPerGloss)} of {session.config.takesPerGloss}
                   {(session.attempts[gloss!] ?? 0) > 0 && `, ${session.attempts[gloss!]} attempt(s) so far`}
                 </p>
-                <p className="mt-2 text-xs text-slate-400">Start with your hands down, sign once, then lower your hands. Both shoulders and your hands in view.</p>
+                <p className="mt-2 text-sm text-ink2">Start with your hands down, sign once, then lower your hands. Both shoulders and your hands in view.</p>
               </div>
             )}
 
             <div className="flex flex-wrap gap-2">
-              <button className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-ink disabled:opacity-50" disabled={!canRecord} onClick={() => void record()}>
+              <button className="btn btn-primary" disabled={!canRecord} onClick={() => void record()}>
                 {recorder.phase.kind === "idle" ? `Record (3-2-1, ${seconds} s)` : recorder.phase.kind === "sending" ? "Saving…" : "Recording…"}
               </button>
               <button className={btn} disabled={recorder.busy || session.done} onClick={() => setSession((s) => (s ? skipGloss(s) : s))}>
@@ -255,13 +255,13 @@ export function RecordSessionPanel({ capture, backendUp }: { capture: LandmarkCa
                 <SquareStop size={16} aria-hidden /> Stop session
               </button>
             </div>
-            <p className="text-xs text-slate-500">Keyboard (when not typing): {shortcutHelp(["record"])}.</p>
+            <p className="text-sm text-ink2">Keyboard (when not typing): {shortcutHelp(["record"])}.</p>
 
-            {last?.error && <p role="alert" className="rounded-lg bg-rose-500/15 p-3 text-sm text-rose-200">{last.error}</p>}
+            {last?.error && <p role="alert" className="notice notice-bad">{last.error}</p>}
             {last?.result && !last.result.accepted && (
-              <div className="rounded-lg bg-amber-400/10 p-3 text-sm text-amber-200">
+              <div className="notice notice-warn">
                 <p className="font-semibold">Take of {last.gloss} rejected, not saved, not counted.</p>
-                <ul className="mt-1 list-disc pl-5 text-xs">
+                <ul className="mt-1 list-disc pl-5 text-sm">
                   {last.result.reasons.map((r) => (
                     <li key={r}>{r}</li>
                   ))}
@@ -269,18 +269,18 @@ export function RecordSessionPanel({ capture, backendUp }: { capture: LandmarkCa
               </div>
             )}
             {last?.result?.accepted && (
-              <p className="rounded-lg bg-emerald-400/10 p-3 text-sm text-emerald-200">
+              <p className="notice notice-good">
                 Saved a take of {last.gloss}: {last.result.stats.frames} frames in {last.result.stats.seconds}s, {last.result.stats.no_hand_frames} without a hand.
               </p>
             )}
 
-            <ul className="flex flex-wrap gap-1 text-xs" aria-label="Signs in this session">
+            <ul className="flex flex-wrap gap-1 text-sm" aria-label="Signs in this session">
               {session.config.glosses.map((g, i) => {
                 const n = session.accepted[g] ?? 0;
                 const complete = n >= session.config.takesPerGloss;
                 const current = !session.done && i === session.index;
                 return (
-                  <li key={g} className={`rounded px-2 py-0.5 ${current ? "bg-accent text-ink" : complete ? "bg-emerald-400/20 text-emerald-200" : "bg-white/5 text-slate-300"}`}>
+                  <li key={g} className={`tag !px-3 !py-1 !text-sm ${current ? "bg-accent text-onaccent" : complete ? "bg-goodbg text-goodfg" : "bg-surface2 text-ink2"}`}>
                     {g} {n}/{session.config.takesPerGloss}
                   </li>
                 );

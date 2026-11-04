@@ -227,7 +227,7 @@ describe.skipIf(!hasVrm || !existsSync(GLB_FILE) || CLIPS.length < 3)("the VRM a
     mix.updateMatrixWorld(true);
     const rv = buildVrmRig(vrm.scene, vrm.humanoid);
     const rm = buildMixamoRig(mix);
-    const vb = (n: string) => vrm.humanoid.getNormalizedBoneNode(n) as Object3D;
+    const vb = (n: string) => vrm.humanoid.getNormalizedBoneNode(n as never) as Object3D;
     const mb = (n: string) => findBone(mix, n) as Object3D;
     const segments: [string, string, string, string][] = []; // [vrm from, vrm to, mixamo from, mixamo to]
     for (const [vs, ms] of [["left", "Left"], ["right", "Right"]] as const) {

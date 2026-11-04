@@ -42,8 +42,12 @@ export function restWeight(pose: Pose, side: "l" | "r"): number {
   return 1 - smoothstep((lift - IDLE.restFades[0]) / (IDLE.restFades[1] - IDLE.restFades[0]));
 }
 
-/** Pose plus the relaxed rest layer at time t (seconds). Always returns all 20 bones. */
-export function withRelaxedRest(pose: Pose, t: number): { pose: Pose; spread: Spread } {
+/**
+ * Pose plus the relaxed rest layer at time t (seconds). Always returns all 20 bones.
+ * calm: the visitor asked for reduced motion, so the decorative idle movement (breathing, weight shift, head drift) is switched off; the
+ * relaxed hands stay, because they are a pose and not a movement.
+ */
+export function withRelaxedRest(pose: Pose, t: number, calm = false): { pose: Pose; spread: Spread } {
   const out: Pose = {};
   const spread: Spread = {};
   const get = (b: string): Euler3 => pose[b] ?? [0, 0, 0];
@@ -51,10 +55,11 @@ export function withRelaxedRest(pose: Pose, t: number): { pose: Pose; spread: Sp
     const e = out[b] ?? get(b);
     out[b] = [e[0] + dx, e[1] + dy, e[2] + dz];
   };
-  const breath = Math.sin(2 * Math.PI * IDLE.breathHz * t);
-  const sway = Math.sin(2 * Math.PI * IDLE.swayHz * t);
-  const drift = Math.sin(2 * Math.PI * IDLE.driftHz * t + 1.3);
-  const nod = Math.sin(2 * Math.PI * IDLE.driftHz * 0.7 * t);
+  const k = calm ? 0 : 1;
+  const breath = k * Math.sin(2 * Math.PI * IDLE.breathHz * t);
+  const sway = k * Math.sin(2 * Math.PI * IDLE.swayHz * t);
+  const drift = k * Math.sin(2 * Math.PI * IDLE.driftHz * t + 1.3);
+  const nod = k * Math.sin(2 * Math.PI * IDLE.driftHz * 0.7 * t);
   add("spine", IDLE.breathSpine * breath, 0, IDLE.swaySpine * sway);
   add("chest", IDLE.breathChest * breath, 0, -IDLE.swaySpine * 0.5 * sway);
   add("neck", -IDLE.breathSpine * 0.5 * breath, 0, IDLE.swaySpine * 0.25 * sway);

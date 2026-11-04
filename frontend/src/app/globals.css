@@ -1,13 +1,255 @@
+@import "@fontsource-variable/nunito/index.css";
+@import "@fontsource/zen-maru-gothic/latin-500.css";
+@import "@fontsource/zen-maru-gothic/latin-700.css";
+@import "@fontsource/zen-maru-gothic/latin-900.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-ink text-slate-100 antialiased;
+/*
+ * Design system "Sakura Daylight" (light, the default) and "Sakura Dusk" (dark).
+ * Colours are space separated RGB triples so Tailwind can add alpha (bg-accent/20). Every text and control pair is checked for WCAG AA
+ * (docs/UI_DESIGN.md lists the ratios). The theme follows the system setting unless the visitor picks one with the toggle (data-theme).
+ */
+:root {
+  color-scheme: light;
+  --canvas: 255 247 245;
+  --surface: 255 255 255;
+  --surface2: 253 238 243;
+  --field: 255 255 255;
+  --line: 241 213 224; /* decorative borders only */
+  --edge: 138 118 150; /* borders of inputs and outlined buttons, at least 3:1 against the surface */
+  --ink: 43 34 51;
+  --ink2: 91 78 104;
+  --accent: 184 56 107;
+  --onaccent: 255 255 255;
+  --soft: 248 211 225;
+  --lav: 91 73 200;
+  --good-fg: 20 102 63;
+  --good-bg: 221 245 232;
+  --warn-fg: 138 75 0;
+  --warn-bg: 255 235 199;
+  --bad-fg: 164 18 47;
+  --bad-bg: 255 227 232;
+  --info-fg: 31 78 140;
+  --info-bg: 225 238 255;
+  --stage1: 255 217 201;
+  --stage2: 249 194 216;
+  --stage3: 207 193 247;
+  --glow: 255 255 255;
+  --shadow-rgb: 184 56 107;
+  --cam: 24 17 33; /* the camera picture box stays dark in both themes */
+  --camfg: 247 238 249;
 }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --canvas: 23 17 31;
+    --surface: 35 27 46;
+    --surface2: 45 35 57;
+    --field: 28 21 38;
+    --line: 63 50 80;
+    --edge: 160 142 178;
+    --ink: 247 238 249;
+    --ink2: 207 194 218;
+    --accent: 255 157 192;
+    --onaccent: 42 15 30;
+    --soft: 74 42 62;
+    --lav: 187 174 255;
+    --good-fg: 126 224 174;
+    --good-bg: 22 56 42;
+    --warn-fg: 255 210 138;
+    --warn-bg: 58 42 16;
+    --bad-fg: 255 179 192;
+    --bad-bg: 74 26 40;
+    --info-fg: 169 207 255;
+    --info-bg: 27 47 77;
+    --stage1: 70 45 85;
+    --stage2: 52 42 98;
+    --stage3: 33 38 92;
+    --glow: 255 157 192;
+    --shadow-rgb: 0 0 0;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas: 23 17 31;
+  --surface: 35 27 46;
+  --surface2: 45 35 57;
+  --field: 28 21 38;
+  --line: 63 50 80;
+  --edge: 160 142 178;
+  --ink: 247 238 249;
+  --ink2: 207 194 218;
+  --accent: 255 157 192;
+  --onaccent: 42 15 30;
+  --soft: 74 42 62;
+  --lav: 187 174 255;
+  --good-fg: 126 224 174;
+  --good-bg: 22 56 42;
+  --warn-fg: 255 210 138;
+  --warn-bg: 58 42 16;
+  --bad-fg: 255 179 192;
+  --bad-bg: 74 26 40;
+  --info-fg: 169 207 255;
+  --info-bg: 27 47 77;
+  --stage1: 70 45 85;
+  --stage2: 52 42 98;
+  --stage3: 33 38 92;
+  --glow: 255 157 192;
+  --shadow-rgb: 0 0 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  @apply bg-canvas font-sans text-ink antialiased;
+  min-height: 100vh;
+  background-image: radial-gradient(900px 500px at 85% -10%, rgb(var(--soft) / 0.55) 0, transparent 60%), radial-gradient(700px 420px at -5% 30%, rgb(var(--stage3) / 0.35) 0, transparent 60%);
+  background-attachment: fixed;
+}
+
 :focus-visible {
-  outline: 2px solid #5eead4;
-  outline-offset: 2px;
+  outline: 3px solid rgb(var(--lav));
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+::selection {
+  background: rgb(var(--soft));
+  color: rgb(var(--ink));
+}
+
+@layer components {
+  .card {
+    @apply rounded-[28px] border border-line bg-surface p-5 sm:p-6;
+    box-shadow: 0 18px 50px rgb(var(--shadow-rgb) / 0.12);
+  }
+  .card-title {
+    @apply font-display text-xl font-black tracking-tight sm:text-2xl;
+  }
+  .eyebrow {
+    @apply font-display text-xs font-bold uppercase tracking-wider text-ink2;
+  }
+  .btn {
+    @apply inline-flex min-h-12 select-none items-center justify-center gap-2 rounded-2xl border-[1.5px] border-edge bg-surface px-5 py-2.5 text-base font-extrabold text-ink transition duration-200 ease-out hover:bg-surface2 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply border-accent bg-accent text-onaccent hover:bg-accent hover:brightness-110;
+    box-shadow: 0 10px 24px rgb(var(--accent) / 0.32);
+  }
+  .btn-primary:disabled {
+    box-shadow: none;
+  }
+  .btn-sm {
+    @apply min-h-11 rounded-xl px-3.5 py-2 text-sm;
+  }
+  .input {
+    @apply min-h-12 w-full rounded-2xl border-2 border-edge bg-field px-4 py-2.5 text-lg font-semibold text-ink transition duration-200 placeholder:font-medium placeholder:text-ink2;
+  }
+  .input:focus {
+    @apply border-lav;
+    box-shadow: 0 0 0 5px rgb(var(--lav) / 0.18);
+    outline: none;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-surface2 px-3 py-1 text-sm font-bold text-ink transition duration-150 hover:border-edge;
+  }
+  .tag {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold;
+  }
+  .tag-warn {
+    @apply bg-warnbg text-warnfg;
+  }
+  .tag-good {
+    @apply bg-goodbg text-goodfg;
+  }
+  .tag-bad {
+    @apply bg-badbg text-badfg;
+  }
+  .tag-info {
+    @apply bg-infobg text-infofg;
+  }
+  .notice {
+    @apply rounded-2xl p-3 text-sm font-semibold;
+  }
+  .notice-warn {
+    @apply bg-warnbg text-warnfg;
+  }
+  .notice-bad {
+    @apply bg-badbg text-badfg;
+  }
+  .notice-info {
+    @apply bg-infobg text-infofg;
+  }
+  .notice-good {
+    @apply bg-goodbg text-goodfg;
+  }
+  .stage-bg {
+    background: radial-gradient(520px 420px at 50% 38%, rgb(var(--glow) / 0.7), transparent 70%), linear-gradient(160deg, rgb(var(--stage1)), rgb(var(--stage2)) 55%, rgb(var(--stage3)));
+  }
+  .glass {
+    @apply border border-line;
+    background: rgb(var(--surface) / 0.92);
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* Falling petals on the stage: slow and decorative, and still when the visitor asks for reduced motion */
+@keyframes petal-fall {
+  0% {
+    transform: translate3d(0, -10%, 0) rotate(var(--r, 0deg));
+  }
+  100% {
+    transform: translate3d(var(--dx, 20px), 110%, 0) rotate(calc(var(--r, 0deg) + 160deg));
+  }
+}
+.petal {
+  position: absolute;
+  top: 0;
+  width: 14px;
+  height: 20px;
+  border-radius: 70% 0 70% 0;
+  background: rgb(var(--glow));
+  opacity: 0.5;
+  pointer-events: none;
+  animation: petal-fall var(--t, 22s) linear infinite;
+  animation-delay: var(--d, 0s);
+}
+
+/* Smooth transitions between tabs and for content that appears */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  animation: fade-up 0.35s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .petal {
+    animation: none;
+    top: var(--y, 20%);
+  }
 }
 
 /* Narrow screens: comfortable touch targets (44 px) and 16 px fields so phones do not zoom into them */

@@ -104,83 +104,83 @@ export function LandmarkCheckPanel({ capture }: { capture: LandmarkCapture }) {
 
   return (
     <section className="space-y-4" aria-label="Landmark check">
-      <div className="rounded-xl border border-white/10 bg-panel p-4">
+      <div className="card">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h2 className="text-lg font-semibold">Landmark check</h2>
+          <h2 className="card-title">Landmark check</h2>
           <button
             onClick={running ? stop : start}
             disabled={state === "starting" || busy}
-            className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-3 py-2 text-sm disabled:opacity-50"
+            className="btn btn-sm"
           >
             {running ? <CameraOff size={16} aria-hidden /> : <Camera size={16} aria-hidden />}
             {state === "starting" ? "Starting…" : running ? "Stop camera" : "Start camera"}
           </button>
         </div>
-        <p className="mt-1 text-xs text-slate-400">
+        <p className="mt-1 text-sm text-ink2">
           Compares the landmarks this browser extracts with the ones Python MediaPipe (used for training) extracts from the same video. A {SECONDS} second
           video of you is recorded locally and offered as a download together with the browser landmarks. Nothing is uploaded; delete the files when
           you are done.
         </p>
 
-        <div className="relative mt-3 overflow-hidden rounded-lg bg-black/60" style={cameraBoxStyle(capture.resolution)}>
+        <div className="relative mx-auto mt-3 max-w-3xl overflow-hidden rounded-3xl border border-edge/50 bg-cam text-camfg" style={cameraBoxStyle(capture.resolution)}>
           <video ref={videoRef} playsInline muted className="h-full w-full object-cover" aria-label="Webcam preview" />
           <canvas ref={canvasRef} width={capture.resolution?.width ?? 640} height={capture.resolution?.height ?? 480} className="pointer-events-none absolute inset-0 h-full w-full" />
           <FramingGuide capture={capture} />
           {!running && (
-            <p className="absolute inset-0 flex items-center justify-center p-4 text-center text-sm text-slate-400">
+            <p className="absolute inset-0 flex items-center justify-center p-4 text-center text-sm text-camfg">
               {state === "starting" ? (extractor === "loading" ? "Loading the landmark model…" : "Waiting for camera…") : "Camera is off."}
             </p>
           )}
           {phase === "countdown" && (
-            <p aria-live="assertive" className="absolute inset-0 flex items-center justify-center bg-black/40 text-8xl font-bold">
+            <p aria-live="assertive" className="absolute inset-0 flex items-center justify-center bg-cam/60 text-8xl font-bold text-camfg">
               {left}
             </p>
           )}
           {phase === "recording" && (
-            <p className="absolute left-3 top-3 inline-flex items-center gap-2 rounded bg-rose-600 px-2 py-1 text-sm font-semibold">
+            <p className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-2xl bg-[#b3123a] px-2.5 py-1 text-sm font-extrabold text-white">
               <Circle size={12} fill="currentColor" aria-hidden /> REC {left}s
             </p>
           )}
         </div>
         <CaptureHints capture={capture} />
         {error && (
-          <p role="alert" className="mt-3 rounded-lg bg-rose-500/15 p-3 text-sm text-rose-200">
+          <p role="alert" className="mt-3 notice notice-bad">
             {error}
           </p>
         )}
         {problem && (
-          <p role="alert" className="mt-2 rounded-lg bg-rose-500/15 p-2 text-sm text-rose-200">
+          <p role="alert" className="mt-2 notice notice-bad">
             {problem}
           </p>
         )}
-        <p className="mt-2 text-xs text-slate-400">
+        <p className="mt-2 text-sm text-ink2">
           Live: {stats.frames} buffered frames, {stats.withPose} with body, {stats.withHands} with hands.
         </p>
-        <p className="mt-2 text-xs text-slate-500">Keyboard: {shortcutHelp(["record"])}.</p>
-        <p className="mt-2 text-xs text-slate-400">Sign one sign you know during the recording, with both shoulders and your hands in view.</p>
+        <p className="mt-2 text-sm text-ink2">Keyboard: {shortcutHelp(["record"])}.</p>
+        <p className="mt-2 text-sm text-ink2">Sign one sign you know during the recording, with both shoulders and your hands in view.</p>
         <button
           onClick={() => void record()}
           disabled={!running || busy}
-          className="mt-3 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-ink disabled:opacity-50"
+          className="mt-3 btn btn-primary"
         >
           {phase === "idle" ? `Record ${SECONDS} s (3-2-1)` : phase === "saving" ? "Saving…" : "Recording…"}
         </button>
 
         {take && (
-          <div aria-live="polite" className="mt-4 space-y-2 rounded-lg bg-emerald-400/10 p-3 text-sm text-emerald-100">
+          <div aria-live="polite" className="mt-4 space-y-2 notice notice-good">
             <p className="font-semibold">
               Recorded {take.seconds} s: {take.frames} landmark frames from the browser ({take.fps} per second).
             </p>
             <div className="flex flex-wrap gap-2">
-              <a className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-3 py-2" href={take.videoUrl} download={`${take.stem}.${extensionFor(take.mime)}`}>
+              <a className="btn btn-sm" href={take.videoUrl} download={`${take.stem}.${extensionFor(take.mime)}`}>
                 <Download size={16} aria-hidden /> Video ({extensionFor(take.mime)})
               </a>
-              <a className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-3 py-2" href={take.landmarksUrl} download={`${take.stem}.landmarks.json`}>
+              <a className="btn btn-sm" href={take.landmarksUrl} download={`${take.stem}.landmarks.json`}>
                 <Download size={16} aria-hidden /> Browser landmarks (json)
               </a>
             </div>
-            <p className="text-xs">Download both, then run this in the backend folder:</p>
-            <pre className="overflow-x-auto rounded bg-black/40 p-2 text-xs">{compareCommand(take.stem, take.mime)}</pre>
+            <p className="text-sm">Download both, then run this in the backend folder:</p>
+            <pre className="overflow-x-auto rounded-xl bg-surface2 p-3 text-sm">{compareCommand(take.stem, take.mime)}</pre>
           </div>
         )}
       </div>

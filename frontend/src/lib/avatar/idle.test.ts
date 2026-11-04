@@ -103,3 +103,18 @@ describe("smoothing", () => {
     expect(r.spread["hand_l.index"]).toBeCloseTo(0.1);
   });
 });
+
+describe("reduced motion (calm idle)", () => {
+  it("switches off breathing, sway and head drift but keeps the relaxed hands", () => {
+    const calm = withRelaxedRest({}, 3.3, true);
+    const lively = withRelaxedRest({}, 3.3, false);
+    for (const bone of ["spine", "chest", "neck", "head"]) expect(calm.pose[bone]).toEqual([0, 0, 0]);
+    expect(lively.pose.chest).not.toEqual([0, 0, 0]);
+    expect(calm.pose["hand_l.index"]).toEqual(lively.pose["hand_l.index"]);
+    expect(calm.pose.foreArm_l).toEqual(lively.pose.foreArm_l);
+  });
+
+  it("is constant over time", () => {
+    expect(withRelaxedRest({}, 0, true)).toEqual(withRelaxedRest({}, 41.7, true));
+  });
+});
