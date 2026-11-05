@@ -63,6 +63,41 @@ def video_to_features(video: Path, stride: int = 1) -> np.ndarray:
     return np.stack(rows)
 
 
+def video_to_features_face(video: Path, stride: int = 1) -> tuple[np.ndarray, np.ndarray]:
+    """Like video_to_features, and also the face block (T, FACE_DIM) of the same frames. The body block is identical to video_to_features' output."""
+    import cv2
+    import mediapipe as mp
+
+    from app.recognition.face import face_block, select_face
+
+    cap = cv2.VideoCapture(str(video))
+    if not cap.isOpened():
+        raise DatasetError(f"Cannot open video: {video}")
+    rows: list[np.ndarray] = []
+    faces: list[np.ndarray] = []
+    try:
+        with mp.solutions.holistic.Holistic(static_image_mode=False, model_complexity=0) as holistic:
+            index = 0
+            while len(rows) < MAX_FRAMES:
+                ok, bgr = cap.read()
+                if not ok:
+                    break
+                index += 1
+                if (index - 1) % stride:
+                    continue
+                results = holistic.process(cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB))
+                frame = results_to_frame(results)
+                feats, report = normalize_frame(frame)
+                if report.valid:
+                    rows.append(feats)
+                    faces.append(face_block(frame.model_copy(update={"face": select_face(_points(results.face_landmarks))})))
+    finally:
+        cap.release()
+    if len(rows) < MIN_USABLE_FRAMES:
+        raise DatasetError(f"{video.name}: only {len(rows)} usable frame(s) (pose not detected)")
+    return np.stack(rows), np.stack(faces)
+
+
 def process_videos(index_csv: Path, out_dir: Path, stride: int = 1) -> tuple[int, list[str]]:
     """index_csv columns: video,label,signer_id (video path relative to the CSV).
 

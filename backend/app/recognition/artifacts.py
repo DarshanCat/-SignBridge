@@ -6,6 +6,7 @@ from pathlib import Path
 
 import torch
 
+from app.recognition.face import FACE_DIM
 from app.recognition.landmarks import FEATURE_DIM
 from app.recognition.models import build_model
 
@@ -28,6 +29,7 @@ class ModelConfig:
     arch: str = "bigru"  # cnn, bigru or transformer
     heads: int = 4  # transformer only
     max_gap: int = 0  # hand gap interpolation used in preprocessing, identical at training and inference
+    face: bool = False  # the model also takes the face block (eyebrows, eyes, mouth); feature_dim is then FEATURE_DIM + FACE_DIM
 
 
 def save_artifacts(model: torch.nn.Module, config: ModelConfig, model_dir: Path) -> None:
@@ -40,8 +42,9 @@ def load_artifacts(model_dir: Path) -> tuple[torch.nn.Module, ModelConfig]:
     try:
         raw = json.loads((model_dir / LABELS_FILE).read_text(encoding="utf-8"))
         config = ModelConfig(**raw)
-        if config.feature_dim != FEATURE_DIM:
-            raise ValueError(f"model expects {config.feature_dim} features per frame but the pipeline produces {FEATURE_DIM}")
+        expected = FEATURE_DIM + (FACE_DIM if config.face else 0)
+        if config.feature_dim != expected:
+            raise ValueError(f"model expects {config.feature_dim} features per frame but the pipeline produces {expected}")
         if config.seq_len < 1 or len(config.classes) < 2:
             raise ValueError("invalid seq_len or class list in labels.json")
         model = build_model(config)

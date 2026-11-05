@@ -15,6 +15,7 @@ class LandmarkFrame(BaseModel):
     pose: list[Point] | None = Field(default=None, description="33 pose landmarks")
     left_hand: list[Point] | None = Field(default=None, description="21 hand landmarks")
     right_hand: list[Point] | None = Field(default=None, description="21 hand landmarks")
+    face: list[Point] | None = Field(default=None, max_length=50, description="the 50 eyebrow, eye and mouth points in app.recognition.face.FACE_INDICES order; optional")
 
 
 class LandmarkSequenceRequest(BaseModel):

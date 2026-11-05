@@ -73,3 +73,18 @@ describe("aspect correction", () => {
     expect(yScaleFor(16 / 9)).toBeCloseTo(1);
   });
 });
+
+describe("face points", () => {
+  const full = Array.from({ length: 468 }, (_, i) => ({ x: i, y: i / 2, z: 0.5 }));
+  it("selects the 50 eyebrow, eye and mouth points in FACE_INDICES order and rescales y like the pose", () => {
+    const f = toFrame({ poseLandmarks: [{ x: 1, y: 2, z: 0 }], faceLandmarks: full }, 4 / 3);
+    expect(f.face).toHaveLength(50);
+    expect(f.face![0].x).toBe(70);
+    expect(f.face![0].y).toBeCloseTo((70 / 2) * yScaleFor(4 / 3), 9);
+    expect(new Set(f.face!.map((p) => p.x)).size).toBe(50);
+  });
+  it("is null when the face was not found or the mesh is not the full 468 points", () => {
+    expect(toFrame({ poseLandmarks: [{ x: 1, y: 2, z: 0 }] }).face).toBeNull();
+    expect(toFrame({ faceLandmarks: full.slice(0, 100) }).face).toBeNull();
+  });
+});

@@ -17,6 +17,7 @@ import torch
 from torch import nn
 
 from app.recognition.artifacts import ModelConfig, save_artifacts
+from app.recognition.face import FACE_DIM
 from app.recognition.landmarks import FEATURE_DIM
 from app.recognition.models import ARCHITECTURES, build_model
 from training.augment import AugmentConfig, DeployAugmentConfig
@@ -57,7 +58,7 @@ def train(
     lr: float = 1e-3, seq_len: int = 32, hidden: int = 128, layers: int = 2, heads: int = 4, dropout: float = 0.3,
     patience: int = 8, noise_std: float = 0.01, class_weights: bool = False, augment: bool = False, max_gap: int = 0,
     num_threads: int | None = None, evaluate_test: bool = True, deploy_augment: bool = False,
-    progress: bool = False, checkpoint: bool = False, resume: bool = False,
+    progress: bool = False, checkpoint: bool = False, resume: bool = False, face_dir: Path | None = None,
 ) -> dict:
     if arch not in ARCHITECTURES:
         raise DatasetError(f"unknown architecture {arch!r}; expected one of {ARCHITECTURES}")
@@ -73,12 +74,14 @@ def train(
     if not evaluate_test:  # pilot mode: the test files are not opened by validation either
         held_out = frozenset(s.path for s in split_samples(read_manifest(manifest), seed)[0]["test"])
     validate(manifest.parent, exclude_paths=held_out)  # refuses to train on a dataset that does not pass validation
-    data = load_splits(manifest, seed, load_test=evaluate_test)  # evaluate_test=False: the test features are never read
+    if face_dir is not None and (augment or deploy_augment):
+        raise DatasetError("the face block is not supported with the landmark augmentations (they only know the body layout)")
+    data = load_splits(manifest, seed, load_test=evaluate_test, face_dir=face_dir)  # evaluate_test=False: the test features are never read
     classes = data.classes
     tr, va = data.stores["train"], data.stores["val"]
     missing = [c for i, c in enumerate(classes) if i not in set(tr.labels.tolist())]
 
-    config = ModelConfig(classes, FEATURE_DIM, seq_len, hidden, layers, dropout, arch, heads, max_gap)
+    config = ModelConfig(classes, FEATURE_DIM + (FACE_DIM if face_dir is not None else 0), seq_len, hidden, layers, dropout, arch, heads, max_gap, face_dir is not None)
     model = build_model(config)
     opt = torch.optim.Adam(model.parameters(), lr=lr)
     weight = None
@@ -94,7 +97,7 @@ def train(
     signature = {
         "arch": arch, "seed": seed, "batch_size": batch_size, "lr": lr, "seq_len": seq_len, "hidden": hidden, "layers": layers, "heads": heads,
         "dropout": dropout, "patience": patience, "noise_std": noise_std, "class_weights": class_weights, "augment": augment,
-        "deploy_augment": deploy_augment, "max_gap": max_gap, "classes": classes, "train_samples": len(tr),
+        "deploy_augment": deploy_augment, "max_gap": max_gap, "classes": classes, "train_samples": len(tr), "face": face_dir is not None,
     }
     out_dir.mkdir(parents=True, exist_ok=True)
     if resume:
@@ -161,7 +164,7 @@ def train(
         "hyperparameters": {
             "arch": arch, "seed": seed, "epochs_max": epochs, "epochs_run": epochs_run, "batch_size": batch_size, "lr": lr,
             "seq_len": seq_len, "hidden": hidden, "layers": layers, "heads": heads, "dropout": dropout, "patience": patience,
-            "noise_std": noise_std, "class_weights": class_weights, "augment": augment, "max_gap": max_gap, "deploy_augment": deploy_augment,
+            "noise_std": noise_std, "class_weights": class_weights, "augment": augment, "max_gap": max_gap, "deploy_augment": deploy_augment, "face": face_dir is not None,
         },
         "parameters": int(sum(p.numel() for p in model.parameters())),
         "environment": {"python": platform.python_version(), "torch": torch.__version__, "platform": platform.platform()},
@@ -185,16 +188,23 @@ def main() -> int:
     p.add_argument("--max-gap", type=int, default=0, help="interpolate missing hand gaps up to this many frames")
     p.add_argument("--threads", type=int, default=None, help="limit torch CPU threads")
     p.add_argument("--class-weights", action="store_true", help="inverse-frequency loss weights (train split)")
+    p.add_argument("--face-dir", type=Path, default=None, help="folder with the face blocks (training.face_stream output); the model then also takes the face")
+    p.add_argument("--no-test", action="store_true", help="validation only: the test features are never read")
     a = p.parse_args()
     try:
         report = train(
             a.manifest, a.out, arch=a.arch, seed=a.seed, epochs=a.epochs, class_weights=a.class_weights, augment=a.augment,
             max_gap=a.max_gap, num_threads=a.threads, deploy_augment=a.deploy_augment, patience=a.patience, progress=True,
-            checkpoint=a.checkpoint or a.resume, resume=a.resume,
+            checkpoint=a.checkpoint or a.resume, resume=a.resume, face_dir=a.face_dir, evaluate_test=not a.no_test,
         )
     except DatasetError as exc:
         print(f"Dataset error: {exc}", file=sys.stderr)
         return 2
+    if a.no_test:
+        v = report["results"]["val"]
+        print(f"Validation only ({a.arch}): top1={v['top1_accuracy']:.4f} macro_f1={v['macro_f1']:.4f}; the test split was not read")
+        print(f"Artifacts and metrics.json written to {a.out}")
+        return 0
     t = report["results"]["test"]
     print(
         f"Test ({report['split_method']} split, {a.arch}): top1={t['top1_accuracy']:.3f} top5={t['top5_accuracy']:.3f} "

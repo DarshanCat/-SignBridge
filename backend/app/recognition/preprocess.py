@@ -1,5 +1,6 @@
 import numpy as np
 
+from app.recognition.face import FACE_DIM, resample_block
 from app.recognition.landmarks import FEATURE_DIM, HAND_POINTS, POSE_POINTS
 
 POSE_END = POSE_POINTS * 3
@@ -61,3 +62,12 @@ def fill_hand_gaps(features: np.ndarray, max_gap: int) -> np.ndarray:
 def prepare_sequence(features: np.ndarray, seq_len: int, max_gap: int = 0) -> np.ndarray:
     """The single preprocessing path shared by training and inference: gap fill, then fixed length resample."""
     return resample_sequence(fill_hand_gaps(features, max_gap), seq_len)
+
+
+def prepare_sequence_full(features: np.ndarray, seq_len: int, max_gap: int = 0) -> np.ndarray:
+    """prepare_sequence for (T, FEATURE_DIM) body features, or for (T, FEATURE_DIM + FACE_DIM) body plus face block features:
+    the body part takes the normal path, the face part is only resampled (it has no hand gaps)."""
+    if features.ndim == 2 and features.shape[1] == FEATURE_DIM + FACE_DIM:
+        body = prepare_sequence(features[:, :FEATURE_DIM], seq_len, max_gap)
+        return np.concatenate([body, resample_block(features[:, FEATURE_DIM:], seq_len)], axis=1)
+    return prepare_sequence(features, seq_len, max_gap)

@@ -1,3 +1,5 @@
+import { FACE_INDICES, FULL_FACE_POINTS } from "./faceIndices";
+
 export interface Point {
   x: number;
   y: number;
@@ -9,9 +11,12 @@ export interface LandmarkFrame {
   pose: Point[] | null;
   left_hand: Point[] | null;
   right_hand: Point[] | null;
+  /** The 50 eyebrow, eye and mouth points (FACE_INDICES order); null when no face was found. Optional: the backend ignores it unless the model uses the face. */
+  face?: Point[] | null;
 }
 
 export interface HolisticResults {
+  faceLandmarks?: Point[];
   poseLandmarks?: Point[];
   leftHandLandmarks?: Point[];
   rightHandLandmarks?: Point[];
@@ -37,7 +42,8 @@ const strip = (pts: Point[] | undefined, ys: number): Point[] | null =>
 /** aspect: width / height of the image the landmarks were measured on (the camera video); omit for no correction. */
 export function toFrame(r: HolisticResults, aspect: number = REFERENCE_ASPECT): LandmarkFrame {
   const ys = yScaleFor(aspect);
-  return { pose: strip(r.poseLandmarks, ys), left_hand: strip(r.leftHandLandmarks, ys), right_hand: strip(r.rightHandLandmarks, ys) };
+  const face = r.faceLandmarks && r.faceLandmarks.length === FULL_FACE_POINTS ? strip(FACE_INDICES.map((i) => r.faceLandmarks![i]), ys) : null;
+  return { pose: strip(r.poseLandmarks, ys), left_hand: strip(r.leftHandLandmarks, ys), right_hand: strip(r.rightHandLandmarks, ys), face };
 }
 
 /** Append a frame, keeping only the newest `max` frames (landmarks only; no video is stored). */

@@ -24,7 +24,7 @@ from training.train import predict_probs
 from training.validate_dataset import validate
 
 
-def evaluate(manifest: Path, model_dir: Path) -> dict:
+def evaluate(manifest: Path, model_dir: Path, face_dir: Path | None = None) -> dict:
     metrics_file = model_dir / "metrics.json"
     if not metrics_file.is_file():
         raise DatasetError(f"{metrics_file} not found; it records the seed used for the split")
@@ -35,7 +35,7 @@ def evaluate(manifest: Path, model_dir: Path) -> dict:
         raise DatasetError(str(exc)) from exc
 
     validate(manifest.parent)
-    data = load_splits(manifest, seed)
+    data = load_splits(manifest, seed, face_dir=face_dir)
     test = data.stores["test"]
     unknown = sorted({s.label for s in data.samples["test"]} - set(config.classes))
     if unknown:
@@ -96,9 +96,10 @@ def main() -> int:
     p.add_argument("--manifest", type=Path, required=True)
     p.add_argument("--model-dir", type=Path, default=Path("models"))
     p.add_argument("--out", type=Path, required=True, help="JSON report path; a .md copy is written beside it")
+    p.add_argument("--face-dir", type=Path, default=None, help="face blocks folder, for a model trained with the face")
     a = p.parse_args()
     try:
-        report = evaluate(a.manifest, a.model_dir)
+        report = evaluate(a.manifest, a.model_dir, a.face_dir)
     except DatasetError as exc:
         print(f"Error: {exc}", file=sys.stderr)
         return 2

@@ -5,7 +5,7 @@ import numpy as np
 import torch
 
 from app.recognition.artifacts import ModelConfig, load_artifacts
-from app.recognition.preprocess import prepare_sequence
+from app.recognition.preprocess import prepare_sequence_full
 
 
 @dataclass(frozen=True)
@@ -22,7 +22,7 @@ class SignRecognizer:
     @torch.no_grad()
     def predict(self, features: np.ndarray, top_k: int = 3) -> list[Prediction]:
         """Softmax probabilities from the trained model for one (T, FEATURE_DIM) sequence."""
-        x = torch.from_numpy(prepare_sequence(features, self.config.seq_len, self.config.max_gap)).unsqueeze(0)
+        x = torch.from_numpy(prepare_sequence_full(features, self.config.seq_len, self.config.max_gap)).unsqueeze(0)
         probs = torch.softmax(self.model(x), dim=-1)[0]
         k = min(top_k, len(self.config.classes))
         vals, idx = torch.topk(probs, k)
