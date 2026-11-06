@@ -23,6 +23,37 @@ class AugmentConfig:
     p_scale: float = 0.8
     p_speed: float = 0.8
     p_jitter: float = 0.5
+    p_mirror: float = 0.0  # probability of mirroring the whole sign (a left-handed signer); 0 keeps every earlier run and its random stream unchanged
+
+
+# MediaPipe pose landmark pairs that swap sides under a mirror (the nose, index 0, stays). Hands are swapped as whole blocks.
+# MediaPipe pose layout: 1-3 left eye (inner, centre, outer), 4-6 right eye, 7 and 8 ears, 9 and 10 mouth corners, 11 and 12 shoulders, then
+# elbows, wrists, pinky, index, thumb, hips, knees, ankles, heels and foot indices, always left then right.
+POSE_MIRROR_PAIRS = [(1, 4), (2, 5), (3, 6), (7, 8), (9, 10), (11, 12), (13, 14), (15, 16), (17, 18), (19, 20), (21, 22), (23, 24), (25, 26), (27, 28), (29, 30), (31, 32)]
+
+
+def mirror_features(x: np.ndarray) -> np.ndarray:
+    """The same sign as a left-handed signer would make it: a mirror image about the vertical axis through the shoulder midpoint.
+
+    The features are already centred on that midpoint, so mirroring is x -> -x for every landmark, then the left and right sides trade
+    places: pose landmark pairs (eyes, ears, mouth corners, shoulders, elbows, wrists, ...) and the two hand blocks (a mirrored right hand is a
+    left hand, and the landmark order inside a hand is the same for both). y and z are unchanged. A missing (all zero) hand stays missing, now on
+    the other side. Applying it twice gives the input back.
+    """
+    from app.recognition.preprocess import LEFT_END, POSE_END
+
+    if x.ndim != 2 or x.shape[1] != FEATURE_DIM:
+        raise ValueError(f"expected shape (T, {FEATURE_DIM}), got {x.shape}")
+    out = x.astype(np.float32, copy=True)
+    pose = out[:, :POSE_END].reshape(x.shape[0], -1, 3)
+    for a, b in POSE_MIRROR_PAIRS:
+        pose[:, [a, b]] = pose[:, [b, a]]
+    out[:, :POSE_END] = pose.reshape(x.shape[0], -1)
+    left, right = out[:, POSE_END:LEFT_END].copy(), out[:, LEFT_END:].copy()
+    out[:, POSE_END:LEFT_END], out[:, LEFT_END:] = right, left
+    cols = np.arange(FEATURE_DIM).reshape(-1, 3)[:, 0]  # the x columns
+    out[:, cols] = -out[:, cols]
+    return out + np.float32(0.0)  # turn a possible -0.0 into 0.0 so missing points stay exactly zero
 
 
 def rotate_xy(x: np.ndarray, degrees: float) -> np.ndarray:
@@ -60,6 +91,8 @@ def augment_sequence(x: np.ndarray, rng: np.random.Generator, cfg: AugmentConfig
     if x.ndim != 2 or x.shape[1] != FEATURE_DIM:
         raise ValueError(f"expected shape (T, {FEATURE_DIM}), got {x.shape}")
     out = x.astype(np.float32, copy=True)
+    if cfg.p_mirror > 0 and rng.random() < cfg.p_mirror:  # drawn only when enabled, so the random stream of earlier runs is unchanged
+        out = mirror_features(out)
     if rng.random() < cfg.p_speed:
         out = speed_resample(out, float(rng.uniform(*cfg.speed_range)))
     if rng.random() < cfg.p_jitter and out.shape[0] >= 8:

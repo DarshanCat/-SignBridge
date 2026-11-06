@@ -66,12 +66,18 @@ export function RecordSessionPanel({ capture, backendUp }: { capture: LandmarkCa
   }, [backendUp]);
 
   /** Fill the sign list from a preset: undefined is the 50 grammar words, "conversation" only the conversation vocabulary signs that must be recorded. */
-  async function loadPreset(preset: "conversation" | undefined) {
+  async function loadPreset(preset: "conversation" | "alphabet" | undefined) {
     try {
       const p = await apiGet<RecordPlan>(preset ? `/api/record/plan?preset=${preset}` : "/api/record/plan");
       setGlossText(p.glosses.join("\n"));
       setPlanError(null);
-      setPresetNote(preset ? `${p.glosses.length} signs to record (the others of the vocabulary are INCLUDE classes the model already knows)` : `${p.glosses.length} grammar words`);
+      setPresetNote(
+        preset === "conversation"
+          ? `${p.glosses.length} signs to record (the others of the vocabulary are INCLUDE classes the model already knows)`
+          : preset === "alphabet"
+            ? `${p.glosses.length} letters: with all of them the avatar can spell words that have no sign`
+            : `${p.glosses.length} grammar words`,
+      );
     } catch (e) {
       setPlanError(e instanceof Error ? e.message : "Could not load the preset.");
     }
@@ -198,6 +204,9 @@ export function RecordSessionPanel({ capture, backendUp }: { capture: LandmarkCa
               </button>
               <button type="button" className="btn btn-sm" disabled={!backendUp} onClick={() => void loadPreset("conversation")}>
                 Conversation vocabulary
+              </button>
+              <button type="button" className="btn btn-sm" disabled={!backendUp} onClick={() => void loadPreset("alphabet")}>
+                ISL alphabet
               </button>
               {presetNote && <span className="text-sm text-ink2" aria-live="polite">{presetNote}</span>}
             </div>

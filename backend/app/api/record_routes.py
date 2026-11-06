@@ -90,7 +90,7 @@ class RecordPlanResponse(BaseModel):
 def record_plan(preset: str | None = None, settings: Settings = Depends(get_settings)) -> RecordPlanResponse:
     """The glosses a guided session should record, in order. preset=conversation lists only the conversation vocabulary signs that must be recorded."""
     from app.conversation_vocab import load_vocabulary
-    from app.recording import PRIORITY_GLOSSES
+    from app.recording import PRIORITY_GLOSSES, alphabet_glosses
 
     if preset == "conversation":
         try:
@@ -101,6 +101,9 @@ def record_plan(preset: str | None = None, settings: Settings = Depends(get_sett
             glosses=todo, priority=[g for g in PRIORITY_GLOSSES if g in todo],
             note="Conversation vocabulary signs that are not INCLUDE classes (they must be recorded).",
         )
+    if preset == "alphabet":
+        letters = alphabet_glosses()
+        return RecordPlanResponse(glosses=letters, priority=[], note="The ISL alphabet: one clip per letter (FS-A to FS-Z). With all 26 the avatar spells words that have no sign of their own.")
     if preset is not None:
         raise HTTPException(status_code=422, detail="Unknown preset.")
 

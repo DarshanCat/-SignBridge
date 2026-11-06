@@ -57,7 +57,7 @@ def train(
     manifest: Path, out_dir: Path, *, arch: str = "bigru", seed: int = 0, epochs: int = 40, batch_size: int = 16,
     lr: float = 1e-3, seq_len: int = 32, hidden: int = 128, layers: int = 2, heads: int = 4, dropout: float = 0.3,
     patience: int = 8, noise_std: float = 0.01, class_weights: bool = False, augment: bool = False, max_gap: int = 0,
-    num_threads: int | None = None, evaluate_test: bool = True, deploy_augment: bool = False,
+    num_threads: int | None = None, evaluate_test: bool = True, deploy_augment: bool = False, mirror: float = 0.0,
     progress: bool = False, checkpoint: bool = False, resume: bool = False, face_dir: Path | None = None,
 ) -> dict:
     if arch not in ARCHITECTURES:
@@ -89,7 +89,9 @@ def train(
         counts = np.bincount(tr.labels, minlength=len(classes)).astype(np.float32)
         weight = torch.from_numpy(counts.sum() / (len(classes) * np.maximum(counts, 1)))
     loss_fn = nn.CrossEntropyLoss(weight=weight)
-    aug = AugmentConfig() if augment else None
+    if mirror and not augment:
+        raise DatasetError("--mirror is part of the landmark augmentation: use it together with --augment")
+    aug = AugmentConfig(p_mirror=mirror) if augment else None
     deploy = DeployAugmentConfig() if deploy_augment else None
     x_val = va.all(seq_len, max_gap)
     best_f1, best_state, stale, epochs_run = -1.0, None, 0, 0
@@ -97,7 +99,7 @@ def train(
     signature = {
         "arch": arch, "seed": seed, "batch_size": batch_size, "lr": lr, "seq_len": seq_len, "hidden": hidden, "layers": layers, "heads": heads,
         "dropout": dropout, "patience": patience, "noise_std": noise_std, "class_weights": class_weights, "augment": augment,
-        "deploy_augment": deploy_augment, "max_gap": max_gap, "classes": classes, "train_samples": len(tr), "face": face_dir is not None,
+        "deploy_augment": deploy_augment, "max_gap": max_gap, "classes": classes, "train_samples": len(tr), "face": face_dir is not None, **({"mirror": mirror} if mirror else {}),
     }
     out_dir.mkdir(parents=True, exist_ok=True)
     if resume:
@@ -164,7 +166,7 @@ def train(
         "hyperparameters": {
             "arch": arch, "seed": seed, "epochs_max": epochs, "epochs_run": epochs_run, "batch_size": batch_size, "lr": lr,
             "seq_len": seq_len, "hidden": hidden, "layers": layers, "heads": heads, "dropout": dropout, "patience": patience,
-            "noise_std": noise_std, "class_weights": class_weights, "augment": augment, "max_gap": max_gap, "deploy_augment": deploy_augment, "face": face_dir is not None,
+            "noise_std": noise_std, "class_weights": class_weights, "augment": augment, "max_gap": max_gap, "deploy_augment": deploy_augment, "face": face_dir is not None, "mirror": mirror,
         },
         "parameters": int(sum(p.numel() for p in model.parameters())),
         "environment": {"python": platform.python_version(), "torch": torch.__version__, "platform": platform.platform()},
@@ -189,13 +191,14 @@ def main() -> int:
     p.add_argument("--threads", type=int, default=None, help="limit torch CPU threads")
     p.add_argument("--class-weights", action="store_true", help="inverse-frequency loss weights (train split)")
     p.add_argument("--face-dir", type=Path, default=None, help="folder with the face blocks (training.face_stream output); the model then also takes the face")
+    p.add_argument("--mirror", type=float, default=0.0, help="probability of mirroring a training sign (left-handed signers); needs --augment")
     p.add_argument("--no-test", action="store_true", help="validation only: the test features are never read")
     a = p.parse_args()
     try:
         report = train(
             a.manifest, a.out, arch=a.arch, seed=a.seed, epochs=a.epochs, class_weights=a.class_weights, augment=a.augment,
             max_gap=a.max_gap, num_threads=a.threads, deploy_augment=a.deploy_augment, patience=a.patience, progress=True,
-            checkpoint=a.checkpoint or a.resume, resume=a.resume, face_dir=a.face_dir, evaluate_test=not a.no_test,
+            checkpoint=a.checkpoint or a.resume, resume=a.resume, face_dir=a.face_dir, evaluate_test=not a.no_test, mirror=a.mirror,
         )
     except DatasetError as exc:
         print(f"Dataset error: {exc}", file=sys.stderr)

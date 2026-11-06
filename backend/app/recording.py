@@ -76,6 +76,11 @@ def grammar_words(lex) -> list[str]:
     return first + [g for g in words if g not in first]
 
 
+def alphabet_glosses() -> list[str]:
+    """FS-A to FS-Z: the clip names the avatar looks for when it spells a word (frontend letterGloss)."""
+    return [f"FS-{c}" for c in "ABCDEFGHIJKLMNOPQRSTUVWXYZ"]
+
+
 def find_segments(features: np.ndarray, pose_ok: np.ndarray) -> list:
     """The signs the live segmenter would find in this take (frames without a body pose are skipped, as live)."""
     seg = SignSegmenter()

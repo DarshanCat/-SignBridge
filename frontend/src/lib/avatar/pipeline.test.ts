@@ -38,4 +38,27 @@ describe("textToClips", () => {
     });
     expect(twice.clips).toHaveLength(2);
   });
+
+  it("spells an unknown word letter by letter when every ISL alphabet clip (FS-A to FS-Z) exists, and reports the whole word as missing otherwise", async () => {
+    const spelled: TextToGloss = {
+      gloss: ["HELLO", "FS:RAJ"],
+      tokens: [{ gloss: "HELLO", kind: "sign", source: "hello" }, { gloss: "FS:RAJ", kind: "fingerspell", source: "raj", letters: ["R", "A", "J"] }],
+      nmm: [], tense: "present", dropped: [], fingerspelled: ["RAJ"], note: "",
+    } as TextToGloss;
+    const run = (have: string[]) =>
+      textToClips("Hello Raj", {
+        textToGloss: async () => spelled,
+        plan: async (g): Promise<AvatarPlan> => ({
+          steps: g.map((x) => ({ gloss: x, available: have.includes(x), clip_url: have.includes(x) ? `/animations/${x.toLowerCase()}.json` : null })),
+          missing: g.filter((x) => !have.includes(x)), playable: true, message: "",
+        }),
+        load: async (steps) => ({ clips: steps.filter((x) => x.available).map((x) => clip(x.gloss)), failed: [] }),
+      });
+    const all = await run(["HELLO", "FS-R", "FS-A", "FS-J"]);
+    expect(all.clips.map((c) => c.gloss)).toEqual(["HELLO", "FS-R", "FS-A", "FS-J"]);
+    expect(all.views.map((v) => v.status)).toEqual(["clip", "fingerspelled"]);
+    const partial = await run(["HELLO", "FS-R", "FS-A"]); // FS-J is missing: nothing is invented, the word is skipped
+    expect(partial.clips.map((c) => c.gloss)).toEqual(["HELLO"]);
+    expect(partial.views[1]).toMatchObject({ gloss: "FS:RAJ", status: "no_clip" });
+  });
 });

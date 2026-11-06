@@ -1,0 +1,69 @@
+{
+ "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+ "cores": 16,
+ "startup_ms": 1254,
+ "extraction_ms_per_frame": {
+  "n": 227,
+  "median": 148.8,
+  "p95": 177.6,
+  "min": 108.4,
+  "max": 205.1,
+  "mean": 152.39
+ },
+ "extraction_fps_sustained": 6.7,
+ "frame_decode_and_draw_ms": {
+  "n": 236,
+  "median": 2.8,
+  "p95": 4.7,
+  "min": 1.7,
+  "max": 11.6,
+  "mean": 3.14
+ },
+ "ws_connect_to_ready_ms": 164.7,
+ "model": {
+  "type": "ready",
+  "classes": 262,
+  "architecture": "cnn",
+  "threshold": 0.7,
+  "threshold_source": "validation"
+ },
+ "ws_roundtrip_empty_ms": {
+  "n": 40,
+  "median": 0.7,
+  "p95": 2,
+  "min": 0.4,
+  "max": 2.8,
+  "mean": 0.85
+ },
+ "ws_predict_whole_sign_ms": {
+  "n": 36,
+  "median": 33.6,
+  "p95": 201.3,
+  "min": 27.8,
+  "max": 447.2,
+  "mean": 53.7
+ },
+ "predict_payload_kb": 265.4,
+ "frames_per_sign": [
+  77,
+  80,
+  79
+ ],
+ "ws_stream_chunk_8_frames_ms": {
+  "n": 120,
+  "median": 1.7,
+  "p95": 11.1,
+  "min": 0.1,
+  "max": 34.1,
+  "mean": 2.97
+ },
+ "stream_chunk_payload_kb": 28,
+ "machine": {
+  "cpu": "13th Gen Intel(R) Core(TM) i5-13450HX",
+  "logical_cpus": 16,
+  "ram_gb": 16.8,
+  "platform": "win32 10.0.26300"
+ },
+ "note": "Headless Chrome, CPU delegate (the app's default), 640x480 frames from real INCLUDE sign videos, one frame in flight at a time. The server was running locally, so the WebSocket numbers have no network distance.",
+ "attempts": 1
+}

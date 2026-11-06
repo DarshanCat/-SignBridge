@@ -55,3 +55,14 @@ def test_model_signs_endpoint_lists_every_class() -> None:
     body = client.get("/api/model/signs").json()
     assert body["loaded"] and body["count"] == len(json.loads(LABELS.read_text(encoding="utf-8"))["classes"])
     assert {"Hello", "Thank you"} <= {s["label"] for s in body["signs"]}
+
+
+def test_alphabet_preset_lists_the_26_letter_glosses_the_avatar_looks_for() -> None:
+    plan = client.get("/api/record/plan", params={"preset": "alphabet"}).json()
+    assert plan["glosses"] == [f"FS-{c}" for c in "ABCDEFGHIJKLMNOPQRSTUVWXYZ"] and len(plan["glosses"]) == 26
+    from app.recording import GLOSS_RE
+    from nlp.fingerspell import fingerspell
+
+    assert all(GLOSS_RE.match(g) for g in plan["glosses"])  # the recorder accepts them
+    token, letters = fingerspell("Raj")
+    assert token == "FS:RAJ" and [f"FS-{c}" for c in letters] == ["FS-R", "FS-A", "FS-J"]  # the names text to gloss spells with are the ones recorded
