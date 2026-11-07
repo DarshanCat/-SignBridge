@@ -28,6 +28,7 @@ class Settings(BaseSettings):
     preload_nlp: bool = True  # load spaCy at startup instead of on the first request
     spacy_model: str = "en_core_web_sm"
     record_dir: Path = BACKEND_DIR.parent / "data" / "recorded"  # self-recorded landmark takes (no video), git-ignored
+    review_dir: Path = BACKEND_DIR.parent / "data" / "reviews"  # signer review records (JSON lines, one file per reviewer), git-ignored
     animation_dir: Path = BACKEND_DIR.parent / "frontend" / "public" / "animations"
 
 

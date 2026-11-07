@@ -7,6 +7,7 @@ import { EnglishToSignPanel } from "@/components/EnglishToSignPanel";
 import { KnownSignsPanel } from "@/components/KnownSignsPanel";
 import { TestSentencesPanel } from "@/components/TestSentencesPanel";
 import { LandmarkCheckPanel } from "@/components/LandmarkCheckPanel";
+import { ReviewPanel } from "@/components/ReviewPanel";
 import { RecordSignPanel } from "@/components/RecordSignPanel";
 import { StatusPanel } from "@/components/StatusPanel";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -17,16 +18,17 @@ import { Footer } from "@/components/Footer";
 import { RECORDING_DISABLED } from "@/lib/deployment";
 import { buildStatusItems } from "@/lib/status";
 
-type Mode = "conversation" | "sign-to-english" | "english-to-sign" | "record-sign" | "landmark-check";
+type Mode = "conversation" | "sign-to-english" | "english-to-sign" | "record-sign" | "signer-review" | "landmark-check";
 const ALL_TABS: { id: Mode; label: string }[] = [
   { id: "conversation", label: "Conversation" },
   { id: "sign-to-english", label: "Sign → English" },
   { id: "english-to-sign", label: "English → Sign" },
   { id: "record-sign", label: "Record sign" },
+  { id: "signer-review", label: "Signer review" },
   { id: "landmark-check", label: "Landmark check" },
 ];
 // the public deployment has no recorder (NEXT_PUBLIC_DISABLE_RECORDING=1)
-const TABS = ALL_TABS.filter((t) => !(RECORDING_DISABLED && t.id === "record-sign"));
+const TABS = ALL_TABS.filter((t) => !(RECORDING_DISABLED && (t.id === "record-sign" || t.id === "signer-review"))); // both write to the local disk
 
 export default function Home() {
   const [mode, setMode] = useState<Mode>("conversation");
@@ -129,6 +131,7 @@ export default function Home() {
             )}
             {(mode === "conversation" || mode === "sign-to-english") && <KnownSignsPanel backendUp={backendUp} />}
             {mode === "record-sign" && !RECORDING_DISABLED && <RecordSignPanel capture={capture} backendUp={backendUp} />}
+            {mode === "signer-review" && !RECORDING_DISABLED && <ReviewPanel backendUp={backendUp} />}
             {mode === "landmark-check" && <LandmarkCheckPanel capture={capture} />}
           </div>
           <div className="mt-6">
