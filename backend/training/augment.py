@@ -56,6 +56,33 @@ def mirror_features(x: np.ndarray) -> np.ndarray:
     return out + np.float32(0.0)  # turn a possible -0.0 into 0.0 so missing points stay exactly zero
 
 
+BASE_FPS = 12.5  # the rate of the stored INCLUDE features: 25 fps videos, every second frame
+
+
+def thin_to_rate(seq: np.ndarray, rate: float, phase: float = 0.0, base_fps: float = BASE_FPS) -> np.ndarray:
+    """The frames of a sequence recorded at base_fps that are nearest to the times (k + phase) / rate, as a camera sampling at `rate` frames per second would
+    deliver them. A rate at or above base_fps returns the sequence unchanged; at least 2 frames are always kept. Works for any width (body, or body and face)."""
+    if rate >= base_fps - 1e-9:
+        return seq
+    step = base_fps / rate
+    idx, k = [], phase
+    while True:
+        i = int(round(k * step))
+        if i >= len(seq):
+            break
+        idx.append(i)
+        k += 1
+    if len(idx) < 2:
+        idx = [0, len(seq) - 1]
+    return seq[idx]
+
+
+def fps_augment(seq: np.ndarray, rng: np.random.Generator, lo: float = 6.0, hi: float = BASE_FPS) -> np.ndarray:
+    """Frame rate augmentation: a rate drawn uniformly from [lo, hi] frames per second and a random sampling phase, then thin_to_rate. The live browser path
+    delivers about 6.7 frames per second (docs/evaluation/LATENCY.md) against the 12.5 of the training features."""
+    return thin_to_rate(seq, float(rng.uniform(lo, hi)), float(rng.uniform(0.0, 1.0)))
+
+
 def rotate_xy(x: np.ndarray, degrees: float) -> np.ndarray:
     """Rotate every landmark's (x, y) by `degrees`; z is unchanged. Layout: 75 landmarks of (x, y, z)."""
     a = np.deg2rad(degrees)

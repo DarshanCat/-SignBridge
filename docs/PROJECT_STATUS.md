@@ -1,5 +1,9 @@
 # Project status
 
+## Frame rate augmentation for the CNN (2026-11-07)
+
+`training/augment.py` (`thin_to_rate`, `fps_augment`), `train --fps-augment LOW HIGH` (off by default, no random numbers drawn when off, so old runs stay reproducible; `tests/test_fps_augment.py`). CNN, 3 seeds, same settings as the baseline, `--fps-augment 6 12.5`, validation only (`--no-test`; test split not read, disclosure list unchanged). Validation macro-F1 mean, baseline then augmented: 12.5 fps 0.9127 then 0.9150, 8 fps 0.8792 then 0.9004, 6.7 fps 0.8812 then 0.8955. Per seed at 6.7 fps the change is +4.5, +1.7 and -1.9 points; no interval over the three seeds excludes zero, so there is no clear gain with three seeds although the mean favours augmentation. Not adopted into the live model and no test evaluation done. See `docs/evaluation/FPS_AUGMENT.md`.
+
 ## Frame rate effect on validation accuracy (2026-11-07)
 
 Validation only (the test split was not read), no retraining, the three baseline CNNs (seeds 0 to 2). Sequences thinned from the training rate (12.5 fps: 25 fps videos, every second frame) to the live browser rate (6.7 fps) lose 3.1 points of validation macro-F1 on average (0.9127 to 0.8812; per seed 0.9039 to 0.8660, 0.9123 to 0.8789, 0.9217 to 0.8989; 95 percent interval over the three seeds -5.1 to -1.2 points). At 8 fps (GPU delegate rate) the loss is about the same. It is a simulation on stored landmarks that isolates the frame rate; see `docs/evaluation/FPS_EFFECT.md`. No test-split use, the disclosure list is unchanged.

@@ -8,7 +8,7 @@ import numpy as np
 from app.recognition.landmarks import FEATURE_DIM
 from app.recognition.face import FACE_DIM
 from app.recognition.preprocess import prepare_sequence_full
-from training.augment import AugmentConfig, DeployAugmentConfig, augment_sequence, deploy_augment
+from training.augment import AugmentConfig, DeployAugmentConfig, augment_sequence, deploy_augment, fps_augment
 from training.data import DatasetError, Sample, read_manifest, split_samples
 
 
@@ -24,11 +24,13 @@ class SequenceStore:
 
     def batch(
         self, idx: np.ndarray, seq_len: int, max_gap: int = 0, rng: np.random.Generator | None = None,
-        augment: AugmentConfig | None = None, deploy: DeployAugmentConfig | None = None,
+        augment: AugmentConfig | None = None, deploy: DeployAugmentConfig | None = None, fps_range: tuple[float, float] | None = None,
     ) -> np.ndarray:
         rows = []
         for i in idx:
             seq = self.sequences[int(i)]
+            if rng is not None and fps_range is not None:  # first, like a camera that delivers fewer frames; nothing is drawn when it is off
+                seq = fps_augment(seq, rng, *fps_range)
             if rng is not None and augment is not None:
                 seq = augment_sequence(seq, rng, augment)
             if rng is not None and deploy is not None:

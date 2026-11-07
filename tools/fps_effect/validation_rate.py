@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "backend"))
 from app.recognition.artifacts import load_artifacts  # noqa: E402
 from app.recognition.preprocess import prepare_sequence_full  # noqa: E402
+from training.augment import thin_to_rate  # noqa: E402
 from training.dataset import load_splits  # noqa: E402
 from training.slr_metrics import full_report  # noqa: E402
 from training.train import predict_probs  # noqa: E402
@@ -28,21 +29,7 @@ T95 = 4.303
 MANIFEST = ROOT / "data" / "processed" / "include_v2" / "manifest.csv"
 
 
-def sample_at(seq: np.ndarray, rate: float, phase: float) -> np.ndarray:
-    """The frames of a 12.5 fps sequence nearest to the times (k + phase) / rate; always at least 2 frames."""
-    if rate >= TRAIN_FPS - 1e-9:
-        return seq
-    step = TRAIN_FPS / rate  # source frames per kept frame
-    idx, k = [], phase
-    while True:
-        i = int(round(k * step))
-        if i >= len(seq):
-            break
-        idx.append(i)
-        k += 1
-    if len(idx) < 2:
-        idx = [0, len(seq) - 1]
-    return seq[idx]
+sample_at = thin_to_rate  # the same function the frame rate augmentation of training uses
 
 
 def macro_f1(model, cfg, store, rate: float, phase: float) -> tuple[float, float]:
