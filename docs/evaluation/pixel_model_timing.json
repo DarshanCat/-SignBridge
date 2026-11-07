@@ -1,0 +1,73 @@
+{
+ "machine": {
+  "cpu_count": 16,
+  "platform": "Windows-10-10.0.26300-SP0",
+  "torch": "2.15.0+cpu",
+  "torchvision": "0.29.2+cpu"
+ },
+ "decode": {
+  "video": "MVI_2993.MOV",
+  "width": 1920,
+  "height": 1080,
+  "fps": 25.0,
+  "frames": 77,
+  "ms_per_frame_single_thread": 8.67
+ },
+ "encoders": {
+  "mobilenet_v3_small": {
+   "parameters": 2542856,
+   "ms_per_frame_224_forward_all_threads": 6.54,
+   "ms_per_frame_224_forward_4_threads": 5.69,
+   "ms_per_frame_112_forward_all_threads": 2.94,
+   "ms_per_frame_224_forward_backward_all_threads": 47.9
+  },
+  "mobilenet_v3_large": {
+   "parameters": 5483032,
+   "ms_per_frame_224_forward_all_threads": 13.43,
+   "ms_per_frame_224_forward_4_threads": 14.27,
+   "ms_per_frame_112_forward_all_threads": 3.88,
+   "ms_per_frame_224_forward_backward_all_threads": null
+  },
+  "resnet18": {
+   "parameters": 11689512,
+   "ms_per_frame_224_forward_all_threads": 34.47,
+   "ms_per_frame_224_forward_4_threads": 34.64,
+   "ms_per_frame_112_forward_all_threads": 10.11,
+   "ms_per_frame_224_forward_backward_all_threads": 96.49
+  },
+  "efficientnet_b0": {
+   "parameters": 5288548,
+   "ms_per_frame_224_forward_all_threads": 24.12,
+   "ms_per_frame_224_forward_4_threads": 26.27,
+   "ms_per_frame_112_forward_all_threads": 7.16,
+   "ms_per_frame_224_forward_backward_all_threads": null
+  },
+  "resnet50": {
+   "parameters": 25557032,
+   "ms_per_frame_224_forward_all_threads": 81.0,
+   "ms_per_frame_224_forward_4_threads": 82.33,
+   "ms_per_frame_112_forward_all_threads": 23.51,
+   "ms_per_frame_224_forward_backward_all_threads": null
+  }
+ },
+ "parallel_4_processes_x_4_threads_frames_per_second": {
+  "mobilenet_v3_small": {
+   "parallel": 251.0,
+   "single_process_all_threads": 152.9
+  },
+  "resnet18": {
+   "parallel": 28.9,
+   "single_process_all_threads": 29.0
+  },
+  "efficientnet_b0": {
+   "parallel": 46.7,
+   "single_process_all_threads": 41.5
+  }
+ },
+ "sequence_epoch_seconds": {
+  "cnn_225": 3.2,
+  "cnn_576": 4.1,
+  "bigru_225": 18.5,
+  "bigru_576": 20.1
+ }
+}

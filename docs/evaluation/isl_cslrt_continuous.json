@@ -1,0 +1,3765 @@
+{
+ "model": {
+  "threshold": 0.7,
+  "threshold_source": "validation"
+ },
+ "videos_selected": 235,
+ "videos_evaluated": 235,
+ "videos_not_extracted": [],
+ "extract_failures": {},
+ "segmentation": {
+  "spearman_segments_vs_gloss_tokens": 0.0497728337680428,
+  "within_one": 0.14468085106382977,
+  "median_segments": 1,
+  "median_gloss_tokens": 3
+ },
+ "covered_sign_recall": {
+  "covered_tokens": 334,
+  "found": 0,
+  "recall": 0.0
+ },
+ "answer_rate": {
+  "signs": 237,
+  "answered": 99,
+  "rate": 0.4177215189873418
+ },
+ "answer_precision": {
+  "answered": 99,
+  "in_sentence_glosses": 0,
+  "wrong": 99,
+  "precision": 0.0,
+  "by_video_kind": {
+   "small": {
+    "answered": 34,
+    "wrong": 34,
+    "signs": 56
+   },
+   "camera": {
+    "answered": 65,
+    "wrong": 65,
+    "signs": 181
+   }
+  }
+ },
+ "fully_covered_sentences": [
+  {
+   "sentence": "you are bad",
+   "id": "217",
+   "reference": [
+    "YOU",
+    "BAD"
+   ],
+   "answered": [
+    "GRANDMOTHER"
+   ],
+   "exact": false
+  },
+  {
+   "sentence": "you are bad",
+   "id": "218",
+   "reference": [
+    "YOU",
+    "BAD"
+   ],
+   "answered": [],
+   "exact": false
+  },
+  {
+   "sentence": "you are bad",
+   "id": "219",
+   "reference": [
+    "YOU",
+    "BAD"
+   ],
+   "answered": [],
+   "exact": false
+  },
+  {
+   "sentence": "you are good",
+   "id": "220",
+   "reference": [
+    "YOU",
+    "GOOD"
+   ],
+   "answered": [],
+   "exact": false
+  },
+  {
+   "sentence": "you are good",
+   "id": "221",
+   "reference": [
+    "YOU",
+    "GOOD"
+   ],
+   "answered": [],
+   "exact": false
+  },
+  {
+   "sentence": "you are good",
+   "id": "222",
+   "reference": [
+    "YOU",
+    "GOOD"
+   ],
+   "answered": [],
+   "exact": false
+  }
+ ],
+ "per_video": [
+  {
+   "id": "000",
+   "sentence": "are you free today",
+   "kind": "small",
+   "glosses": [
+    "YOU",
+    "FREE",
+    "TODAY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 13
+  },
+  {
+   "id": "001",
+   "sentence": "are you free today",
+   "kind": "small",
+   "glosses": [
+    "YOU",
+    "FREE",
+    "TODAY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 25
+  },
+  {
+   "id": "002",
+   "sentence": "are you free today",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "FREE",
+    "TODAY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 39
+  },
+  {
+   "id": "003",
+   "sentence": "are you hiding something",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "HIDE",
+    "SOMETHING"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "AUTHOR"
+   ],
+   "frames": 48
+  },
+  {
+   "id": "004",
+   "sentence": "are you hiding something",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "HIDE",
+    "SOMETHING"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 42
+  },
+  {
+   "id": "005",
+   "sentence": "are you hiding something",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "HIDE",
+    "SOMETHING"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 44
+  },
+  {
+   "id": "006",
+   "sentence": "can i help you",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "HELP",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 25
+  },
+  {
+   "id": "007",
+   "sentence": "can i help you",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "HELP",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "POCKET"
+   ],
+   "frames": 38
+  },
+  {
+   "id": "008",
+   "sentence": "can i help you",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "HELP",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 48
+  },
+  {
+   "id": "009",
+   "sentence": "can you repeat that please",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "REPEAT",
+    "PLEASE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "KITCHEN"
+   ],
+   "frames": 55
+  },
+  {
+   "id": "010",
+   "sentence": "can you repeat that please",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "REPEAT",
+    "PLEASE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 55
+  },
+  {
+   "id": "011",
+   "sentence": "can you repeat that please",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "REPEAT",
+    "PLEASE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 46
+  },
+  {
+   "id": "012",
+   "sentence": "comb your hair",
+   "kind": "camera",
+   "glosses": [
+    "COMB",
+    "YOU",
+    "HAIR"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 46
+  },
+  {
+   "id": "013",
+   "sentence": "comb your hair",
+   "kind": "camera",
+   "glosses": [
+    "COMB",
+    "YOU",
+    "HAIR"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 70
+  },
+  {
+   "id": "014",
+   "sentence": "comb your hair",
+   "kind": "camera",
+   "glosses": [
+    "COMB",
+    "YOU",
+    "HAIR"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 49
+  },
+  {
+   "id": "015",
+   "sentence": "could you please talk slower",
+   "kind": "small",
+   "glosses": [
+    "YOU",
+    "PLEASE",
+    "TALK",
+    "SLOWER"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 25
+  },
+  {
+   "id": "016",
+   "sentence": "could you please talk slower",
+   "kind": "small",
+   "glosses": [
+    "YOU",
+    "PLEASE",
+    "TALK",
+    "SLOWER"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 38
+  },
+  {
+   "id": "017",
+   "sentence": "could you please talk slower",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "PLEASE",
+    "TALK",
+    "SLOWER"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "KITCHEN"
+   ],
+   "frames": 71
+  },
+  {
+   "id": "018",
+   "sentence": "do not take it to the heart",
+   "kind": "small",
+   "glosses": [
+    "DO",
+    "NOT",
+    "TAKE",
+    "IT",
+    "HEART"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 25
+  },
+  {
+   "id": "019",
+   "sentence": "do not take it to the heart",
+   "kind": "small",
+   "glosses": [
+    "DO",
+    "NOT",
+    "TAKE",
+    "IT",
+    "HEART"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 38
+  },
+  {
+   "id": "020",
+   "sentence": "do not take it to the heart",
+   "kind": "camera",
+   "glosses": [
+    "DO",
+    "NOT",
+    "TAKE",
+    "IT",
+    "HEART"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 60
+  },
+  {
+   "id": "021",
+   "sentence": "do you need something",
+   "kind": "small",
+   "glosses": [
+    "DO",
+    "YOU",
+    "NEED",
+    "SOMETHING"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 25
+  },
+  {
+   "id": "022",
+   "sentence": "do you need something",
+   "kind": "small",
+   "glosses": [
+    "DO",
+    "YOU",
+    "NEED",
+    "SOMETHING"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 25
+  },
+  {
+   "id": "023",
+   "sentence": "do you need something",
+   "kind": "camera",
+   "glosses": [
+    "DO",
+    "YOU",
+    "NEED",
+    "SOMETHING"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "MEDICINE"
+   ],
+   "frames": 72
+  },
+  {
+   "id": "024",
+   "sentence": "he came by train",
+   "kind": "small",
+   "glosses": [
+    "HE",
+    "CAME",
+    "TRAIN"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HAT"
+   ],
+   "frames": 50
+  },
+  {
+   "id": "025",
+   "sentence": "he came by train",
+   "kind": "small",
+   "glosses": [
+    "HE",
+    "CAME",
+    "TRAIN"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 25
+  },
+  {
+   "id": "026",
+   "sentence": "he came by train",
+   "kind": "camera",
+   "glosses": [
+    "HE",
+    "CAME",
+    "TRAIN"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 50
+  },
+  {
+   "id": "027",
+   "sentence": "He is going into the room",
+   "kind": "camera",
+   "glosses": [
+    "HE",
+    "GO",
+    "INTO",
+    "ROOM"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "SEASON"
+   ],
+   "frames": 65
+  },
+  {
+   "id": "028",
+   "sentence": "He is going into the room",
+   "kind": "small",
+   "glosses": [
+    "HE",
+    "GO",
+    "INTO",
+    "ROOM"
+   ],
+   "segments": 2,
+   "signs": 2,
+   "answered": [
+    "POCKET",
+    "HOSPITAL"
+   ],
+   "frames": 50
+  },
+  {
+   "id": "029",
+   "sentence": "He is going into the room",
+   "kind": "small",
+   "glosses": [
+    "HE",
+    "GO",
+    "INTO",
+    "ROOM"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 38
+  },
+  {
+   "id": "030",
+   "sentence": "he is on the way",
+   "kind": "small",
+   "glosses": [
+    "HE",
+    "ON",
+    "WAY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "POCKET"
+   ],
+   "frames": 13
+  },
+  {
+   "id": "031",
+   "sentence": "he is on the way",
+   "kind": "small",
+   "glosses": [
+    "HE",
+    "ON",
+    "WAY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "WIDE"
+   ],
+   "frames": 13
+  },
+  {
+   "id": "032",
+   "sentence": "he is on the way",
+   "kind": "camera",
+   "glosses": [
+    "HE",
+    "ON",
+    "WAY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 57
+  },
+  {
+   "id": "033",
+   "sentence": "he she is my friend",
+   "kind": "camera",
+   "glosses": [
+    "HE",
+    "SHE",
+    "MY",
+    "FRIEND"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 45
+  },
+  {
+   "id": "034",
+   "sentence": "he she is my friend",
+   "kind": "camera",
+   "glosses": [
+    "HE",
+    "SHE",
+    "MY",
+    "FRIEND"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 42
+  },
+  {
+   "id": "035",
+   "sentence": "he she is my friend",
+   "kind": "camera",
+   "glosses": [
+    "HE",
+    "SHE",
+    "MY",
+    "FRIEND"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 38
+  },
+  {
+   "id": "036",
+   "sentence": "he would be coming today",
+   "kind": "small",
+   "glosses": [
+    "HE",
+    "COMING",
+    "TODAY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 38
+  },
+  {
+   "id": "037",
+   "sentence": "he would be coming today",
+   "kind": "small",
+   "glosses": [
+    "HE",
+    "COMING",
+    "TODAY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "POCKET"
+   ],
+   "frames": 38
+  },
+  {
+   "id": "038",
+   "sentence": "he would be coming today",
+   "kind": "camera",
+   "glosses": [
+    "HE",
+    "COMING",
+    "TODAY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 54
+  },
+  {
+   "id": "039",
+   "sentence": "hi how are you",
+   "kind": "small",
+   "glosses": [
+    "HI",
+    "HOW",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 38
+  },
+  {
+   "id": "040",
+   "sentence": "hi how are you",
+   "kind": "small",
+   "glosses": [
+    "HI",
+    "HOW",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "WIDE"
+   ],
+   "frames": 50
+  },
+  {
+   "id": "041",
+   "sentence": "hi how are you",
+   "kind": "camera",
+   "glosses": [
+    "HI",
+    "HOW",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 56
+  },
+  {
+   "id": "042",
+   "sentence": "how can i help you",
+   "kind": "small",
+   "glosses": [
+    "HOW",
+    "I",
+    "HELP",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 13
+  },
+  {
+   "id": "043",
+   "sentence": "how can i help you",
+   "kind": "small",
+   "glosses": [
+    "HOW",
+    "I",
+    "HELP",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 25
+  },
+  {
+   "id": "044",
+   "sentence": "how can i help you",
+   "kind": "camera",
+   "glosses": [
+    "HOW",
+    "I",
+    "HELP",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "PATIENT"
+   ],
+   "frames": 68
+  },
+  {
+   "id": "045",
+   "sentence": "how can i trust you",
+   "kind": "small",
+   "glosses": [
+    "HOW",
+    "I",
+    "TRUST",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 25
+  },
+  {
+   "id": "046",
+   "sentence": "how can i trust you",
+   "kind": "small",
+   "glosses": [
+    "HOW",
+    "I",
+    "TRUST",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 38
+  },
+  {
+   "id": "047",
+   "sentence": "how can i trust you",
+   "kind": "camera",
+   "glosses": [
+    "HOW",
+    "I",
+    "TRUST",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 48
+  },
+  {
+   "id": "048",
+   "sentence": "how dare you",
+   "kind": "camera",
+   "glosses": [
+    "HOW",
+    "DARE",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "MEDICINE"
+   ],
+   "frames": 39
+  },
+  {
+   "id": "049",
+   "sentence": "how dare you",
+   "kind": "camera",
+   "glosses": [
+    "HOW",
+    "DARE",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "MEDICINE"
+   ],
+   "frames": 48
+  },
+  {
+   "id": "050",
+   "sentence": "how dare you",
+   "kind": "camera",
+   "glosses": [
+    "HOW",
+    "DARE",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOW-ARE-YOU"
+   ],
+   "frames": 40
+  },
+  {
+   "id": "051",
+   "sentence": "how old are you",
+   "kind": "small",
+   "glosses": [
+    "HOW",
+    "OLD",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 25
+  },
+  {
+   "id": "052",
+   "sentence": "how old are you",
+   "kind": "small",
+   "glosses": [
+    "HOW",
+    "OLD",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 25
+  },
+  {
+   "id": "053",
+   "sentence": "how old are you",
+   "kind": "camera",
+   "glosses": [
+    "HOW",
+    "OLD",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "GRANDMOTHER"
+   ],
+   "frames": 56
+  },
+  {
+   "id": "054",
+   "sentence": "i am (age)",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "(AGE)"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 43
+  },
+  {
+   "id": "055",
+   "sentence": "i am (age)",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "(AGE)"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "GRANDMOTHER"
+   ],
+   "frames": 37
+  },
+  {
+   "id": "056",
+   "sentence": "i am (age)",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "(AGE)"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 32
+  },
+  {
+   "id": "057",
+   "sentence": "i am afraid of that",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "AFRAID",
+    "THAT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 61
+  },
+  {
+   "id": "058",
+   "sentence": "i am afraid of that",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "AFRAID",
+    "THAT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "MEDICINE"
+   ],
+   "frames": 76
+  },
+  {
+   "id": "059",
+   "sentence": "i am afraid of that",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "AFRAID",
+    "THAT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 55
+  },
+  {
+   "id": "060",
+   "sentence": "i am crying",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "CRY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 38
+  },
+  {
+   "id": "061",
+   "sentence": "i am crying",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "CRY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 48
+  },
+  {
+   "id": "062",
+   "sentence": "i am crying",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "CRY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "GRANDMOTHER"
+   ],
+   "frames": 39
+  },
+  {
+   "id": "063",
+   "sentence": "i am feeling bored",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "FEELING",
+    "BORED"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 37
+  },
+  {
+   "id": "064",
+   "sentence": "i am feeling bored",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "FEELING",
+    "BORED"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 61
+  },
+  {
+   "id": "065",
+   "sentence": "i am feeling bored",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "FEELING",
+    "BORED"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 60
+  },
+  {
+   "id": "066",
+   "sentence": "i am feeling cold",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "FEELING",
+    "COLD"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 39
+  },
+  {
+   "id": "067",
+   "sentence": "i am feeling cold",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "FEELING",
+    "COLD"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 42
+  },
+  {
+   "id": "068",
+   "sentence": "i am feeling cold",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "FEELING",
+    "COLD"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 41
+  },
+  {
+   "id": "069",
+   "sentence": "i am fine. thank you sir",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "FINE",
+    "THANK-YOU",
+    "SIR"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 55
+  },
+  {
+   "id": "070",
+   "sentence": "i am fine. thank you sir",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "FINE",
+    "THANK-YOU",
+    "SIR"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 69
+  },
+  {
+   "id": "071",
+   "sentence": "i am fine. thank you sir",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "FINE",
+    "THANK-YOU",
+    "SIR"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "T-SHIRT"
+   ],
+   "frames": 51
+  },
+  {
+   "id": "072",
+   "sentence": "i am hungry",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "HUNGRY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "POCKET"
+   ],
+   "frames": 25
+  },
+  {
+   "id": "073",
+   "sentence": "i am hungry",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "HUNGRY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 25
+  },
+  {
+   "id": "074",
+   "sentence": "i am hungry",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "HUNGRY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 52
+  },
+  {
+   "id": "075",
+   "sentence": "i am in dilemma what to do",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "IN",
+    "DILEMMA",
+    "WHAT",
+    "TO",
+    "DO"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 77
+  },
+  {
+   "id": "076",
+   "sentence": "i am in dilemma what to do",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "IN",
+    "DILEMMA",
+    "WHAT",
+    "TO",
+    "DO"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 92
+  },
+  {
+   "id": "077",
+   "sentence": "i am in dilemma what to do",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "IN",
+    "DILEMMA",
+    "WHAT",
+    "TO",
+    "DO"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 96
+  },
+  {
+   "id": "078",
+   "sentence": "i am not really sure",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "NOT",
+    "REALLY",
+    "SURE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "DOG"
+   ],
+   "frames": 39
+  },
+  {
+   "id": "079",
+   "sentence": "i am not really sure",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "NOT",
+    "REALLY",
+    "SURE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 25
+  },
+  {
+   "id": "080",
+   "sentence": "i am not really sure",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "NOT",
+    "REALLY",
+    "SURE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 38
+  },
+  {
+   "id": "081",
+   "sentence": "i am really grateful",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "REALLY",
+    "GRATEFUL"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 67
+  },
+  {
+   "id": "082",
+   "sentence": "i am really grateful",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "REALLY",
+    "GRATEFUL"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 66
+  },
+  {
+   "id": "083",
+   "sentence": "i am really grateful",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "REALLY",
+    "GRATEFUL"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 47
+  },
+  {
+   "id": "084",
+   "sentence": "i am sitting in the class",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "SITTING",
+    "IN",
+    "THE",
+    "CLASS"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 25
+  },
+  {
+   "id": "085",
+   "sentence": "i am sitting in the class",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "SITTING",
+    "IN",
+    "THE",
+    "CLASS"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 50
+  },
+  {
+   "id": "086",
+   "sentence": "i am sitting in the class",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "SITTING",
+    "IN",
+    "THE",
+    "CLASS"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 80
+  },
+  {
+   "id": "087",
+   "sentence": "i am so sorry to hear that",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "AM",
+    "SO",
+    "SORRY",
+    "TO",
+    "HEAR",
+    "THAT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 13
+  },
+  {
+   "id": "088",
+   "sentence": "i am so sorry to hear that",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "AM",
+    "SO",
+    "SORRY",
+    "TO",
+    "HEAR",
+    "THAT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 38
+  },
+  {
+   "id": "089",
+   "sentence": "i am so sorry to hear that",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "AM",
+    "SO",
+    "SORRY",
+    "TO",
+    "HEAR",
+    "THAT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 44
+  },
+  {
+   "id": "090",
+   "sentence": "i am suffering from fever",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "SUFFERING",
+    "FROM",
+    "FEVER"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 36
+  },
+  {
+   "id": "091",
+   "sentence": "i am suffering from fever",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "SUFFERING",
+    "FROM",
+    "FEVER"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 50
+  },
+  {
+   "id": "092",
+   "sentence": "i am suffering from fever",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "SUFFERING",
+    "FROM",
+    "FEVER"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 51
+  },
+  {
+   "id": "093",
+   "sentence": "i am tired",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "TIRED"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 38
+  },
+  {
+   "id": "094",
+   "sentence": "i am tired",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "TIRED"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "WIDE"
+   ],
+   "frames": 38
+  },
+  {
+   "id": "095",
+   "sentence": "i am tired",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "TIRED"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 48
+  },
+  {
+   "id": "096",
+   "sentence": "i am very happy",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "VERY",
+    "HAPPY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "POCKET"
+   ],
+   "frames": 25
+  },
+  {
+   "id": "097",
+   "sentence": "i am very happy",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "VERY",
+    "HAPPY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 38
+  },
+  {
+   "id": "098",
+   "sentence": "i am very happy",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "VERY",
+    "HAPPY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "SUIT"
+   ],
+   "frames": 44
+  },
+  {
+   "id": "099",
+   "sentence": "i can not help you there",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "NOT",
+    "HELP",
+    "YOU",
+    "THERE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 64
+  },
+  {
+   "id": "100",
+   "sentence": "i can not help you there",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "NOT",
+    "HELP",
+    "YOU",
+    "THERE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 55
+  },
+  {
+   "id": "101",
+   "sentence": "i can not help you there",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "NOT",
+    "HELP",
+    "YOU",
+    "THERE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "LIBRARY"
+   ],
+   "frames": 47
+  },
+  {
+   "id": "102",
+   "sentence": "i do not agree",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "DONOT",
+    "AGREE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 51
+  },
+  {
+   "id": "103",
+   "sentence": "i do not agree",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "DONOT",
+    "AGREE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 55
+  },
+  {
+   "id": "104",
+   "sentence": "i do not agree",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "DONOT",
+    "AGREE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 55
+  },
+  {
+   "id": "105",
+   "sentence": "i do not like it",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "DO",
+    "NOT",
+    "LIKE",
+    "IT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 44
+  },
+  {
+   "id": "106",
+   "sentence": "i do not like it",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "DO",
+    "NOT",
+    "LIKE",
+    "IT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 52
+  },
+  {
+   "id": "107",
+   "sentence": "i do not like it",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "DO",
+    "NOT",
+    "LIKE",
+    "IT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 55
+  },
+  {
+   "id": "108",
+   "sentence": "i do not mean it",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "DO",
+    "NOT",
+    "MEAN",
+    "IT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 38
+  },
+  {
+   "id": "109",
+   "sentence": "i do not mean it",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "DO",
+    "NOT",
+    "MEAN",
+    "IT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 50
+  },
+  {
+   "id": "110",
+   "sentence": "i do not mean it",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "DO",
+    "NOT",
+    "MEAN",
+    "IT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 75
+  },
+  {
+   "id": "111",
+   "sentence": "i dont agree",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "DONT",
+    "AGREE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 50
+  },
+  {
+   "id": "112",
+   "sentence": "i enjoyed a lot",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "ENJOYED",
+    "A",
+    "LOT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 42
+  },
+  {
+   "id": "113",
+   "sentence": "i enjoyed a lot",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "ENJOYED",
+    "A",
+    "LOT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "T-SHIRT"
+   ],
+   "frames": 36
+  },
+  {
+   "id": "114",
+   "sentence": "i enjoyed a lot",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "ENJOYED",
+    "A",
+    "LOT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 48
+  },
+  {
+   "id": "115",
+   "sentence": "i got hurt",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "GOT",
+    "HURT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "BATHROOM"
+   ],
+   "frames": 48
+  },
+  {
+   "id": "116",
+   "sentence": "i got hurt",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "GOT",
+    "HURT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "GRANDMOTHER"
+   ],
+   "frames": 53
+  },
+  {
+   "id": "117",
+   "sentence": "i got hurt",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "GOT",
+    "HURT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "BATHROOM"
+   ],
+   "frames": 48
+  },
+  {
+   "id": "118",
+   "sentence": "i like you i love you",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "LIKE",
+    "YOU",
+    "I",
+    "LOVE",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 38
+  },
+  {
+   "id": "119",
+   "sentence": "i like you i love you",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "LIKE",
+    "YOU",
+    "I",
+    "LOVE",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "MEDICINE"
+   ],
+   "frames": 38
+  },
+  {
+   "id": "120",
+   "sentence": "i like you i love you",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "LIKE",
+    "YOU",
+    "I",
+    "LOVE",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 40
+  },
+  {
+   "id": "121",
+   "sentence": "i need water",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "NEED",
+    "WATER"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 38
+  },
+  {
+   "id": "122",
+   "sentence": "i need water",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "NEED",
+    "WATER"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 38
+  },
+  {
+   "id": "123",
+   "sentence": "i need water",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "NEED",
+    "WATER"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "COLOUR"
+   ],
+   "frames": 63
+  },
+  {
+   "id": "124",
+   "sentence": "i promise",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "PROMISE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "POCKET"
+   ],
+   "frames": 25
+  },
+  {
+   "id": "125",
+   "sentence": "i promise",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "PROMISE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "POCKET"
+   ],
+   "frames": 25
+  },
+  {
+   "id": "126",
+   "sentence": "i promise",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "PROMISE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 55
+  },
+  {
+   "id": "127",
+   "sentence": "i really appreciate it",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "REALLY",
+    "APPRECIATE",
+    "IT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 25
+  },
+  {
+   "id": "128",
+   "sentence": "i really appreciate it",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "REALLY",
+    "APPRECIATE",
+    "IT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "WIDE"
+   ],
+   "frames": 38
+  },
+  {
+   "id": "129",
+   "sentence": "i really appreciate it",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "REALLY",
+    "APPRECIATE",
+    "IT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 53
+  },
+  {
+   "id": "130",
+   "sentence": "i somehow got to know about it",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "SOMEHOW",
+    "GOT",
+    "KNOW",
+    "ABOUT",
+    "IT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HAT"
+   ],
+   "frames": 50
+  },
+  {
+   "id": "131",
+   "sentence": "i somehow got to know about it",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "SOMEHOW",
+    "GOT",
+    "KNOW",
+    "ABOUT",
+    "IT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 25
+  },
+  {
+   "id": "132",
+   "sentence": "i somehow got to know about it",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "SOMEHOW",
+    "GOT",
+    "KNOW",
+    "ABOUT",
+    "IT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 52
+  },
+  {
+   "id": "133",
+   "sentence": "i was stopped by some one",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "STOPPED",
+    "BY",
+    "SOMEONE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 61
+  },
+  {
+   "id": "134",
+   "sentence": "i was stopped by some one",
+   "kind": "camera",
+   "glosses": [
+    "I",
+    "STOPPED",
+    "BY",
+    "SOMEONE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 58
+  },
+  {
+   "id": "135",
+   "sentence": "i was stopped by some one",
+   "kind": "small",
+   "glosses": [
+    "I",
+    "STOPPED",
+    "BY",
+    "SOMEONE"
+   ],
+   "segments": 2,
+   "signs": 2,
+   "answered": [
+    "POCKET"
+   ],
+   "frames": 63
+  },
+  {
+   "id": "136",
+   "sentence": "it does not make any difference to me",
+   "kind": "camera",
+   "glosses": [
+    "IT",
+    "DO",
+    "NOT",
+    "MAKE",
+    "ANY",
+    "DIFFERENCE",
+    "TO",
+    "ME"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 78
+  },
+  {
+   "id": "137",
+   "sentence": "it does not make any difference to me",
+   "kind": "camera",
+   "glosses": [
+    "IT",
+    "DO",
+    "NOT",
+    "MAKE",
+    "ANY",
+    "DIFFERENCE",
+    "TO",
+    "ME"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "BATHROOM"
+   ],
+   "frames": 61
+  },
+  {
+   "id": "138",
+   "sentence": "it does not make any difference to me",
+   "kind": "camera",
+   "glosses": [
+    "IT",
+    "DO",
+    "NOT",
+    "MAKE",
+    "ANY",
+    "DIFFERENCE",
+    "TO",
+    "ME"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "BATHROOM"
+   ],
+   "frames": 61
+  },
+  {
+   "id": "139",
+   "sentence": "it was nice chatting with you",
+   "kind": "camera",
+   "glosses": [
+    "IT",
+    "NICE",
+    "CHAT",
+    "WITH",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 68
+  },
+  {
+   "id": "140",
+   "sentence": "it was nice chatting with you",
+   "kind": "camera",
+   "glosses": [
+    "IT",
+    "NICE",
+    "CHAT",
+    "WITH",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 65
+  },
+  {
+   "id": "141",
+   "sentence": "it was nice chatting with you",
+   "kind": "camera",
+   "glosses": [
+    "IT",
+    "NICE",
+    "CHAT",
+    "WITH",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "CAR"
+   ],
+   "frames": 63
+  },
+  {
+   "id": "142",
+   "sentence": "let him take time",
+   "kind": "small",
+   "glosses": [
+    "LET",
+    "HIM",
+    "TAKE",
+    "TIME"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 38
+  },
+  {
+   "id": "143",
+   "sentence": "let him take time",
+   "kind": "small",
+   "glosses": [
+    "LET",
+    "HIM",
+    "TAKE",
+    "TIME"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 38
+  },
+  {
+   "id": "144",
+   "sentence": "let him take time",
+   "kind": "camera",
+   "glosses": [
+    "LET",
+    "HIM",
+    "TAKE",
+    "TIME"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 43
+  },
+  {
+   "id": "145",
+   "sentence": "nice to meet you",
+   "kind": "camera",
+   "glosses": [
+    "NICE",
+    "MEET",
+    "YOU"
+   ],
+   "segments": 2,
+   "signs": 1,
+   "answered": [],
+   "frames": 59
+  },
+  {
+   "id": "146",
+   "sentence": "nice to meet you",
+   "kind": "camera",
+   "glosses": [
+    "NICE",
+    "MEET",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 58
+  },
+  {
+   "id": "147",
+   "sentence": "nice to meet you",
+   "kind": "camera",
+   "glosses": [
+    "NICE",
+    "MEET",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 56
+  },
+  {
+   "id": "148",
+   "sentence": "now onwards he will never hurt you",
+   "kind": "camera",
+   "glosses": [
+    "NOW",
+    "ONWARDS",
+    "HE",
+    "NEVER",
+    "HURT",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 66
+  },
+  {
+   "id": "149",
+   "sentence": "now onwards he will never hurt you",
+   "kind": "camera",
+   "glosses": [
+    "NOW",
+    "ONWARDS",
+    "HE",
+    "NEVER",
+    "HURT",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 85
+  },
+  {
+   "id": "150",
+   "sentence": "now onwards he will never hurt you",
+   "kind": "camera",
+   "glosses": [
+    "NOW",
+    "ONWARDS",
+    "HE",
+    "NEVER",
+    "HURT",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 77
+  },
+  {
+   "id": "151",
+   "sentence": "prepare the bed",
+   "kind": "camera",
+   "glosses": [
+    "PREPARE",
+    "BED"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 48
+  },
+  {
+   "id": "152",
+   "sentence": "prepare the bed",
+   "kind": "camera",
+   "glosses": [
+    "PREPARE",
+    "BED"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 73
+  },
+  {
+   "id": "153",
+   "sentence": "prepare the bed",
+   "kind": "camera",
+   "glosses": [
+    "PREPARE",
+    "BED"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 55
+  },
+  {
+   "id": "154",
+   "sentence": "shall we go outside",
+   "kind": "camera",
+   "glosses": [
+    "WE",
+    "GO",
+    "OUTSIDE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "MEDICINE"
+   ],
+   "frames": 46
+  },
+  {
+   "id": "155",
+   "sentence": "shall we go outside",
+   "kind": "camera",
+   "glosses": [
+    "WE",
+    "GO",
+    "OUTSIDE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 54
+  },
+  {
+   "id": "156",
+   "sentence": "shall we go outside",
+   "kind": "camera",
+   "glosses": [
+    "WE",
+    "GO",
+    "OUTSIDE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 49
+  },
+  {
+   "id": "157",
+   "sentence": "thank you so much",
+   "kind": "camera",
+   "glosses": [
+    "THANK-YOU",
+    "SO",
+    "MUCH"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "MEDICINE"
+   ],
+   "frames": 54
+  },
+  {
+   "id": "158",
+   "sentence": "thank you so much",
+   "kind": "camera",
+   "glosses": [
+    "THANK-YOU",
+    "SO",
+    "MUCH"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 49
+  },
+  {
+   "id": "159",
+   "sentence": "thank you so much",
+   "kind": "camera",
+   "glosses": [
+    "THANK-YOU",
+    "SO",
+    "MUCH"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 50
+  },
+  {
+   "id": "160",
+   "sentence": "that is so kind of you",
+   "kind": "camera",
+   "glosses": [
+    "THAT",
+    "KIND",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "GRANDMOTHER"
+   ],
+   "frames": 50
+  },
+  {
+   "id": "161",
+   "sentence": "that is so kind of you",
+   "kind": "camera",
+   "glosses": [
+    "THAT",
+    "KIND",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 58
+  },
+  {
+   "id": "162",
+   "sentence": "that is so kind of you",
+   "kind": "camera",
+   "glosses": [
+    "THAT",
+    "KIND",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 44
+  },
+  {
+   "id": "163",
+   "sentence": "This place is beautiful",
+   "kind": "camera",
+   "glosses": [
+    "THIS",
+    "PLACE",
+    "BEAUTIFUL"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 53
+  },
+  {
+   "id": "164",
+   "sentence": "This place is beautiful",
+   "kind": "camera",
+   "glosses": [
+    "THIS",
+    "PLACE",
+    "BEAUTIFUL"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 64
+  },
+  {
+   "id": "165",
+   "sentence": "This place is beautiful",
+   "kind": "camera",
+   "glosses": [
+    "THIS",
+    "PLACE",
+    "BEAUTIFUL"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "WIDE"
+   ],
+   "frames": 48
+  },
+  {
+   "id": "166",
+   "sentence": "turn on light turn off light",
+   "kind": "camera",
+   "glosses": [
+    "TURN",
+    "ON",
+    "LIGHT",
+    "TURN",
+    "OFF",
+    "LIGHT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 37
+  },
+  {
+   "id": "167",
+   "sentence": "turn on light turn off light",
+   "kind": "camera",
+   "glosses": [
+    "TURN",
+    "ON",
+    "LIGHT",
+    "TURN",
+    "OFF",
+    "LIGHT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 47
+  },
+  {
+   "id": "168",
+   "sentence": "turn on light turn off light",
+   "kind": "camera",
+   "glosses": [
+    "TURN",
+    "ON",
+    "LIGHT",
+    "TURN",
+    "OFF",
+    "LIGHT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "WARM"
+   ],
+   "frames": 33
+  },
+  {
+   "id": "169",
+   "sentence": "we are all with you",
+   "kind": "camera",
+   "glosses": [
+    "WE",
+    "ALL",
+    "WITH",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 45
+  },
+  {
+   "id": "170",
+   "sentence": "we are all with you",
+   "kind": "camera",
+   "glosses": [
+    "WE",
+    "ALL",
+    "WITH",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 43
+  },
+  {
+   "id": "171",
+   "sentence": "we are all with you",
+   "kind": "camera",
+   "glosses": [
+    "WE",
+    "ALL",
+    "WITH",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 40
+  },
+  {
+   "id": "172",
+   "sentence": "wear the shirt",
+   "kind": "camera",
+   "glosses": [
+    "WEAR",
+    "SHIRT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 35
+  },
+  {
+   "id": "173",
+   "sentence": "wear the shirt",
+   "kind": "camera",
+   "glosses": [
+    "WEAR",
+    "SHIRT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "KITCHEN"
+   ],
+   "frames": 47
+  },
+  {
+   "id": "174",
+   "sentence": "wear the shirt",
+   "kind": "camera",
+   "glosses": [
+    "WEAR",
+    "SHIRT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 55
+  },
+  {
+   "id": "175",
+   "sentence": "what are you doing",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "YOU",
+    "DO"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 47
+  },
+  {
+   "id": "176",
+   "sentence": "what are you doing",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "YOU",
+    "DO"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "GREY"
+   ],
+   "frames": 46
+  },
+  {
+   "id": "177",
+   "sentence": "what are you doing",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "YOU",
+    "DO"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 47
+  },
+  {
+   "id": "178",
+   "sentence": "what did you tell him",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "YOU",
+    "TELL",
+    "HIM"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 42
+  },
+  {
+   "id": "179",
+   "sentence": "what did you tell him",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "YOU",
+    "TELL",
+    "HIM"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 41
+  },
+  {
+   "id": "180",
+   "sentence": "what did you tell him",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "YOU",
+    "TELL",
+    "HIM"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 53
+  },
+  {
+   "id": "181",
+   "sentence": "what do you do",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "YOU",
+    "DO"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 46
+  },
+  {
+   "id": "182",
+   "sentence": "what do you do",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "YOU",
+    "DO"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "DRESS"
+   ],
+   "frames": 45
+  },
+  {
+   "id": "183",
+   "sentence": "what do you do",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "YOU",
+    "DO"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "GRANDMOTHER"
+   ],
+   "frames": 50
+  },
+  {
+   "id": "184",
+   "sentence": "what do you think",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "DO",
+    "YOU",
+    "THINK"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 50
+  },
+  {
+   "id": "185",
+   "sentence": "what do you think",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "DO",
+    "YOU",
+    "THINK"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 40
+  },
+  {
+   "id": "186",
+   "sentence": "what do you think",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "DO",
+    "YOU",
+    "THINK"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 38
+  },
+  {
+   "id": "187",
+   "sentence": "what do you want to become",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "DO",
+    "YOU",
+    "WANT",
+    "BECOME"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 43
+  },
+  {
+   "id": "188",
+   "sentence": "what do you want to become",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "DO",
+    "YOU",
+    "WANT",
+    "BECOME"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "SEASON"
+   ],
+   "frames": 57
+  },
+  {
+   "id": "189",
+   "sentence": "what do you want to become",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "DO",
+    "YOU",
+    "WANT",
+    "BECOME"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "WARM"
+   ],
+   "frames": 46
+  },
+  {
+   "id": "190",
+   "sentence": "what have you planned for your career",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "HAVE",
+    "YOU",
+    "PLAN",
+    "YOUR",
+    "CAREER"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 73
+  },
+  {
+   "id": "191",
+   "sentence": "what have you planned for your career",
+   "kind": "small",
+   "glosses": [
+    "WHAT",
+    "HAVE",
+    "YOU",
+    "PLAN",
+    "YOUR",
+    "CAREER"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 25
+  },
+  {
+   "id": "192",
+   "sentence": "what have you planned for your career",
+   "kind": "small",
+   "glosses": [
+    "WHAT",
+    "HAVE",
+    "YOU",
+    "PLAN",
+    "YOUR",
+    "CAREER"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 50
+  },
+  {
+   "id": "193",
+   "sentence": "what you want",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "YOU",
+    "WANT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 44
+  },
+  {
+   "id": "194",
+   "sentence": "what you want",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "YOU",
+    "WANT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 46
+  },
+  {
+   "id": "195",
+   "sentence": "what you want",
+   "kind": "camera",
+   "glosses": [
+    "WHAT",
+    "YOU",
+    "WANT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 53
+  },
+  {
+   "id": "196",
+   "sentence": "when will the train leave",
+   "kind": "camera",
+   "glosses": [
+    "WHEN",
+    "TRAIN",
+    "LEAVE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 60
+  },
+  {
+   "id": "197",
+   "sentence": "when will the train leave",
+   "kind": "camera",
+   "glosses": [
+    "WHEN",
+    "TRAIN",
+    "LEAVE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 55
+  },
+  {
+   "id": "198",
+   "sentence": "when will the train leave",
+   "kind": "camera",
+   "glosses": [
+    "WHEN",
+    "TRAIN",
+    "LEAVE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "WIDE"
+   ],
+   "frames": 54
+  },
+  {
+   "id": "199",
+   "sentence": "where are you from",
+   "kind": "camera",
+   "glosses": [
+    "WHERE",
+    "YOU",
+    "FROM"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 48
+  },
+  {
+   "id": "200",
+   "sentence": "where are you from",
+   "kind": "camera",
+   "glosses": [
+    "WHERE",
+    "YOU",
+    "FROM"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "PARK"
+   ],
+   "frames": 48
+  },
+  {
+   "id": "201",
+   "sentence": "where are you from",
+   "kind": "camera",
+   "glosses": [
+    "WHERE",
+    "YOU",
+    "FROM"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 48
+  },
+  {
+   "id": "202",
+   "sentence": "which college school are you from",
+   "kind": "camera",
+   "glosses": [
+    "WHICH",
+    "COLLEGE",
+    "SCHOOL",
+    "YOU",
+    "FROM"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 87
+  },
+  {
+   "id": "203",
+   "sentence": "which college school are you from",
+   "kind": "camera",
+   "glosses": [
+    "WHICH",
+    "COLLEGE",
+    "SCHOOL",
+    "YOU",
+    "FROM"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 75
+  },
+  {
+   "id": "204",
+   "sentence": "which college school are you from",
+   "kind": "camera",
+   "glosses": [
+    "WHICH",
+    "COLLEGE",
+    "SCHOOL",
+    "YOU",
+    "FROM"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "MEDICINE"
+   ],
+   "frames": 71
+  },
+  {
+   "id": "205",
+   "sentence": "who are you",
+   "kind": "camera",
+   "glosses": [
+    "WHO",
+    "YOU"
+   ],
+   "segments": 0,
+   "signs": 0,
+   "answered": [],
+   "frames": 53
+  },
+  {
+   "id": "206",
+   "sentence": "who are you",
+   "kind": "camera",
+   "glosses": [
+    "WHO",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "GRANDMOTHER"
+   ],
+   "frames": 42
+  },
+  {
+   "id": "207",
+   "sentence": "who are you",
+   "kind": "camera",
+   "glosses": [
+    "WHO",
+    "YOU"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 38
+  },
+  {
+   "id": "208",
+   "sentence": "why are you angry",
+   "kind": "camera",
+   "glosses": [
+    "WHY",
+    "YOU",
+    "ANGRY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 44
+  },
+  {
+   "id": "209",
+   "sentence": "why are you angry",
+   "kind": "camera",
+   "glosses": [
+    "WHY",
+    "YOU",
+    "ANGRY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 47
+  },
+  {
+   "id": "210",
+   "sentence": "why are you angry",
+   "kind": "camera",
+   "glosses": [
+    "WHY",
+    "YOU",
+    "ANGRY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 50
+  },
+  {
+   "id": "211",
+   "sentence": "why are you crying",
+   "kind": "camera",
+   "glosses": [
+    "WHY",
+    "YOU",
+    "CRY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 50
+  },
+  {
+   "id": "212",
+   "sentence": "why are you crying",
+   "kind": "camera",
+   "glosses": [
+    "WHY",
+    "YOU",
+    "CRY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 58
+  },
+  {
+   "id": "213",
+   "sentence": "why are you crying",
+   "kind": "camera",
+   "glosses": [
+    "WHY",
+    "YOU",
+    "CRY"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 46
+  },
+  {
+   "id": "214",
+   "sentence": "why are you disappointed",
+   "kind": "camera",
+   "glosses": [
+    "WHY",
+    "YOU",
+    "DISAPPOINTED"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "GRANDMOTHER"
+   ],
+   "frames": 62
+  },
+  {
+   "id": "215",
+   "sentence": "why are you disappointed",
+   "kind": "camera",
+   "glosses": [
+    "WHY",
+    "YOU",
+    "DISAPPOINTED"
+   ],
+   "segments": 2,
+   "signs": 2,
+   "answered": [
+    "GRANDMOTHER"
+   ],
+   "frames": 52
+  },
+  {
+   "id": "216",
+   "sentence": "why are you disappointed",
+   "kind": "camera",
+   "glosses": [
+    "WHY",
+    "YOU",
+    "DISAPPOINTED"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 50
+  },
+  {
+   "id": "217",
+   "sentence": "you are bad",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "BAD"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "GRANDMOTHER"
+   ],
+   "frames": 39
+  },
+  {
+   "id": "218",
+   "sentence": "you are bad",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "BAD"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 38
+  },
+  {
+   "id": "219",
+   "sentence": "you are bad",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "BAD"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 37
+  },
+  {
+   "id": "220",
+   "sentence": "you are good",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "GOOD"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 36
+  },
+  {
+   "id": "221",
+   "sentence": "you are good",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "GOOD"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 35
+  },
+  {
+   "id": "222",
+   "sentence": "you are good",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "GOOD"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 35
+  },
+  {
+   "id": "223",
+   "sentence": "you are welcome",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "WELCOME"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "PATIENT"
+   ],
+   "frames": 26
+  },
+  {
+   "id": "224",
+   "sentence": "you are welcome",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "WELCOME"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "PARK"
+   ],
+   "frames": 42
+  },
+  {
+   "id": "225",
+   "sentence": "you are welcome",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "WELCOME"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "HOSPITAL"
+   ],
+   "frames": 33
+  },
+  {
+   "id": "226",
+   "sentence": "you can do it",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "DO",
+    "IT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "BOY"
+   ],
+   "frames": 48
+  },
+  {
+   "id": "227",
+   "sentence": "you can do it",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "DO",
+    "IT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 49
+  },
+  {
+   "id": "228",
+   "sentence": "you can do it",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "DO",
+    "IT"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "BOY"
+   ],
+   "frames": 44
+  },
+  {
+   "id": "229",
+   "sentence": "you do anything, i do not care",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "DO",
+    "ANYTHING",
+    "I",
+    "DO",
+    "NOT",
+    "CARE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 85
+  },
+  {
+   "id": "230",
+   "sentence": "you do anything, i do not care",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "DO",
+    "ANYTHING",
+    "I",
+    "DO",
+    "NOT",
+    "CARE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 67
+  },
+  {
+   "id": "231",
+   "sentence": "you do anything, i do not care",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "DO",
+    "ANYTHING",
+    "I",
+    "DO",
+    "NOT",
+    "CARE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [],
+   "frames": 75
+  },
+  {
+   "id": "232",
+   "sentence": "you need a medicine, take this one",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "NEED",
+    "A",
+    "MEDICINE",
+    "TAKE",
+    "THIS",
+    "ONE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "DREAM"
+   ],
+   "frames": 59
+  },
+  {
+   "id": "233",
+   "sentence": "you need a medicine, take this one",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "NEED",
+    "A",
+    "MEDICINE",
+    "TAKE",
+    "THIS",
+    "ONE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "DREAM"
+   ],
+   "frames": 78
+  },
+  {
+   "id": "234",
+   "sentence": "you need a medicine, take this one",
+   "kind": "camera",
+   "glosses": [
+    "YOU",
+    "NEED",
+    "A",
+    "MEDICINE",
+    "TAKE",
+    "THIS",
+    "ONE"
+   ],
+   "segments": 1,
+   "signs": 1,
+   "answered": [
+    "DREAM"
+   ],
+   "frames": 56
+  }
+ ]
+}

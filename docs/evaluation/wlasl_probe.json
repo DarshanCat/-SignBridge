@@ -1,0 +1,2169 @@
+{
+ "sample": 300,
+ "alive": 151,
+ "share": 0.5033333333333333,
+ "wilson95": [
+  0.44707091826263046,
+  0.559511458870718
+ ],
+ "by_host": {
+  "youtube": {
+   "alive": 54,
+   "n": 78
+  },
+  "signingsavvy.com": {
+   "alive": 0,
+   "n": 39
+  },
+  "media.asldeafined.com": {
+   "alive": 31,
+   "n": 31
+  },
+  "signstock.blob.core.windows.net": {
+   "alive": 30,
+   "n": 30
+  },
+  "aslpro.com": {
+   "alive": 0,
+   "n": 27
+  },
+  "handspeak.com": {
+   "alive": 0,
+   "n": 25
+  },
+  "aslsearch.com": {
+   "alive": 0,
+   "n": 19
+  },
+  "media.spreadthesign.com": {
+   "alive": 18,
+   "n": 18
+  },
+  "aslsignbank.haskins.yale.edu": {
+   "alive": 0,
+   "n": 15
+  },
+  "s3-us-west-1.amazonaws.com": {
+   "alive": 15,
+   "n": 15
+  },
+  "elementalaslconcepts.weebly.com": {
+   "alive": 2,
+   "n": 2
+  },
+  "aslbricks.org": {
+   "alive": 1,
+   "n": 1
+  }
+ },
+ "statuses": {
+  "200": 170,
+  "None": 40,
+  "403": 14,
+  "404": 74,
+  "401": 2
+ },
+ "results": [
+  {
+   "video_id": "43555",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "09128",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "18326",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "34212",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "67705",
+   "host": "youtube",
+   "status": 403,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "03070",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "57235",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "68047",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "60525",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "15555",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "17557",
+   "host": "elementalaslconcepts.weebly.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/quicktime"
+  },
+  {
+   "video_id": "70300",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "18427",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "04601",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "62694",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "67383",
+   "host": "youtube",
+   "status": 403,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "68480",
+   "host": "youtube",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "44848",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "23548",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "44225",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "32917",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "67612",
+   "host": "youtube",
+   "status": 403,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "26298",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "54560",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "32607",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "51021",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "57209",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "01266",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "59207",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "65366",
+   "host": "aslsignbank.haskins.yale.edu",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "22410",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "35156",
+   "host": "s3-us-west-1.amazonaws.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "40242",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "61219",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "35531",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "58837",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "62197",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "30180",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "33656",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "37471",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "61807",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "56373",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "68720",
+   "host": "youtube",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "32303",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "53824",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "48566",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "07082",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "40830",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "08829",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "53901",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "18529",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "45783",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "62104",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "69306",
+   "host": "aslbricks.org",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "67441",
+   "host": "youtube",
+   "status": 403,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "67313",
+   "host": "youtube",
+   "status": 403,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "12874",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "10260",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "52216",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "35213",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "25067",
+   "host": "s3-us-west-1.amazonaws.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "62742",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "38070",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "20666",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "05778",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "11199",
+   "host": "s3-us-west-1.amazonaws.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "18033",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "57900",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "06413",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "40177",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "54766",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "53640",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "66458",
+   "host": "aslsignbank.haskins.yale.edu",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "32812",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "33857",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "54535",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "20115",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "03429",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "32557",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "26534",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "28790",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "42987",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "36603",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "13113",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "65472",
+   "host": "aslsignbank.haskins.yale.edu",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "05762",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "07593",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "15532",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "13179",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "56844",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "41708",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "35953",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "60531",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "16194",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "21071",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "66422",
+   "host": "aslsignbank.haskins.yale.edu",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "65822",
+   "host": "aslsignbank.haskins.yale.edu",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "70152",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "66759",
+   "host": "aslsignbank.haskins.yale.edu",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "50816",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "46959",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "38402",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "55664",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "35190",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "09580",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "50412",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "65726",
+   "host": "aslsignbank.haskins.yale.edu",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "07679",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "14983",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "55279",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "39359",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "08624",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "61592",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "14365",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "67014",
+   "host": "youtube",
+   "status": 403,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "44902",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "23948",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "03204",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "19931",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "53183",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "55749",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "17428",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "17146",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "21950",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "53423",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "26943",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "57832",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "29327",
+   "host": "elementalaslconcepts.weebly.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/quicktime"
+  },
+  {
+   "video_id": "57665",
+   "host": "youtube",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "53445",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "65433",
+   "host": "aslsignbank.haskins.yale.edu",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "58361",
+   "host": "s3-us-west-1.amazonaws.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "58593",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "18301",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "54826",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "43175",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "12161",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "56119",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "45052",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "33005",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "37125",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "22130",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "39468",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "56795",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "15160",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "36901",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "65412",
+   "host": "aslsignbank.haskins.yale.edu",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "31155",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "46957",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "26533",
+   "host": "youtube",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "26806",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "65817",
+   "host": "aslsignbank.haskins.yale.edu",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "09968",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "36144",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "57643",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "21689",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "09246",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "38586",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "63690",
+   "host": "s3-us-west-1.amazonaws.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "43348",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "53271",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "67078",
+   "host": "youtube",
+   "status": 403,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "52992",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "65413",
+   "host": "aslsignbank.haskins.yale.edu",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "66360",
+   "host": "aslsignbank.haskins.yale.edu",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "59506",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "35944",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "25686",
+   "host": "s3-us-west-1.amazonaws.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "70108",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "65940",
+   "host": "aslsignbank.haskins.yale.edu",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "17949",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "08785",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "23906",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "05193",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "53270",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "17353",
+   "host": "s3-us-west-1.amazonaws.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "52345",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "14678",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "28820",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "59214",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "28647",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "35956",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "15713",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "55642",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "08970",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "57298",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "32971",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "41034",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "37988",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "67966",
+   "host": "youtube",
+   "status": 403,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "00834",
+   "host": "s3-us-west-1.amazonaws.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "42547",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "23543",
+   "host": "s3-us-west-1.amazonaws.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "26945",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "28817",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "28881",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "62707",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "64218",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "56786",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "60380",
+   "host": "s3-us-west-1.amazonaws.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "08510",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "21358",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "67772",
+   "host": "youtube",
+   "status": 403,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "14313",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "45104",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "67695",
+   "host": "youtube",
+   "status": 403,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "31316",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "02430",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "67036",
+   "host": "youtube",
+   "status": 403,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "46870",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "57082",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "56194",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "68145",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "52997",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "62443",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "58784",
+   "host": "s3-us-west-1.amazonaws.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "14380",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "00872",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "09834",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "39334",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "03562",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "70118",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "22358",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "55870",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "45664",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "53190",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "26697",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "44863",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "00663",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "63288",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "17727",
+   "host": "youtube",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "26934",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "18778",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "54592",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "38864",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "13319",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "59370",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "58669",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "35544",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "35610",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "07719",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "51057",
+   "host": "s3-us-west-1.amazonaws.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "55978",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "07618",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "06625",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "51221",
+   "host": "s3-us-west-1.amazonaws.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "51134",
+   "host": "youtube",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "32822",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "70333",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "34393",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "37796",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "33769",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "41582",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "03763",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "03089",
+   "host": "youtube",
+   "status": 401,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "35310",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "68011",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "67550",
+   "host": "youtube",
+   "status": 403,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "09717",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "46178",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "65927",
+   "host": "aslsignbank.haskins.yale.edu",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "52146",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "05237",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "02143",
+   "host": "youtube",
+   "status": 401,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "15102",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "56369",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "54844",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "04721",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "49244",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "06472",
+   "host": "s3-us-west-1.amazonaws.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "55677",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "05795",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "35155",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "05747",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "47501",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "01992",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "69054",
+   "host": "youtube",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "42040",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "41263",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "50855",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "17430",
+   "host": "signstock.blob.core.windows.net",
+   "status": 200,
+   "alive": true,
+   "type": "application/octet-stream"
+  },
+  {
+   "video_id": "28464",
+   "host": "s3-us-west-1.amazonaws.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "38706",
+   "host": "aslsearch.com",
+   "status": 200,
+   "alive": false,
+   "type": "text/html"
+  },
+  {
+   "video_id": "27175",
+   "host": "handspeak.com",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "19459",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "59965",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "06654",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "68488",
+   "host": "youtube",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "59742",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "51530",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "66452",
+   "host": "aslsignbank.haskins.yale.edu",
+   "status": null,
+   "alive": false,
+   "type": "URLError"
+  },
+  {
+   "video_id": "67076",
+   "host": "youtube",
+   "status": 403,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "62970",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "67254",
+   "host": "youtube",
+   "status": 403,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "41486",
+   "host": "aslpro.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "24029",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "30386",
+   "host": "media.asldeafined.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  },
+  {
+   "video_id": "55346",
+   "host": "youtube",
+   "status": 200,
+   "alive": true,
+   "type": "oembed"
+  },
+  {
+   "video_id": "33407",
+   "host": "signingsavvy.com",
+   "status": 404,
+   "alive": false,
+   "type": ""
+  },
+  {
+   "video_id": "06021",
+   "host": "media.spreadthesign.com",
+   "status": 200,
+   "alive": true,
+   "type": "video/mp4"
+  }
+ ],
+ "note": "headers only; oEmbed for YouTube; an estimate for 300 random instances, not a download test"
+}

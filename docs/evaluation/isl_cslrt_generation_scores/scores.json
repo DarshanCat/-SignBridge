@@ -1,0 +1,1460 @@
+{
+ "scored": 101,
+ "skipped": 0,
+ "signers": [
+  "ISLCSLTR-authors"
+ ],
+ "english_to_gloss": {
+  "sentences": 101,
+  "exact_match": 0.0297029702970297,
+  "word_error_rate": 0.7817679558011049,
+  "token_accuracy": 0.21823204419889508,
+  "bag_f1": 0.508355176176958,
+  "bleu": {
+   "bleu": 2.4640864005393204,
+   "precisions": [
+    54.858934169278996,
+    5.045871559633028,
+    0.42016806722689076,
+    0.5434782608695652
+   ],
+   "hyp_len": 319,
+   "ref_len": 362,
+   "brevity_penalty": 0.8738939597150692
+  },
+  "per_sentence": [
+   {
+    "id": "C001",
+    "english": "are you free today",
+    "hypothesis": "TODAY YOU FS:FREE",
+    "references": [
+     "YOU FREE TODAY"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C002",
+    "english": "are you hiding something",
+    "hypothesis": "YOU FS:SOMETHING FS:HIDE",
+    "references": [
+     "YOU HIDE SOMETHING"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C003",
+    "english": "bring water for me",
+    "hypothesis": "WATER I FS:BRING",
+    "references": [
+     "BRING WATER ME"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C004",
+    "english": "can i help you",
+    "hypothesis": "I YOU HELP CAN",
+    "references": [
+     "I HELP YOU"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C005",
+    "english": "can you repeat that please",
+    "hypothesis": "YOU FS:THAT PLEASE FS:REPEAT CAN",
+    "references": [
+     "YOU REPEAT PLEASE"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C006",
+    "english": "comb your hair",
+    "hypothesis": "YOU FS:HAIR FS:COMB",
+    "references": [
+     "COMB YOU HAIR"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C007",
+    "english": "congratulations",
+    "hypothesis": "FS:CONGRATULATIONS",
+    "references": [
+     "CONGRATULATIIONS"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C008",
+    "english": "could you please talk slower",
+    "hypothesis": "YOU PLEASE SLOW FS:TALK",
+    "references": [
+     "YOU PLEASE TALK SLOWER"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C009",
+    "english": "do me a favour",
+    "hypothesis": "I FS:FAVOUR FS:DO",
+    "references": [
+     "DO ME FAVOUR"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C010",
+    "english": "do not abuse him",
+    "hypothesis": "HE FS:ABUSE NOT",
+    "references": [
+     "DONOT ABUSE HIM"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C011",
+    "english": "do not be stubborn",
+    "hypothesis": "FS:STUBBORN NOT",
+    "references": [
+     "DONOT BE STUBBORN"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C012",
+    "english": "do not hurt me",
+    "hypothesis": "I FS:HURT NOT",
+    "references": [
+     "DONOT HURT ME"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C013",
+    "english": "do not make me angry",
+    "hypothesis": "I FS:ANGRY FS:MAKE NOT",
+    "references": [
+     "DO NOT MAKE ME ANGRY"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C014",
+    "english": "do not take it to the heart",
+    "hypothesis": "IT FS:HEART TAKE NOT",
+    "references": [
+     "DO NOT TAKE IT HEART"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C015",
+    "english": "do not worry",
+    "hypothesis": "FS:WORRY NOT",
+    "references": [
+     "DO NOT WORRY"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C016",
+    "english": "do you need something",
+    "hypothesis": "YOU FS:SOMETHING NEED",
+    "references": [
+     "DO YOU NEED SOMETHING"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C017",
+    "english": "go and sleep",
+    "hypothesis": "GO SLEEP",
+    "references": [
+     "GO SLEEP"
+    ],
+    "exact": true
+   },
+   {
+    "id": "C018",
+    "english": "had your food",
+    "hypothesis": "YOU FOOD HAVE",
+    "references": [
+     "YOUR FOOD"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C019",
+    "english": "he came by train",
+    "hypothesis": "HE TRAIN COME",
+    "references": [
+     "HE CAME TRAIN"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C020",
+    "english": "He is going into the room",
+    "hypothesis": "HE FS:ROOM GO",
+    "references": [
+     "HE GO INTO ROOM"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C021",
+    "english": "he is on the way",
+    "hypothesis": "HE FS:WAY",
+    "references": [
+     "HE ON WAY"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C022",
+    "english": "he she is my friend",
+    "hypothesis": "HE SHE I FRIEND",
+    "references": [
+     "HE SHE MY FRIEND"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C023",
+    "english": "he would be coming today",
+    "hypothesis": "TODAY HE COME",
+    "references": [
+     "HE COMING TODAY"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C024",
+    "english": "help me",
+    "hypothesis": "I HELP",
+    "references": [
+     "HELP ME"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C025",
+    "english": "hi how are you",
+    "hypothesis": "FS:HI HOW-ARE-YOU",
+    "references": [
+     "HI HOW YOU"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C026",
+    "english": "how are things",
+    "hypothesis": "FS:THINGS HOW",
+    "references": [
+     "HOW THINGS"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C027",
+    "english": "how can i help you",
+    "hypothesis": "I YOU HELP CAN HOW",
+    "references": [
+     "HOW I HELP YOU"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C028",
+    "english": "how can i trust you",
+    "hypothesis": "I YOU FS:TRUST CAN HOW",
+    "references": [
+     "HOW I TRUST YOU"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C029",
+    "english": "how dare you",
+    "hypothesis": "YOU FS:DARE HOW",
+    "references": [
+     "HOW DARE YOU"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C030",
+    "english": "how old are you",
+    "hypothesis": "OLD YOU HOW",
+    "references": [
+     "HOW OLD YOU"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C031",
+    "english": "i am (age)",
+    "hypothesis": "I FS:AGE",
+    "references": [
+     "I (AGE)"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C032",
+    "english": "i am afraid of that",
+    "hypothesis": "I FS:AFRAID FS:THAT",
+    "references": [
+     "I AFRAID THAT"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C033",
+    "english": "i am crying",
+    "hypothesis": "I FS:CRY",
+    "references": [
+     "I CRY"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C034",
+    "english": "i am feeling bored",
+    "hypothesis": "I FS:BORED FS:FEEL",
+    "references": [
+     "I FEELING BORED"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C035",
+    "english": "i am feeling cold",
+    "hypothesis": "I COLD FS:FEEL",
+    "references": [
+     "I FEELING COLD"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C036",
+    "english": "i am fine. thank you sir",
+    "hypothesis": "I FS:FINE THANK-YOU FS:SIR",
+    "references": [
+     "I FINE THANK YOU SIR"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C037",
+    "english": "i am hungry",
+    "hypothesis": "I FS:HUNGRY",
+    "references": [
+     "I HUNGRY"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C038",
+    "english": "i am in dilemma what to do",
+    "hypothesis": "I FS:DILEMMA FS:DO WHAT",
+    "references": [
+     "I IN DILEMMA WHAT TO DO"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C039",
+    "english": "i am not really sure",
+    "hypothesis": "I FS:SURE NOT",
+    "references": [
+     "I NOT REALLY SURE"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C040",
+    "english": "i am really grateful",
+    "hypothesis": "I FS:GRATEFUL",
+    "references": [
+     "I REALLY GRATEFUL"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C041",
+    "english": "i am sitting in the class",
+    "hypothesis": "I FS:CLASS FS:SIT",
+    "references": [
+     "I SITTING IN THE CLASS"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C042",
+    "english": "i am so sorry to hear that",
+    "hypothesis": "I FS:SORRY FS:THAT FS:HEAR",
+    "references": [
+     "I AM SO SORRY TO HEAR THAT"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C043",
+    "english": "i am suffering from fever",
+    "hypothesis": "I FS:FEVER FS:SUFFER",
+    "references": [
+     "I SUFFERING FROM FEVER"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C044",
+    "english": "i am tired",
+    "hypothesis": "I FS:TIRED",
+    "references": [
+     "I TIRED"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C045",
+    "english": "i am very happy",
+    "hypothesis": "I HAPPY",
+    "references": [
+     "I VERY HAPPY"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C046",
+    "english": "i can not help you there",
+    "hypothesis": "I YOU FS:THERE HELP NOT CAN",
+    "references": [
+     "I NOT HELP YOU THERE"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C047",
+    "english": "i do not agree",
+    "hypothesis": "I FS:AGREE NOT",
+    "references": [
+     "I DONOT AGREE"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C048",
+    "english": "i do not like it",
+    "hypothesis": "I IT LIKE NOT",
+    "references": [
+     "I DO NOT LIKE IT"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C049",
+    "english": "i do not mean it",
+    "hypothesis": "I IT MEAN NOT",
+    "references": [
+     "I DO NOT MEAN IT"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C050",
+    "english": "i dont agree",
+    "hypothesis": "I FS:AGREE NOT",
+    "references": [
+     "I DONT AGREE"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C051",
+    "english": "i enjoyed a lot",
+    "hypothesis": "I FS:LOT FS:ENJOY",
+    "references": [
+     "I ENJOYED A LOT"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C052",
+    "english": "i got hurt",
+    "hypothesis": "I FS:HURT",
+    "references": [
+     "I GOT HURT"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C053",
+    "english": "i like you i love you",
+    "hypothesis": "I YOU LIKE I YOU LOVE",
+    "references": [
+     "I LIKE YOU I LOVE YOU"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C054",
+    "english": "i need water",
+    "hypothesis": "I WATER NEED",
+    "references": [
+     "I NEED WATER"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C055",
+    "english": "i promise",
+    "hypothesis": "I FS:PROMISE",
+    "references": [
+     "I PROMISE"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C056",
+    "english": "i really appreciate it",
+    "hypothesis": "I IT FS:APPRECIATE",
+    "references": [
+     "I REALLY APPRECIATE IT"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C057",
+    "english": "i somehow got to know about it",
+    "hypothesis": "I FS:SOMEHOW IT FS:GET KNOW",
+    "references": [
+     "I SOMEHOW GOT KNOW ABOUT IT"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C058",
+    "english": "i was stopped by some one",
+    "hypothesis": "I FS:ONE FS:STOP",
+    "references": [
+     "I STOPPED BY SOMEONE"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C059",
+    "english": "it does not make any difference to me",
+    "hypothesis": "IT FS:DIFFERENCE I FS:MAKE NOT",
+    "references": [
+     "IT DO NOT MAKE ANY DIFFERENCE TO ME"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C060",
+    "english": "it was nice chatting with you",
+    "hypothesis": "IT NICE YOU FS:CHAT",
+    "references": [
+     "IT NICE CHAT WITH YOU"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C061",
+    "english": "let him take time",
+    "hypothesis": "HE TIME FS:LET TAKE",
+    "references": [
+     "LET HIM TAKE TIME"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C062",
+    "english": "my name is xxxxxxxx",
+    "hypothesis": "I NAME FS:XXXXXXXX",
+    "references": [
+     "MY NAME XXXXXXXX"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C063",
+    "english": "nice to meet you",
+    "hypothesis": "NICE YOU MEET",
+    "references": [
+     "NICE MEET YOU"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C064",
+    "english": "No need to worry dont worry",
+    "hypothesis": "NEED FS:WORRY FS:WORRY NOT",
+    "references": [
+     "NO NEED WORRY DONT WORRY"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C065",
+    "english": "now onwards he will never hurt you",
+    "hypothesis": "NOW FS:ONWARDS HE YOU FS:HURT NOT",
+    "references": [
+     "NOW ONWARDS HE NEVER HURT YOU"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C066",
+    "english": "pour some more water into the glass",
+    "hypothesis": "FS:MORE WATER FS:GLASS FS:POUR",
+    "references": [
+     "POUR SOME MORE WATER INTO THE GLASS"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C067",
+    "english": "prepare the bed",
+    "hypothesis": "BED FS:PREPARE",
+    "references": [
+     "PREPARE BED"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C068",
+    "english": "serve the food",
+    "hypothesis": "FOOD FS:SERVE",
+    "references": [
+     "SERVE FOOD"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C069",
+    "english": "shall we go outside",
+    "hypothesis": "WE FS:OUTSIDE GO",
+    "references": [
+     "WE GO OUTSIDE"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C070",
+    "english": "speak softly",
+    "hypothesis": "FS:SOFTLY FS:SPEAK",
+    "references": [
+     "SPEAK SOFTLY"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C071",
+    "english": "take care of yourself",
+    "hypothesis": "FS:CARE FS:YOURSELF TAKE",
+    "references": [
+     "TAKE CARE OF YOURSELF"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C072",
+    "english": "tell me truth",
+    "hypothesis": "I FS:TRUTH FS:TELL",
+    "references": [
+     "TELL ME TRUTH"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C073",
+    "english": "thank you so much",
+    "hypothesis": "THANK-YOU",
+    "references": [
+     "THANK YOU SO MUCH"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C074",
+    "english": "that is so kind of you",
+    "hypothesis": "FS:THAT FS:KIND YOU",
+    "references": [
+     "THAT KIND YOU"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C075",
+    "english": "This place is beautiful",
+    "hypothesis": "THIS FS:PLACE BEAUTIFUL",
+    "references": [
+     "THIS PLACE BEAUTIFUL"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C076",
+    "english": "try to understand",
+    "hypothesis": "FS:TRY FS:UNDERSTAND",
+    "references": [
+     "TRY TO UNDERSTAND"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C077",
+    "english": "turn on light turn off light",
+    "hypothesis": "LIGHT FS:TURN LIGHT FS:TURN",
+    "references": [
+     "TURN ON LIGHT TURN OFF LIGHT"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C078",
+    "english": "we are all with you",
+    "hypothesis": "WE ALL YOU",
+    "references": [
+     "WE ALL WITH YOU"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C079",
+    "english": "wear the shirt",
+    "hypothesis": "SHIRT FS:WEAR",
+    "references": [
+     "WEAR SHIRT"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C080",
+    "english": "what are you doing",
+    "hypothesis": "YOU FS:DO WHAT",
+    "references": [
+     "WHAT YOU DO"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C081",
+    "english": "what did you tell him",
+    "hypothesis": "YOU HE FS:TELL WHAT",
+    "references": [
+     "WHAT YOU TELL HIM"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C082",
+    "english": "what do you do",
+    "hypothesis": "YOU FS:DO WHAT",
+    "references": [
+     "WHAT YOU DO"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C083",
+    "english": "what do you think",
+    "hypothesis": "YOU FS:THINK WHAT",
+    "references": [
+     "WHAT DO YOU THINK"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C084",
+    "english": "what do you want to become",
+    "hypothesis": "YOU WANT FS:BECOME WHAT",
+    "references": [
+     "WHAT DO YOU WANT BECOME"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C085",
+    "english": "what happened",
+    "hypothesis": "FS:HAPPEN WHAT",
+    "references": [
+     "WHAT HAPPENED"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C086",
+    "english": "what have you planned for your career",
+    "hypothesis": "YOU FS:CAREER FS:PLAN WHAT",
+    "references": [
+     "WHAT HAVE YOU PLAN YOUR CAREER"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C087",
+    "english": "what is your phone number",
+    "hypothesis": "YOU TELEPHONE FS:NUMBER WHAT",
+    "references": [
+     "WHAT YOUR PHONE NUMBER"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C088",
+    "english": "what you want",
+    "hypothesis": "YOU WANT WHAT",
+    "references": [
+     "WHAT YOU WANT"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C089",
+    "english": "when will the train leave",
+    "hypothesis": "TRAIN FS:LEAVE WHEN",
+    "references": [
+     "WHEN TRAIN LEAVE"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C090",
+    "english": "where are you from",
+    "hypothesis": "YOU WHERE",
+    "references": [
+     "WHERE YOU FROM"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C091",
+    "english": "which college school are you from",
+    "hypothesis": "FS:COLLEGE SCHOOL YOU WHICH",
+    "references": [
+     "WHICH COLLEGE SCHOOL YOU FROM"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C092",
+    "english": "who are you",
+    "hypothesis": "YOU WHO",
+    "references": [
+     "WHO YOU"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C093",
+    "english": "why are you angry",
+    "hypothesis": "YOU FS:ANGRY WHY",
+    "references": [
+     "WHY YOU ANGRY"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C094",
+    "english": "why are you crying",
+    "hypothesis": "YOU FS:CRY WHY",
+    "references": [
+     "WHY YOU CRY"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C095",
+    "english": "why are you disappointed",
+    "hypothesis": "YOU FS:DISAPPOINTED WHY",
+    "references": [
+     "WHY YOU DISAPPOINTED"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C096",
+    "english": "you are bad",
+    "hypothesis": "YOU BAD",
+    "references": [
+     "YOU BAD"
+    ],
+    "exact": true
+   },
+   {
+    "id": "C097",
+    "english": "you are good",
+    "hypothesis": "YOU GOOD",
+    "references": [
+     "YOU GOOD"
+    ],
+    "exact": true
+   },
+   {
+    "id": "C098",
+    "english": "you are welcome",
+    "hypothesis": "YOU FS:WELCOME",
+    "references": [
+     "YOU WELCOME"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C099",
+    "english": "you can do it",
+    "hypothesis": "YOU IT FS:DO CAN",
+    "references": [
+     "YOU DO IT"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C100",
+    "english": "you do anything, i do not care",
+    "hypothesis": "YOU FS:ANYTHING I FS:DO FS:CARE NOT",
+    "references": [
+     "YOU DO ANYTHING I DO NOT CARE"
+    ],
+    "exact": false
+   },
+   {
+    "id": "C101",
+    "english": "you need a medicine, take this one",
+    "hypothesis": "YOU MEDICINE THIS FS:ONE NEED TAKE",
+    "references": [
+     "YOU NEED A MEDICINE TAKE THIS ONE"
+    ],
+    "exact": false
+   }
+  ]
+ },
+ "gloss_to_english": {
+  "sentences": 101,
+  "exact_match": 0.0,
+  "bleu": {
+   "bleu": 18.922346697784374,
+   "precisions": [
+    57.165109034267914,
+    23.475046210720887,
+    12.954545454545455,
+    7.374631268436578
+   ],
+   "hyp_len": 642,
+   "ref_len": 447,
+   "brevity_penalty": 1.0
+  },
+  "per_sentence": [
+   {
+    "id": "C001",
+    "hypothesis": "You are a free today.",
+    "exact": false
+   },
+   {
+    "id": "C002",
+    "hypothesis": "You are hide something.",
+    "exact": false
+   },
+   {
+    "id": "C003",
+    "hypothesis": "The bring is water me.",
+    "exact": false
+   },
+   {
+    "id": "C004",
+    "hypothesis": "I help you.",
+    "exact": false
+   },
+   {
+    "id": "C005",
+    "hypothesis": "You are repeat please.",
+    "exact": false
+   },
+   {
+    "id": "C006",
+    "hypothesis": "The comb is you hair.",
+    "exact": false
+   },
+   {
+    "id": "C007",
+    "hypothesis": "The congratulatiions.",
+    "exact": false
+   },
+   {
+    "id": "C008",
+    "hypothesis": "You are please talk slower.",
+    "exact": false
+   },
+   {
+    "id": "C009",
+    "hypothesis": "The do is me favour.",
+    "exact": false
+   },
+   {
+    "id": "C010",
+    "hypothesis": "The donot is abuse him.",
+    "exact": false
+   },
+   {
+    "id": "C011",
+    "hypothesis": "The donot is be stubborn.",
+    "exact": false
+   },
+   {
+    "id": "C012",
+    "hypothesis": "The donot is hurt me.",
+    "exact": false
+   },
+   {
+    "id": "C013",
+    "hypothesis": "The do is not make me angry.",
+    "exact": false
+   },
+   {
+    "id": "C014",
+    "hypothesis": "The do does not take it the heart.",
+    "exact": false
+   },
+   {
+    "id": "C015",
+    "hypothesis": "The do is not worry.",
+    "exact": false
+   },
+   {
+    "id": "C016",
+    "hypothesis": "The do needs you the something.",
+    "exact": false
+   },
+   {
+    "id": "C017",
+    "hypothesis": "Go to sleep.",
+    "exact": false
+   },
+   {
+    "id": "C018",
+    "hypothesis": "The your is food.",
+    "exact": false
+   },
+   {
+    "id": "C019",
+    "hypothesis": "He is came train.",
+    "exact": false
+   },
+   {
+    "id": "C020",
+    "hypothesis": "He goes to the into to the room.",
+    "exact": false
+   },
+   {
+    "id": "C021",
+    "hypothesis": "He is on way.",
+    "exact": false
+   },
+   {
+    "id": "C022",
+    "hypothesis": "He is she my friend.",
+    "exact": false
+   },
+   {
+    "id": "C023",
+    "hypothesis": "He is a coming today.",
+    "exact": false
+   },
+   {
+    "id": "C024",
+    "hypothesis": "The me helps.",
+    "exact": false
+   },
+   {
+    "id": "C025",
+    "hypothesis": "How is the hi you?",
+    "exact": false
+   },
+   {
+    "id": "C026",
+    "hypothesis": "How is the things?",
+    "exact": false
+   },
+   {
+    "id": "C027",
+    "hypothesis": "How do i help you?",
+    "exact": false
+   },
+   {
+    "id": "C028",
+    "hypothesis": "How is me the trust you?",
+    "exact": false
+   },
+   {
+    "id": "C029",
+    "hypothesis": "How is the dare you?",
+    "exact": false
+   },
+   {
+    "id": "C030",
+    "hypothesis": "How is the old you?",
+    "exact": false
+   },
+   {
+    "id": "C031",
+    "hypothesis": "I am a (age).",
+    "exact": false
+   },
+   {
+    "id": "C032",
+    "hypothesis": "I am afraid that.",
+    "exact": false
+   },
+   {
+    "id": "C033",
+    "hypothesis": "I am a cry.",
+    "exact": false
+   },
+   {
+    "id": "C034",
+    "hypothesis": "I am feeling bored.",
+    "exact": false
+   },
+   {
+    "id": "C035",
+    "hypothesis": "I am feeling cold.",
+    "exact": false
+   },
+   {
+    "id": "C036",
+    "hypothesis": "I am fine thank you sir.",
+    "exact": false
+   },
+   {
+    "id": "C037",
+    "hypothesis": "I am a hungry.",
+    "exact": false
+   },
+   {
+    "id": "C038",
+    "hypothesis": "What is me the in the dilemma the to the do?",
+    "exact": false
+   },
+   {
+    "id": "C039",
+    "hypothesis": "I am not really sure.",
+    "exact": false
+   },
+   {
+    "id": "C040",
+    "hypothesis": "I am really grateful.",
+    "exact": false
+   },
+   {
+    "id": "C041",
+    "hypothesis": "I am sitting in the class.",
+    "exact": false
+   },
+   {
+    "id": "C042",
+    "hypothesis": "I am am so sorry to hear that.",
+    "exact": false
+   },
+   {
+    "id": "C043",
+    "hypothesis": "I am suffering from fever.",
+    "exact": false
+   },
+   {
+    "id": "C044",
+    "hypothesis": "I am a tired.",
+    "exact": false
+   },
+   {
+    "id": "C045",
+    "hypothesis": "I am very happy.",
+    "exact": false
+   },
+   {
+    "id": "C046",
+    "hypothesis": "I do not help you the there.",
+    "exact": false
+   },
+   {
+    "id": "C047",
+    "hypothesis": "I am donot agree.",
+    "exact": false
+   },
+   {
+    "id": "C048",
+    "hypothesis": "I do not like the do it.",
+    "exact": false
+   },
+   {
+    "id": "C049",
+    "hypothesis": "I am not do mean it.",
+    "exact": false
+   },
+   {
+    "id": "C050",
+    "hypothesis": "I am dont agree.",
+    "exact": false
+   },
+   {
+    "id": "C051",
+    "hypothesis": "I am enjoyed a lot.",
+    "exact": false
+   },
+   {
+    "id": "C052",
+    "hypothesis": "I am got hurt.",
+    "exact": false
+   },
+   {
+    "id": "C053",
+    "hypothesis": "I like to love you me you.",
+    "exact": false
+   },
+   {
+    "id": "C054",
+    "hypothesis": "I need the water.",
+    "exact": false
+   },
+   {
+    "id": "C055",
+    "hypothesis": "I am a promise.",
+    "exact": false
+   },
+   {
+    "id": "C056",
+    "hypothesis": "I am really appreciate it.",
+    "exact": false
+   },
+   {
+    "id": "C057",
+    "hypothesis": "I know the somehow the got the about it.",
+    "exact": false
+   },
+   {
+    "id": "C058",
+    "hypothesis": "I am stopped by someone.",
+    "exact": false
+   },
+   {
+    "id": "C059",
+    "hypothesis": "It is not do make any difference to me.",
+    "exact": false
+   },
+   {
+    "id": "C060",
+    "hypothesis": "It is nice chat with you.",
+    "exact": false
+   },
+   {
+    "id": "C061",
+    "hypothesis": "The let takes the him time.",
+    "exact": false
+   },
+   {
+    "id": "C062",
+    "hypothesis": "The my is name xxxxxxxx.",
+    "exact": false
+   },
+   {
+    "id": "C063",
+    "hypothesis": "The nice meets you.",
+    "exact": false
+   },
+   {
+    "id": "C064",
+    "hypothesis": "The no needs the worry the dont the worry.",
+    "exact": false
+   },
+   {
+    "id": "C065",
+    "hypothesis": "The onwards is he never hurt you now.",
+    "exact": false
+   },
+   {
+    "id": "C066",
+    "hypothesis": "The pour is some more water into the glass.",
+    "exact": false
+   },
+   {
+    "id": "C067",
+    "hypothesis": "The prepare is bed.",
+    "exact": false
+   },
+   {
+    "id": "C068",
+    "hypothesis": "The serve is food.",
+    "exact": false
+   },
+   {
+    "id": "C069",
+    "hypothesis": "We go to the outside.",
+    "exact": false
+   },
+   {
+    "id": "C070",
+    "hypothesis": "The speak is softly.",
+    "exact": false
+   },
+   {
+    "id": "C071",
+    "hypothesis": "The care takes the of the yourself.",
+    "exact": false
+   },
+   {
+    "id": "C072",
+    "hypothesis": "The tell is me truth.",
+    "exact": false
+   },
+   {
+    "id": "C073",
+    "hypothesis": "The thank is you so much.",
+    "exact": false
+   },
+   {
+    "id": "C074",
+    "hypothesis": "The that is kind you.",
+    "exact": false
+   },
+   {
+    "id": "C075",
+    "hypothesis": "The place is beautiful this.",
+    "exact": false
+   },
+   {
+    "id": "C076",
+    "hypothesis": "The try is to understand.",
+    "exact": false
+   },
+   {
+    "id": "C077",
+    "hypothesis": "The turn is on light turn off light.",
+    "exact": false
+   },
+   {
+    "id": "C078",
+    "hypothesis": "We are all with you.",
+    "exact": false
+   },
+   {
+    "id": "C079",
+    "hypothesis": "The wear is shirt.",
+    "exact": false
+   },
+   {
+    "id": "C080",
+    "hypothesis": "What is your do?",
+    "exact": false
+   },
+   {
+    "id": "C081",
+    "hypothesis": "What is you the tell the him?",
+    "exact": false
+   },
+   {
+    "id": "C082",
+    "hypothesis": "What is your do?",
+    "exact": false
+   },
+   {
+    "id": "C083",
+    "hypothesis": "What is the do you the think?",
+    "exact": false
+   },
+   {
+    "id": "C084",
+    "hypothesis": "What does the do want you the become?",
+    "exact": false
+   },
+   {
+    "id": "C085",
+    "hypothesis": "What is the happened?",
+    "exact": false
+   },
+   {
+    "id": "C086",
+    "hypothesis": "What do you have the plan the your the career?",
+    "exact": false
+   },
+   {
+    "id": "C087",
+    "hypothesis": "What is the your the phone the number?",
+    "exact": false
+   },
+   {
+    "id": "C088",
+    "hypothesis": "What do you want?",
+    "exact": false
+   },
+   {
+    "id": "C089",
+    "hypothesis": "When is the train the leave?",
+    "exact": false
+   },
+   {
+    "id": "C090",
+    "hypothesis": "Where is your from?",
+    "exact": false
+   },
+   {
+    "id": "C091",
+    "hypothesis": "Which is the college the school you the from?",
+    "exact": false
+   },
+   {
+    "id": "C092",
+    "hypothesis": "Who are you?",
+    "exact": false
+   },
+   {
+    "id": "C093",
+    "hypothesis": "Why is your angry?",
+    "exact": false
+   },
+   {
+    "id": "C094",
+    "hypothesis": "Why is your cry?",
+    "exact": false
+   },
+   {
+    "id": "C095",
+    "hypothesis": "Why is your disappointed?",
+    "exact": false
+   },
+   {
+    "id": "C096",
+    "hypothesis": "You are bad.",
+    "exact": false
+   },
+   {
+    "id": "C097",
+    "hypothesis": "You are good.",
+    "exact": false
+   },
+   {
+    "id": "C098",
+    "hypothesis": "You are a welcome.",
+    "exact": false
+   },
+   {
+    "id": "C099",
+    "hypothesis": "You are do it.",
+    "exact": false
+   },
+   {
+    "id": "C100",
+    "hypothesis": "You are not do anything i do care.",
+    "exact": false
+   },
+   {
+    "id": "C101",
+    "hypothesis": "You need to take the a the medicine the one this.",
+    "exact": false
+   }
+  ]
+ }
+}
